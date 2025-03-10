@@ -1,0 +1,41 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Прикладний статистичний аналіз"
+  reader-mode: true
+
+  page-footer:
+    left: |
+      Прикладний статистичний аналіз
+    right: |
+      Ця книга створена за допомогою <a href="https://quarto.org/">Quarto</a>.
+
+  author: 
+    - name: Ігор Мірошниченко
+      orcid: 0000-0002-1307-7889
+      email: ihor.miroshnychenko@knu.ua
+      affiliation: "Київський національний університет імені Тараса Шевченка"
+    - name: Юлія Хлевна
+      orcid: 0000-0002-1874-1961
+      email: yuliia.khlevna@knu.ua
+      affiliation: "Київський національний університет імені Тараса Шевченка"
+  date: today
+
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    code-link: true
+  docx:
+    reference-doc: reference.docx
+  # pdf:
+  #   documentclass: scrreprt
