@@ -3,6 +3,9 @@ project:
   output-dir: docs
 
 language: _ua.yml
+crossref: 
+  title-delim: "&nbsp;-&nbsp;"
+
 
 
 book:
