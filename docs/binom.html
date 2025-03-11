@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Підсумки – Прикладний статистичний аналіз</title>
+<title>2&nbsp; Біноміальний критерій – Прикладний статистичний аналіз</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./bootstrap.html" rel="prev">
+<link href="./z-test.html" rel="next">
+<link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключити бокову панель навігації" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./summary.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Підсумки</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./binom.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Біноміальний критерій</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключити бокову панель навігації" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Пошук" onclick="window.quartoOpenSearch();">
@@ -156,7 +190,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./binom.html" class="sidebar-item-text sidebar-link">
+  <a href="./binom.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Біноміальний критерій</span></span></a>
   </div>
 </li>
@@ -204,7 +238,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link active">
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Підсумки</span></span></a>
   </div>
 </li>
@@ -219,15 +253,22 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Зміст</h2>
+   
+  <ul>
+  <li><a href="#генеральна-сукупність-та-вибірка" id="toc-генеральна-сукупність-та-вибірка" class="nav-link active" data-scroll-target="#генеральна-сукупність-та-вибірка"><span class="header-section-number">2.1</span> Генеральна сукупність та вибірка</a></li>
+  <li><a href="#статистичні-гіпотези" id="toc-статистичні-гіпотези" class="nav-link" data-scroll-target="#статистичні-гіпотези"><span class="header-section-number">2.2</span> Статистичні гіпотези</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Підсумки</span></h1>
+<h1 class="title"><span id="sec-binom" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Біноміальний критерій</span></span></h1>
 </div>
 
 
@@ -244,8 +285,112 @@ window.Quarto = {
 </header>
 
 
+<section id="генеральна-сукупність-та-вибірка" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="генеральна-сукупність-та-вибірка"><span class="header-section-number">2.1</span> Генеральна сукупність та вибірка</h2>
+<p>Ви вирішили створити платформу онлайн-курсів з програмування. Ви записали навчальні відео та запропонували користувачам доступ за передплатою. Вартість курсу для студента становить 1000 рублів, а витрати на підтримку платформи та індивідуальні консультації коштують вам 500 рублів з кожного студента.</p>
+<p>Проте ви помічаєте, що деякі люди відмовляються від курсу після першого заняття, якщо матеріал їм здається складним або нецікавим. Інвестори готові підтримати ваш проєкт, якщо рівень відмов буде нижче 50%.</p>
+<p>Щоб це перевірити, ви проводите експеримент: залучаєте 30 нових студентів. 19 із них проходять курс й оплачують доступ, а 11 відмовляються. 19 — це більше половини, але чи достатньо цього, щоб довести перспективність проєкту?</p>
+<p>Розв’язуючи таку задачу, ми припускаємо, що існує певна аудиторія, яка користуватиметься нашим сервісом. Цю групу називають <strong>генеральною сукупністю</strong>. Якщо запустити сервіс для всіх потенційних користувачів, у ньому буде певна частка успішних випадків, позначимо її як <span class="math inline">\(\mu\)</span>. Це невідомий параметр, який ми не можемо визначити безпосередньо. Натомість ми можемо проводити експерименти та <strong>досліджувати</strong> результати. Оскільки протестувати продукт на всій аудиторії неможливо, ми беремо <strong>вибірку</strong> з генеральної сукупності та аналізуємо частку успішних випадків.</p>
+<p>Згідно з результатами нашого експерименту, спостережувана ймовірність оплати становить <span class="math inline">\(\hat{\mu} = 19/30 = 0.63\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Це означає, що 63% студентів оплатили доступ. Чи можемо ми зробити висновок, що справжня частка успішних випадків перевищує 50%?</p>
+<p>Розгляньмо, чому отримане значення <em>може не бути</em> переконливим доказом. Припустимо, що ймовірність успішної оплати дорівнює <span class="math inline">\(\mu = 0.5\)</span>, і змоделюємо можливі результати для 30 студентів.</p>
+<p>Давайте спростимо цю задачу до прикладу з підкиданням монетки та змоделюємо результати для 30 спроб:</p>
+<ul>
+<li>Якщо монетка випаде орлом, студент оплачує доступ.</li>
+<li>Якщо монетка випаде решкою, студент відмовляється від курсу.</li>
+<li>Використаємо метод <code>integers()</code> до класу <code>Generator</code>, яка генерує випадкові цілі числа в заданому діапазоні.</li>
+<li>Підкинемо монетку 30 разів та порахуємо кількість успішних випадків.</li>
+</ul>
+<div id="91a03bcc" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">18</span>)</span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> rng.integers(<span class="dv">0</span>, <span class="dv">1</span>, size <span class="op">=</span> <span class="dv">30</span>, endpoint <span class="op">=</span> <span class="va">True</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>success <span class="op">=</span> np.<span class="bu">sum</span>(results) <span class="op">/</span> n</span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-1-7" class="code-annotation-target"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Кількість успішних випадків: </span><span class="sc">{</span><span class="bu">round</span>(success, <span class="dv">3</span>) <span class="op">*</span> <span class="dv">100</span><span class="sc">}</span><span class="ss">%"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Ініціалізуємо генератор випадкових чисел з фіксованим <code>seed</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="2">Кількість студентів.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="3">Генеруємо випадкові числа<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> для кожного студента.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="4">Обчислюємо частку успішних випадків.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="7" data-code-annotation="5">Виводимо результат.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Кількість успішних випадків: 70.0%</code></pre>
+</div>
+</div>
+<p>Ми бачимо, що в експерименті частка успішних випадків навіть перевищила 63%, тоді як у симуляції була закладена ймовірність 50%.</p>
+<p>Тому, на жаль, ми не можемо з абсолютною точністю визначити, яким є справжнє значення <span class="math inline">\(\mu\)</span> у генеральній сукупності та чи перевищує воно 50%, незалежно від того, скільки спостережень ми проводимо. Однак, застосовуючи методи прикладної статистики, ми зможемо використати інструменти, які допоможуть ухвалити правильне рішення, зокрема й у цьому випадку.</p>
+</section>
+<section id="статистичні-гіпотези" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="статистичні-гіпотези"><span class="header-section-number">2.2</span> Статистичні гіпотези</h2>
+<p>Ми з’ясували, що навіть за ймовірності <span class="math inline">\(\mu = 0.5\)</span> можна отримати значну кількість успішних випадків. Насправді ми спеціально підбирали <code>seed</code> для отримання такого результату. Якщо повторити цей експеримент з іншим значенням <code>seed</code> або збільшити кількість спостережень, результат може виявитися іншим.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Порада
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Спробуйте змінити <code>seed</code> (наприклад 22) або кількість спостережень та перевірте, як змінюється результат.</p>
+</div>
+</div>
+<p>Тож велика кількість успішних випадків може бути результатом випадковості. Щоб вирішити, чи можна вважати результати експерименту <strong>статистично значущими</strong> необхідно отримати відповідь на питання:</p>
+<blockquote class="blockquote">
+<p>Чи можна вважати, що спостережуване значення <span class="math inline">\(\hat{\mu}\)</span> є більшим від <span class="math inline">\(\mu = 0.5\)</span>?</p>
+</blockquote>
+<p>Звернімося до теорії ймовірностей. Факт підписки на наш сервіс для кожного окремого студента можна розглядати як випадкову величину <span class="math inline">\(\xi\)</span>, яка підпорядковується розподілу Бернуллі<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Параметр цього розподілу, а саме ймовірність успіху, нам невідомий.</p>
+<p><span class="math display">\[
+\xi \sim \text{Bernoulli}(\mu)
+\]</span></p>
+<p>де <span class="math inline">\(\mu\)</span> — ймовірність успіху.</p>
+<p>Нас цікавить підтвердження того, що <span class="math inline">\(\mu &gt; 0.5\)</span>. У статистиці для перевірки гіпотез розглядають дві можливості:</p>
+<ul>
+<li><strong>Нульова гіпотеза</strong> (<span class="math inline">\(H_0\)</span>) формулюється як твердження, яке ми прагнемо спростувати.</li>
+<li><strong>Альтернативна гіпотеза</strong> (<span class="math inline">\(H_1\)</span>) висловлює припущення, яке ми хочемо довести.</li>
+</ul>
+<p>Скорочено це записують як:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \mu \leq 0.5 \\
+H_1 &amp;: \mu &gt; 0.5
+\end{aligned}
+\]</span></p>
+<p>Якщо ми проводимо <span class="math inline">\(n\)</span> незалежних спостережень, то сума цих випадкових величин також підпорядковується біноміальному розподілу.</p>
+<p><span class="math display">\[
+S_n = \sum_{i=1}^{n} \xi_i \sim \text{Binomial}(n, \mu)
+\]</span></p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>У статистиці <span class="math inline">\(\hat{\mu}\)</span> позначається як оцінка параметра <span class="math inline">\(\mu\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Метод <code>integers()</code> генерує випадкові цілі числа в заданому діапазоні. Аргумент <code>endpoint</code> вказує, що верхня межа включається у діапазон.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Розподіл Бернуллі — це дискретний розподіл ймовірностей, який моделює випадковий експеримент з двома можливими результатами: успіхом або невдачею.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -670,13 +815,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./bootstrap.html" class="pagination-link" aria-label="Бутстреп">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Бутстреп</span></span>
+      <a href="./intro.html" class="pagination-link" aria-label="Вступ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Вступ</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Список літератури">
-        <span class="nav-page-text">Список літератури</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./z-test.html" class="pagination-link" aria-label="$Z$-критерій Фішера">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><span class="math inline">\(Z\)</span>-критерій Фішера</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -2,9 +2,12 @@ project:
   type: book
   output-dir: docs
 
+lang: ua
+
 book:
   title: "Прикладний статистичний аналіз"
   reader-mode: true
+
 
   page-footer:
     left: |
@@ -26,6 +29,14 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
+    - binom.qmd
+    - z-test.qmd
+    - t-test.qmd
+    - monte-carlo.qmd
+    - kolmogorov.qmd
+    - chi-sq.qmd
+    - mann-whitney.qmd
+    - bootstrap.qmd
     - summary.qmd
     - references.qmd
 
@@ -36,6 +47,6 @@ format:
     theme: cosmo
     code-link: true
   docx:
-    reference-doc: reference.docx
+    reference-doc: word-template.docx
   # pdf:
   #   documentclass: scrreprt
