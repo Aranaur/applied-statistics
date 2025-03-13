@@ -29,6 +29,7 @@ book:
       email: yuliia.khlevna@knu.ua
       affiliation: "Київський національний університет імені Тараса Шевченка"
   date: today
+  date-format: iso
 
   chapters:
     - index.qmd

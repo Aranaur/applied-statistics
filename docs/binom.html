@@ -239,7 +239,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Підсумки</span></span></a>
+ <span class="menu-text">Підсумки</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -259,7 +259,14 @@ window.Quarto = {
    
   <ul>
   <li><a href="#генеральна-сукупність-та-вибірка" id="toc-генеральна-сукупність-та-вибірка" class="nav-link active" data-scroll-target="#генеральна-сукупність-та-вибірка"><span class="header-section-number">1.1</span> Генеральна сукупність та вибірка</a></li>
-  <li><a href="#статистичні-гіпотези" id="toc-статистичні-гіпотези" class="nav-link" data-scroll-target="#статистичні-гіпотези"><span class="header-section-number">1.2</span> Статистичні гіпотези</a></li>
+  <li><a href="#статистичні-гіпотези" id="toc-статистичні-гіпотези" class="nav-link" data-scroll-target="#статистичні-гіпотези"><span class="header-section-number">1.2</span> Статистичні гіпотези</a>
+  <ul class="collapse">
+  <li><a href="#постановка-задачі" id="toc-постановка-задачі" class="nav-link" data-scroll-target="#постановка-задачі"><span class="header-section-number">1.2.1</span> Постановка задачі</a></li>
+  <li><a href="#критерій" id="toc-критерій" class="nav-link" data-scroll-target="#критерій"><span class="header-section-number">1.2.2</span> Критерій</a></li>
+  <li><a href="#критична-область" id="toc-критична-область" class="nav-link" data-scroll-target="#критична-область"><span class="header-section-number">1.2.3</span> Критична область</a></li>
+  <li><a href="#обчислення-fpr" id="toc-обчислення-fpr" class="nav-link" data-scroll-target="#обчислення-fpr"><span class="header-section-number">1.2.4</span> Обчислення FPR</a></li>
+  </ul></li>
+  <li><a href="#статистичні-функції-в-python" id="toc-статистичні-функції-в-python" class="nav-link" data-scroll-target="#статистичні-функції-в-python"><span class="header-section-number">1.3</span> Статистичні функції в Python</a></li>
   </ul>
 </nav>
     </div>
@@ -287,7 +294,7 @@ window.Quarto = {
 
 <section id="генеральна-сукупність-та-вибірка" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="генеральна-сукупність-та-вибірка"><span class="header-section-number">1.1</span> Генеральна сукупність та вибірка</h2>
-<p>Ви вирішили створити платформу онлайн-курсів з програмування. Ви записали навчальні відео та запропонували користувачам доступ за передплатою. Вартість курсу для студента становить 1000 рублів, а витрати на підтримку платформи та індивідуальні консультації коштують вам 500 рублів з кожного студента.</p>
+<p>Ви вирішили створити платформу онлайн-курсів з програмування. Ви записали навчальні відео та запропонували користувачам доступ за передплатою. Вартість курсу для студента становить 1000 гривень, а витрати на підтримку платформи та індивідуальні консультації коштують вам 500 гривень з кожного студента.</p>
 <p>Проте ви помічаєте, що деякі люди відмовляються від курсу після першого заняття, якщо матеріал їм здається складним або нецікавим. Інвестори готові підтримати ваш проєкт, якщо рівень відмов буде нижче 50%.</p>
 <p>Щоб це перевірити, ви проводите експеримент: залучаєте 30 нових студентів. 20 із них проходять курс й оплачують доступ, а 11 відмовляються. 20 — це більше половини, але чи достатньо цього, щоб довести перспективність проєкту?</p>
 <p>Розв’язуючи таку задачу, ми припускаємо, що існує певна аудиторія, яка користуватиметься нашим сервісом. Цю групу називають <strong>генеральною сукупністю</strong>. Якщо запустити сервіс для всіх потенційних користувачів, у ньому буде певна частка успішних випадків, позначимо її як <span class="math inline">\(\mu\)</span>. Це невідомий параметр, який ми не можемо визначити безпосередньо. Натомість ми можемо проводити експерименти та <strong>досліджувати</strong> результати. Оскільки протестувати продукт на всій аудиторії неможливо, ми беремо <strong>вибірку</strong> з генеральної сукупності та аналізуємо частку успішних випадків.</p>
@@ -300,7 +307,7 @@ window.Quarto = {
 <li>Використаємо метод <code>integers()</code> до класу <code>Generator</code>, яка генерує випадкові цілі числа в заданому діапазоні.</li>
 <li>Підкинемо монетку 30 разів та порахуємо кількість успішних випадків.</li>
 </ul>
-<div id="a9cf5e9c" class="cell" data-execution_count="2">
+<div id="2198fe00" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">18</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -341,6 +348,8 @@ window.Quarto = {
 </section>
 <section id="статистичні-гіпотези" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="статистичні-гіпотези"><span class="header-section-number">1.2</span> Статистичні гіпотези</h2>
+<section id="постановка-задачі" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="постановка-задачі"><span class="header-section-number">1.2.1</span> Постановка задачі</h3>
 <p>Ми з’ясували, що навіть за ймовірності <span class="math inline">\(\mu = 0.5\)</span> можна отримати значну кількість успішних випадків. Насправді ми спеціально підбирали <code>seed</code> для отримання такого результату. Якщо повторити цей експеримент з іншим значенням <code>seed</code> або збільшити кількість спостережень, результат може виявитися іншим.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -387,7 +396,7 @@ S_n = \sum_{i=1}^{n} \xi_i \sim \text{Binomial}(n, \mu)
 \]</span></p>
 <p>де <span class="math inline">\(\xi_i\)</span> — випадкова величина, яка показує успіх у <span class="math inline">\(i\)</span>-му спостереженні, <span class="math inline">\(S_n\)</span> — кількість успішних випадків у <span class="math inline">\(n\)</span> спостереженнях, <span class="math inline">\(n\)</span> — кількість спостережень, <span class="math inline">\(\mu\)</span> — ймовірність успіху.</p>
 <p>Давайте подивимось, як це виглядає графічно. Для цього побудуємо графік функції щільності ймовірностей для біноміального розподілу з параметрами <span class="math inline">\(n = 30\)</span> та <span class="math inline">\(\mu = 0.5\)</span>.</p>
-<div id="cell-fig-binom-pmf" class="cell" data-execution_count="3">
+<div id="cell-fig-binom-pmf" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -412,7 +421,113 @@ S_n = \sum_{i=1}^{n} \xi_i \sim \text{Binomial}(n, \mu)
 </div>
 </div>
 </div>
-<p>На графіку зображено функцію щільності ймовірностей для біноміального розподілу з параметрами <span class="math inline">\(n = 30\)</span> та <span class="math inline">\(\mu = 0.5\)</span>. Ціановим кольором позначено ймовірності для кожної кількості успішних випадків. Рожевими виділено ймовірності для кількості успішних випадків, яка дорівнює або перевищує 20.</p>
+<p><a href="#fig-binom-pmf" class="quarto-xref">Рисунок&nbsp;<span>1.1</span></a> демонструє функцію щільності ймовірностей для біноміального розподілу з параметрами <span class="math inline">\(n = 30\)</span> та <span class="math inline">\(\mu = 0.5\)</span>. Ціановим<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> кольором позначено ймовірності для кожної кількості успішних випадків. Рожевими виділено ймовірності для кількості успішних випадків, яка перевищує або дорівнює 20.</p>
+</section>
+<section id="критерій" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="критерій"><span class="header-section-number">1.2.2</span> Критерій</h3>
+<p>Щойно ми розробили алгоритм, який на основі вибірки <span class="math inline">\(\xi\)</span> або визнає наявність доказів на користь <span class="math inline">\(H_1\)</span>, або повідомляє, що таких доказів немає. Відповідно, він або відхиляє <span class="math inline">\(H_0\)</span>, або не відхиляє її.</p>
+<p>Такий алгоритм називається <strong>критерієм</strong>. Його можна подати у вигляді функції <span class="math inline">\(S\)</span>, яка приймає реалізацію вибірки та повертає <span class="math inline">\(1\)</span>, якщо слід відхилити <span class="math inline">\(H_0\)</span>, та <span class="math inline">\(0\)</span> в іншому випадку.</p>
+<p><span class="math display">\[
+S(\xi) = \begin{cases}
+    1, \text{ якщо відхиляємо } H_0 \\
+    0, \text{ в іншому випадку}
+\end{cases}
+\]</span></p>
+<p>Давайте припустимо, що ми вирішили відхилити <span class="math inline">\(H_0\)</span>, якщо кількість успішних випадків перевищує або дорівнює 21. Тоді критерій набуде вигляду:</p>
+<p><span class="math display">\[
+S(\xi) = \begin{cases}
+    1, \text{ якщо } \sum \xi_i \geqslant 21 \\
+    0, \text{ в іншому випадку}
+\end{cases}
+\]</span></p>
+<p>Зазвичай скорочують запис і пишуть просто правило, за яким відхиляємо <span class="math inline">\(H_0\)</span></p>
+<p><span class="math display">\[
+S = \{\sum \xi_i \geqslant 21\}
+\]</span></p>
+<p>Позначимо <span class="math inline">\(Q = \sum \xi_i\)</span>, <span class="math inline">\(C = 21\)</span>, тоді критерій набуває вигляду:</p>
+<p><span class="math display">\[
+S = \{Q(\xi) \geqslant C\}
+\]</span></p>
+<p>Так влаштована більшість класичних критеріїв у прикладній статистиці, тому величинам у ньому дано спеціальні назви. <span class="math inline">\(Q\)</span> називається <strong>статистикою критерію</strong>, <span class="math inline">\(C\)</span> — <strong>критичним значенням</strong>.</p>
+<p><span class="math inline">\(Q\)</span> може бути будь-якою функцією від вибірки, яку ви вважаєте логічною для перевірки гіпотези. У нашому випадку це кількість успіхів, або сума всіх <span class="math inline">\(\xi_i\)</span>. Але ви можете вибрати й інші: максимальне значення, суму перших 5 значень або навіть просто перший елемент.</p>
+</section>
+<section id="критична-область" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="критична-область"><span class="header-section-number">1.2.3</span> Критична область</h3>
+<p>Знову перепишемо наше основне запитання, тільки тепер з використанням нашого критерію <span class="math inline">\(S\)</span>:</p>
+<blockquote class="blockquote">
+<p>Наскільки часто може бути таке, що за справедливості <span class="math inline">\(H_0\)</span> критерій <span class="math inline">\(S\)</span> відхиляє гіпотезу?</p>
+</blockquote>
+<p>Відповідь на це запитання залежить від критичного значення. Зараз ми взяли його рівним 21, побачивши на картинці, що великі відхилення відбуваються при <span class="math inline">\(H_0\)</span> рідко. Але що означає рідко й наскільки рідко, не сказали. Тепер наша мета зрозуміти, як вибрати критичне значення <span class="math inline">\(C\)</span>, виходячи з <strong>частоти помилок</strong> нашого критерію.</p>
+<p>Вибираючи <span class="math inline">\(C\)</span>, ми можемо або часто відхиляти нульову гіпотезу, коли <span class="math inline">\(C\)</span> мале, або можемо робити це рідше, коли <span class="math inline">\(C\)</span> велике. Щоб вибрати правильне значення, потрібно визначитися, коли наш критерій помиляється.</p>
+<ul>
+<li><p><span class="math inline">\(C = 16\)</span>. Якщо відхиляти гіпотезу при отриманні хоча б 16 успішних підписок із 30, то це навряд чи влаштує інвесторів. Так, успіхів більше половини. Але якщо в генеральній сукупності ймовірність 0.5, то майже в половині випадків ми будемо відхиляти гіпотезу. Критерій помилково повертає <span class="math inline">\(1\)</span>, тобто це помилка <strong>хибно позитивна</strong> (false positive, <strong>FP</strong>).</p></li>
+<li><p><span class="math inline">\(C = 29\)</span>. У такому разі будемо відхиляти гіпотезу тільки за 29 або 30 успіхів. Ці значення, звісно, говорять про те, що відхилення від 50% успіхів сильне. Але якщо в генеральній сукупності ймовірність, наприклад, 60%, то такі значення будуть виходити рідко. Але ж такі ймовірності теж влаштували б інвесторів, й ми б змогли відкрити стартап! А з таким критерієм ми навряд чи доб’ємося цього. Не відхилити гіпотезу <span class="math inline">\(H_0\)</span>, коли вона неправильна — це теж помилка. Вона називається <strong>хибно негативна</strong> (false negative, <strong>FN</strong>), оскільки критерій повернув 0 помилково.</p></li>
+</ul>
+<p><span class="math display">\[ \text{FP} - H_0\ відхиляється,\ коли\ вона\ вірна \]</span> <span class="math display">\[ \text{FN} - H_0\ не\ відхиляється,\ коли\ вона\ не вірна \]</span></p>
+<p>У нашому завданні інвесторам важливіше хибно позитивна помилка. Їм дуже не хочеться потрапити в ситуацію, коли їм показали доказ успішності бізнесу, а виявилося, більшість користувачів відмовляється оформлювати підписку й компанія не отримує прибуток. Це призведе до збитків. Хибно негативна помилка призведе до того, що ви втратите успішний бізнес, але інвестори грошей не втратять.</p>
+<p>Тому виберемо поріг, щоб ймовірність хибно позитивної помилки була задовільною, або ж <strong>частота хибнопозитивних спрацьовувань</strong> (False Positive Rate, FPR). Для цього треба зрозуміти, як часто ми будемо відхиляти гіпотезу, за умови вірності <span class="math inline">\(H_0\)</span>.</p>
+<p>Тепер знову переформулюємо основне питання, повністю з використанням нових термінів, й врешті-решт відповімо на нього.</p>
+<blockquote class="blockquote">
+<p>Який FPR у критерію <span class="math inline">\(S\)</span> для перевірки гіпотези <span class="math inline">\(H_0\)</span> проти <span class="math inline">\(H_1\)</span>?</p>
+</blockquote>
+<p>Коли <span class="math inline">\(H_0\)</span> є вірною, щоб порахувати кількість успіхів ми проводили 30 разів підкидання монетки з ймовірністю орла <span class="math inline">\(0.5\)</span>. Кількість орлів (тобто успіхів) у такому експерименті має розподіл, який називається біноміальним, тобто при <span class="math inline">\(\mu = 0.5\)</span> наша статистика має біноміальний розподіл <span class="math inline">\(Q \sim Binom(0.5, 30)\)</span>.</p>
+<p>Обчислимо FPR для <span class="math inline">\(C = 21\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+FPR &amp;= P(S(\xi) = 1\ |\ H_0) \\
+&amp;= P(Q \geqslant 21\ |\ H_0) \\
+&amp;= P(Q \geqslant 21\ |\ \mu = 0.5) = \\
+&amp;= P(Q \geqslant 21\ |\ Q \sim Binom(0.5, 30))
+\end{aligned}
+\]</span></p>
+<p>Це вже ймовірність події за конкретного розподілу випадкової величини. Його можна подивитися за таблицею або, що зручніше, обчислити з використанням мов програмування.</p>
+</section>
+<section id="обчислення-fpr" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="обчислення-fpr"><span class="header-section-number">1.2.4</span> Обчислення FPR</h3>
+<p>Давайте порахуємо суму ймовірностей для кількостей успіхів від 21 до 30 включно. Покажемо графічно, як це виглядає на <a href="#fig-binom-pmf-fpr" class="quarto-xref">Рисунку&nbsp;<span>1.2</span></a>.</p>
+<div id="cell-fig-binom-pmf-fpr" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, n <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> binom.pmf(x, n, <span class="fl">0.5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.bar(x, y, color<span class="op">=</span>turquoise)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.bar(x[x <span class="op">&gt;=</span> crit_subs], y[x <span class="op">&gt;=</span> crit_subs], color<span class="op">=</span>red_pink)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(crit_subs <span class="op">-</span> <span class="dv">2</span>, crit_subs <span class="op">+</span> <span class="dv">4</span>):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    plt.text(i <span class="op">+</span> <span class="fl">0.5</span>, y[i] <span class="op">+</span> <span class="fl">0.001</span>, <span class="ss">f"</span><span class="sc">{</span><span class="bu">round</span>(y[i] <span class="op">*</span> <span class="dv">100</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">%"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, size<span class="op">=</span><span class="dv">8</span>, rotation <span class="op">=</span> <span class="dv">30</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Кількість успішних випадків"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ймовірність"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-binom-pmf-fpr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-binom-pmf-fpr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="binom_files/figure-html/fig-binom-pmf-fpr-output-1.png" width="685" height="329" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-pmf-fpr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.2&nbsp;-&nbsp; Ймовірність хибно відхилити <span class="math inline">\(H_0\)</span> за умови її вірності
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Залишається лише обчислити суму ймовірностей для кількостей успіхів від 21 до 30 включно. Це і буде нашим FPR.</p>
+<p><span class="math display">\[
+FPR_{21} = \sum_{i = 21}^{30} P(Q = i) \approx 0.021
+\]</span></p>
+<p>У нашому випадку це буде 2.1%. Якщо FPR не перевищує деякої константи <span class="math inline">\(\alpha\)</span>, то критерій називається критерієм <strong>рівня значущості</strong> <span class="math inline">\(\alpha\)</span>. Статистичний критерій з <span class="math inline">\(\alpha\)</span> = 100% створити тривіально — достатньо завжди відхиляти <span class="math inline">\(H_0\)</span> — тому така постановка не має сенсу.</p>
+<p>Рівень значущості зазвичай обирають на основі бізнес-міркувань. Він позначає те, який ризик неправильного прийняття позитивного рішення ми вважаємо прийнятним. Зазвичай беруть <span class="math inline">\(\alpha = 0.05\)</span>, але якщо потрібне більш точне ухвалення рішення, можуть вибрати <span class="math inline">\(0.01\)</span>, <span class="math inline">\(0.005\)</span>, <span class="math inline">\(0.001\)</span>. Якщо ж рішення не таке критичне, можуть вибрати <span class="math inline">\(0.1\)</span>.</p>
+<p>Припустимо, вибрали значення <span class="math inline">\(\alpha = 0.05\)</span>, скористаємося критерієм <span class="math inline">\(S\)</span>: тобто якщо кількість успішних випадків перевищує або дорівнює 21, то відхиляємо <span class="math inline">\(H_0\)</span>.</p>
+<p>Якщо уважно подивитись на <a href="#fig-binom-pmf-fpr" class="quarto-xref">Рисунок&nbsp;<span>1.2</span></a>, то можна помітити, що ми можемо відхиляти <span class="math inline">\(H_0\)</span> при кількості успіхів від 20, а не 21, оскільки такий все ще буде відповідати <span class="math inline">\(\alpha = 0.05\)</span>:</p>
+<p><span class="math display">\[
+FPR_{20} = \sum_{i = 20}^{30} P(Q = i) \approx 0.049
+\]</span></p>
+<p>Якщо ж обрати 19, то FPR буде більше <span class="math inline">\(\alpha\)</span>: <span class="math display">\[
+FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
+\]</span></p>
+</section>
+</section>
+<section id="статистичні-функції-в-python" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="статистичні-функції-в-python"><span class="header-section-number">1.3</span> Статистичні функції в Python</h2>
 
 
 </section>
@@ -423,6 +538,7 @@ S_n = \sum_{i=1}^{n} \xi_i \sim \text{Binomial}(n, \mu)
 <li id="fn2"><p>Метод <code>integers()</code> генерує випадкові цілі числа в заданому діапазоні. Аргумент <code>endpoint</code> вказує, що верхня межа включається у діапазон.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Розподіл Бернуллі — це дискретний розподіл ймовірностей, який моделює випадковий експеримент з двома можливими результатами: успіхом або невдачею.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Біноміальний розподіл моделює кількість успішних випадків у послідовності незалежних випробувань. Сума <span class="math inline">\(n\)</span> незалежних випадкових величин з розподілу Бернуллі підпорядковується біноміальному розподілу.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Англ. <em>cyan</em>, від грец. κυανoῦς — “блакитний”, “лазуровий”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

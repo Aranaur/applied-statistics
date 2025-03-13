@@ -28,6 +28,11 @@ plt.rcParams['xtick.labelsize'] = 12
 plt.rcParams['ytick.labelsize'] = 12
 plt.rcParams['legend.fontsize'] = 12
 plt.rcParams['figure.titlesize'] = 12
+plt.rcParams['grid.color'] = (0.5, 0.5, 0.5, 0.1)
+plt.rcParams['axes.spines.top'] = False
+plt.rcParams['axes.spines.right'] = False
+plt.rcParams['axes.spines.left'] = False
+plt.rcParams['axes.spines.bottom'] = False
 
 # Define colors
 red_pink   = "#e64173"
