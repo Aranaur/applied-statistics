@@ -13,12 +13,14 @@ warnings.filterwarnings("ignore")
 np.random.seed(73)
 
 # custom color palette
+base_size = 13
 sns.set_style("whitegrid")
 palette = sns.color_palette("Set2")
 sns.set_palette(palette)
 sns.set_context("talk")
 
 # matplotlib settings
+plt.rcParams['figure.figsize'] = (8, 3.5)
 plt.rcParams['font.size'] = 12
 plt.rcParams['axes.labelsize'] = 12
 plt.rcParams['axes.titlesize'] = 12
