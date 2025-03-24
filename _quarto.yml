@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 language: _ua.yml
-crossref: 
-  title-delim: "&nbsp;-&nbsp;"
+# crossref: 
+#   title-delim: "&nbsp;-&nbsp;"
 
 
 

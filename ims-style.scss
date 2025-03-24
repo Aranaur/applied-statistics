@@ -195,3 +195,25 @@ h3 {
 /* restart footnote counter at each chapter */
 /* https://github.com/rstudio/bookdown/issues/589#issuecomment-701044587 */
 /* doesn't work for bs4_book, update when resolved */
+
+/* workedexample */
+
+.workedexample{
+  padding: 1em 1em 1em 4em;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: #f8f8f8 5px center/3em no-repeat; 
+  border-top: 1px solid #569BBD;    /* openintro::COL[1,1] */ 
+  border-bottom: 1px solid #569BBD; /* openintro::COL[1,1] */ 
+  background-image: url("img/_icons/worked-example.png");
+  background-position: 0.5em 1em;
+}
+
+.workedexample:before {
+  content: "Приклад:";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: #569BBD;
+}
