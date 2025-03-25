@@ -4,7 +4,20 @@ import matplotlib.pyplot as plt
 import random
 
 from scipy.stats import (
-    norm, binom, expon, t, chi2, pareto, ttest_1samp, ttest_ind, sem, bernoulli, mannwhitneyu, uniform, gamma
+    norm,
+    binom, 
+    expon, 
+    binomtest,
+    chisquare,
+    t, 
+    chi2, 
+    pareto, 
+    ttest_1samp, 
+    ttest_ind, sem, 
+    bernoulli, 
+    mannwhitneyu, 
+    uniform, 
+    gamma
 )
 
 import warnings
