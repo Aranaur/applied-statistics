@@ -6,7 +6,8 @@ language: _ua.yml
 # crossref: 
 #   title-delim: "&nbsp;-&nbsp;"
 
-
+profile:
+  default: development
 
 book:
   title: "Прикладний статистичний аналіз"
@@ -54,4 +55,22 @@ format:
   docx:
     reference-doc: word-template.docx
   # pdf:
-  #   documentclass: scrreprt
+  #  include-in-header: latex/ims-style.tex
+  #  include-after-body: latex/after-body.tex
+  #  documentclass: book
+  #  classoption: 
+  #    - 10pt
+  #    - openany
+  #  pdf-engine: xelatex
+  #  biblio-style: apalike
+  #  keep-tex: true
+  #  block-headings: false
+  #  top-level-division: chapter
+  #  fig-dpi: 300
+  #  fig-show: hold
+  #  fig-pos: H
+  #  tbl-pos: H
+  #  fig-align: center
+  #  toc: true
+  #  toc-depth: 2
+

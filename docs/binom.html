@@ -286,8 +286,15 @@ window.Quarto = {
   <li><a href="#p-значення-для-несиметричного-розподілу" id="toc-p-значення-для-несиметричного-розподілу" class="nav-link" data-scroll-target="#p-значення-для-несиметричного-розподілу"><span class="header-section-number">1.5.4</span> <span class="math inline">\(p\)</span>-значення для несиметричного розподілу</a></li>
   </ul></li>
   <li><a href="#готові-функції" id="toc-готові-функції" class="nav-link" data-scroll-target="#готові-функції"><span class="header-section-number">1.6</span> Готові функції</a></li>
-  <li><a href="#висновок" id="toc-висновок" class="nav-link" data-scroll-target="#висновок"><span class="header-section-number">1.7</span> Висновок</a></li>
-  <li><a href="#питання-для-самоперевірки" id="toc-питання-для-самоперевірки" class="nav-link" data-scroll-target="#питання-для-самоперевірки"><span class="header-section-number">1.8</span> Питання для самоперевірки</a></li>
+  <li><a href="#статистична-потужність" id="toc-статистична-потужність" class="nav-link" data-scroll-target="#статистична-потужність"><span class="header-section-number">1.7</span> Статистична потужність</a>
+  <ul class="collapse">
+  <li><a href="#хибно-негативні-помилки" id="toc-хибно-негативні-помилки" class="nav-link" data-scroll-target="#хибно-негативні-помилки"><span class="header-section-number">1.7.1</span> Хибно негативні помилки</a></li>
+  <li><a href="#критерій-пори-року" id="toc-критерій-пори-року" class="nav-link" data-scroll-target="#критерій-пори-року"><span class="header-section-number">1.7.2</span> Критерій пори року</a></li>
+  <li><a href="#потужність" id="toc-потужність" class="nav-link" data-scroll-target="#потужність"><span class="header-section-number">1.7.3</span> Потужність</a></li>
+  </ul></li>
+  <li><a href="#потужність-для-біноміального-розподілу" id="toc-потужність-для-біноміального-розподілу" class="nav-link" data-scroll-target="#потужність-для-біноміального-розподілу"><span class="header-section-number">1.8</span> Потужність для біноміального розподілу</a></li>
+  <li><a href="#висновок" id="toc-висновок" class="nav-link" data-scroll-target="#висновок"><span class="header-section-number">1.9</span> Висновок</a></li>
+  <li><a href="#питання-для-самоперевірки" id="toc-питання-для-самоперевірки" class="nav-link" data-scroll-target="#питання-для-самоперевірки"><span class="header-section-number">1.10</span> Питання для самоперевірки</a></li>
   </ul>
 </nav>
     </div>
@@ -328,7 +335,7 @@ window.Quarto = {
 <li>Використаємо метод <code>integers()</code> до класу <code>Generator</code>, яка генерує випадкові цілі числа в заданому діапазоні.</li>
 <li>Підкинемо монетку 30 разів та порахуємо кількість успішних випадків.</li>
 </ul>
-<div id="13f9afa9" class="cell" data-execution_count="3">
+<div id="988fa7bc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">18</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -555,7 +562,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>Ми з’ясували, що статистика <span class="math inline">\(Q\)</span> має біноміальний розподіл.</p>
 <p>Біноміальний розподіл <span class="math inline">\(Binom(n, \mu)\)</span> — розподіл кількості успіхів у послідовності з <span class="math inline">\(n\)</span> незалежних випадкових експериментів, ймовірність успіху в кожному з яких дорівнює <span class="math inline">\(\mu\)</span>.</p>
 <p>Щоб працювати з розподілом, можна створити об’єкт-розподіл за допомогою бібліотеки <code>scipy.stats</code>.</p>
-<div id="a851a914" class="cell" data-execution_count="6">
+<div id="b4f31f51" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> binom</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -580,7 +587,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="функція-ймовірностей"><span class="header-section-number">1.3.2</span> Функція ймовірностей</h3>
 <p>Функція ймовірності дискретного розподілу <span class="math inline">\(p_\xi(x)\)</span> — ймовірність, з якою <span class="math inline">\(\xi\)</span> приймає значення <span class="math inline">\(x\)</span>.</p>
 <p>У Python це функція <code>pmf</code> (probability mass function).</p>
-<div id="e53d1c8f" class="cell" data-execution_count="7">
+<div id="5718775a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>binom_dist.pmf(<span class="dv">20</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
@@ -644,7 +651,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 </div>
 </div>
 <p>Насправді вже зараз ми можемо порахувати ймовірність потрапляння в критичну область. Потрібно просто підсумувати ймовірності для кількостей успіхів від 21 до 30.</p>
-<div id="87c16dbb" class="cell" data-execution_count="9">
+<div id="4e8e4a65" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(np.<span class="bu">sum</span>(y[crit_subs:]), <span class="dv">4</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>0.0214</code></pre>
@@ -652,7 +659,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 </div>
 <p>Отже, ми дійсно побудували критерій рівня значущості <span class="math inline">\(\alpha = 0.05\)</span>. Ба більше, це критерій рівня значущості 0.021.</p>
 <p>А що якби ми взяли <span class="math inline">\(C = 19\)</span>?</p>
-<div id="164d173d" class="cell" data-execution_count="10">
+<div id="802ad9d6" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(np.<span class="bu">sum</span>(y[crit_subs:]), <span class="dv">4</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -661,7 +668,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 </div>
 <p>Тоді ймовірність помилки вже навіть більше <span class="math inline">\(10\%\)</span>, що зовсім нам не підходить.</p>
 <p>А якщо <span class="math inline">\(C = 20\)</span>?</p>
-<div id="108f3dc0" class="cell" data-execution_count="11">
+<div id="f2207162" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(np.<span class="bu">sum</span>(y[crit_subs:]), <span class="dv">4</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -674,7 +681,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <h3 data-number="1.3.3" class="anchored" data-anchor-id="кумулятивна-функція-розподілу"><span class="header-section-number">1.3.3</span> Кумулятивна функція розподілу</h3>
 <p>Кумулятивна функція розподілу <span class="math inline">\(F_\xi(x) = P(\xi \leqslant x)\)</span></p>
 <p>У Python це функція <code>cdf</code> (Cumulative Distribution Function).</p>
-<div id="7e5faa0a" class="cell" data-execution_count="12">
+<div id="4bad42b9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a>binom_dist.cdf(<span class="dv">19</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
@@ -689,7 +696,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 </div>
 </div>
 <p>Ймовірність отримати <span class="math inline">\(19\)</span> або менше успіхів у нашому завданні <span class="math inline">\(\geqslant 0.95\)</span>. А оскільки <span class="math inline">\(P(\xi \leqslant 19) + P(\xi \geqslant 20) = 1\)</span>, можемо обчислити рівень значущості нашого критерію.</p>
-<div id="0be1052f" class="cell" data-execution_count="13">
+<div id="5e22b18c" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">-</span> binom_dist.cdf(<span class="dv">19</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>0.04936857335269451</code></pre>
@@ -713,7 +720,7 @@ u_p(\xi) = min\ \{x\ |\ F_\xi(x) \geqslant p \}
 <p>Якби розподіл був неперервним, можна було б сказати, що квантиль — це таке <span class="math inline">\(x\)</span>, на якому функція розподілу дорівнює <span class="math inline">\(p\)</span>. Але для дискретного розподілу такого може не бути.</p>
 </div>
 <p>У Python квантиль можна порахувати через функцію <code>ppf</code> (Percent Point Function).</p>
-<div id="99bb68d6" class="cell" data-execution_count="14">
+<div id="75b38da3" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>binom_dist.ppf(<span class="fl">0.95</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>19.0</code></pre>
@@ -727,7 +734,7 @@ u_p(\xi) = min\ \{x\ |\ F_\xi(x) \geqslant p \}
 <li>Отже, з визначення квантилі, <span class="math inline">\(C - 1 = u_{1 - \alpha}\)</span></li>
 <li>Значить <span class="math inline">\(C = u_{1 - \alpha} + 1\)</span></li>
 </ol>
-<div id="3951c0fd" class="cell" data-execution_count="15">
+<div id="ea2aa898" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_crit_subs(n, mu, alpha):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичне значення для критерію</span></span>
@@ -740,7 +747,7 @@ u_p(\xi) = min\ \{x\ |\ F_\xi(x) \geqslant p \}
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> binom_dist.ppf(<span class="dv">1</span> <span class="op">-</span> alpha) <span class="op">+</span> <span class="dv">1</span></span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Використаємо функцію для знаходження критичного значення для <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="778a29a1" class="cell" data-execution_count="16">
+<div id="34e48f88" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>find_crit_subs(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>20.0</code></pre>
@@ -849,7 +856,7 @@ S = \{Q \geqslant C\} \cup \{Q \leqslant n - C\}
 <p>Якщо ж виставити <span class="math inline">\(C = 6\)</span>, то така область уже підходить, площа стовпців <span class="math inline">\(\approx 0.043 &lt; 0.05\)</span>.</p>
 <p>Щоб вибрати порогову константу за формулою, можна помітити, що критична область симетрична, а значить праворуч площа не повинна бути більшою, ніж <span class="math inline">\(\frac{\alpha}{2}\)</span>. А таку задачу ми вже вміємо розв’язувати.</p>
 <p>Реалізуємо функцію на Python.</p>
-<div id="f737e2df" class="cell" data-execution_count="20">
+<div id="ff1982cc" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_crit_subs_two_sided(n, mu, alpha):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичне значення для двостороннього критерію</span></span>
@@ -862,7 +869,7 @@ S = \{Q \geqslant C\} \cup \{Q \leqslant n - C\}
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> binom_dist.ppf(alpha <span class="op">/</span> <span class="dv">2</span>) <span class="op">+</span> <span class="dv">1</span></span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Використаємо функцію для знаходження критичного значення для <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="8723aeb1" class="cell" data-execution_count="21">
+<div id="61ba489d" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>find_crit_subs_two_sided(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>6.0</code></pre>
@@ -880,7 +887,7 @@ S = \{|Q(\xi) - 15| \geqslant C\}
 S = \{\Delta(\xi) \geqslant C\}
 \]</span></p>
 <p>Тобто більш екстремальними вважатимуться ті значення суми, що знаходяться далі від 15. Щоб обчислити <span class="math inline">\(p\)</span>-значення, доведеться порахувати суму площ із двох сторін окремо.</p>
-<div id="6b651a59" class="cell" data-execution_count="22">
+<div id="abf94ec1" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided_sym(n, q):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> np.<span class="bu">abs</span>(q <span class="op">-</span> <span class="dv">15</span>)</span>
@@ -889,7 +896,7 @@ S = \{\Delta(\xi) \geqslant C\}
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> left_sq <span class="op">+</span> right_sq</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Насправді через симетричність розподілу ліва і права площа виходять однаковими, тому можна порахувати площу з одного боку і помножити на 2.</p>
-<div id="b8ce8182" class="cell" data-execution_count="23">
+<div id="02321764" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided_sym_simple(n, q):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> np.<span class="bu">abs</span>(q <span class="op">-</span> <span class="dv">15</span>)</span>
@@ -897,13 +904,13 @@ S = \{\Delta(\xi) \geqslant C\}
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> right_sq</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Використаємо функцію для знаходження <span class="math inline">\(p\)</span>-значення для <span class="math inline">\(q = 21\)</span>.</p>
-<div id="51ae14e2" class="cell" data-execution_count="24">
+<div id="fa402ce8" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pvalue_two_sided_sym(<span class="dv">30</span>, <span class="dv">21</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>0.04277394525706769</code></pre>
 </div>
 </div>
-<div id="a0ed43a4" class="cell" data-execution_count="25">
+<div id="5b7e5918" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pvalue_two_sided_sym_simple(<span class="dv">30</span>, <span class="dv">21</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>0.04277394525706768</code></pre>
@@ -942,7 +949,7 @@ S = \{\Delta(\xi) \geqslant C\}
 P(Q(\xi) \leqslant C) \leqslant \frac{\alpha}{2}
 \]</span></p>
 <p>Спочатку знайдемо перше число, де ймовірність <span class="math inline">\(\geqslant \frac{\alpha}{2}\)</span>. А це за визначенням <span class="math inline">\(\frac{\alpha}{2}\)</span>-квантиль. Достатньо взяти попереднє число, і воно буде задовольняти нашій умові.</p>
-<div id="be6fa0de" class="cell" data-execution_count="27">
+<div id="a8389d71" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> two_sided_criterion_nonsym(n, mu, alpha):</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span>mu)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    c2 <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">1</span></span>
@@ -950,7 +957,7 @@ P(Q(\xi) \leqslant C) \leqslant \frac{\alpha}{2}
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c1, c2</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Використаємо функцію для знаходження критичних значень для <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="20739b60" class="cell" data-execution_count="28">
+<div id="303494c1" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>two_sided_criterion_nonsym(<span class="dv">30</span>, <span class="fl">0.8</span>, <span class="fl">0.05</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>(18.0, 29.0)</code></pre>
@@ -1002,7 +1009,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 \]</span></p>
 <p>Отже, можна рахувати <span class="math inline">\(p\)</span>-значення як <span class="math inline">\(2 \min(p_1, p_2)\)</span> й порівнювати з <span class="math inline">\(\alpha\)</span>.</p>
 <p>Проведемо аналогію із симетричним випадком: якщо сума опинилася в лівій частині, то потрібно порахувати <span class="math inline">\(p\)</span>-значення лівого критерію і помножити на 2. Якщо сума опинилася в правій частині, то потрібно порахувати <span class="math inline">\(p\)</span>-значення правого критерію і помножити на 2.</p>
-<div id="7c08816c" class="cell" data-execution_count="30">
+<div id="b188c02b" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided(n, q, mu<span class="op">=</span><span class="fl">0.5</span>):</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span>mu)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    pvalue_left <span class="op">=</span> binom_h0.cdf(q)</span>
@@ -1010,7 +1017,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> <span class="bu">min</span>(pvalue_left, pvalue_right)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Використаємо функцію для знаходження <span class="math inline">\(p\)</span>-значення для <span class="math inline">\(q = 28\)</span>.</p>
-<div id="c9151863" class="cell" data-execution_count="31">
+<div id="9cbf8eda" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pvalue_two_sided(<span class="dv">30</span>, <span class="dv">28</span>, <span class="fl">0.8</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>0.08835797030399428</code></pre>
@@ -1018,13 +1025,13 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 </div>
 <p>Видно, що <span class="math inline">\(p\)</span>-значення <span class="math inline">\(&gt; 0.05\)</span>, отже, на рівні значущості <span class="math inline">\(0.05\)</span> навіть <span class="math inline">\(28\)</span> успіхів недостатньо, щоб відкинути ймовірність успіху в <span class="math inline">\(80\%\)</span>.</p>
 <p>Зауважимо, що ця ж функція працює і для симетричного випадку, повертаючи той самий результат.</p>
-<div id="94cc19ec" class="cell" data-execution_count="32">
+<div id="adad882b" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pvalue_two_sided(n<span class="op">=</span><span class="dv">30</span>, q<span class="op">=</span><span class="dv">20</span>, mu<span class="op">=</span><span class="fl">0.5</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>0.09873714670538902</code></pre>
 </div>
 </div>
-<div id="19e530bf" class="cell" data-execution_count="33">
+<div id="043cdf7a" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pvalue_two_sided_sym(n<span class="op">=</span><span class="dv">30</span>, q<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>0.09873714670538904</code></pre>
@@ -1046,7 +1053,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <li><code>less</code>: лівостороння</li>
 </ul></li>
 </ul>
-<div id="ba3487ed" class="cell" data-execution_count="34">
+<div id="cf689dd1" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> binomtest</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binomtest(<span class="dv">19</span>, <span class="dv">30</span>, <span class="fl">0.5</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
@@ -1059,12 +1066,156 @@ p-значення: 0.20048842206597334</code></pre>
 </div>
 </div>
 </section>
-<section id="висновок" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="висновок"><span class="header-section-number">1.7</span> Висновок</h2>
+<section id="статистична-потужність" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="статистична-потужність"><span class="header-section-number">1.7</span> Статистична потужність</h2>
+<section id="хибно-негативні-помилки" class="level3" data-number="1.7.1">
+<h3 data-number="1.7.1" class="anchored" data-anchor-id="хибно-негативні-помилки"><span class="header-section-number">1.7.1</span> Хибно негативні помилки</h3>
+<p>Раніше під час побудови критеріїв ми звертали увагу тільки на <span class="math inline">\(\alpha\)</span>, рівень значущості критерію. Але цей параметр контролює лише хибнопозитивну помилку (False Positive), а саме ймовірність, що критерій прийме <span class="math inline">\(H_1\)</span> за умови вірності <span class="math inline">\(H_0\)</span>.</p>
+<p>Але є ще один вид помилок, які може допустити критерій — хибно негативні помилки (False Negative). Це випадки, коли критерій приймає <span class="math inline">\(H_0\)</span> за умови вірності <span class="math inline">\(H_1\)</span>. Це важливо, оскільки вони можуть вказувати на те, що критерій не чутливий до змін, які відбуваються в даних.</p>
+<p>Випадок, коли ймовірність FPR <span class="math inline">\(&lt; \alpha\)</span>, але при цьому ймовірність хибно негативні помилки (False Negative Rate, FNR) величезна, можна навести легко. Для цього достатньо <strong>ніколи</strong> не відкидати гіпотезу, взявши критерій <span class="math inline">\(S \equiv 0\)</span>.</p>
+<p>Наведемо приклад, коли помилки False Negative відбуваються не завжди, але критерії є все одно нечутливими.</p>
+</section>
+<section id="критерій-пори-року" class="level3" data-number="1.7.2">
+<h3 data-number="1.7.2" class="anchored" data-anchor-id="критерій-пори-року"><span class="header-section-number">1.7.2</span> Критерій пори року</h3>
+<p>Поставимо гіпотезу про те, що зараз на вулиці літо. Для перевірки можна було б, звісно, подивитися в календар, але ми зробимо інакше.</p>
+<p><span class="math display">\[
+H_0: \text{ на вулиці літо}
+\]</span></p>
+<p><span class="math display">\[
+H_1: \text{ на вулиці не літо}
+\]</span></p>
+<p>Подивимося у вікно і визначимо, чи йде там сніг. Якщо він йде, то це непоганий доказ того, що зараз не літо, а отже можна відкинути <span class="math inline">\(H_0\)</span>.</p>
+<p>Порахуємо FPR та FNR для цього критерію. Ми знаємо, що влітку сніг іде дуже рідко (ймовірність помилки нижча за <span class="math inline">\(0.1\%\)</span>), тож це точно критерій рівня значущості <span class="math inline">\(0.001\)</span>, чого зазвичай достатньо для критеріїв.</p>
+<p><span class="math display">\[
+FPR(S) = P(\text{йде сніг}\ |\ \text{сьогодні літо}) &lt; 0.001
+\]</span></p>
+<p>Але що з FNR? Розглянемо конкретний випадок: зараз вересень. Оскільки у вересні майже завжди немає снігу, можна сказати, що FNR більша за <span class="math inline">\(90\%\)</span>, отже, цей критерій насправді мало дієвий.</p>
+<p><span class="math display">\[
+FNR(S) = P(\text{не йде сніг}\ |\ \text{зараз вересень}) &gt; 0.9
+\]</span></p>
+<p>Сформулюємо інший критерій рівня значущості <span class="math inline">\(\alpha\)</span>, причому в цьому разі рівень значущості можна вибрати довільним.</p>
+<p><span class="math display">\[
+S(\xi) = \begin{cases}
+    1, \text{ якщо монетка з імовірністю орла } \alpha \text{ випала орлом} \\
+    0, \text{ інакше}
+\end{cases}
+\]</span></p>
+<p>Виходить, цей критерій випадковий, і він не використовує взагалі жодної інформації про погоду. Однак вимогам до рівня значущості він задовольняє.</p>
+<p><span class="math display">\[
+FPR = P(\text{випав орел}\ |\ \text{сьогодні літо}) = P(\text{випав орел}) = \alpha
+\]</span></p>
+<p>Обчислимо FNR.</p>
+<p><span class="math display">\[
+FNR = P(\text{не випав орел}\ |\ \text{сьогодні не літо}) = P(\text{не випав орел}) = 1 - \alpha
+\]</span></p>
+<p>За <span class="math inline">\(\alpha = 0.001\)</span>, як у першому випадку, отримуємо ймовірність FNR <span class="math inline">\(0.999 &gt; 0.9\)</span>, тобто за однакового рівня значущості з першим критерієм, другий критерій частіше припускається хибно негативної помилки.</p>
+</section>
+<section id="потужність" class="level3" data-number="1.7.3">
+<h3 data-number="1.7.3" class="anchored" data-anchor-id="потужність"><span class="header-section-number">1.7.3</span> Потужність</h3>
+<p>У статистиці заведено позитивним результатом вважати відкидання нульової гіпотези, бо зазвичай підтвердження альтернативи означає наявність бізнес-результату. Тому вважається хорошим критерій, який частіше дає змогу виявити бізнес-результат. І рахують тоді не ймовірність хибно негативної помилки, а <em>потужність</em>, що дорівнює ймовірності відкинути нульову гіпотезу за вірності <span class="math inline">\(H_1\)</span>, тобто ймовірність <strong>істинно позитивного результату</strong> (True Positive Rate, TPR).</p>
+<p><span id="eq-power"><span class="math display">\[
+\text{Power}_S = 1 - FNR
+\tag{1.1}\]</span></span></p>
+<p>Коли альтернатива <span class="math inline">\(H_1\)</span> складається з множини результатів, потужність розглядають як функцію від результату. Наприклад, можна порахувати потужність першого та другого критеріїв взимку й восени.</p>
+<p><span class="math display">\[
+\text{Power}_S(\mu) = 1 - FNR(\mu)
+\]</span></p>
+<p><strong>Перший критерій</strong></p>
+<p><span class="math display">\[
+\text{Power}_S(\text{травень}) = P(\text{їде сніг } | \text{ травень}) \approx 0.00001
+\]</span></p>
+<p><span class="math display">\[
+\text{Power}_S(\text{жовтень}) = P(\text{їде сніг } | \text{ жовтень}) \approx 0.1
+\]</span></p>
+<p><span class="math display">\[
+\text{Power}_S(\text{січень}) = P(\text{їде сніг } | \text{ січень}) \approx 0.5
+\]</span></p>
+<p><strong>Другий критерій</strong></p>
+<p><span class="math display">\[
+\text{Power}_S(\text{травень}) = P(\text{випав орел } | \text{ травень}) = \alpha = 0.001
+\]</span></p>
+<p><span class="math display">\[
+\text{Power}_S(\text{жовтень}) = P(\text{випав орел } | \text{ жовтень}) = \alpha = 0.001
+\]</span></p>
+<p><span class="math display">\[
+\text{Power}_S(\text{січень}) = P(\text{випав орел } | \text{ січень}) = \alpha = 0.001
+\]</span></p>
+<p>Зазвичай завдання пошуку найкращого критерію формулюється як пошук якомога потужнішого критерію за заданого рівня значущості <span class="math inline">\(FPR \leqslant \alpha\)</span>. Але ми сказали, що потужність — функція від параметра, у нашому випадку від місяця.</p>
+<p>Якщо ми застосовуватимемо критерій у січні, то потужнішим буде перший критерій, а якщо в травні, то потужнішим буде другий критерій. Тому потрібно розуміти, коли буде застосовуватися критерій, а отже, ми шукаємо найпотужніший критерій у галузі, яка нас цікавить.</p>
+<p>Хоча в реальності в травні потужність обох критеріїв настільки низька, що вони просто не приносять користі, й використовувати їх не має сенсу.</p>
+</section>
+</section>
+<section id="потужність-для-біноміального-розподілу" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="потужність-для-біноміального-розподілу"><span class="header-section-number">1.8</span> Потужність для біноміального розподілу</h2>
+<p>Застосуємо нові знання про потужність для нашої задачі з освітнім сервісом. З бізнес-міркувань ми вже вибрали <span class="math inline">\(\alpha = 0.05\)</span>, а отже, знаємо, що ми неправильно відкидаємо гіпотезу <span class="math inline">\(H_0:\ \mu = 0.5\)</span> з ймовірністю не більше, ніж <span class="math inline">\(5\%\)</span>. Тобто цим обмежена ймовірність хибно позитивної помилки.</p>
+<p>А з якою ймовірністю ми будемо <em>правильно</em> відкидати гіпотезу? І яка в нас буде ймовірність хибно негативної помилки? На це запитання якраз відповість формула потужності.</p>
+<p>Згадаймо критерій, за яким ми приймаємо рішення:</p>
+<p><span class="math display">\[
+Q(\xi) = \sum\limits_{i=1}^n \xi_i - \text{кількість підписок}
+\]</span></p>
+<p><span class="math display">\[
+S = \{Q \geqslant 20\}
+\]</span></p>
+<p>Тобто якщо отримуємо хоча б <span class="math inline">\(20\)</span> успішних підписок, то відкидаємо <span class="math inline">\({H}_0\)</span>.</p>
+<p>Зауважимо, що потужність залежить від того, яке значення <span class="math inline">\(\mu\)</span> у нашій генеральній сукупності. Зафіксуємо спочатку параметр <span class="math inline">\(\mu = 0.6\)</span> й порахуємо потужність для нього. Якщо істинний параметр такий, то статистика <span class="math inline">\(Q\)</span> має розподіл <span class="math inline">\(Binom(30, 0.6)\)</span>.</p>
+<div id="cell-fig-binom-power" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>binom_h0 <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>binom_alternative <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>x_grid <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">31</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>crit_reg <span class="op">=</span> x_grid <span class="op">&gt;=</span> <span class="dv">20</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>probs_h0 <span class="op">=</span> binom_h0.pmf(x_grid)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs_h0, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'PMF, $Binom(0.5, 30)$'</span>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>probs_alternative <span class="op">=</span> binom_alternative.pmf(x_grid)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs_alternative, color<span class="op">=</span>slate, label<span class="op">=</span><span class="st">'PMF, $Binom(0.6, 30)$'</span>)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid[crit_reg], probs_alternative[crit_reg], color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Критична область'</span>)</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-binom-power" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-binom-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="binom_files/figure-html/fig-binom-power-output-1.png" width="662" height="309" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.9: Потужність критерію для <span class="math inline">\(\mu = 0.6\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Як і раніше, нас цікавить імовірність отримати <span class="math inline">\(20\)</span> або більше успіхів. Але якщо раніше ми дивилися на неї для розподілу з <span class="math inline">\(\mu=0.5\)</span> й хотіли, щоб вона була меншою за <span class="math inline">\(5\%\)</span>, то тепер ми дивимося за <span class="math inline">\(\mu = 0.6\)</span> та прагнемо зробити цю величину якомога більшою. Порівняно з обчисленням FPR формула не зміниться, змінюється тільки <span class="math inline">\(\mu\)</span></p>
+<div id="b359b1b3" class="cell" data-execution_count="36">
+<div id="lst-binom-power" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;1.1: Обчислення потужності критерію
+</figcaption>
+<div aria-describedby="lst-binom-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-binom-power"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-binom-power-1"><a href="#lst-binom-power-1" aria-hidden="true" tabindex="-1"></a>critical_value <span class="op">=</span> <span class="dv">20</span></span>
+<span id="lst-binom-power-2"><a href="#lst-binom-power-2" aria-hidden="true" tabindex="-1"></a>power <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.6</span>).cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="lst-binom-power-3"><a href="#lst-binom-power-3" aria-hidden="true" tabindex="-1"></a>fpr   <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.5</span>).cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="lst-binom-power-4"><a href="#lst-binom-power-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-binom-power-5"><a href="#lst-binom-power-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Хибно позитивна помилка: </span><span class="sc">{</span>fpr<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="lst-binom-power-6"><a href="#lst-binom-power-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Потужність: </span><span class="sc">{</span>power<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Хибно позитивна помилка: 4.9%
+Потужність: 29.1%</code></pre>
+</div>
+</div>
+</section>
+<section id="висновок" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="висновок"><span class="header-section-number">1.9</span> Висновок</h2>
 <p>Ми розглянули, як можна використовувати біноміальний розподіл для перевірки гіпотези про ймовірність успіху. Для цього ми визначили критерій, критичну область, <span class="math inline">\(p\)</span>-значення. Показали, як можна використовувати ці поняття для різних видів гіпотез: односторонніх, двосторонніх, симетричних та несиметричних.</p>
 </section>
-<section id="питання-для-самоперевірки" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="питання-для-самоперевірки"><span class="header-section-number">1.8</span> Питання для самоперевірки</h2>
+<section id="питання-для-самоперевірки" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="питання-для-самоперевірки"><span class="header-section-number">1.10</span> Питання для самоперевірки</h2>
 <ol type="1">
 <li>Які гіпотези можна перевірити за допомогою біноміального розподілу?</li>
 <li>Як визначити критичну область для критерію?</li>
