@@ -39,12 +39,12 @@ book:
     - z-test.qmd
     - t-test.qmd
     - monte-carlo.qmd
-    - kolmogorov.qmd
-    - chi-sq.qmd
-    - mann-whitney.qmd
-    - bootstrap.qmd
+    # - kolmogorov.qmd
+    # - chi-sq.qmd
+    # - mann-whitney.qmd
+    # - bootstrap.qmd
     - summary.qmd
-    - references.qmd
+    # - references.qmd
 
 bibliography: references.bib
 
@@ -54,23 +54,40 @@ format:
     code-link: true
   docx:
     reference-doc: word-template.docx
-  # pdf:
+  pdf:
+   sansfont: Calibri
+   mainfont: Georgia
+   monofont: Consolas
   #  include-in-header: latex/ims-style.tex
   #  include-after-body: latex/after-body.tex
-  #  documentclass: book
-  #  classoption: 
-  #    - 10pt
-  #    - openany
-  #  pdf-engine: xelatex
-  #  biblio-style: apalike
-  #  keep-tex: true
-  #  block-headings: false
+   include-in-header: 
+    text: |
+      \usepackage{sourcecodepro}
+      \definecolor{codefontcolor}{RGB}{125,18,186}
+      \definecolor{codebggray}{HTML}{f8f9fa}
+      \let\textttOrig\texttt
+      \renewcommand{\texttt}[1]{\textttOrig{\colorbox{codebggray}{\textcolor{codefontcolor}{#1}}}}
+   geometry:
+    - top=25mm
+    - left=18mm
+    - right=18mm
+    - bottom=20mm
+    - heightrounded
+   colorlinks: true
+   documentclass: report
+   classoption: 
+     - 10pt
+     - openany
+   pdf-engine: xelatex
+   biblio-style: apalike
+   keep-tex: false
+   block-headings: false
   #  top-level-division: chapter
-  #  fig-dpi: 300
-  #  fig-show: hold
-  #  fig-pos: H
-  #  tbl-pos: H
-  #  fig-align: center
-  #  toc: true
-  #  toc-depth: 2
+   fig-dpi: 300
+   fig-show: hold
+   fig-pos: H
+   tbl-pos: H
+   fig-align: center
+   toc: true
+   toc-depth: 2
 
