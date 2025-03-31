@@ -5,6 +5,7 @@ project:
 language: _ua.yml
 # crossref: 
 #   title-delim: "&nbsp;-&nbsp;"
+code-annotations: below
 
 profile:
   default: development
@@ -12,7 +13,6 @@ profile:
 book:
   title: "Прикладний статистичний аналіз"
   reader-mode: true
-
 
   page-footer:
     left: |
@@ -58,15 +58,7 @@ format:
    sansfont: Calibri
    mainfont: Georgia
    monofont: Consolas
-  #  include-in-header: latex/ims-style.tex
-  #  include-after-body: latex/after-body.tex
-   include-in-header: 
-    text: |
-      \usepackage{sourcecodepro}
-      \definecolor{codefontcolor}{RGB}{125,18,186}
-      \definecolor{codebggray}{HTML}{f8f9fa}
-      \let\textttOrig\texttt
-      \renewcommand{\texttt}[1]{\textttOrig{\colorbox{codebggray}{\textcolor{codefontcolor}{#1}}}}
+   include-in-header: latex/as-style.tex
    geometry:
     - top=25mm
     - left=18mm

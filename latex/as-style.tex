@@ -1,0 +1,11 @@
+% Quarto PDF configuration
+\usepackage{xcolor}
+\usepackage{sourcecodepro}
+
+% Define custom colors
+\definecolor{codefontcolor}{RGB}{125,18,186}
+\definecolor{codebggray}{HTML}{f8f9fa}
+
+% Redefine \texttt to apply custom styling
+\let\textttOrig\texttt
+\renewcommand{\texttt}[1]{\textttOrig{\colorbox{codebggray}{\textcolor{codefontcolor}{#1}}}}
