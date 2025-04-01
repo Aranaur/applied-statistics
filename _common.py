@@ -2,6 +2,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import random
+import time
+from statsmodels.stats.proportion import proportion_confint
 
 from scipy.stats import (
     norm,

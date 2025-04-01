@@ -7,6 +7,9 @@ language: _ua.yml
 #   title-delim: "&nbsp;-&nbsp;"
 code-annotations: below
 
+filters:
+  - first-line-indent
+
 profile:
   default: development
 
@@ -36,6 +39,7 @@ book:
     - index.qmd
     - intro.qmd
     - binom.qmd
+    - power.qmd
     - z-test.qmd
     - t-test.qmd
     - monte-carlo.qmd
@@ -55,6 +59,9 @@ format:
   docx:
     reference-doc: word-template.docx
   pdf:
+   indent: true
+   first-line-indent:
+     size: 1.25cm
    sansfont: Calibri
    mainfont: Georgia
    monofont: Consolas
