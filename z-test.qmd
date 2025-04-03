@@ -11,7 +11,7 @@ with open("_common.py") as f:
 
 Далі, для виведення критеріїв нам потрібен нормальний розподіл. *Потому що саме цьому розподілу підпорядковується середнє вибірок*. Тож давайте подивимося, що це взагалі таке, як з ним працювати в Python й які в нього є властивості.
 
-## Нормальний розподіл
+## Нормальний розподіл {#sec-normal-distribution}
 
 Нормальний розподіл $\mathcal{N}(\mu, \sigma^2)$ --- неперервний розподіл, у якому щільність спадає зі збільшенням відстані від математичного сподівання $\mu$ за швидкістю, пропорційною квадрату відстані (див. [формулу -@eq-normal-density]).
 
@@ -59,7 +59,7 @@ plt.legend()
 plt.show()
 ```
 
-## Нормальний розподіл у Python
+## Нормальний розподіл у Python {#sec-normal-distribution-python}
 
 Нехай ми хочемо задати розподіл $\mathcal{N}(\mu, \sigma^2)$. Для цього є клас `norm`[^py-norm].
 
@@ -85,15 +85,17 @@ plt.show()
 #| echo: false
 
 mu, sigma = 0, 1
+q = 1.5
+
 
 # Генерація випадкової вибірки
 rnorm = norm.rvs(loc=mu, scale=sigma, size=50, random_state=42)
 
 # Щільність розподілу (PDF)
 x = np.linspace(-4, 4, 1000)
-dnrom = norm.pdf(2, loc=mu, scale=sigma)
-pnorm = norm.cdf(2, loc=mu, scale=sigma)
-qnorm = norm.ppf(0.977, loc=mu, scale=sigma)
+dnrom = norm.pdf(q, loc=mu, scale=sigma)
+pnorm = norm.cdf(q, loc=mu, scale=sigma)
+qnorm = norm.ppf(0.933, loc=mu, scale=sigma)
 
 # PDF for x
 plt.plot(x, norm.pdf(x, loc=mu, scale=sigma), label='PDF', color = turquoise)
@@ -104,20 +106,19 @@ plt.annotate('norm.rvs(50)', xy=(-1, 0), xytext=(-3, 0.2), color=red_pink, ha = 
              arrowprops=dict(facecolor=red_pink, shrink=0.05))
 
 # CDF for 2
-plt.fill_between(x, norm.pdf(x, loc=mu, scale=sigma), where=(x <= 2), color=turquoise, alpha=0.2)
-plt.annotate('norm.cdf(2) = 0.977', xy=(1, 0.15), xytext=(1.5, 0.3), color=turquoise,
+plt.fill_between(x, norm.pdf(x, loc=mu, scale=sigma), where=(x <= q), color=turquoise, alpha=0.2)
+plt.annotate('norm.cdf(1.5) = 0.933', xy=(1, 0.15), xytext=(1.5, 0.3), color=turquoise,
              arrowprops=dict(facecolor=turquoise, shrink=0.05))
 
 # PDF for 2
-plt.scatter(qnorm, norm.pdf(qnorm, loc=mu, scale=sigma), color=orange, s=15, zorder=5)
-plt.plot([2, 2], [0, dnrom], color=orange, linewidth=1, linestyle='--')
-plt.annotate('norm.pdf(2) = 0.054', xy=(2, dnrom), xytext=(2.5, 0.2), color=orange, ha = 'center',
+plt.scatter(q, norm.pdf(q, loc=mu, scale=sigma), color=orange, s=15, zorder=5)
+plt.plot([q, q], [0, dnrom], color=orange, linewidth=1, linestyle='--')
+plt.annotate('norm.pdf(1.5) = 0.129', xy=(q, dnrom), xytext=(2, 0.2), color=orange, ha = 'left',
              arrowprops=dict(facecolor=orange, shrink=0.05))
 
-
 # PPF for 0.977
-plt.scatter(qnorm, 0, color=purple, label='qnorm(0.977)', s=15, zorder=5)
-plt.annotate('norm.ppf(0.977) = 2', xy=(qnorm, 0), xytext=(2.5, 0.1), color=purple, ha = 'left',
+plt.scatter(q, 0, color=purple, label='qnorm(0.977)', s=15, zorder=5)
+plt.annotate('norm.ppf(0.933) = 1.5', xy=(q, 0), xytext=(2, 0.1), color=purple, ha = 'left',
              arrowprops=dict(facecolor=purple, shrink=0.05))
 
 

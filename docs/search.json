@@ -218,5 +218,25 @@
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>$Z$-критерій Фішера</span>"
     ]
+  },
+  {
+    "objectID": "z-test.html#sec-normal-distribution",
+    "href": "z-test.html#sec-normal-distribution",
+    "title": "3  \\(Z\\)-критерій Фішера",
+    "section": "",
+    "text": "Лістинг 3.1: Візуалізація нормального розподілу з різними параметрами \\(\\mu\\) та \\(\\sigma^2\\).\n\n\n\nx = np.linspace(-5, 5, 1000)\nparams = [(0, 1), (0, 2), (1, 1), (1, 2), (2, 1), (2, 2)]\n\nfor mu, sigma in params:\n    plt.plot(x, norm.pdf(x, mu, sigma), label=f'μ={mu}, σ={sigma}')\n\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend()\nplt.show()",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>$Z$-критерій Фішера</span>"
+    ]
+  },
+  {
+    "objectID": "z-test.html#sec-normal-distribution-python",
+    "href": "z-test.html#sec-normal-distribution-python",
+    "title": "3  \\(Z\\)-критерій Фішера",
+    "section": "3.2 Нормальний розподіл у Python",
+    "text": "3.2 Нормальний розподіл у Python\nНехай ми хочемо задати розподіл \\(\\mathcal{N}(\\mu, \\sigma^2)\\). Для цього є клас norm1.\nПараметри класу:\n\nloc — це \\(\\mu\\)\nscale — це \\(\\sigma\\), або стандартне відхилення. Не дисперсія!\n\n\nМетоди класу:\n\nrvs() — згенерувати випадкові числа з розподілу \\(\\mathcal{N}(\\mu, \\sigma^2)\\)\ncdf(x) — кумулятивна функція розподілу (CDF) в точці \\(x\\).\nppf(q) — квантиль функції розподілу (quantile function) в точці \\(q\\).\npdf(x) — щільність ймовірності (PDF) в точці \\(x\\).\n\n\n\n\n\n\n\n\n\nРисунок 3.2: Нормальний розподіл з параметрами \\(\\mu = 0\\), \\(\\sigma = 1\\)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>$Z$-критерій Фішера</span>"
+    ]
   }
 ]

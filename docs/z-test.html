@@ -260,8 +260,8 @@ window.Quarto = {
     <h2 id="toc-title">Зміст</h2>
    
   <ul>
-  <li><a href="#нормальний-розподіл" id="toc-нормальний-розподіл" class="nav-link active" data-scroll-target="#нормальний-розподіл"><span class="header-section-number">3.1</span> Нормальний розподіл</a></li>
-  <li><a href="#нормальний-розподіл-у-python" id="toc-нормальний-розподіл-у-python" class="nav-link" data-scroll-target="#нормальний-розподіл-у-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</a></li>
+  <li><a href="#sec-normal-distribution" id="toc-sec-normal-distribution" class="nav-link active" data-scroll-target="#sec-normal-distribution"><span class="header-section-number">3.1</span> Нормальний розподіл</a></li>
+  <li><a href="#sec-normal-distribution-python" id="toc-sec-normal-distribution-python" class="nav-link" data-scroll-target="#sec-normal-distribution-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</a></li>
   </ul>
 </nav>
     </div>
@@ -290,8 +290,8 @@ window.Quarto = {
 <div class="no-first-line-indent-after"></div>
 <p>У цьому розділі ми розглянемо <span class="math inline">\(Z\)</span>-критерій Фішера, який використовується для перевірки гіпотез про середнє значення генеральної сукупності з відомою дисперсією.</p>
 <p>Далі, для виведення критеріїв нам потрібен нормальний розподіл. <em>Потому що саме цьому розподілу підпорядковується середнє вибірок</em>. Тож давайте подивимося, що це взагалі таке, як з ним працювати в Python й які в нього є властивості.</p>
-<section id="нормальний-розподіл" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="нормальний-розподіл"><span class="header-section-number">3.1</span> Нормальний розподіл</h2>
+<section id="sec-normal-distribution" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-normal-distribution"><span class="header-section-number">3.1</span> Нормальний розподіл</h2>
 <p>Нормальний розподіл <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span> — неперервний розподіл, у якому щільність спадає зі збільшенням відстані від математичного сподівання <span class="math inline">\(\mu\)</span> за швидкістю, пропорційною квадрату відстані (див. <a href="#eq-normal-density" class="quarto-xref">формулу&nbsp;<span>3.1</span></a>).</p>
 <p><span id="eq-normal-density"><span class="math display">\[
 f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2},
@@ -303,7 +303,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.1: Візуалізація нормального розподілу з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="2d262ac1" class="cell" data-execution_count="2">
+<div id="6cd876a8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -333,8 +333,8 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 </div>
 </div>
 </section>
-<section id="нормальний-розподіл-у-python" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="нормальний-розподіл-у-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</h2>
+<section id="sec-normal-distribution-python" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-normal-distribution-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</h2>
 <p>Нехай ми хочемо задати розподіл <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>. Для цього є клас <code>norm</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>Параметри класу:</p>
 <ul>
@@ -354,7 +354,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <div id="fig-normal-distribution-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="z-test_files/figure-html/fig-normal-distribution-2-output-1.png" width="678" height="324" class="figure-img">
+<img src="z-test_files/figure-html/fig-normal-distribution-2-output-1.png" width="666" height="324" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;3.2: Нормальний розподіл з параметрами <span class="math inline">\(\mu = 0\)</span>, <span class="math inline">\(\sigma = 1\)</span>
