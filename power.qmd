@@ -303,7 +303,6 @@ plt.show()
 def binom_test_mde_one_sided(N, mu0, alpha=0.05, min_power=0.8):
     delta_grid = np.linspace(0, 1 - mu0, 500) 
     power = get_stat_power(N, mu0, mu0 + delta_grid, alpha=alpha)
-    # выберем подходящие delta и вернем первую
     fit_delta = delta_grid[power >= min_power]
     return fit_delta[0]
 

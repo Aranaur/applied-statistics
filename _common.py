@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import random
 import time
 from statsmodels.stats.proportion import proportion_confint
+from IPython.display import Markdown, display
 
 from scipy.stats import (
     norm,

@@ -303,7 +303,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.1: Візуалізація нормального розподілу з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="6cd876a8" class="cell" data-execution_count="2">
+<div id="efd33bea" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -345,11 +345,57 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <p>Методи класу:</p>
 <ul>
 <li><code>rvs()</code> — згенерувати випадкові числа з розподілу <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span></li>
-<li><code>cdf(x)</code> — кумулятивна функція розподілу (CDF) в точці <span class="math inline">\(x\)</span>.</li>
-<li><code>ppf(q)</code> — квантиль функції розподілу (quantile function) в точці <span class="math inline">\(q\)</span>.</li>
-<li><code>pdf(x)</code> — щільність ймовірності (PDF) в точці <span class="math inline">\(x\)</span>.</li>
+<li><code>cdf(x)</code> — кумулятивна функція розподілу (cumulative distribution function, CDF) в точці <span class="math inline">\(x\)</span>, ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(x\)</span>.</li>
+<li><code>ppf(q)</code> — квантиль функції розподілу (percent-point function, PPF) для ймовірності <span class="math inline">\(q\)</span>, ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(q\)</span>.</li>
+<li><code>pdf(x)</code> — щільність ймовірності (probability density function, PDF) в точці <span class="math inline">\(x\)</span>, ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> дорівнює <span class="math inline">\(x\)</span>.</li>
 </ul>
-<div id="cell-fig-normal-distribution-2" class="cell" data-execution_count="4">
+<div class="no-first-line-indent-after"></div>
+<p>CDF та PPF — це функції, які пов’язані між собою. CDF визначає ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(x\)</span>, а PPF визначає значення <span class="math inline">\(x\)</span>, для якого ймовірність <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(q\)</span>.</p>
+<p>Ініціалізуємо клас <code>norm</code> з параметрами <span class="math inline">\(\mu = 0\)</span> та <span class="math inline">\(\sigma = 1\)</span> (стандартний нормальний розподіл). Далі, згенеруємо випадкову вибірку з 50 спостережень, а також обчислимо PDF, CDF та PPF для <span class="math inline">\(x = 1.5\)</span>.</p>
+<div id="lst-normal-distribution-2" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.2: Нормальний розподіл у Python.
+</figcaption>
+<div aria-describedby="lst-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="cbf16c7e" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>std_norm <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>rnorm <span class="op">=</span> std_norm.rvs(size<span class="op">=</span><span class="dv">50</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>dnrom <span class="op">=</span> std_norm.pdf(<span class="fl">1.5</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>pnorm <span class="op">=</span> std_norm.cdf(<span class="fl">1.5</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>qnorm <span class="op">=</span> std_norm.ppf(<span class="fl">0.933</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Ініціалізація класу <code>norm</code> з параметрами <span class="math inline">\(\mu = 0\)</span> та <span class="math inline">\(\sigma = 1\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">Генерація випадкової вибірки з 50 спостережень.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="3">Обчислення PDF для <span class="math inline">\(x = 1.5\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="4">Обчислення CDF для <span class="math inline">\(x = 1.5\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="5">Обчислення PPF для <span class="math inline">\(q = 0.933\)</span>.</span>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Візуалізація методів класу <code>norm</code> показана на <a href="#fig-normal-distribution-2" class="quarto-xref">рисунку&nbsp;<span>3.2</span></a>.</p>
+<div id="cell-fig-normal-distribution-2" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div id="fig-normal-distribution-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -357,7 +403,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <img src="z-test_files/figure-html/fig-normal-distribution-2-output-1.png" width="666" height="324" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.2: Нормальний розподіл з параметрами <span class="math inline">\(\mu = 0\)</span>, <span class="math inline">\(\sigma = 1\)</span>
+Рисунок&nbsp;3.2: Демонстрація методів класу <code>norm</code>
 </figcaption>
 </figure>
 </div>
