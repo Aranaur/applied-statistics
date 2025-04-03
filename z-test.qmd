@@ -1,1 +1,127 @@
 # $Z$-критерій Фішера {#sec-z-test}
+
+```{python}
+#| include: false
+
+with open("_common.py") as f:
+    exec(f.read())
+```
+
+У цьому розділі ми розглянемо $Z$-критерій Фішера, який використовується для перевірки гіпотез про середнє значення генеральної сукупності з відомою дисперсією.
+
+Далі, для виведення критеріїв нам потрібен нормальний розподіл. *Потому що саме цьому розподілу підпорядковується середнє вибірок*. Тож давайте подивимося, що це взагалі таке, як з ним працювати в Python й які в нього є властивості.
+
+## Нормальний розподіл
+
+Нормальний розподіл $\mathcal{N}(\mu, \sigma^2)$ --- неперервний розподіл, у якому щільність спадає зі збільшенням відстані від математичного сподівання $\mu$ за швидкістю, пропорційною квадрату відстані (див. [формулу -@eq-normal-density]).
+
+$$
+f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2},
+$$ {#eq-normal-density}
+де $x$ --- випадкова величина, $\mu$ --- математичне сподівання, $\sigma^2$ --- дисперсія.
+
+На графіку нижче показано, як виглядає нормальний розподіл з різними параметрами $\mu$ та $\sigma^2$.
+
+::: {#lst-normal-distribution}
+
+```{python}
+#| eval: false
+
+x = np.linspace(-5, 5, 1000)
+params = [(0, 1), (0, 2), (1, 1), (1, 2), (2, 1), (2, 2)]
+
+for mu, sigma in params:
+    plt.plot(x, norm.pdf(x, mu, sigma), label=f'μ={mu}, σ={sigma}')
+
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.legend()
+plt.show()
+```
+
+Візуалізація нормального розподілу з різними параметрами $\mu$ та $\sigma^2$.
+:::
+
+```{python}
+#| label: fig-normal-distribution
+#| fig-cap: Нормальний розподіл з різними параметрами
+#| echo: false
+
+x = np.linspace(-5, 5, 1000)
+params = [(0, 1), (0, 2), (1, 1), (1, 2), (2, 1), (2, 2)]
+
+for mu, sigma in params:
+    plt.plot(x, norm.pdf(x, mu, sigma), label=f'μ={mu}, σ={sigma}')
+
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.legend()
+plt.show()
+```
+
+## Нормальний розподіл у Python
+
+Нехай ми хочемо задати розподіл $\mathcal{N}(\mu, \sigma^2)$. Для цього є клас `norm`[^py-norm].
+
+[^py-norm]: Документація доступна за посиланням <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>.
+
+Параметри класу:
+
+- `loc` --- це $\mu$
+- `scale` --- це $\sigma$, або **стандартне відхилення**. Не дисперсія!
+
+Методи класу:
+
+- `rvs()` --- згенерувати випадкові числа з розподілу $\mathcal{N}(\mu, \sigma^2)$
+- `cdf(x)` --- кумулятивна функція розподілу (CDF) в точці $x$.
+- `ppf(q)` --- квантиль функції розподілу (quantile function) в точці $q$.
+- `pdf(x)` --- щільність ймовірності (PDF) в точці $x$.
+
+
+
+```{python}
+#| label: fig-normal-distribution-2
+#| fig-cap: Нормальний розподіл з параметрами $\mu = 0$, $\sigma = 1$
+#| echo: false
+
+mu, sigma = 0, 1
+
+# Генерація випадкової вибірки
+rnorm = norm.rvs(loc=mu, scale=sigma, size=50, random_state=42)
+
+# Щільність розподілу (PDF)
+x = np.linspace(-4, 4, 1000)
+dnrom = norm.pdf(2, loc=mu, scale=sigma)
+pnorm = norm.cdf(2, loc=mu, scale=sigma)
+qnorm = norm.ppf(0.977, loc=mu, scale=sigma)
+
+# PDF for x
+plt.plot(x, norm.pdf(x, loc=mu, scale=sigma), label='PDF', color = turquoise)
+
+# Random sample
+plt.scatter(rnorm, np.random.normal(0, 0.005, size=rnorm.shape), color=red_pink, alpha=0.5, s=10)
+plt.annotate('norm.rvs(50)', xy=(-1, 0), xytext=(-3, 0.2), color=red_pink, ha = 'center',
+             arrowprops=dict(facecolor=red_pink, shrink=0.05))
+
+# CDF for 2
+plt.fill_between(x, norm.pdf(x, loc=mu, scale=sigma), where=(x <= 2), color=turquoise, alpha=0.2)
+plt.annotate('norm.cdf(2) = 0.977', xy=(1, 0.15), xytext=(1.5, 0.3), color=turquoise,
+             arrowprops=dict(facecolor=turquoise, shrink=0.05))
+
+# PDF for 2
+plt.scatter(qnorm, norm.pdf(qnorm, loc=mu, scale=sigma), color=orange, s=15, zorder=5)
+plt.plot([2, 2], [0, dnrom], color=orange, linewidth=1, linestyle='--')
+plt.annotate('norm.pdf(2) = 0.054', xy=(2, dnrom), xytext=(2.5, 0.2), color=orange, ha = 'center',
+             arrowprops=dict(facecolor=orange, shrink=0.05))
+
+
+# PPF for 0.977
+plt.scatter(qnorm, 0, color=purple, label='qnorm(0.977)', s=15, zorder=5)
+plt.annotate('norm.ppf(0.977) = 2', xy=(qnorm, 0), xytext=(2.5, 0.1), color=purple, ha = 'left',
+             arrowprops=dict(facecolor=purple, shrink=0.05))
+
+
+plt.xlabel('x')
+plt.ylabel('Щільність')
+plt.show()
+```

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -221,8 +255,15 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Зміст</h2>
+   
+  <ul>
+  <li><a href="#нормальний-розподіл" id="toc-нормальний-розподіл" class="nav-link active" data-scroll-target="#нормальний-розподіл"><span class="header-section-number">3.1</span> Нормальний розподіл</a></li>
+  <li><a href="#нормальний-розподіл-у-python" id="toc-нормальний-розподіл-у-python" class="nav-link" data-scroll-target="#нормальний-розподіл-у-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -246,8 +287,91 @@ window.Quarto = {
 </header>
 
 
+<div class="no-first-line-indent-after"></div>
+<p>У цьому розділі ми розглянемо <span class="math inline">\(Z\)</span>-критерій Фішера, який використовується для перевірки гіпотез про середнє значення генеральної сукупності з відомою дисперсією.</p>
+<p>Далі, для виведення критеріїв нам потрібен нормальний розподіл. <em>Потому що саме цьому розподілу підпорядковується середнє вибірок</em>. Тож давайте подивимося, що це взагалі таке, як з ним працювати в Python й які в нього є властивості.</p>
+<section id="нормальний-розподіл" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="нормальний-розподіл"><span class="header-section-number">3.1</span> Нормальний розподіл</h2>
+<p>Нормальний розподіл <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span> — неперервний розподіл, у якому щільність спадає зі збільшенням відстані від математичного сподівання <span class="math inline">\(\mu\)</span> за швидкістю, пропорційною квадрату відстані (див. <a href="#eq-normal-density" class="quarto-xref">формулу&nbsp;<span>3.1</span></a>).</p>
+<p><span id="eq-normal-density"><span class="math display">\[
+f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2},
+\tag{3.1}\]</span></span> де <span class="math inline">\(x\)</span> — випадкова величина, <span class="math inline">\(\mu\)</span> — математичне сподівання, <span class="math inline">\(\sigma^2\)</span> — дисперсія.</p>
+<p>На графіку нижче показано, як виглядає нормальний розподіл з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.</p>
+<div id="lst-normal-distribution" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.1: Візуалізація нормального розподілу з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.
+</figcaption>
+<div aria-describedby="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="2d262ac1" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu, sigma <span class="kw">in</span> params:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, norm.pdf(x, mu, sigma), label<span class="op">=</span><span class="ss">f'μ=</span><span class="sc">{</span>mu<span class="sc">}</span><span class="ss">, σ=</span><span class="sc">{</span>sigma<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'f(x)'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</figure>
+</div>
+<div id="cell-fig-normal-distribution" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div id="fig-normal-distribution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="z-test_files/figure-html/fig-normal-distribution-output-1.png" width="672" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.1: Нормальний розподіл з різними параметрами
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="нормальний-розподіл-у-python" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="нормальний-розподіл-у-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</h2>
+<p>Нехай ми хочемо задати розподіл <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>. Для цього є клас <code>norm</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Параметри класу:</p>
+<ul>
+<li><code>loc</code> — це <span class="math inline">\(\mu\)</span></li>
+<li><code>scale</code> — це <span class="math inline">\(\sigma\)</span>, або <strong>стандартне відхилення</strong>. Не дисперсія!</li>
+</ul>
+<div class="no-first-line-indent-after"></div>
+<p>Методи класу:</p>
+<ul>
+<li><code>rvs()</code> — згенерувати випадкові числа з розподілу <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span></li>
+<li><code>cdf(x)</code> — кумулятивна функція розподілу (CDF) в точці <span class="math inline">\(x\)</span>.</li>
+<li><code>ppf(q)</code> — квантиль функції розподілу (quantile function) в точці <span class="math inline">\(q\)</span>.</li>
+<li><code>pdf(x)</code> — щільність ймовірності (PDF) в точці <span class="math inline">\(x\)</span>.</li>
+</ul>
+<div id="cell-fig-normal-distribution-2" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="fig-normal-distribution-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="z-test_files/figure-html/fig-normal-distribution-2-output-1.png" width="678" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.2: Нормальний розподіл з параметрами <span class="math inline">\(\mu = 0\)</span>, <span class="math inline">\(\sigma = 1\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Документація доступна за посиланням <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html" class="uri">https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
