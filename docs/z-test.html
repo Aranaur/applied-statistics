@@ -266,8 +266,12 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sec-normal-distribution-properties-python" id="toc-sec-normal-distribution-properties-python" class="nav-link" data-scroll-target="#sec-normal-distribution-properties-python"><span class="header-section-number">3.3.1</span> Перевірка властивостей в Python</a></li>
   </ul></li>
-  <li><a href="#sec-central-limit-theorem" id="toc-sec-central-limit-theorem" class="nav-link" data-scroll-target="#sec-central-limit-theorem"><span class="header-section-number">3.4</span> Центральна гранична теорема</a></li>
-  <li><a href="#sec-visualization-central-limit-theorem" id="toc-sec-visualization-central-limit-theorem" class="nav-link" data-scroll-target="#sec-visualization-central-limit-theorem"><span class="header-section-number">3.5</span> Візуалізація ЦГТ</a></li>
+  <li><a href="#sec-central-limit-theorem" id="toc-sec-central-limit-theorem" class="nav-link" data-scroll-target="#sec-central-limit-theorem"><span class="header-section-number">3.4</span> Центральна гранична теорема</a>
+  <ul class="collapse">
+  <li><a href="#sec-visualization-central-limit-theorem" id="toc-sec-visualization-central-limit-theorem" class="nav-link" data-scroll-target="#sec-visualization-central-limit-theorem"><span class="header-section-number">3.4.1</span> Візуалізація ЦГТ</a></li>
+  <li><a href="#sec-other-forms-central-limit-theorem" id="toc-sec-other-forms-central-limit-theorem" class="nav-link" data-scroll-target="#sec-other-forms-central-limit-theorem"><span class="header-section-number">3.4.2</span> Інші формулювання ЦГТ</a></li>
+  </ul></li>
+  <li><a href="#sec-z-test-fisher" id="toc-sec-z-test-fisher" class="nav-link" data-scroll-target="#sec-z-test-fisher"><span class="header-section-number">3.5</span> <span class="math inline">\(Z\)</span>-критерій Фішера</a></li>
   </ul>
 </nav>
     </div>
@@ -308,7 +312,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.1: Візуалізація нормального розподілу з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="c4aade2c" class="cell" data-execution_count="2">
+<div id="3a6da25d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -361,7 +365,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.2: Нормальний розподіл у Python.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="6a28688d" class="cell" data-execution_count="4">
+<div id="359c30c0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>std_norm <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>rnorm <span class="op">=</span> std_norm.rvs(size<span class="op">=</span><span class="dv">50</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
@@ -468,7 +472,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.3: Візуалізація нормального розподілу суми двох нормально розподілених випадкових величин.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="f5e823fe" class="cell" data-execution_count="6">
+<div id="9d66a4ab" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>mean_one, mean_two <span class="op">=</span> <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>var_one, var_two <span class="op">=</span> <span class="dv">4</span>, <span class="dv">2</span></span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -482,12 +486,13 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-12" class="code-annotation-target"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>x_grid <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">1000</span>)</span>
 <span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-3-14" class="code-annotation-target"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>sns.displot(x_sum, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x_grid, check_sum.pdf(x_grid), color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Теоретичний розподіл'</span>)</span>
-<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
-<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>sns.histplot(x_sum, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, ax<span class="op">=</span>ax)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-3-16" class="code-annotation-target"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>plt.plot(x_grid, check_sum.pdf(x_grid), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Теоретичний розподіл'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
@@ -520,18 +525,18 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="14" data-code-annotation="8">Емпіричний розподіл суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="8">Емпіричний розподіл суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="9">Теоретичний розподіл суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="16" data-code-annotation="9">Теоретичний розподіл суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="z-test_files/figure-html/cell-7-output-1.png" width="464" height="484" class="figure-img"></p>
+<p><img src="z-test_files/figure-html/cell-7-output-1.png" width="678" height="324" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -547,7 +552,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.4: Візуалізація нормального розподілу множення нормально розподіленої випадкової величини на константу.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-properties-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="b50a6022" class="cell" data-execution_count="7">
+<div id="18bb7a60" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>mean_one <span class="op">=</span> <span class="dv">0</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>var_one <span class="op">=</span> <span class="dv">1</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
@@ -557,12 +562,13 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>check_mult <span class="op">=</span> norm(loc<span class="op">=</span>a <span class="op">*</span> mean_one, scale<span class="op">=</span>np.sqrt(a<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> var_one))</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-4-8" class="code-annotation-target"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>x_grid <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">1000</span>)</span>
 <span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>sns.displot(x_mult, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
-<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x_grid, check_mult.pdf(x_grid), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Теоретичний розподіл'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
-<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>sns.histplot(x_mult, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, ax<span class="op">=</span>ax)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-4-12" class="code-annotation-target"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a>plt.plot(x_grid, check_mult.pdf(x_grid), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Теоретичний розподіл'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-4-16"><a href="#annotated-cell-4-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
@@ -595,18 +601,18 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="8" data-code-annotation="8">Стандартне відхилення множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="8,11" data-code-annotation="8">Стандартне відхилення множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="10,11,12,13,14,15" data-code-annotation="9">Емпіричний та теоретичний розподіл множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="12,13,14,15,16" data-code-annotation="9">Емпіричний та теоретичний розподіл множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="z-test_files/figure-html/cell-8-output-1.png" width="464" height="484" class="figure-img"></p>
+<p><img src="z-test_files/figure-html/cell-8-output-1.png" width="678" height="324" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -640,9 +646,8 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <p>Випадкові величини можуть бути слабко залежні одна від одної й злегка по-різному розподілені. Центральна гранична теорема все ще буде правильною, <span class="citation" data-cites="Gnedenko2021">Gnedenko and Kolmogorov (<a href="references.html#ref-Gnedenko2021" role="doc-biblioref">2021</a>)</span>.</p>
 </div>
 </div>
-</section>
-<section id="sec-visualization-central-limit-theorem" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="sec-visualization-central-limit-theorem"><span class="header-section-number">3.5</span> Візуалізація ЦГТ</h2>
+<section id="sec-visualization-central-limit-theorem" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="sec-visualization-central-limit-theorem"><span class="header-section-number">3.4.1</span> Візуалізація ЦГТ</h3>
 <p>Щоб краще розуміти, як працює ЦГТ, я пропоную візуалізувати теорему: подивимося на розподіл середніх значень у різних вибірках. Як ми це зробимо?</p>
 <ul>
 <li>Щоб подивитися, що деяка випадкова величина з нормального розподілу, нам потрібна вибірка цих випадкових величин.</li>
@@ -659,7 +664,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.5: Візуалізація ЦГТ при великій вибірці з біноміального розподілу.
 </figcaption>
 <div aria-describedby="lst-visualization-central-limit-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="9b93415e" class="cell" data-execution_count="8">
+<div id="d4852192" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_CLT(sample_generator, expected_value, variance):</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="dv">5000</span></span>
@@ -671,22 +676,23 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-5-9" class="code-annotation-target"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>        clt_sample.append(statistic)</span>
 <span id="annotated-cell-5-10"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-5-11" class="code-annotation-target"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
-<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a>    sns.displot(clt_sample, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
-<span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, norm().pdf(x), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'X'</span>)</span>
-<span id="annotated-cell-5-16"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Щільність'</span>)</span>
-<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a>    sns.histplot(clt_sample, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, ax<span class="op">=</span>ax)</span>
+<span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, norm().pdf(x), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="annotated-cell-5-16"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'X'</span>)</span>
+<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
 <span id="annotated-cell-5-19"><a href="#annotated-cell-5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
-<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">5000</span></span>
-<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-5-24" class="code-annotation-target"><a href="#annotated-cell-5-24" aria-hidden="true" tabindex="-1"></a>visualize_CLT(<span class="kw">lambda</span>: np.random.binomial(n, p, size),</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-5-25" class="code-annotation-target"><a href="#annotated-cell-5-25" aria-hidden="true" tabindex="-1"></a>              expected_value <span class="op">=</span> p <span class="op">*</span> n,</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-5-26" class="code-annotation-target"><a href="#annotated-cell-5-26" aria-hidden="true" tabindex="-1"></a>              variance <span class="op">=</span> n <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
-<span id="annotated-cell-5-27"><a href="#annotated-cell-5-27" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="annotated-cell-5-24"><a href="#annotated-cell-5-24" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-5-25" class="code-annotation-target"><a href="#annotated-cell-5-25" aria-hidden="true" tabindex="-1"></a>visualize_CLT(<span class="kw">lambda</span>: np.random.binomial(n, p, size),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-5-26" class="code-annotation-target"><a href="#annotated-cell-5-26" aria-hidden="true" tabindex="-1"></a>              expected_value <span class="op">=</span> p <span class="op">*</span> n,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-5-27" class="code-annotation-target"><a href="#annotated-cell-5-27" aria-hidden="true" tabindex="-1"></a>              variance <span class="op">=</span> n <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
+<span id="annotated-cell-5-28"><a href="#annotated-cell-5-28" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
@@ -715,26 +721,26 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="11,12,13,14,15,16,17" data-code-annotation="7">Візуалізація емпіричного розподілу та теоретичного розподілу.</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="11,13,14,15,16,17,18" data-code-annotation="7">Візуалізація емпіричного розподілу та теоретичного розподілу.</span>
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="24" data-code-annotation="8">Генерація вибірки з біноміального розподілу.</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="25" data-code-annotation="8">Генерація вибірки з біноміального розподілу.</span>
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="25" data-code-annotation="9">Математичне сподівання біноміального розподілу.</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="26" data-code-annotation="9">Математичне сподівання біноміального розподілу.</span>
 </dd>
 <dt data-target-cell="annotated-cell-5" data-target-annotation="10">10</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="26" data-code-annotation="10">Дисперсія біноміального розподілу.</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="27" data-code-annotation="10">Дисперсія біноміального розподілу.</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="z-test_files/figure-html/cell-9-output-1.png" width="464" height="484" class="figure-img"></p>
+<p><img src="z-test_files/figure-html/cell-9-output-1.png" width="672" height="324" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -749,7 +755,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.6: Візуалізація ЦГТ при малій вибірці з біноміального розподілу.
 </figcaption>
 <div aria-describedby="lst-visualization-central-limit-theorem-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="6479ff5d" class="cell" data-execution_count="9">
+<div id="c92b312f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.05</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">10</span></span>
@@ -761,7 +767,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="z-test_files/figure-html/cell-10-output-1.png" width="464" height="484" class="figure-img"></p>
+<p><img src="z-test_files/figure-html/cell-10-output-1.png" width="666" height="324" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -769,6 +775,73 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </div>
 </figure>
 </div>
+<p>Стало значно гірше: з’явилися прогалини в розподілі, та й сама емпірична функція розподілу зміщена. Тож наш експеримент підтвердив важливість розміру вибірки для коректної роботи ЦГТ.</p>
+<p>Тепер подивимось на експоненціальний розподіл.</p>
+<div id="lst-visualization-central-limit-theorem-3" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-visualization-central-limit-theorem-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.7: Візуалізація ЦГТ при великій вибірці з експоненціального розподілу.
+</figcaption>
+<div aria-describedby="lst-visualization-central-limit-theorem-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fe1f2596" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">5</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">400</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>visualize_CLT(<span class="kw">lambda</span>: np.random.exponential(scale<span class="op">=</span><span class="dv">1</span><span class="op">/</span>p, size<span class="op">=</span>size),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a>              expected_value <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>p,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-7-5" class="code-annotation-target"><a href="#annotated-cell-7-5" aria-hidden="true" tabindex="-1"></a>              variance <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(p<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1">Параметр <span class="math inline">\(\lambda\)</span> експоненціального розподілу.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="2">Розмір вибірки.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="3">Генерація вибірки з експоненціального розподілу.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="4">Математичне сподівання експоненціального розподілу задається як <span class="math inline">\(1/\lambda\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="5" data-code-annotation="5">Дисперсія експоненціального розподілу задається як <span class="math inline">\(1/\lambda^2\)</span>.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="z-test_files/figure-html/cell-11-output-1.png" width="666" height="324" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Бачимо, що і тут усе добре працює!</p>
+</section>
+<section id="sec-other-forms-central-limit-theorem" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="sec-other-forms-central-limit-theorem"><span class="header-section-number">3.4.2</span> Інші формулювання ЦГТ</h3>
+<p>Наступні формулювання є еквівалентними, тому що ми можемо перетворити одне в інше за допомогою простих алгебраїчних перетворень. Вони можуть бути корисними в різних ситуаціях, залежно від того, що ми хочемо перевірити.</p>
+<p><span id="eq-other-forms-central-limit-theorem"><span class="math display">\[
+\begin{aligned}
+\sqrt{n}\dfrac{\overline \xi - \mu}{\sqrt{\sigma^2}} &amp;\sim \mathcal{N}(0, 1) {\Leftrightarrow}\\
+\overline \xi - \mu &amp;\sim \mathcal{N}\left(0, \dfrac{\sigma^2}{n} \right) \Leftrightarrow\\
+\dfrac{\underset{i=1}{\overset{n}{\sum}} \xi_i}{n} &amp;\sim \mathcal{N}\left(\mu, \dfrac{\sigma^2}{n} \right) \Leftrightarrow\\
+\underset{i=1}{\overset{n}{\sum}} \xi_i &amp;\sim \mathcal{N}\left(n \cdot \mu, n \cdot \sigma^2 \right)
+\end{aligned}
+\tag{3.5}\]</span></span></p>
+</section>
+</section>
+<section id="sec-z-test-fisher" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-z-test-fisher"><span class="header-section-number">3.5</span> <span class="math inline">\(Z\)</span>-критерій Фішера</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

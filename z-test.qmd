@@ -204,8 +204,9 @@ check_sum = norm(loc=mean_one + mean_two, scale=np.sqrt(var_one + var_two)) # <6
 
 x_grid = np.linspace(-8, 12, 1000) # <7>
 
-sns.displot(x_sum, kde=True, stat='density', color=red_pink, label='Емпіричний розподіл') # <8>
-plt.plot(x_grid, check_sum.pdf(x_grid), color=turquoise, label='Теоретичний розподіл') # <9>
+fig, ax = plt.subplots()
+sns.histplot(x_sum, kde=True, stat='density', color=turquoise, label='Емпіричний розподіл', ax=ax) # <8>
+plt.plot(x_grid, check_sum.pdf(x_grid), color=red_pink, label='Теоретичний розподіл', alpha=0.8) # <9>
 plt.xlabel('x')
 plt.ylabel('Щільність')
 plt.legend()
@@ -239,7 +240,8 @@ x_mult = a * x1 # <6>
 check_mult = norm(loc=a * mean_one, scale=np.sqrt(a**2 * var_one)) # <7>
 x_grid = np.linspace(-8, 8, 1000) # <8>
 
-sns.displot(x_mult, kde=True, stat='density', color=turquoise, label='Емпіричний розподіл') # <9>
+fig, ax = plt.subplots()
+sns.histplot(x_mult, kde=True, stat='density', color=turquoise, label='Емпіричний розподіл', ax=ax) # <8>
 plt.plot(x_grid, check_mult.pdf(x_grid), color=red_pink, label='Теоретичний розподіл', alpha=0.8) # <9>
 plt.xlabel('x') # <9>
 plt.ylabel('Щільність') # <9>
@@ -286,7 +288,7 @@ $$ {#eq-central-limit-theorem}
 Випадкові величини можуть бути слабко залежні одна від одної й злегка по-різному розподілені. Центральна гранична теорема все ще буде правильною, @Gnedenko2021.
 :::
 
-## Візуалізація ЦГТ {#sec-visualization-central-limit-theorem}
+### Візуалізація ЦГТ {#sec-visualization-central-limit-theorem}
 
 Щоб краще розуміти, як працює ЦГТ, я пропоную візуалізувати теорему: подивимося на розподіл середніх значень у різних вибірках. Як ми це зробимо?
 
@@ -309,8 +311,9 @@ def visualize_CLT(sample_generator, expected_value, variance):
         clt_sample.append(statistic) # <6>
 
     x = np.linspace(-4, 4, 1000) # <7>
-    sns.displot(clt_sample, kde=True, stat='density', color=turquoise, label='Емпіричний розподіл') # <7>
-    plt.plot(x, norm().pdf(x), color=red_pink, label='$\mathcal{N}(0, 1)$', alpha=0.8) # <7>
+    fig, ax = plt.subplots()
+    sns.histplot(clt_sample, kde=True, stat='density', color=turquoise, label='Емпіричний розподіл', ax=ax) # <7>
+    ax.plot(x, norm().pdf(x), color=red_pink, label='$\mathcal{N}(0, 1)$', alpha=0.8) # <7>
     plt.legend() # <7>
     plt.xlabel('X') # <7>
     plt.ylabel('Щільність') # <7>
@@ -357,3 +360,42 @@ visualize_CLT(lambda: np.random.binomial(n, p, size),
 
 Візуалізація ЦГТ при малій вибірці з біноміального розподілу.
 :::
+
+Стало значно гірше: з'явилися прогалини в розподілі, та й сама емпірична функція розподілу зміщена. Тож наш експеримент підтвердив важливість розміру вибірки для коректної роботи ЦГТ.
+
+Тепер подивимось на експоненціальний розподіл.
+
+::: {#lst-visualization-central-limit-theorem-3}
+```{python}
+p = 5 # <1>
+size = 400 # <2>
+visualize_CLT(lambda: np.random.exponential(scale=1/p, size=size), # <3>
+              expected_value = 1/p, # <4>
+              variance = 1/(p**2) # <5>
+)
+```
+1. Параметр $\lambda$ експоненціального розподілу.
+2. Розмір вибірки.
+3. Генерація вибірки з експоненціального розподілу.
+4. Математичне сподівання експоненціального розподілу задається як $1/\lambda$.
+5. Дисперсія експоненціального розподілу задається як $1/\lambda^2$.
+
+Візуалізація ЦГТ при великій вибірці з експоненціального розподілу.
+:::
+
+Бачимо, що і тут усе добре працює!
+
+### Інші формулювання ЦГТ {#sec-other-forms-central-limit-theorem}
+
+Наступні формулювання є еквівалентними, тому що ми можемо перетворити одне в інше за допомогою простих алгебраїчних перетворень. Вони можуть бути корисними в різних ситуаціях, залежно від того, що ми хочемо перевірити.
+
+$$
+\begin{aligned}
+\sqrt{n}\dfrac{\overline \xi - \mu}{\sqrt{\sigma^2}} &\sim \mathcal{N}(0, 1) {\Leftrightarrow}\\
+\overline \xi - \mu &\sim \mathcal{N}\left(0, \dfrac{\sigma^2}{n} \right) \Leftrightarrow\\
+\dfrac{\underset{i=1}{\overset{n}{\sum}} \xi_i}{n} &\sim \mathcal{N}\left(\mu, \dfrac{\sigma^2}{n} \right) \Leftrightarrow\\
+\underset{i=1}{\overset{n}{\sum}} \xi_i &\sim \mathcal{N}\left(n \cdot \mu, n \cdot \sigma^2 \right)
+\end{aligned}
+$$ {#eq-other-forms-central-limit-theorem}
+
+## $Z$-критерій Фішера {#sec-z-test-fisher}

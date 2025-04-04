@@ -29,11 +29,14 @@ warnings.filterwarnings("ignore")
 np.random.seed(73)
 
 # custom color palette
+sns.despine(left=True, bottom=True)
 base_size = 13
 sns.set_style("whitegrid")
 palette = sns.color_palette("Set2")
 sns.set_palette(palette)
 sns.set_context("talk")
+
+
 
 # matplotlib settings
 plt.rcParams['figure.figsize'] = (8, 3.5)
