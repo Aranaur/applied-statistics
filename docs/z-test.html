@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -75,31 +95,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-6c380caa1d326ca7d97976c903cdd929.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<style>
-/* first-line indent styles */
-  p {
-    text-indent: 1.5em;
-    margin: 0;
-  }
-  header p {
-    text-indent: 0;
-    margin: 1em 0;
-  }
-  :is(h1, h2, h3, h4, h5, h6) + p {
-    text-indent: 0;
-  }
-  li > p, li > div p {
-    text-indent: 0;
-    margin-bottom: 1rem;
-  }
-  div.no-first-line-indent-after + p {
-    text-indent: 0;
-  }
-  div.first-line-indent-after + p {
-    text-indent: 1.5em;
-  }
-/* end of first-line indent styles */
-</style>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -127,7 +122,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Пошук"
   }
 }</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -250,6 +244,12 @@ window.Quarto = {
  <span class="menu-text">Підсумки</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Список літератури</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -262,6 +262,12 @@ window.Quarto = {
   <ul>
   <li><a href="#sec-normal-distribution" id="toc-sec-normal-distribution" class="nav-link active" data-scroll-target="#sec-normal-distribution"><span class="header-section-number">3.1</span> Нормальний розподіл</a></li>
   <li><a href="#sec-normal-distribution-python" id="toc-sec-normal-distribution-python" class="nav-link" data-scroll-target="#sec-normal-distribution-python"><span class="header-section-number">3.2</span> Нормальний розподіл у Python</a></li>
+  <li><a href="#sec-normal-distribution-properties" id="toc-sec-normal-distribution-properties" class="nav-link" data-scroll-target="#sec-normal-distribution-properties"><span class="header-section-number">3.3</span> Властивості нормального розподілу</a>
+  <ul class="collapse">
+  <li><a href="#sec-normal-distribution-properties-python" id="toc-sec-normal-distribution-properties-python" class="nav-link" data-scroll-target="#sec-normal-distribution-properties-python"><span class="header-section-number">3.3.1</span> Перевірка властивостей в Python</a></li>
+  </ul></li>
+  <li><a href="#sec-central-limit-theorem" id="toc-sec-central-limit-theorem" class="nav-link" data-scroll-target="#sec-central-limit-theorem"><span class="header-section-number">3.4</span> Центральна гранична теорема</a></li>
+  <li><a href="#sec-visualization-central-limit-theorem" id="toc-sec-visualization-central-limit-theorem" class="nav-link" data-scroll-target="#sec-visualization-central-limit-theorem"><span class="header-section-number">3.5</span> Візуалізація ЦГТ</a></li>
   </ul>
 </nav>
     </div>
@@ -287,7 +293,6 @@ window.Quarto = {
 </header>
 
 
-<div class="no-first-line-indent-after"></div>
 <p>У цьому розділі ми розглянемо <span class="math inline">\(Z\)</span>-критерій Фішера, який використовується для перевірки гіпотез про середнє значення генеральної сукупності з відомою дисперсією.</p>
 <p>Далі, для виведення критеріїв нам потрібен нормальний розподіл. <em>Потому що саме цьому розподілу підпорядковується середнє вибірок</em>. Тож давайте подивимося, що це взагалі таке, як з ним працювати в Python й які в нього є властивості.</p>
 <section id="sec-normal-distribution" class="level2" data-number="3.1">
@@ -303,7 +308,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.1: Візуалізація нормального розподілу з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="efd33bea" class="cell" data-execution_count="2">
+<div id="c4aade2c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -341,7 +346,6 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <li><code>loc</code> — це <span class="math inline">\(\mu\)</span></li>
 <li><code>scale</code> — це <span class="math inline">\(\sigma\)</span>, або <strong>стандартне відхилення</strong>. Не дисперсія!</li>
 </ul>
-<div class="no-first-line-indent-after"></div>
 <p>Методи класу:</p>
 <ul>
 <li><code>rvs()</code> — згенерувати випадкові числа з розподілу <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span></li>
@@ -349,7 +353,6 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <li><code>ppf(q)</code> — квантиль функції розподілу (percent-point function, PPF) для ймовірності <span class="math inline">\(q\)</span>, ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(q\)</span>.</li>
 <li><code>pdf(x)</code> — щільність ймовірності (probability density function, PDF) в точці <span class="math inline">\(x\)</span>, ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> дорівнює <span class="math inline">\(x\)</span>.</li>
 </ul>
-<div class="no-first-line-indent-after"></div>
 <p>CDF та PPF — це функції, які пов’язані між собою. CDF визначає ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(x\)</span>, а PPF визначає значення <span class="math inline">\(x\)</span>, для якого ймовірність <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(q\)</span>.</p>
 <p>Ініціалізуємо клас <code>norm</code> з параметрами <span class="math inline">\(\mu = 0\)</span> та <span class="math inline">\(\sigma = 1\)</span> (стандартний нормальний розподіл). Далі, згенеруємо випадкову вибірку з 50 спостережень, а також обчислимо PDF, CDF та PPF для <span class="math inline">\(x = 1.5\)</span>.</p>
 <div id="lst-normal-distribution-2" class="listing quarto-float quarto-figure quarto-figure-left anchored">
@@ -358,14 +361,20 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.2: Нормальний розподіл у Python.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="cbf16c7e" class="cell" data-execution_count="4">
+<div id="6a28688d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>std_norm <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>rnorm <span class="op">=</span> std_norm.rvs(size<span class="op">=</span><span class="dv">50</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>dnrom <span class="op">=</span> std_norm.pdf(<span class="fl">1.5</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>pnorm <span class="op">=</span> std_norm.cdf(<span class="fl">1.5</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>qnorm <span class="op">=</span> std_norm.ppf(<span class="fl">0.933</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>CDF <span class="op">=</span> std_norm.cdf(<span class="fl">1.5</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>PDF <span class="op">=</span> std_norm.pdf(<span class="fl">1.5</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>PPF <span class="op">=</span> std_norm.ppf(<span class="fl">0.933</span>)</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a>display(</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-2-10" class="code-annotation-target"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a>    Markdown(<span class="ss">f"$P(X </span><span class="ch">\\</span><span class="ss">leq 1.5) = </span><span class="sc">{</span>CDF<span class="sc">:.3f}</span><span class="ss">$"</span>),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-2-11" class="code-annotation-target"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a>    Markdown(<span class="ss">f"$f(1.5) = </span><span class="sc">{</span>PDF<span class="sc">:.3f}</span><span class="ss">$"</span>),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-2-12" class="code-annotation-target"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>    Markdown(<span class="ss">f"$z_</span><span class="ch">{{</span><span class="ss">0.933</span><span class="ch">}}</span><span class="ss"> = \Phi^</span><span class="ch">{{</span><span class="ss">-1</span><span class="ch">}}</span><span class="ss">(0.933) = </span><span class="sc">{</span>PPF<span class="sc">:.3f}</span><span class="ss">$"</span>)</span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
@@ -388,7 +397,28 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <dd>
 <span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="5">Обчислення PPF для <span class="math inline">\(q = 0.933\)</span>.</span>
 </dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="10" data-code-annotation="6">Ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(1.5\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="11" data-code-annotation="7">Ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> дорівнює <span class="math inline">\(1.5\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="12" data-code-annotation="8">Значення <span class="math inline">\(x\)</span>, для якого ймовірність <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(0.933\)</span>.</span>
+</dd>
 </dl>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(P(X \leq 1.5) = 0.933\)</span></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(f(1.5) = 0.130\)</span></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(z_{0.933} = \Phi^{-1}(0.933) = 1.499\)</span></p>
 </div>
 </div>
 </div>
@@ -409,13 +439,353 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 </div>
 </div>
 </div>
+</section>
+<section id="sec-normal-distribution-properties" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-normal-distribution-properties"><span class="header-section-number">3.3</span> Властивості нормального розподілу</h2>
+<p>Нормальний розподіл має кілька важливих властивостей<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<ol type="1">
+<li><strong>Сума двох незалежних нормально розподілених випадкових величин також має нормальний розподіл</strong>:</li>
+</ol>
+<p><span id="eq-normal-sum"><span class="math display">\[
+\begin{aligned}
+\xi_1 &amp;\sim \mathcal{N}(\mu_1, \sigma_1^2) \\
+\xi_2 &amp;\sim \mathcal{N}(\mu_2, \sigma_2^2) \\
+\xi_1 + \xi_2 &amp;\sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)
+\end{aligned}
+\tag{3.2}\]</span></span> де <span class="math inline">\(\xi_1\)</span> та <span class="math inline">\(\xi_2\)</span> — незалежні нормально розподілені випадкові величини з параметрами <span class="math inline">\(\mu_1\)</span>, <span class="math inline">\(\sigma_1^2\)</span> та <span class="math inline">\(\mu_2\)</span>, <span class="math inline">\(\sigma_2^2\)</span> відповідно.</p>
+<ol start="2" type="1">
+<li><strong>Множення нормально розподіленої випадкової величини на константу також дає нормально розподілену величину</strong>:</li>
+</ol>
+<p><span id="eq-normal-multiply"><span class="math display">\[
+a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
+\tag{3.3}\]</span></span> де <span class="math inline">\(a\)</span> — константа, <span class="math inline">\(\xi_1\)</span> — нормально розподілена випадкова величина з параметрами <span class="math inline">\(\mu_1\)</span>, <span class="math inline">\(\sigma_1^2\)</span>.</p>
+<section id="sec-normal-distribution-properties-python" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-normal-distribution-properties-python"><span class="header-section-number">3.3.1</span> Перевірка властивостей в Python</h3>
+<p>За допомогою мови Python ми можемо перевірити ці властивості. Почнемо з <a href="#eq-normal-sum" class="quarto-xref">Рівняння&nbsp;<span>3.2</span></a>. Для цього ми згенеруємо дві нормально розподілені випадкові величини <span class="math inline">\(\xi_1\)</span> та <span class="math inline">\(\xi_2\)</span> з параметрами <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\sigma_1^2 = 1\)</span> та <span class="math inline">\(\mu_2 = 1\)</span>, <span class="math inline">\(\sigma_2^2 = 4\)</span>. Потім, ми обчислимо їхню суму та перевіримо, чи має вона нормальний розподіл з параметрами <span class="math inline">\(\mu_1 + \mu_2\)</span> та <span class="math inline">\(\sigma_1^2 + \sigma_2^2\)</span>.</p>
+<div id="lst-normal-distribution-properties" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-normal-distribution-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.3: Візуалізація нормального розподілу суми двох нормально розподілених випадкових величин.
+</figcaption>
+<div aria-describedby="lst-normal-distribution-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="f5e823fe" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>mean_one, mean_two <span class="op">=</span> <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>var_one, var_two <span class="op">=</span> <span class="dv">4</span>, <span class="dv">2</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> norm.rvs(loc<span class="op">=</span>mean_one, scale<span class="op">=</span>np.sqrt(var_one), size<span class="op">=</span>n)</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> norm.rvs(loc<span class="op">=</span>mean_two, scale<span class="op">=</span>np.sqrt(var_two), size<span class="op">=</span>n)</span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-9" class="code-annotation-target"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>x_sum <span class="op">=</span> x1 <span class="op">+</span> x2</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>check_sum <span class="op">=</span> norm(loc<span class="op">=</span>mean_one <span class="op">+</span> mean_two, scale<span class="op">=</span>np.sqrt(var_one <span class="op">+</span> var_two))</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-12" class="code-annotation-target"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>x_grid <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">1000</span>)</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-3-14" class="code-annotation-target"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>sns.displot(x_sum, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x_grid, check_sum.pdf(x_grid), color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Теоретичний розподіл'</span>)</span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="1" data-code-annotation="1">Параметри <span class="math inline">\(\mu_1\)</span> та <span class="math inline">\(\mu_2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="2">Параметри <span class="math inline">\(\sigma_1^2\)</span> та <span class="math inline">\(\sigma_2^2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="3">Кількість спостережень.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6,7" data-code-annotation="4">Генерація нормально розподілених випадкових величин <span class="math inline">\(\xi_1\)</span> та <span class="math inline">\(\xi_2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="9" data-code-annotation="5">Сума двох нормально розподілених випадкових величин.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="6">Параметри суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="7">Стандартне відхилення суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="14" data-code-annotation="8">Емпіричний розподіл суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="9">Теоретичний розподіл суми <span class="math inline">\(\xi_1 + \xi_2\)</span>.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="z-test_files/figure-html/cell-7-output-1.png" width="464" height="484" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Видно, що розподіли приблизно збіглися! А значить ми переконалися, що формула правильна.</p>
+<p>Другу властивість <a href="#eq-normal-multiply" class="quarto-xref">Рівняння&nbsp;<span>3.3</span></a> можна перевірити аналогічно. Для цього ми згенеруємо нормально розподілену випадкову величину <span class="math inline">\(\xi_1\)</span> з параметрами <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\sigma_1^2 = 1\)</span> та помножимо її на константу <span class="math inline">\(a = 2\)</span>. Потім, ми перевіримо, чи має вона нормальний розподіл з параметрами <span class="math inline">\(a\mu_1\)</span> та <span class="math inline">\(a^2\sigma_1^2\)</span>.</p>
+<div id="lst-normal-distribution-properties-2" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-normal-distribution-properties-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.4: Візуалізація нормального розподілу множення нормально розподіленої випадкової величини на константу.
+</figcaption>
+<div aria-describedby="lst-normal-distribution-properties-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="b50a6022" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>mean_one <span class="op">=</span> <span class="dv">0</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>var_one <span class="op">=</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> norm.rvs(loc<span class="op">=</span>mean_one, scale<span class="op">=</span>np.sqrt(var_one), size<span class="op">=</span>n)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-4-6" class="code-annotation-target"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>x_mult <span class="op">=</span> a <span class="op">*</span> x1</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>check_mult <span class="op">=</span> norm(loc<span class="op">=</span>a <span class="op">*</span> mean_one, scale<span class="op">=</span>np.sqrt(a<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> var_one))</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-4-8" class="code-annotation-target"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>x_grid <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">1000</span>)</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>sns.displot(x_mult, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x_grid, check_mult.pdf(x_grid), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Теоретичний розподіл'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">Параметри <span class="math inline">\(\mu_1\)</span> та <span class="math inline">\(\sigma_1^2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="2">Параметри <span class="math inline">\(\sigma_1^2\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="3">Константа <span class="math inline">\(a\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="4" data-code-annotation="4">Кількість спостережень.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="5">Генерація нормально розподіленої випадкової величини <span class="math inline">\(\xi_1\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="6" data-code-annotation="6">Множення нормально розподіленої випадкової величини <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="7">Параметри множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="8" data-code-annotation="8">Стандартне відхилення множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10,11,12,13,14,15" data-code-annotation="9">Емпіричний та теоретичний розподіл множення <span class="math inline">\(\xi_1\)</span> на константу <span class="math inline">\(a\)</span>.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="z-test_files/figure-html/cell-8-output-1.png" width="464" height="484" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Цього разу розподіли також збіглися. А значить ми переконалися, що формула правильна.</p>
+</section>
+</section>
+<section id="sec-central-limit-theorem" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-central-limit-theorem"><span class="header-section-number">3.4</span> Центральна гранична теорема</h2>
+<p>Для початку пригадаємо теорему, яка є основоположною теоремою для всіх критеріїв, які ми розглянемо найближчим часом.</p>
+<div id="thm-central-limit-theorem" class="theorem">
+<p><span class="theorem-title"><strong>Теорема 3.1 (Центральна гранична теорема, ЦГТ)</strong></span> Нехай <span class="math inline">\(\xi_1, ..., \xi_n\)</span> — <strong>незалежно</strong> однаково розподілені випадкові величини, в яких існують математичне сподівання та дисперсія: <span class="math inline">\(E [\xi_i] = \mu &lt; \infty\)</span> і <span class="math inline">\(Var[\xi_i] = \sigma^2 &lt; \infty\)</span>, тоді <span class="math inline">\(\sqrt{n}\dfrac{\overline \xi - \mu}{\sqrt{\sigma^2}}\)</span> збігається за розподілом<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> до <span class="math inline">\(\mathcal{N}(0, 1)\)</span>.</p>
+</div>
+<p>Це означає, що якщо випадкові величини в експерименті <strong>незалежні й однаково розподілені</strong> й ваша вибірка <strong>досить велика</strong>, то можна вважати, що</p>
+<p><span id="eq-central-limit-theorem"><span class="math display">\[
+\sqrt{n}\dfrac{\overline \xi - \mu}{\sqrt{\sigma^2}} \sim \mathcal{N}(0, 1),
+\tag{3.4}\]</span></span> де <span class="math inline">\(\overline \xi\)</span> — середнє арифметичне вибірки, <span class="math inline">\(n\)</span> — кількість спостережень, <span class="math inline">\(\mu\)</span> — математичне сподівання генеральної сукупності, <span class="math inline">\(\sigma^2\)</span> — дисперсія генеральної сукупності.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Примітка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Випадкові величини можуть бути слабко залежні одна від одної й злегка по-різному розподілені. Центральна гранична теорема все ще буде правильною, <span class="citation" data-cites="Gnedenko2021">Gnedenko and Kolmogorov (<a href="references.html#ref-Gnedenko2021" role="doc-biblioref">2021</a>)</span>.</p>
+</div>
+</div>
+</section>
+<section id="sec-visualization-central-limit-theorem" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-visualization-central-limit-theorem"><span class="header-section-number">3.5</span> Візуалізація ЦГТ</h2>
+<p>Щоб краще розуміти, як працює ЦГТ, я пропоную візуалізувати теорему: подивимося на розподіл середніх значень у різних вибірках. Як ми це зробимо?</p>
+<ul>
+<li>Щоб подивитися, що деяка випадкова величина з нормального розподілу, нам потрібна вибірка цих випадкових величин.</li>
+<li>У цьому випадку нам потрібна вибірка статистик із ЦГТ. Тому нам потрібно згенерувати <span class="math inline">\(N\)</span> вибірок по <span class="math inline">\(M\)</span> елементів у кожній.
+<ul>
+<li>По кожній вибірці треба порахувати середнє за <span class="math inline">\(M\)</span> елементами.</li>
+<li>У підсумку ми отримаємо вибірку з <span class="math inline">\(N\)</span> елементів.</li>
+<li>Вона і має бути з нормального розподілу.</li>
+</ul></li>
+</ul>
+<div id="lst-visualization-central-limit-theorem" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-visualization-central-limit-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.5: Візуалізація ЦГТ при великій вибірці з біноміального розподілу.
+</figcaption>
+<div aria-describedby="lst-visualization-central-limit-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="9b93415e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_CLT(sample_generator, expected_value, variance):</span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="dv">5000</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>    clt_sample <span class="op">=</span> []</span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-5-6" class="code-annotation-target"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>        sample <span class="op">=</span> sample_generator()</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-5-7" class="code-annotation-target"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>        sample_size <span class="op">=</span> <span class="bu">len</span>(sample)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-5-8" class="code-annotation-target"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>        statistic <span class="op">=</span> np.sqrt(sample_size) <span class="op">*</span> (np.mean(sample) <span class="op">-</span> expected_value) <span class="op">/</span> np.sqrt(variance)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-5-9" class="code-annotation-target"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>        clt_sample.append(statistic)</span>
+<span id="annotated-cell-5-10"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-5-11" class="code-annotation-target"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a>    sns.displot(clt_sample, kde<span class="op">=</span><span class="va">True</span>, stat<span class="op">=</span><span class="st">'density'</span>, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
+<span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, norm().pdf(x), color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'X'</span>)</span>
+<span id="annotated-cell-5-16"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-19"><a href="#annotated-cell-5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-5-24" class="code-annotation-target"><a href="#annotated-cell-5-24" aria-hidden="true" tabindex="-1"></a>visualize_CLT(<span class="kw">lambda</span>: np.random.binomial(n, p, size),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-5-25" class="code-annotation-target"><a href="#annotated-cell-5-25" aria-hidden="true" tabindex="-1"></a>              expected_value <span class="op">=</span> p <span class="op">*</span> n,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-5-26" class="code-annotation-target"><a href="#annotated-cell-5-26" aria-hidden="true" tabindex="-1"></a>              variance <span class="op">=</span> n <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
+<span id="annotated-cell-5-27"><a href="#annotated-cell-5-27" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="1">Кількість вибірок.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="2">Пустий масив для зберігання статистик.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="6" data-code-annotation="3">Генерація вибірки з <span class="math inline">\(M\)</span> елементами.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="7" data-code-annotation="4">Кількість елементів у вибірці.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="8" data-code-annotation="5">Обчислення статистики.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="9" data-code-annotation="6">Додавання статистики до масиву.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="11,12,13,14,15,16,17" data-code-annotation="7">Візуалізація емпіричного розподілу та теоретичного розподілу.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="24" data-code-annotation="8">Генерація вибірки з біноміального розподілу.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="25" data-code-annotation="9">Математичне сподівання біноміального розподілу.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="26" data-code-annotation="10">Дисперсія біноміального розподілу.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="z-test_files/figure-html/cell-9-output-1.png" width="464" height="484" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Емпірична щільність достатньо близько збігається з теоретичним розподілом. А що якщо зменшити вибірку, за якою рахується середнє?</p>
+<div id="lst-visualization-central-limit-theorem-2" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-visualization-central-limit-theorem-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Лістинг&nbsp;3.6: Візуалізація ЦГТ при малій вибірці з біноміального розподілу.
+</figcaption>
+<div aria-describedby="lst-visualization-central-limit-theorem-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="6479ff5d" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>visualize_CLT(<span class="kw">lambda</span>: np.random.binomial(n, p, size),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>              expected_value <span class="op">=</span> p <span class="op">*</span> n,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>              variance <span class="op">=</span> n <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="z-test_files/figure-html/cell-10-output-1.png" width="464" height="484" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Gnedenko2021" class="csl-entry" role="listitem">
+Gnedenko, Boris V., and Alexander N. Kolmogorov. 2021. <em>Limit Distributions for Sums of Independent Random Variables</em>. Martino Fine Books.
+</div>
+<div id="ref-lemons2002" class="csl-entry" role="listitem">
+Lemons, Don S. 2002. <em>An Introduction to Stochastic Processes in Physics</em>. The Johns Hopkins University Press.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>Документація доступна за посиланням <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html" class="uri">https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Доведення цих властивостей можна знайти в роботі <span class="citation" data-cites="lemons2002">Lemons (<a href="references.html#ref-lemons2002" role="doc-biblioref">2002</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Послідовність випадкових величин <span class="math inline">\(\xi_n\)</span> збігається за розподілом до <span class="math inline">\(\xi\)</span>, позначаємо <span class="math inline">\(\xi_n \xrightarrow{d} \xi\)</span>, якщо <span class="math inline">\(\lim_{n \to \infty} F_{\xi_n}(x) = F_{\xi}(x)\)</span> для всіх <span class="math inline">\(x\)</span>, в яких <span class="math inline">\(F_{\xi}(x)\)</span> неперервна.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

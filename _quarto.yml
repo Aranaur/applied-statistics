@@ -7,8 +7,8 @@ language: _ua.yml
 #   title-delim: "&nbsp;-&nbsp;"
 code-annotations: below
 
-filters:
-  - first-line-indent
+# filters:
+#   - first-line-indent
 
 profile:
   default: development
@@ -48,9 +48,10 @@ book:
     # - mann-whitney.qmd
     # - bootstrap.qmd
     - summary.qmd
-    # - references.qmd
+    - references.qmd
 
 bibliography: references.bib
+bibliographystyle: apa
 
 format:
   html:
