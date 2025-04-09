@@ -589,6 +589,65 @@ print(f"p-значення за точним біноміальним тесто
 
 ## Поправка на неперервність {#sec-continuity-correction}
 
+Задля кращого розуміння, давайте спочатку візуалізуємо $p$-значення в залежності від величини успіхів експерименту $t$ для біноміального тесту та $Z$-критерію Фішера. Для цього побудуємо три варіанти:
 
+- $p$-значення *за нормальною апроксимацією*.
+    + Розрахунок в Python: `1 - norm.cdf(t)`.
+- $p$-значення *біноміального тесту за умови, що $t$ --- неціле число*.
+    + Розглянемо на прикладі $t = 19.5$, тоді $p$-значення буде дорівнювати $$\begin{aligned}P(T(X) \geq t) &= P(T(X) \geq 19.5) \\ &= 1 - P(T(X) < 19.5) \end{aligned}$$
+    + Розрахунок в Python: `1 - binom.cdf(t, n, mu_0)`.
+- $p$-значення *біноміального тесту за умови, що $t$ --- ціле число*.
+    + Розглянемо на прикладі $t = 19$, тоді $p$-значення буде дорівнювати $$\begin{aligned}P(T(X) \geq t) &= P(T(X) \geq 19) \\ &= 1 - P(T(X) \leq 18)\end{aligned}$$
+    + Розрахунок в Python: `1 - binom.cdf(t - 1, n, mu_0)`.
 
+::: {#lst-continuity-correction}
+```{python}
+def cmp_pvalue_binom_and_norm(n, mu0, t, add_to_x=0):
+    x_axis = np.linspace(0, n, 1000)
+    dots_to_show = np.arange(0, n + 1, 1)
 
+    sum_mu = n * mu0 # <1>
+    sum_variance = n * mu0 * (1 - mu0) # <1>
+    sum_std = np.sqrt(sum_variance) # <1>
+
+    binom_dist = binom(n=n, p=mu0) # <2>
+    norm_dist = norm(loc=sum_mu, scale=sum_std) # <2>
+
+    plt.hlines(1 - binom_dist.cdf(x_axis[:-1]), x_axis[:-1], x_axis[1:], color=turquoise, linestyle='-')
+    plt.vlines(x_axis[:-1], 1 - binom_dist.cdf(x_axis[:-1]), 1 - binom_dist.cdf(x_axis[1:]), color=turquoise, linestyle=':')
+    
+    plt.scatter(dots_to_show, 1 - binom_dist.cdf(dots_to_show-1), color=turquoise,
+                alpha=1, linewidths=0.5,
+                label=f'Binom pvalue = 1-binom.cdf(x-1)') # <3>
+    # pvalue через биномиальное распределение
+    plt.scatter(t, 1 - binom_dist.cdf(t - 1), color=turquoise, marker='o',
+                alpha=1, s=100, label=f'binom p-value({t})') # <4>
+    # аппроксимирующее нормальное распределение
+    add_str = "" if add_to_x == 0 else f"{add_to_x}"
+    plt.plot(x_axis, 1 - norm_dist.cdf(x_axis + add_to_x), color=red_pink, alpha=0.5,
+             label=f'Normal pvalue = 1-norm.cdf(x{add_str})') # <5>
+    # pvalue через нормальное распределение
+    plt.scatter(t, 1 - norm_dist.cdf(t + add_to_x), color=red_pink,
+                alpha=1, marker='o', s=100, label=f'norm p-value({t})') # <6>
+
+    plt.legend()
+    plt.xlabel('t')
+    plt.ylabel('$p$-значення')
+    plt.show()
+
+n = 30
+mu_0 = 0.5
+t = 15
+
+cmp_pvalue_binom_and_norm(n, mu_0, t)
+```
+
+1. Параметри нормального розподілу.
+2. Створення біноміального та нормального розподілів.
+3. $p$-значення біноміального розподілу.
+4. $p$-значення біноміального розподілу для конкретного $t$.
+5. $p$-значення нормального розподілу.
+6. $p$-значення нормального розподілу для конкретного $t$.
+
+Порівняння $p$-значення біноміального і нормального розподілів.
+:::
