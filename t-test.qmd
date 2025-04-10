@@ -1,1 +1,426 @@
 # $t$-критерій Стьюдента {#sec-t-test}
+
+```{python}
+#| include: false
+
+with open("_common.py") as f:
+    exec(f.read())
+```
+
+Спробуємо розв'язати таке завдання.
+
+::: {#exm-task}
+Менеджмент компанії розглядає новий підхід до планування щотижневих нарад, щоб зменшити втрати часу співробітників. Раніше середня тривалість таких нарад складала 70 хвилин. Ідея полягає в тому, щоб перейти до нової структури нарад, яка, за задумом, дозволить зменшити тривалість нарад до 60 хвилин.
+
+Протягом одного тижня провели 7 нарад у новому форматі й зафіксували їх тривалість. Якщо з'ясується, що нові наради тривають довше, ніж у середньому 70 хвилин, новий формат вважатимуть неефективним.
+
+Ваше завдання --- перевірити, чи новий формат нарад дійсно ефективніший.
+
+Вийшла вибірка середньої тривалості нарад (в хвилинах): `[50, 55, 70, 45, 40, 70, 80]`.
+:::
+
+Для початку переформулюємо умову мовою математики. Є вибірка:
+
+- $X_1, X_2, ..., X_7$ --- значення середньої тривалості нарад у новому форматі;
+- Будемо вважати, що $X$ з нормального розподілу, тобто $X \sim N(\mu, \sigma^2)$.
+
+```{python}
+meeting_time = np.array([50, 55, 70, 45, 40, 70, 80])
+print(f"Середнє значення: {np.mean(meeting_time):.2f} хвилин")
+```
+
+Наша гіпотеза звучить так:
+
+$$
+H_0: E \overline{X} \geq 70 \; \text{проти} \; H_1: E \overline{X} < 70
+$$
+
+Здається, що ми таке вже вміємо вирішувати: згадаємо про $Z$-критерій:
+
+$$
+H_0: \mu \leq \mu_0\ \; \text{проти} \; \ H_1: \mu > \mu_0
+$$
+
+- Статистика $Z(X) = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{\sigma^2}}$
+- За досить великого розміру вибірки $Z(X) \overset{H_0}{\sim} \mathcal{N}(0, 1)$ (за ЦГТ)
+- Односторонній критерій: $\left\{Z(X) \geq z_{1 - \alpha} \right\}$
+    - $p$-значення = $1 - \Phi(z)$, де $z$ --- реалізація статистики $Z(X)$, $\Phi(z)$ --- функція розподілу $\mathcal{N}(0, 1)$
+- Двосторонній критерій: $\left\{Z(X) \geq z_{1 - \frac{\alpha}{2}} \right\} \bigcup \left\{Z(X) \leq -z_{1 - \frac{\alpha}{2}} \right\}$
+    - $p$-значення = $2\cdot \min \left[{\Phi(z), 1 - \Phi(z)} \right]$, де $z$ --- реалізація статистики $Z(X)$
+
+Тоді треба лише порахувати таку статистику: $\sqrt{n}\dfrac{\overline X - 70}{\sqrt{\sigma^2}} \overset{H_0}{\sim} \mathcal{N}(0, 1)$.
+
+Але є суттєва проблема: **ми не знаємо $\sigma^2$**! Тому ми не можемо використовувати $Z$-критерій.
+
+Давайте спробуємо оцінити $\sigma^2$ за допомогою вибірки. Для цього скористаємося формулою:
+
+$$
+\hat{\sigma}^2 = S^2 = \dfrac{1}{n - 1} \sum_{i=1}^n (X_i - \overline X)^2
+$$ {#eq-sample-variance}
+
+Вона називається **вибірковою дисперсією**. Вибіркова дисперсія є *незміщеною* та *консистентною* оцінкою дисперсії генеральної сукупності. 
+
+Вибіркова дисперсія є **незміщеною**, оскільки ми ділимо на $n - 1$, а не на $n$. Це робиться для того, щоб уникнути систематичної помилки в оцінці дисперсії. **Консистентність** пояснюється тим, що з ростом вибірки $n$ ми все ближче підходимо до істинної дисперсії генеральної сукупності.
+
+Для розрахунку вибіркової дисперсії в Python можна скористатися функцією `np.var` з параметром `ddof=1`, що означає, що ми ділимо на $n - 1$.
+
+```{python}
+meeting_time_var = np.var(meeting_time, ddof=1)
+print(f"Вибіркова дисперсія: {meeting_time_var:.2f} хвилин")
+```
+
+Давайте введемо новий критерій $T'$-тест, у якому ми підставимо:
+
+- $T(X) := \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}}$
+- $T(X) \overset{H_0}{\sim} \mathcal{N}(0, 1)$
+
+Залишилося перевірити: **Чи правда, що при $H_0$ розподіл $T$-статистики --- стандартний нормальний?**
+
+Для цього пропонується подивитися, як насправді буде розподілена статистика $T(X) = \sqrt{n}\dfrac{\overline{X}-\mu_0}{\sqrt{S^2}}$ у завданні, яке було поставлено від початку.
+
+Для цього будемо вважати, що вибірка $X$ складається з 7 елементів й $X \sim \mathcal{N}$.
+
+- Ми $M$ раз згенеруємо вибірку $X$ та порахуємо щоразу статистику $T(X)$.
+- У підсумку ми отримаємо вибірку розміру $M$ для $T(X)$ й зможемо побудувати гістограму розподілу. Окремо побудуємо розподіл $\mathcal{N}(0, 1)$. Якщо емпіричний розподіл візуально збіжиться з теоретичним нормальним, значить, усе добре. А якщо ні, то так просто ми не можемо замінити $\sigma^2$ на $S^2$.
+    - Додатково подивимося, що буде, якщо замінити $T(X)$ на $Z(X)$. Добре, що на штучному прикладі ми знаємо дисперсію.
+
+Для цього ми напишемо функцію `sample_statistics`, яка зможе побудувати розподіл для будь-якої статистики, а не тільки для $T(X), Z(X)$. Вона приймає на вхід:
+
+- `number_of_experiments` --- кількість експериментів, які ми хочемо провести;
+- `statistic_function` --- функція, яка обчислює статистику;
+- `sample_size` --- розмір вибірки;
+- `sample_distr` --- розподіл, з якого ми генеруємо вибірку.
+
+```{python}
+def sample_statistics(number_of_experiments, statistic_function, sample_size, sample_distr):
+    statistic_sample = []
+    for _ in range(number_of_experiments):
+        sample = sample_distr.rvs(sample_size)
+        statistic = statistic_function(sample)
+        statistic_sample.append(statistic)
+    return statistic_sample
+```
+
+Тепер перевіримо, чи дійсно $T(X)$ розподілена нормально. Для цього скористаємося функцією `sample_statistics` та побудуємо гістограму для $T(X)$. Генерувати вибірку будемо з нормального розподілу $\mathcal{N}(5, 3^2)$.
+
+```{python}
+#| label: fig-t-test
+#| fig-cap: Симуляція розподілу $T(X)$ та $Z(X)$
+
+sample_size = 7
+M = 100000
+sample_distr = norm(loc=5, scale=3)
+
+T_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / np.sqrt(np.var(sample, ddof=1))
+Z_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / sample_distr.std()
+
+samples = {
+    "T(X)": sample_statistics(
+    number_of_experiments=M, statistic_function=T_X,
+    sample_size=sample_size, sample_distr=sample_distr),
+
+    "Z(X)": sample_statistics(
+    number_of_experiments=M, statistic_function=Z_X,
+    sample_size=sample_size, sample_distr=sample_distr)
+}
+
+for i, name in enumerate(["T(X)", "Z(X)"]):
+    plt.subplot(1, 2, i + 1)
+    current_sample = samples[name]
+    l_bound, r_bound = np.quantile(current_sample, [0.001, 0.999])
+
+    x = np.linspace(l_bound, r_bound, 1000)
+    sns.distplot(current_sample, label='Емпіричний розподіл', color=turquoise)
+    plt.plot(x, norm(0, 1).pdf(x), label='$\mathcal{N}(0, 1)$', color=red_pink)
+    plt.legend(loc='upper left')
+    plt.xlabel(f'{name}')
+    plt.xlim((l_bound, r_bound))
+    plt.ylabel('Щільність')
+    plt.grid(linewidth=0.2)
+
+plt.show()
+```
+
+Ми бачимо, що:
+
+- $Z$-тест тут працює: $\sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{\sigma^2}} \sim \mathcal{N}(0, 1)$.
+- Але ось для $T(X)$ це не так! **Вони відрізняються! А значить $T'$-критерій не підходить для початкової задачі!
+
+Для того щоб стало зрозуміло, чому так сталося, розглянемо $T(X)$ у деталях. При створенні критерію є два кроки:
+
+1. Придумати статистику для критерію
+    - Із цим ми успішно впоралися, придумавши $T(X)$.
+2. Зрозуміти розподіл статистики.
+    - І ось це найскладніший крок, який не дозволяє використовувати будь-яку придуману статистику. Потрібно також розуміти її розподіл.
+    - І з цим, як ми побачили, ми провалилися для $T(X)$. Нормальний розподіл не підійшов.
+
+Але чому $T(X) = \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}}$ не розподілена нормально, хоча $\sqrt{n}\dfrac{\overline X - \mu}{\sqrt{\sigma^2}} \overset{H_0}{\sim} \mathcal{N}(0, 1)$$? Чому при заміні $\sigma^2$ на $S^2$ усе зіпсувалося?
+
+**Справа в тому, що $S^2$ --- це випадкова величина!** Згадаймо, як ми виводили $Z$-критерій:
+
+1. Ми порахували, що $\overline X \sim \mathcal{N}(\mu, \sigma^2)$. З ЦГТ або, у випадку вище, з властивостей нормального розподілу.
+2. Далі, все також із властивостей цього розподілу випливає, що якщо ми віднімемо константу або поділимо на константу, то нормальний розподіл не перетвориться на інший: тому $\sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{\sigma^2}} \sim \mathcal{N}(0, 1)$.
+
+**Але ми нічого не знаємо про** $\dfrac{\overline{X}}{\sqrt{\eta}}$, де $\overline{X} \sim \mathcal{N}, S^2 := \eta \sim P$, де $P$ невідомо. Ми не знаємо поки що жодних теорем, які б хоч якось доводили, що тут також залишиться нормальний розподіл.
+
+Давайте подивимося на розподіл $\sqrt{S^2}$ на все тому ж нормальному розподілі.
+
+
+```{python}
+#| label: fig-sample-variance
+#| fig-cap: Розподіл $\sqrt{S^2}$
+
+S2 = lambda sample: np.std(sample, ddof=1)
+S2_sample = sample_statistics(
+    number_of_experiments=M, statistic_function=S2,
+    sample_size=sample_size, sample_distr=sample_distr
+)
+
+sns.distplot(S2_sample, label='Емпіричний розподіл', color=turquoise)
+plt.legend()
+plt.xlabel('$\sqrt{S^2}$')
+plt.ylabel('Щільність')
+plt.grid(linewidth=0.2)
+plt.show()
+```
+
+Розподіл $\sqrt{S^2}$ несиметричний й незрозуміло як розподілений. Тому, коли ми якусь величину з нормального розподілу ділимо на несиметричний незрозумілий розподіл, ми й отримуємо, що наша статистика $T$ не з нормального розподілу.
+
+Тож давайте виведемо критерій, який допоможе розв'язати початкову задачу!
+
+## $T$-тест Стьюдента
+
+Для того щоб вивести $T$-тест, нам потрібно зрозуміти, як розподіляється статистика $T(X) = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}}$. Для того, щоб це дізнатися, нам знадобиться кілька фактів:
+
+1. Нехай $X_1 \ldots X_n \sim \mathcal{N}(\mu, \sigma^2)$
+2. Нехай $\xi_1 \ldots \xi_n \sim \mathcal{N}(0, 1)$. Тоді $\eta=\xi_1^2 +\ ... +\xi_n^2 \sim \chi^2_n$[^chi2].
+    - Тоді $\underset{i=1}{\overset{n}{\sum}}\left(\xi_i - \overline \xi \right)^2 \sim \chi^2_{n-1}$ [^Cochran].
+    - $S^2_X = \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}}(X_i - \overline X)^2$
+    - $\xi_i := \dfrac{X_i - \mu}{\sigma} \sim \mathcal{N}(0, 1)$. Тоді
+    $$\begin{aligned}
+    S^2_{\xi} &= \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}}\left(\xi_i - \overline \xi \right)^2 =
+            \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}} \left(\dfrac{X_i-\mu}{\sigma} - \underset{i=1}{\overset{n}{\sum}}\left[\dfrac{X_i-\mu}{n\sigma}\right] \right)^2 = \\
+             &= \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}} \left(\dfrac{X_i}{\sigma} - \dfrac{\mu}{\sigma} - \underset{i=1}{\overset{n}{\sum}}\left[\dfrac{X_i}{n\sigma}\right] + \dfrac{n\mu}{n\sigma} \right)^2 =\\
+             &= \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}} \left(\dfrac{X_i}{\sigma} -\dfrac{\overline X_i}{\sigma} \right)^2 = \dfrac{1}{\sigma \cdot(n - 1)}\underset{i=1}{\overset{n}{\sum}} \left(X_i - \overline X_i \right)^2 = \dfrac{1}{\sigma}S^2_X
+    \end{aligned}
+    $$
+    
+    - А значить $\dfrac{(n - 1)\cdot S^2_X}{\sigma^2} = \underset{i=1}{\overset{n}{\sum}}\left(\xi_i - \overline \xi \right)^2 \sim \chi^2_{n-1}$
+3. Нехай $\xi \sim \mathcal{N}(0, 1), \eta \sim \chi^2_k$ і $\xi$ з $\eta$ незалежні. Тоді статистика $\zeta = \dfrac{\xi}{\sqrt{\eta/k}} \sim t_{k}$ --- з розподілу Стьюдента[^student] з $k$ ступенями свободи.
+    - $\xi := \sqrt{n}\dfrac{\overline X - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)$
+    - $\eta := \dfrac{(n - 1)\cdot S^2_X}{\sigma^2} \sim \chi^2_{n-1}$
+    - $\xi$ и $\eta$ незалежні[^basu].
+    - Тоді
+    $$
+    \begin{aligned}
+        T = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}} = \frac{\sqrt{n}\dfrac{\overline X - \mu_0}{\sigma}}{\sqrt{\dfrac{(n - 1)\cdot S^2_X}{(n - 1)\sigma^2}}} = \dfrac{\xi}{\sqrt{\dfrac{\eta}{n-1}}} \sim t_{n - 1}
+    \end{aligned}
+    $$
+
+[^chi2]: Розподіл $\chi^2$ --- це розподіл суми квадратів $k$ незалежних нормальних випадкових величин з нульовим математичним сподіванням. Тобто, якщо $X_1, X_2, \ldots, X_k \sim \mathcal{N}(0, 1)$, то $Y = X_1^2 + X_2^2 + \ldots + X_k^2 \sim \chi^2_k$.
+
+[^Cochran]: Доведення @Cochran1934.
+
+[^student]: Розподіл Стьюдента --- це розподіл, який виникає при нормальному розподілі з невідомою дисперсією. Якщо $X_1, X_2, \ldots, X_n \sim \mathcal{N}(\mu, \sigma^2)$, то $T = \dfrac{\overline{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}$, де $\overline{X}$ --- вибіркове середнє, $S$ --- вибіркова стандартна девіація.
+
+[^basu]: Доведення @Basu1955.
+
+У підсумку, статистика $T = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}} \sim t_{n - 1}$ --- взята з розподілу Стьюдента з $n - 1$ ступенем свободи. **Але тільки в разі, якщо початкова вибірка з нормального розподілу!**
+
+Тепер нам достатньо даних, щоб побудувати $T$-тест:
+
+$$
+H_0: \mu =\mu_0, \ X \sim \mathcal{N}\ проти\ H_1: \mu > \mu_0
+$$ {#eq-t-test}
+
+Статистика $T(X)$ буде виглядати так:
+
+$$
+T(X) = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}} \sim t_{n - 1}
+$$ {#eq-t-statistic}
+
+Тоді односторонній критерій набуває вигляду:
+$$
+\left\{T(X) \geq t_{n-1, 1 - \alpha} \right\}
+$$ {#eq-t-test-crit}
+
+А $p$-значення для одностороннього критерію можна обчислити так:
+
+$$
+p\text{-значення} = 1 - \tau_{n-1}(z),
+$$ {#eq-t-p-value}
+де z --- реалізація статистики $T(X)$, $\tau_{n-1}(z)$ --- функція розподілу $t_{n - 1}$
+
+Двосторонній критерій буде виглядати так:
+$$
+\left\{T(X) \geq t_{n-1, 1 - \frac{\alpha}{2}} \right\} \bigcup \left\{T(X) \leq -t_{n-1, 1 - \frac{\alpha}{2}} \right\}
+$$ {#eq-t-test-crit2}
+
+При цьому $p$-значення для двостороннього критерію можна обчислити так:
+
+$$
+p\text{-значення} = 2\cdot \min \left[{\tau_{n-1}(z), 1 - \tau_{n-1}(z)} \right],
+$$ {#eq-t-p-value2}
+де $z$ --- реалізація статистики $T(X)$, $\tau_{n-1}(z)$ --- функція розподілу $t_{n - 1}$.
+
+## $T$-тест у Python
+
+Давайте тепер протестуємо всі наші теоретичні дослідження на практиці. Для цього нам знадобляться наступні бібліотеки функції:
+
+- `scipy.stats.chii2` --- для розподілу $\chi^2$;
+- `scipy.stats.t` --- для $t$ розподілу Стюдента;
+- `scipy.stats.ttest_1samp` --- для $T$-тесту.
+
+Подивимось на розподіл $\chi^2$ та розподіл $\eta$.
+
+```{python}
+#| label: fig-chi2
+#| fig-cap: Розподіл емпіричного $\eta$ та теоретичного $\chi^2$.
+sample_size = 7
+sample_distr = norm(loc=5, scale=3)
+sample = sample_distr.rvs(sample_size)
+M = 10000
+
+eta_statistic = lambda sample: np.var(sample, ddof=1) * (sample_size - 1) / sample_distr.var()
+eta_sample = sample_statistics(
+    number_of_experiments=M, statistic_function=eta_statistic,
+    sample_size=sample_size, sample_distr=sample_distr
+)
+
+chi2_dist = chi2(df=sample_size-1)
+
+l_bound, r_bound = np.quantile(eta_sample, [0.001, 0.999])
+x = np.linspace(l_bound, r_bound, 1000)
+
+sns.distplot(eta_sample, label='Емпіричний розподіл', color=turquoise)
+plt.plot(x, chi2_dist.pdf(x), label='$\chi^2$', color=red_pink)
+plt.legend()
+plt.xlabel('$\eta$')
+plt.ylabel('Щільність')
+plt.grid(linewidth=0.2)
+plt.show()
+```
+
+Ми бачимо, що емпіричний розподіл $\eta$ та теоретичний $\chi^2$ збігаються. Це означає, що ми можемо використовувати $T$-тест для перевірки гіпотези.
+
+Тепер перевіримо, чи дійсно $T(X)$ описується розподілом Стьюдента. Для цього скористаємося функцією `sample_statistics` та побудуємо гістограму для $T(X)$. Генерувати вибірку будемо з нормального розподілу $\mathcal{N}(5, 3^2)$.
+
+```{python}
+#| label: fig-t-test-dist
+#| fig-cap: Розподіл $T(X)$
+
+sample_size = 7
+sample_distr = norm(loc=5, scale=3)
+sample = sample_distr.rvs(sample_size)
+M = 10000
+
+T_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / np.std(sample, ddof=1)
+T_sample = sample_statistics(
+    number_of_experiments=M, statistic_function=T_X,
+    sample_size=sample_size, sample_distr=sample_distr
+)
+
+
+T_dist = t(df=sample_size-1)
+
+l_bound, r_bound = np.quantile(T_sample, [0.001, 0.999])
+x = np.linspace(l_bound, r_bound, 1000)
+
+sns.distplot(T_sample, color=turquoise, label='Емпіричний розподіл')
+plt.plot(x, T_dist.pdf(x), c=red_pink, label='$t_{n-1}$')
+plt.plot(x, norm(0, 1).pdf(x), c=slate, linestyle='--', label='$\mathcal{N}(0, 1)$')
+plt.legend()
+plt.xlabel('$T(X)$')
+plt.ylabel('Щільність')
+plt.xlim((l_bound, r_bound))
+plt.grid(linewidth=0.2)
+plt.show()
+```
+
+Розподіл Стьюдента практично ідеально описує дані, тоді як нормальний розподіл більш "центрований".
+
+Тепер, як викликати вбудований $T$-тест у Python? Для цього скористаємося функцією `scipy.stats.ttest_1samp`. Вона приймає на вхід:
+
+- `a` --- вибірка;
+- `popmean` --- середнє значення генеральної сукупності, яке ми хочемо перевірити;
+- `axis` --- вздовж якої осі обчислювати тест. За замовчуванням `0`;
+- `nan_policy` --- як обробляти NaN. Може приймати значення `propagate`, `raise`, `omit`. За замовчуванням `propagate`;
+- `alternative` --- альтернативна гіпотеза. Може приймати значення `two-sided`, `less`, `greater`. За замовчуванням `two-sided`.
+
+```{python}
+meeting_time = np.array([50, 55, 70, 45, 40, 70, 80])
+
+ttest_result = ttest_1samp(meeting_time, 70, alternative='less')
+print(f"Статистика: {ttest_result.statistic:.2f}")
+print(f"p-значення: {ttest_result.pvalue:.2f}")
+```
+
+Оскільки $p$-значення менше 0.05, то ми відхиляємо нульову гіпотезу. Це означає, що середня тривалість нарад у новому форматі триває менше 70 хвилин.
+Відповідно до $T$-тесту, ми можемо стверджувати, що новий формат нарад дійсно скорочує їх тривалість.
+
+## Довірчі інтервали
+
+Давайте тепер розглянемо, як можна оцінити параметри генеральної сукупності за допомогою $T$-тесту. Розглянемо два виведення довірчого інтервалу.
+
+### Перший метод
+
+> Нехай є статистика $Q$ та критерій $\psi(Q)$ для перевірки гіпотези $H_0: \theta = m$ рівня значущості $\alpha$.
+>
+> Тоді довірчий інтервал для $\theta$ рівня довіри $1 - \alpha$: множина таких $m$, що критерій $\psi(Q)$ не відкидає для них $H_0$.
+
+Нехай $\mu$ --- істинне середнє вибірки. Ми також знаємо, що за $H_0: \sqrt{n}\dfrac{\overline X - m}{\sqrt{S^2}} \sim t_{n - 1}$.
+
+Нас цікавлять такі $m$, що: $\left\{-t_{n-1, 1 - \frac{\alpha}{2}} < \sqrt{n}\dfrac{\overline X - m}{\sqrt{S^2}} < t_{n-1, 1 - \frac{\alpha}{2}} \right\}$, у цьому разі критерій не відкинеться.
+
+Розпишемо, щоб у центрі залишилося тільки $m$: $\left\{\overline X - \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} < m < \overline X + \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}}\right\}$. А отже, наш довірчий інтервал: 
+
+$$
+CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} \right),
+$$ {#eq-t-interval1}
+де $S^2 = \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}}(X_i - \overline X)^2$ 
+
+### Другий метод
+
+> Довірчим інтервалом для параметра $\theta$ рівня довіри $1 - \alpha$ є пара статистик $L(X), R(X)$, таких, що $P(L(X) < \theta < R(X)) = 1 - \alpha$.
+
+Це класичне визначення довірчого інтервалу. Тобто, ми повинні знайти такі $L(X)$ та $R(X)$, що $P(L(X) < \mu < R(X)) = 1 - \alpha$.
+
+$$
+\begin{aligned}
+    &T(X) = \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}} \sim t_{n - 1} \Rightarrow \\
+    &P\left(-t_{n - 1, 1-\alpha/2} < \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}} < t_{n - 1, 1-\alpha/2} \right) = 1 - \alpha \Leftrightarrow \\
+    &P\left(\overline X - \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}}  < \mu < \overline X + \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} \right) = 1 - \alpha
+\end{aligned}
+$$ {#eq-t-interval2}
+
+Тоді
+
+$$
+CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} \right)
+$$ {#eq-t-interval3}
+
+Цей довірчий інтервал збігається з попереднім. Тобто, ми можемо використовувати обидва методи для побудови довірчого інтервалу.
+
+## Довірчі інтервали у Python
+
+Давайте тепер побудуємо довірчий інтервал для середнього значення тривалості нарад у новому форматі. Для цього скористаємося функцією `scipy.stats.t.interval`. Вона приймає на вхід:
+
+- `confidence` --- рівень значущості;
+- `df` --- кількість ступенів свободи;
+- `loc` --- середнє значення, за замовчуванням `0`;
+- `scale` --- стандартна девіація, за замовчуванням `1`.
+
+Для побудови лівостороннього довірчого інтервалу візьмемо `confidence` на рівні 90%, оскільки ми хочемо перевірити, чи тривалість нарад у новому форматі *менша* 70 хвилин.
+```{python}
+meeting_time = np.array([50, 55, 70, 45, 40, 70, 80])
+
+confidence = 0.90
+df = len(meeting_time) - 1
+loc = np.mean(meeting_time)
+scale = np.std(meeting_time, ddof=1) / np.sqrt(len(meeting_time))
+
+interval = t.interval(confidence, df, loc, scale)
+print(f"Довірчий інтервал: {np.round(interval, 2)}")
+```
+
+## $T$-тест та вимога нормальності

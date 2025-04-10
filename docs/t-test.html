@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -41,31 +95,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-6c380caa1d326ca7d97976c903cdd929.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<style>
-/* first-line indent styles */
-  p {
-    text-indent: 1.5em;
-    margin: 0;
-  }
-  header p {
-    text-indent: 0;
-    margin: 1em 0;
-  }
-  :is(h1, h2, h3, h4, h5, h6) + p {
-    text-indent: 0;
-  }
-  li > p, li > div p {
-    text-indent: 0;
-    margin-bottom: 1rem;
-  }
-  div.no-first-line-indent-after + p {
-    text-indent: 0;
-  }
-  div.first-line-indent-after + p {
-    text-indent: 1.5em;
-  }
-/* end of first-line indent styles */
-</style>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -93,7 +122,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Пошук"
   }
 }</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -216,13 +244,33 @@ window.Quarto = {
  <span class="menu-text">Підсумки</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Список літератури</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Зміст</h2>
+   
+  <ul>
+  <li><a href="#t-тест-стьюдента" id="toc-t-тест-стьюдента" class="nav-link active" data-scroll-target="#t-тест-стьюдента"><span class="header-section-number">4.1</span> <span class="math inline">\(T\)</span>-тест Стьюдента</a></li>
+  <li><a href="#t-тест-у-python" id="toc-t-тест-у-python" class="nav-link" data-scroll-target="#t-тест-у-python"><span class="header-section-number">4.2</span> <span class="math inline">\(T\)</span>-тест у Python</a></li>
+  <li><a href="#довірчі-інтервали" id="toc-довірчі-інтервали" class="nav-link" data-scroll-target="#довірчі-інтервали"><span class="header-section-number">4.3</span> Довірчі інтервали</a>
+  <ul class="collapse">
+  <li><a href="#перший-метод" id="toc-перший-метод" class="nav-link" data-scroll-target="#перший-метод"><span class="header-section-number">4.3.1</span> Перший метод</a></li>
+  <li><a href="#другий-метод" id="toc-другий-метод" class="nav-link" data-scroll-target="#другий-метод"><span class="header-section-number">4.3.2</span> Другий метод</a></li>
+  </ul></li>
+  <li><a href="#довірчі-інтервали-у-python" id="toc-довірчі-інтервали-у-python" class="nav-link" data-scroll-target="#довірчі-інтервали-у-python"><span class="header-section-number">4.4</span> Довірчі інтервали у Python</a></li>
+  <li><a href="#t-тест-та-вимога-нормальності" id="toc-t-тест-та-вимога-нормальності" class="nav-link" data-scroll-target="#t-тест-та-вимога-нормальності"><span class="header-section-number">4.5</span> <span class="math inline">\(T\)</span>-тест та вимога нормальності</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -246,8 +294,439 @@ window.Quarto = {
 </header>
 
 
+<p>Спробуємо розв’язати таке завдання.</p>
+<div id="exm-task" class="theorem example">
+<p><span class="theorem-title"><strong>Приклад 4.1</strong></span> Менеджмент компанії розглядає новий підхід до планування щотижневих нарад, щоб зменшити втрати часу співробітників. Раніше середня тривалість таких нарад складала 70 хвилин. Ідея полягає в тому, щоб перейти до нової структури нарад, яка, за задумом, дозволить зменшити тривалість нарад до 60 хвилин.</p>
+<p>Протягом одного тижня провели 7 нарад у новому форматі й зафіксували їх тривалість. Якщо з’ясується, що нові наради тривають довше, ніж у середньому 70 хвилин, новий формат вважатимуть неефективним.</p>
+<p>Ваше завдання — перевірити, чи новий формат нарад дійсно ефективніший.</p>
+<p>Вийшла вибірка середньої тривалості нарад (в хвилинах): <code>[50, 55, 70, 45, 40, 70, 80]</code>.</p>
+</div>
+<p>Для початку переформулюємо умову мовою математики. Є вибірка:</p>
+<ul>
+<li><span class="math inline">\(X_1, X_2, ..., X_7\)</span> — значення середньої тривалості нарад у новому форматі;</li>
+<li>Будемо вважати, що <span class="math inline">\(X\)</span> з нормального розподілу, тобто <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+</ul>
+<div id="e15844ab" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Середнє значення: </span><span class="sc">{</span>np<span class="sc">.</span>mean(meeting_time)<span class="sc">:.2f}</span><span class="ss"> хвилин"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Середнє значення: 58.57 хвилин</code></pre>
+</div>
+</div>
+<p>Наша гіпотеза звучить так:</p>
+<p><span class="math display">\[
+H_0: E \overline{X} \geq 70 \; \text{проти} \; H_1: E \overline{X} &lt; 70
+\]</span></p>
+<p>Здається, що ми таке вже вміємо вирішувати: згадаємо про <span class="math inline">\(Z\)</span>-критерій:</p>
+<p><span class="math display">\[
+H_0: \mu \leq \mu_0\ \; \text{проти} \; \ H_1: \mu &gt; \mu_0
+\]</span></p>
+<ul>
+<li>Статистика <span class="math inline">\(Z(X) = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{\sigma^2}}\)</span></li>
+<li>За досить великого розміру вибірки <span class="math inline">\(Z(X) \overset{H_0}{\sim} \mathcal{N}(0, 1)\)</span> (за ЦГТ)</li>
+<li>Односторонній критерій: <span class="math inline">\(\left\{Z(X) \geq z_{1 - \alpha} \right\}\)</span>
+<ul>
+<li><span class="math inline">\(p\)</span>-значення = <span class="math inline">\(1 - \Phi(z)\)</span>, де <span class="math inline">\(z\)</span> — реалізація статистики <span class="math inline">\(Z(X)\)</span>, <span class="math inline">\(\Phi(z)\)</span> — функція розподілу <span class="math inline">\(\mathcal{N}(0, 1)\)</span></li>
+</ul></li>
+<li>Двосторонній критерій: <span class="math inline">\(\left\{Z(X) \geq z_{1 - \frac{\alpha}{2}} \right\} \bigcup \left\{Z(X) \leq -z_{1 - \frac{\alpha}{2}} \right\}\)</span>
+<ul>
+<li><span class="math inline">\(p\)</span>-значення = <span class="math inline">\(2\cdot \min \left[{\Phi(z), 1 - \Phi(z)} \right]\)</span>, де <span class="math inline">\(z\)</span> — реалізація статистики <span class="math inline">\(Z(X)\)</span></li>
+</ul></li>
+</ul>
+<p>Тоді треба лише порахувати таку статистику: <span class="math inline">\(\sqrt{n}\dfrac{\overline X - 70}{\sqrt{\sigma^2}} \overset{H_0}{\sim} \mathcal{N}(0, 1)\)</span>.</p>
+<p>Але є суттєва проблема: <strong>ми не знаємо <span class="math inline">\(\sigma^2\)</span></strong>! Тому ми не можемо використовувати <span class="math inline">\(Z\)</span>-критерій.</p>
+<p>Давайте спробуємо оцінити <span class="math inline">\(\sigma^2\)</span> за допомогою вибірки. Для цього скористаємося формулою:</p>
+<p><span id="eq-sample-variance"><span class="math display">\[
+\hat{\sigma}^2 = S^2 = \dfrac{1}{n - 1} \sum_{i=1}^n (X_i - \overline X)^2
+\tag{4.1}\]</span></span></p>
+<p>Вона називається <strong>вибірковою дисперсією</strong>. Вибіркова дисперсія є <em>незміщеною</em> та <em>консистентною</em> оцінкою дисперсії генеральної сукупності.</p>
+<p>Вибіркова дисперсія є <strong>незміщеною</strong>, оскільки ми ділимо на <span class="math inline">\(n - 1\)</span>, а не на <span class="math inline">\(n\)</span>. Це робиться для того, щоб уникнути систематичної помилки в оцінці дисперсії. <strong>Консистентність</strong> пояснюється тим, що з ростом вибірки <span class="math inline">\(n\)</span> ми все ближче підходимо до істинної дисперсії генеральної сукупності.</p>
+<p>Для розрахунку вибіркової дисперсії в Python можна скористатися функцією <code>np.var</code> з параметром <code>ddof=1</code>, що означає, що ми ділимо на <span class="math inline">\(n - 1\)</span>.</p>
+<div id="96c4d21a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>meeting_time_var <span class="op">=</span> np.var(meeting_time, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Вибіркова дисперсія: </span><span class="sc">{</span>meeting_time_var<span class="sc">:.2f}</span><span class="ss"> хвилин"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Вибіркова дисперсія: 222.62 хвилин</code></pre>
+</div>
+</div>
+<p>Давайте введемо новий критерій <span class="math inline">\(T'\)</span>-тест, у якому ми підставимо:</p>
+<ul>
+<li><span class="math inline">\(T(X) := \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}}\)</span></li>
+<li><span class="math inline">\(T(X) \overset{H_0}{\sim} \mathcal{N}(0, 1)\)</span></li>
+</ul>
+<p>Залишилося перевірити: <strong>Чи правда, що при <span class="math inline">\(H_0\)</span> розподіл <span class="math inline">\(T\)</span>-статистики — стандартний нормальний?</strong></p>
+<p>Для цього пропонується подивитися, як насправді буде розподілена статистика <span class="math inline">\(T(X) = \sqrt{n}\dfrac{\overline{X}-\mu_0}{\sqrt{S^2}}\)</span> у завданні, яке було поставлено від початку.</p>
+<p>Для цього будемо вважати, що вибірка <span class="math inline">\(X\)</span> складається з 7 елементів й <span class="math inline">\(X \sim \mathcal{N}\)</span>.</p>
+<ul>
+<li>Ми <span class="math inline">\(M\)</span> раз згенеруємо вибірку <span class="math inline">\(X\)</span> та порахуємо щоразу статистику <span class="math inline">\(T(X)\)</span>.</li>
+<li>У підсумку ми отримаємо вибірку розміру <span class="math inline">\(M\)</span> для <span class="math inline">\(T(X)\)</span> й зможемо побудувати гістограму розподілу. Окремо побудуємо розподіл <span class="math inline">\(\mathcal{N}(0, 1)\)</span>. Якщо емпіричний розподіл візуально збіжиться з теоретичним нормальним, значить, усе добре. А якщо ні, то так просто ми не можемо замінити <span class="math inline">\(\sigma^2\)</span> на <span class="math inline">\(S^2\)</span>.
+<ul>
+<li>Додатково подивимося, що буде, якщо замінити <span class="math inline">\(T(X)\)</span> на <span class="math inline">\(Z(X)\)</span>. Добре, що на штучному прикладі ми знаємо дисперсію.</li>
+</ul></li>
+</ul>
+<p>Для цього ми напишемо функцію <code>sample_statistics</code>, яка зможе побудувати розподіл для будь-якої статистики, а не тільки для <span class="math inline">\(T(X), Z(X)\)</span>. Вона приймає на вхід:</p>
+<ul>
+<li><code>number_of_experiments</code> — кількість експериментів, які ми хочемо провести;</li>
+<li><code>statistic_function</code> — функція, яка обчислює статистику;</li>
+<li><code>sample_size</code> — розмір вибірки;</li>
+<li><code>sample_distr</code> — розподіл, з якого ми генеруємо вибірку.</li>
+</ul>
+<div id="1fbb9168" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_statistics(number_of_experiments, statistic_function, sample_size, sample_distr):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    statistic_sample <span class="op">=</span> []</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(number_of_experiments):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        sample <span class="op">=</span> sample_distr.rvs(sample_size)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        statistic <span class="op">=</span> statistic_function(sample)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        statistic_sample.append(statistic)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> statistic_sample</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Тепер перевіримо, чи дійсно <span class="math inline">\(T(X)\)</span> розподілена нормально. Для цього скористаємося функцією <code>sample_statistics</code> та побудуємо гістограму для <span class="math inline">\(T(X)\)</span>. Генерувати вибірку будемо з нормального розподілу <span class="math inline">\(\mathcal{N}(5, 3^2)\)</span>.</p>
+<div id="cell-fig-t-test" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100000</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sample_distr <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">5</span>, scale<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>T_X <span class="op">=</span> <span class="kw">lambda</span> sample: np.sqrt(sample_size) <span class="op">*</span> (np.mean(sample) <span class="op">-</span> sample_distr.mean()) <span class="op">/</span> np.sqrt(np.var(sample, ddof<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>Z_X <span class="op">=</span> <span class="kw">lambda</span> sample: np.sqrt(sample_size) <span class="op">*</span> (np.mean(sample) <span class="op">-</span> sample_distr.mean()) <span class="op">/</span> sample_distr.std()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"T(X)"</span>: sample_statistics(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>T_X,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Z(X)"</span>: sample_statistics(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>Z_X,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, name <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="st">"T(X)"</span>, <span class="st">"Z(X)"</span>]):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    current_sample <span class="op">=</span> samples[name]</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    l_bound, r_bound <span class="op">=</span> np.quantile(current_sample, [<span class="fl">0.001</span>, <span class="fl">0.999</span>])</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(l_bound, r_bound, <span class="dv">1000</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    sns.distplot(current_sample, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, norm(<span class="dv">0</span>, <span class="dv">1</span>).pdf(x), label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>, color<span class="op">=</span>red_pink)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="ss">f'</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    plt.xlim((l_bound, r_bound))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-t-test" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-t-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-t-test-output-1.png" width="672" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.1: Симуляція розподілу <span class="math inline">\(T(X)\)</span> та <span class="math inline">\(Z(X)\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Ми бачимо, що:</p>
+<ul>
+<li><span class="math inline">\(Z\)</span>-тест тут працює: <span class="math inline">\(\sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{\sigma^2}} \sim \mathcal{N}(0, 1)\)</span>.</li>
+<li>Але ось для <span class="math inline">\(T(X)\)</span> це не так! **Вони відрізняються! А значить <span class="math inline">\(T'\)</span>-критерій не підходить для початкової задачі!</li>
+</ul>
+<p>Для того щоб стало зрозуміло, чому так сталося, розглянемо <span class="math inline">\(T(X)\)</span> у деталях. При створенні критерію є два кроки:</p>
+<ol type="1">
+<li>Придумати статистику для критерію
+<ul>
+<li>Із цим ми успішно впоралися, придумавши <span class="math inline">\(T(X)\)</span>.</li>
+</ul></li>
+<li>Зрозуміти розподіл статистики.
+<ul>
+<li>І ось це найскладніший крок, який не дозволяє використовувати будь-яку придуману статистику. Потрібно також розуміти її розподіл.</li>
+<li>І з цим, як ми побачили, ми провалилися для <span class="math inline">\(T(X)\)</span>. Нормальний розподіл не підійшов.</li>
+</ul></li>
+</ol>
+<p>Але чому <span class="math inline">\(T(X) = \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}}\)</span> не розподілена нормально, хоча <span class="math inline">\(\sqrt{n}\dfrac{\overline X - \mu}{\sqrt{\sigma^2}} \overset{H_0}{\sim} \mathcal{N}(0, 1)\)</span>$? Чому при заміні <span class="math inline">\(\sigma^2\)</span> на <span class="math inline">\(S^2\)</span> усе зіпсувалося?</p>
+<p><strong>Справа в тому, що <span class="math inline">\(S^2\)</span> — це випадкова величина!</strong> Згадаймо, як ми виводили <span class="math inline">\(Z\)</span>-критерій:</p>
+<ol type="1">
+<li>Ми порахували, що <span class="math inline">\(\overline X \sim \mathcal{N}(\mu, \sigma^2)\)</span>. З ЦГТ або, у випадку вище, з властивостей нормального розподілу.</li>
+<li>Далі, все також із властивостей цього розподілу випливає, що якщо ми віднімемо константу або поділимо на константу, то нормальний розподіл не перетвориться на інший: тому <span class="math inline">\(\sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{\sigma^2}} \sim \mathcal{N}(0, 1)\)</span>.</li>
+</ol>
+<p><strong>Але ми нічого не знаємо про</strong> <span class="math inline">\(\dfrac{\overline{X}}{\sqrt{\eta}}\)</span>, де <span class="math inline">\(\overline{X} \sim \mathcal{N}, S^2 := \eta \sim P\)</span>, де <span class="math inline">\(P\)</span> невідомо. Ми не знаємо поки що жодних теорем, які б хоч якось доводили, що тут також залишиться нормальний розподіл.</p>
+<p>Давайте подивимося на розподіл <span class="math inline">\(\sqrt{S^2}\)</span> на все тому ж нормальному розподілі.</p>
+<div id="cell-fig-sample-variance" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> <span class="kw">lambda</span> sample: np.std(sample, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>S2_sample <span class="op">=</span> sample_statistics(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>S2,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>sns.distplot(S2_sample, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$\sqrt{S^2}$'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-sample-variance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sample-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-sample-variance-output-1.png" width="666" height="332" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sample-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.2: Розподіл <span class="math inline">\(\sqrt{S^2}\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Розподіл <span class="math inline">\(\sqrt{S^2}\)</span> несиметричний й незрозуміло як розподілений. Тому, коли ми якусь величину з нормального розподілу ділимо на несиметричний незрозумілий розподіл, ми й отримуємо, що наша статистика <span class="math inline">\(T\)</span> не з нормального розподілу.</p>
+<p>Тож давайте виведемо критерій, який допоможе розв’язати початкову задачу!</p>
+<section id="t-тест-стьюдента" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="t-тест-стьюдента"><span class="header-section-number">4.1</span> <span class="math inline">\(T\)</span>-тест Стьюдента</h2>
+<p>Для того щоб вивести <span class="math inline">\(T\)</span>-тест, нам потрібно зрозуміти, як розподіляється статистика <span class="math inline">\(T(X) = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}}\)</span>. Для того, щоб це дізнатися, нам знадобиться кілька фактів:</p>
+<ol type="1">
+<li>Нехай <span class="math inline">\(X_1 \ldots X_n \sim \mathcal{N}(\mu, \sigma^2)\)</span></li>
+<li>Нехай <span class="math inline">\(\xi_1 \ldots \xi_n \sim \mathcal{N}(0, 1)\)</span>. Тоді <span class="math inline">\(\eta=\xi_1^2 +\ ... +\xi_n^2 \sim \chi^2_n\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.
+<ul>
+<li><p>Тоді <span class="math inline">\(\underset{i=1}{\overset{n}{\sum}}\left(\xi_i - \overline \xi \right)^2 \sim \chi^2_{n-1}\)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p></li>
+<li><p><span class="math inline">\(S^2_X = \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}}(X_i - \overline X)^2\)</span></p></li>
+<li><p><span class="math inline">\(\xi_i := \dfrac{X_i - \mu}{\sigma} \sim \mathcal{N}(0, 1)\)</span>. Тоді <span class="math display">\[\begin{aligned}
+S^2_{\xi} &amp;= \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}}\left(\xi_i - \overline \xi \right)^2 =
+      \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}} \left(\dfrac{X_i-\mu}{\sigma} - \underset{i=1}{\overset{n}{\sum}}\left[\dfrac{X_i-\mu}{n\sigma}\right] \right)^2 = \\
+       &amp;= \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}} \left(\dfrac{X_i}{\sigma} - \dfrac{\mu}{\sigma} - \underset{i=1}{\overset{n}{\sum}}\left[\dfrac{X_i}{n\sigma}\right] + \dfrac{n\mu}{n\sigma} \right)^2 =\\
+       &amp;= \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}} \left(\dfrac{X_i}{\sigma} -\dfrac{\overline X_i}{\sigma} \right)^2 = \dfrac{1}{\sigma \cdot(n - 1)}\underset{i=1}{\overset{n}{\sum}} \left(X_i - \overline X_i \right)^2 = \dfrac{1}{\sigma}S^2_X
+\end{aligned}
+\]</span></p></li>
+<li><p>А значить <span class="math inline">\(\dfrac{(n - 1)\cdot S^2_X}{\sigma^2} = \underset{i=1}{\overset{n}{\sum}}\left(\xi_i - \overline \xi \right)^2 \sim \chi^2_{n-1}\)</span></p></li>
+</ul></li>
+<li>Нехай <span class="math inline">\(\xi \sim \mathcal{N}(0, 1), \eta \sim \chi^2_k\)</span> і <span class="math inline">\(\xi\)</span> з <span class="math inline">\(\eta\)</span> незалежні. Тоді статистика <span class="math inline">\(\zeta = \dfrac{\xi}{\sqrt{\eta/k}} \sim t_{k}\)</span> — з розподілу Стьюдента<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> з <span class="math inline">\(k\)</span> ступенями свободи.
+<ul>
+<li><span class="math inline">\(\xi := \sqrt{n}\dfrac{\overline X - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)\)</span></li>
+<li><span class="math inline">\(\eta := \dfrac{(n - 1)\cdot S^2_X}{\sigma^2} \sim \chi^2_{n-1}\)</span></li>
+<li><span class="math inline">\(\xi\)</span> и <span class="math inline">\(\eta\)</span> незалежні<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
+<li>Тоді <span class="math display">\[
+\begin{aligned}
+  T = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}} = \frac{\sqrt{n}\dfrac{\overline X - \mu_0}{\sigma}}{\sqrt{\dfrac{(n - 1)\cdot S^2_X}{(n - 1)\sigma^2}}} = \dfrac{\xi}{\sqrt{\dfrac{\eta}{n-1}}} \sim t_{n - 1}
+\end{aligned}
+\]</span></li>
+</ul></li>
+</ol>
+<p>У підсумку, статистика <span class="math inline">\(T = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}} \sim t_{n - 1}\)</span> — взята з розподілу Стьюдента з <span class="math inline">\(n - 1\)</span> ступенем свободи. <strong>Але тільки в разі, якщо початкова вибірка з нормального розподілу!</strong></p>
+<p>Тепер нам достатньо даних, щоб побудувати <span class="math inline">\(T\)</span>-тест:</p>
+<p><span id="eq-t-test"><span class="math display">\[
+H_0: \mu =\mu_0, \ X \sim \mathcal{N}\ проти\ H_1: \mu &gt; \mu_0
+\tag{4.2}\]</span></span></p>
+<p>Статистика <span class="math inline">\(T(X)\)</span> буде виглядати так:</p>
+<p><span id="eq-t-statistic"><span class="math display">\[
+T(X) = \sqrt{n}\dfrac{\overline X - \mu_0}{\sqrt{S^2}} \sim t_{n - 1}
+\tag{4.3}\]</span></span></p>
+<p>Тоді односторонній критерій набуває вигляду: <span id="eq-t-test-crit"><span class="math display">\[
+\left\{T(X) \geq t_{n-1, 1 - \alpha} \right\}
+\tag{4.4}\]</span></span></p>
+<p>А <span class="math inline">\(p\)</span>-значення для одностороннього критерію можна обчислити так:</p>
+<p><span id="eq-t-p-value"><span class="math display">\[
+p\text{-значення} = 1 - \tau_{n-1}(z),
+\tag{4.5}\]</span></span> де z — реалізація статистики <span class="math inline">\(T(X)\)</span>, <span class="math inline">\(\tau_{n-1}(z)\)</span> — функція розподілу <span class="math inline">\(t_{n - 1}\)</span></p>
+<p>Двосторонній критерій буде виглядати так: <span id="eq-t-test-crit2"><span class="math display">\[
+\left\{T(X) \geq t_{n-1, 1 - \frac{\alpha}{2}} \right\} \bigcup \left\{T(X) \leq -t_{n-1, 1 - \frac{\alpha}{2}} \right\}
+\tag{4.6}\]</span></span></p>
+<p>При цьому <span class="math inline">\(p\)</span>-значення для двостороннього критерію можна обчислити так:</p>
+<p><span id="eq-t-p-value2"><span class="math display">\[
+p\text{-значення} = 2\cdot \min \left[{\tau_{n-1}(z), 1 - \tau_{n-1}(z)} \right],
+\tag{4.7}\]</span></span> де <span class="math inline">\(z\)</span> — реалізація статистики <span class="math inline">\(T(X)\)</span>, <span class="math inline">\(\tau_{n-1}(z)\)</span> — функція розподілу <span class="math inline">\(t_{n - 1}\)</span>.</p>
+</section>
+<section id="t-тест-у-python" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="t-тест-у-python"><span class="header-section-number">4.2</span> <span class="math inline">\(T\)</span>-тест у Python</h2>
+<p>Давайте тепер протестуємо всі наші теоретичні дослідження на практиці. Для цього нам знадобляться наступні бібліотеки функції:</p>
+<ul>
+<li><code>scipy.stats.chii2</code> — для розподілу <span class="math inline">\(\chi^2\)</span>;</li>
+<li><code>scipy.stats.t</code> — для <span class="math inline">\(t\)</span> розподілу Стюдента;</li>
+<li><code>scipy.stats.ttest_1samp</code> — для <span class="math inline">\(T\)</span>-тесту.</li>
+</ul>
+<p>Подивимось на розподіл <span class="math inline">\(\chi^2\)</span> та розподіл <span class="math inline">\(\eta\)</span>.</p>
+<div id="cell-fig-chi2" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sample_distr <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">5</span>, scale<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> sample_distr.rvs(sample_size)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>eta_statistic <span class="op">=</span> <span class="kw">lambda</span> sample: np.var(sample, ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">*</span> (sample_size <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> sample_distr.var()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>eta_sample <span class="op">=</span> sample_statistics(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>eta_statistic,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>chi2_dist <span class="op">=</span> chi2(df<span class="op">=</span>sample_size<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>l_bound, r_bound <span class="op">=</span> np.quantile(eta_sample, [<span class="fl">0.001</span>, <span class="fl">0.999</span>])</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(l_bound, r_bound, <span class="dv">1000</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>sns.distplot(eta_sample, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, chi2_dist.pdf(x), label<span class="op">=</span><span class="st">'$\chi^2$'</span>, color<span class="op">=</span>red_pink)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$\eta$'</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-chi2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chi2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-chi2-output-1.png" width="672" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chi2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.3: Розподіл емпіричного <span class="math inline">\(\eta\)</span> та теоретичного <span class="math inline">\(\chi^2\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Ми бачимо, що емпіричний розподіл <span class="math inline">\(\eta\)</span> та теоретичний <span class="math inline">\(\chi^2\)</span> збігаються. Це означає, що ми можемо використовувати <span class="math inline">\(T\)</span>-тест для перевірки гіпотези.</p>
+<p>Тепер перевіримо, чи дійсно <span class="math inline">\(T(X)\)</span> описується розподілом Стьюдента. Для цього скористаємося функцією <code>sample_statistics</code> та побудуємо гістограму для <span class="math inline">\(T(X)\)</span>. Генерувати вибірку будемо з нормального розподілу <span class="math inline">\(\mathcal{N}(5, 3^2)\)</span>.</p>
+<div id="cell-fig-t-test-dist" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sample_distr <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">5</span>, scale<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> sample_distr.rvs(sample_size)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>T_X <span class="op">=</span> <span class="kw">lambda</span> sample: np.sqrt(sample_size) <span class="op">*</span> (np.mean(sample) <span class="op">-</span> sample_distr.mean()) <span class="op">/</span> np.std(sample, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>T_sample <span class="op">=</span> sample_statistics(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>T_X,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>T_dist <span class="op">=</span> t(df<span class="op">=</span>sample_size<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>l_bound, r_bound <span class="op">=</span> np.quantile(T_sample, [<span class="fl">0.001</span>, <span class="fl">0.999</span>])</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(l_bound, r_bound, <span class="dv">1000</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>sns.distplot(T_sample, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, T_dist.pdf(x), c<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'$t_{n-1}$'</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm(<span class="dv">0</span>, <span class="dv">1</span>).pdf(x), c<span class="op">=</span>slate, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$T(X)$'</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.xlim((l_bound, r_bound))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-t-test-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-t-test-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-t-test-dist-output-1.png" width="672" height="325" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t-test-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.4: Розподіл <span class="math inline">\(T(X)\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Розподіл Стьюдента практично ідеально описує дані, тоді як нормальний розподіл більш “центрований”.</p>
+<p>Тепер, як викликати вбудований <span class="math inline">\(T\)</span>-тест у Python? Для цього скористаємося функцією <code>scipy.stats.ttest_1samp</code>. Вона приймає на вхід:</p>
+<ul>
+<li><code>a</code> — вибірка;</li>
+<li><code>popmean</code> — середнє значення генеральної сукупності, яке ми хочемо перевірити;</li>
+<li><code>axis</code> — вздовж якої осі обчислювати тест. За замовчуванням <code>0</code>;</li>
+<li><code>nan_policy</code> — як обробляти NaN. Може приймати значення <code>propagate</code>, <code>raise</code>, <code>omit</code>. За замовчуванням <code>propagate</code>;</li>
+<li><code>alternative</code> — альтернативна гіпотеза. Може приймати значення <code>two-sided</code>, <code>less</code>, <code>greater</code>. За замовчуванням <code>two-sided</code>.</li>
+</ul>
+<div id="da7b986f" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ttest_result <span class="op">=</span> ttest_1samp(meeting_time, <span class="dv">70</span>, alternative<span class="op">=</span><span class="st">'less'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Статистика: </span><span class="sc">{</span>ttest_result<span class="sc">.</span>statistic<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-значення: </span><span class="sc">{</span>ttest_result<span class="sc">.</span>pvalue<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Статистика: -2.03
+p-значення: 0.04</code></pre>
+</div>
+</div>
+<p>Оскільки <span class="math inline">\(p\)</span>-значення менше 0.05, то ми відхиляємо нульову гіпотезу. Це означає, що середня тривалість нарад у новому форматі триває менше 70 хвилин. Відповідно до <span class="math inline">\(T\)</span>-тесту, ми можемо стверджувати, що новий формат нарад дійсно скорочує їх тривалість.</p>
+</section>
+<section id="довірчі-інтервали" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="довірчі-інтервали"><span class="header-section-number">4.3</span> Довірчі інтервали</h2>
+<p>Давайте тепер розглянемо, як можна оцінити параметри генеральної сукупності за допомогою <span class="math inline">\(T\)</span>-тесту. Розглянемо два виведення довірчого інтервалу.</p>
+<section id="перший-метод" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="перший-метод"><span class="header-section-number">4.3.1</span> Перший метод</h3>
+<blockquote class="blockquote">
+<p>Нехай є статистика <span class="math inline">\(Q\)</span> та критерій <span class="math inline">\(\psi(Q)\)</span> для перевірки гіпотези <span class="math inline">\(H_0: \theta = m\)</span> рівня значущості <span class="math inline">\(\alpha\)</span>.</p>
+<p>Тоді довірчий інтервал для <span class="math inline">\(\theta\)</span> рівня довіри <span class="math inline">\(1 - \alpha\)</span>: множина таких <span class="math inline">\(m\)</span>, що критерій <span class="math inline">\(\psi(Q)\)</span> не відкидає для них <span class="math inline">\(H_0\)</span>.</p>
+</blockquote>
+<p>Нехай <span class="math inline">\(\mu\)</span> — істинне середнє вибірки. Ми також знаємо, що за <span class="math inline">\(H_0: \sqrt{n}\dfrac{\overline X - m}{\sqrt{S^2}} \sim t_{n - 1}\)</span>.</p>
+<p>Нас цікавлять такі <span class="math inline">\(m\)</span>, що: <span class="math inline">\(\left\{-t_{n-1, 1 - \frac{\alpha}{2}} &lt; \sqrt{n}\dfrac{\overline X - m}{\sqrt{S^2}} &lt; t_{n-1, 1 - \frac{\alpha}{2}} \right\}\)</span>, у цьому разі критерій не відкинеться.</p>
+<p>Розпишемо, щоб у центрі залишилося тільки <span class="math inline">\(m\)</span>: <span class="math inline">\(\left\{\overline X - \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} &lt; m &lt; \overline X + \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}}\right\}\)</span>. А отже, наш довірчий інтервал:</p>
+<p><span id="eq-t-interval1"><span class="math display">\[
+CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} \right),
+\tag{4.8}\]</span></span> де <span class="math inline">\(S^2 = \dfrac{1}{n - 1}\underset{i=1}{\overset{n}{\sum}}(X_i - \overline X)^2\)</span></p>
+</section>
+<section id="другий-метод" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="другий-метод"><span class="header-section-number">4.3.2</span> Другий метод</h3>
+<blockquote class="blockquote">
+<p>Довірчим інтервалом для параметра <span class="math inline">\(\theta\)</span> рівня довіри <span class="math inline">\(1 - \alpha\)</span> є пара статистик <span class="math inline">\(L(X), R(X)\)</span>, таких, що <span class="math inline">\(P(L(X) &lt; \theta &lt; R(X)) = 1 - \alpha\)</span>.</p>
+</blockquote>
+<p>Це класичне визначення довірчого інтервалу. Тобто, ми повинні знайти такі <span class="math inline">\(L(X)\)</span> та <span class="math inline">\(R(X)\)</span>, що <span class="math inline">\(P(L(X) &lt; \mu &lt; R(X)) = 1 - \alpha\)</span>.</p>
+<p><span id="eq-t-interval2"><span class="math display">\[
+\begin{aligned}
+    &amp;T(X) = \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}} \sim t_{n - 1} \Rightarrow \\
+    &amp;P\left(-t_{n - 1, 1-\alpha/2} &lt; \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}} &lt; t_{n - 1, 1-\alpha/2} \right) = 1 - \alpha \Leftrightarrow \\
+    &amp;P\left(\overline X - \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}}  &lt; \mu &lt; \overline X + \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} \right) = 1 - \alpha
+\end{aligned}
+\tag{4.9}\]</span></span></p>
+<p>Тоді</p>
+<p><span id="eq-t-interval3"><span class="math display">\[
+CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqrt{n}} \right)
+\tag{4.10}\]</span></span></p>
+<p>Цей довірчий інтервал збігається з попереднім. Тобто, ми можемо використовувати обидва методи для побудови довірчого інтервалу.</p>
+</section>
+</section>
+<section id="довірчі-інтервали-у-python" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="довірчі-інтервали-у-python"><span class="header-section-number">4.4</span> Довірчі інтервали у Python</h2>
+<p>Давайте тепер побудуємо довірчий інтервал для середнього значення тривалості нарад у новому форматі. Для цього скористаємося функцією <code>scipy.stats.t.interval</code>. Вона приймає на вхід:</p>
+<ul>
+<li><code>confidence</code> — рівень значущості;</li>
+<li><code>df</code> — кількість ступенів свободи;</li>
+<li><code>loc</code> — середнє значення, за замовчуванням <code>0</code>;</li>
+<li><code>scale</code> — стандартна девіація, за замовчуванням <code>1</code>.</li>
+</ul>
+<p>Для побудови лівостороннього довірчого інтервалу візьмемо <code>confidence</code> на рівні 90%, оскільки ми хочемо перевірити, чи тривалість нарад у новому форматі <em>менша</em> 70 хвилин.</p>
+<div id="feda2c7a" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>confidence <span class="op">=</span> <span class="fl">0.90</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="bu">len</span>(meeting_time) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>loc <span class="op">=</span> np.mean(meeting_time)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.std(meeting_time, ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> np.sqrt(<span class="bu">len</span>(meeting_time))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>interval <span class="op">=</span> t.interval(confidence, df, loc, scale)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Довірчий інтервал: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(interval, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Довірчий інтервал: [47.61 69.53]</code></pre>
+</div>
+</div>
+</section>
+<section id="t-тест-та-вимога-нормальності" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="t-тест-та-вимога-нормальності"><span class="header-section-number">4.5</span> <span class="math inline">\(T\)</span>-тест та вимога нормальності</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Basu1955" class="csl-entry" role="listitem">
+Basu, D. 1955. <em>On Statistics Independent of a Complete Sufficient Statistic</em>. <em>Sankhya</em>. Vol. 15.
+</div>
+<div id="ref-Cochran1934" class="csl-entry" role="listitem">
+Cochran, William G. 1934. <em>The Distribution of Quadratic Forms in a Normal System, with Applications to the Analysis of Covariance</em>. <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>. Vol. 30. 3. Cambridge University Press. <a href="https://doi.org/10.1017/S0305004100016595">https://doi.org/10.1017/S0305004100016595</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Розподіл <span class="math inline">\(\chi^2\)</span> — це розподіл суми квадратів <span class="math inline">\(k\)</span> незалежних нормальних випадкових величин з нульовим математичним сподіванням. Тобто, якщо <span class="math inline">\(X_1, X_2, \ldots, X_k \sim \mathcal{N}(0, 1)\)</span>, то <span class="math inline">\(Y = X_1^2 + X_2^2 + \ldots + X_k^2 \sim \chi^2_k\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Доведення <span class="citation" data-cites="Cochran1934">Cochran (<a href="references.html#ref-Cochran1934" role="doc-biblioref">1934</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Розподіл Стьюдента — це розподіл, який виникає при нормальному розподілі з невідомою дисперсією. Якщо <span class="math inline">\(X_1, X_2, \ldots, X_n \sim \mathcal{N}(\mu, \sigma^2)\)</span>, то <span class="math inline">\(T = \dfrac{\overline{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}\)</span>, де <span class="math inline">\(\overline{X}\)</span> — вибіркове середнє, <span class="math inline">\(S\)</span> — вибіркова стандартна девіація.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Доведення <span class="citation" data-cites="Basu1955">Basu (<a href="references.html#ref-Basu1955" role="doc-biblioref">1955</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

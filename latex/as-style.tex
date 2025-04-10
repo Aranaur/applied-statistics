@@ -9,3 +9,6 @@
 % Redefine \texttt to apply custom styling
 \let\textttOrig\texttt
 \renewcommand{\texttt}[1]{\textttOrig{\colorbox{codebggray}{\textcolor{codefontcolor}{#1}}}}
+
+\usepackage{float}  % якщо хочеш керувати float-поведінкою
+\floatplacement{listing}{H}  % щоб код не “плавав” по сторінці

@@ -546,7 +546,7 @@ def z_test_pvalue(sample_mean, sample_size, population_mean, population_variance
     elif alternative == 'less': # <6>
         p_value = norm.cdf(z) # <7>
     else:
-        raise ValueError("alternative must be one of ['two-sided', 'greater', 'less']") # <8>
+        raise ValueError("Оберіть одну з альтернатив: ['two-sided', 'greater', 'less']") # <8>
     return p_value # <9>
 ```
 1. Обчислення статистики $Z$-критерію Фішера.
@@ -606,29 +606,32 @@ def cmp_pvalue_binom_and_norm(n, mu0, t, add_to_x=0):
     x_axis = np.linspace(0, n, 1000)
     dots_to_show = np.arange(0, n + 1, 1)
 
-    sum_mu = n * mu0 # <1>
-    sum_variance = n * mu0 * (1 - mu0) # <1>
-    sum_std = np.sqrt(sum_variance) # <1>
+    add_str = "" if add_to_x == 0 else f"{add_to_x}"  # <1>
 
-    binom_dist = binom(n=n, p=mu0) # <2>
-    norm_dist = norm(loc=sum_mu, scale=sum_std) # <2>
+    sum_mu = n * mu0 # <2>
+    sum_variance = n * mu0 * (1 - mu0) # <2>
+    sum_std = np.sqrt(sum_variance) # 2>
 
-    plt.hlines(1 - binom_dist.cdf(x_axis[:-1]), x_axis[:-1], x_axis[1:], color=turquoise, linestyle='-')
-    plt.vlines(x_axis[:-1], 1 - binom_dist.cdf(x_axis[:-1]), 1 - binom_dist.cdf(x_axis[1:]), color=turquoise, linestyle=':')
+    binom_dist = binom(n=n, p=mu0) # <3>
+    norm_dist = norm(loc=sum_mu, scale=sum_std) # <3>
+
+    plt.hlines(1 - binom_dist.cdf(x_axis[:-1]), x_axis[:-1], x_axis[1:], color=turquoise, linestyle='-',linewidth=1)
+    plt.vlines(x_axis[:-1], 1 - binom_dist.cdf(x_axis[:-1]), 1 - binom_dist.cdf(x_axis[1:]), color=turquoise, linestyle=':', linewidth=1)
     
-    plt.scatter(dots_to_show, 1 - binom_dist.cdf(dots_to_show-1), color=turquoise,
-                alpha=1, linewidths=0.5,
-                label=f'Binom pvalue = 1-binom.cdf(x-1)') # <3>
-    # pvalue через биномиальное распределение
-    plt.scatter(t, 1 - binom_dist.cdf(t - 1), color=turquoise, marker='o',
-                alpha=1, s=100, label=f'binom p-value({t})') # <4>
-    # аппроксимирующее нормальное распределение
-    add_str = "" if add_to_x == 0 else f"{add_to_x}"
-    plt.plot(x_axis, 1 - norm_dist.cdf(x_axis + add_to_x), color=red_pink, alpha=0.5,
-             label=f'Normal pvalue = 1-norm.cdf(x{add_str})') # <5>
-    # pvalue через нормальное распределение
-    plt.scatter(t, 1 - norm_dist.cdf(t + add_to_x), color=red_pink,
-                alpha=1, marker='o', s=100, label=f'norm p-value({t})') # <6>
+    plt.scatter(dots_to_show, 1 - binom_dist.cdf(dots_to_show-1), color=turquoise, # <4>
+                alpha=1, linewidths=0.5, s=25, # <4>
+                label=f'Binom pvalue = 1-binom.cdf(x-1)') # <4>
+
+    plt.scatter(t, 1 - norm_dist.cdf(t + add_to_x), color=red_pink,  # <5>
+                alpha=1, marker='o', s=50, label=f'norm p-value({t})') # <5>
+
+    plt.scatter(t, 1 - binom_dist.cdf(t - 1), color=turquoise, marker='o', # <6>
+                alpha=1, s=50, label=f'binom p-value({t})') # <6>
+
+    plt.plot(x_axis, 1 - norm_dist.cdf(x_axis + add_to_x), color=red_pink, alpha=0.5, # <7>
+             label=f'Normal pvalue = 1-norm.cdf(x{add_str})') # <7>
+
+    
 
     plt.legend()
     plt.xlabel('t')
@@ -642,12 +645,163 @@ t = 15
 cmp_pvalue_binom_and_norm(n, mu_0, t)
 ```
 
-1. Параметри нормального розподілу.
-2. Створення біноміального та нормального розподілів.
-3. $p$-значення біноміального розподілу.
-4. $p$-значення біноміального розподілу для конкретного $t$.
+1. Додатковий доданок до $x$-координати (про нього ми поговоримо пізніше).
+2. Параметри нормального розподілу.
+3. Створення біноміального та нормального розподілів.
+4. $p$-значення біноміального розподілу.
 5. $p$-значення нормального розподілу.
-6. $p$-значення нормального розподілу для конкретного $t$.
+6. $p$-значення біноміального розподілу у точці $t$.
+7. $p$-значення нормального розподілу у точці $t$.
+
 
 Порівняння $p$-значення біноміального і нормального розподілів.
 :::
+
+Якщо порівняти різницю між $p$-значеннями біноміального та нормального розподілів, то ми отримаємо, що $p$-значення біноміального розподілу завжди більше за $p$-значення нормального розподілу. При цьому із збільшенням вибірки ця різниця зменшується. Давайте подивимось на ці різниці для різних значень $t$.
+
+Для початку візьмемо $n = 20$ та $t = 10$ (@lst-continuity-correction-2).
+
+::: {#lst-continuity-correction-2}
+```{python}
+n = 20
+t = 10
+mu_0 = 0.5
+
+binom_pvalue = 1 - binom(n, mu_0).cdf(t - 1) # <1>
+norm_pvalue = 1 - norm(loc=n * mu_0, scale=np.sqrt(n * mu_0 * (1 - mu_0))).cdf(t) # <2>
+diff = binom_pvalue - norm_pvalue # <3>
+
+print(f"p-значення біноміального розподілу = {binom_pvalue:.4f}")
+print(f"p-значення нормального розподілу = {norm_pvalue:.4f}")
+print(f"Різниця між p-значеннями = {diff:.4f}")
+```
+
+1. $p$-значення біноміального розподілу.
+2. $p$-значення нормального розподілу.
+3. Різниця між $p$-значеннями.
+
+Порівняння $p$-значення біноміального та нормального розподілів при малому $n=20$ та $t=10$.
+:::
+
+Тепер візьмемо $n = 20$ та $t = 16$ (@lst-continuity-correction-3).
+
+::: {#lst-continuity-correction-3}
+```{python}
+n = 20
+t = 16
+mu_0 = 0.5
+
+binom_pvalue = 1 - binom(n, mu_0).cdf(t - 1)
+norm_pvalue = 1 - norm(loc=n * mu_0, scale=np.sqrt(n * mu_0 * (1 - mu_0))).cdf(t)
+diff = binom_pvalue - norm_pvalue
+
+print(f"p-значення біноміального розподілу = {binom_pvalue:.4f}")
+print(f"p-значення нормального розподілу = {norm_pvalue:.4f}")
+print(f"Різниця між p-значеннями = {diff:.4f}")
+```
+
+Порівняння $p$-значення біноміального та нормального розподілів при малому $n=20$ та $t=16$.
+:::
+
+І накінці візьмемо $n = 200$ та $t = 100$ (@lst-continuity-correction-4).
+
+::: {#lst-continuity-correction-4}
+```{python}
+n = 200
+t = 100
+mu_0 = 0.5
+
+binom_pvalue = 1 - binom(n, mu_0).cdf(t - 1)
+norm_pvalue = 1 - norm(loc=n * mu_0, scale=np.sqrt(n * mu_0 * (1 - mu_0))).cdf(t)
+diff = binom_pvalue - norm_pvalue
+
+print(f"p-значення біноміального розподілу = {binom_pvalue:.4f}")
+print(f"p-значення нормального розподілу = {norm_pvalue:.4f}")
+print(f"Різниця між p-значеннями = {diff:.4f}")
+```
+
+Порівняння $p$-значення біноміального та нормального розподілів при великому $n=200$ та $t=100$.
+:::
+
+Ми бачимо, що з ростом вибірки різниця між $p$-значеннями біноміального та нормального розподілів зменшується. Але як зробити так, щоб два $p$-значення збіглися? Для цього слід звернути увагу на точки перетину двох ліній: біноміального та нормального розподілів. Зауважимо, що вони перетинаються приблизно на середині відрізка: між $t-1$ та $t$. Тому спробуємо "змістити" графік нормального розподілу на $0.5$ праворуч.
+
+$$
+F_{\text{new}}(x) = F_{\text{old}}(x - 0.5)
+$$ {#eq-continuity-correction}
+
+Це означає, що ми повинні відняти $0.5$ від $x$-координати точки перетину. Тобто, ми можемо використовувати поправку на неперервність, яка дозволяє покращити точність апроксимації. Тоді $p$-значення для біноміального розподілу буде дорівнювати:
+
+$$
+p\text{-значення} = 1 - \Phi(t - 0.5)
+$$ {#eq-continuity-correction-p-value}
+де $\Phi(t - 0.5)$ --- функція розподілу стандартного нормального розподілу.
+
+Подивимось на графік з поправкою на неперервність (@lst-continuity-correction-5).
+
+::: {#lst-continuity-correction-5}
+```{python}
+cmp_pvalue_binom_and_norm(30, 0.5, 15, add_to_x=-0.5)
+```
+Порівняння $p$-значення біноміального та нормального розподілів з поправкою на неперервність.
+:::
+
+Ми бачимо, що $p$-значення біноміального та нормального розподілів тепер збігаються.
+
+Порівняємо $p$-значення біноміального та нормального розподілів з поправкою на неперервність (@lst-continuity-correction-6).
+
+::: {#lst-continuity-correction-6}
+```{python}
+n = 30
+t = 19
+mu_0 = 0.5
+
+binom_pvalue = 1 - binom(n, mu_0).cdf(t - 1) # <1>
+norm_pvalue = 1 - norm(loc=n * mu_0, scale=np.sqrt(n * mu_0 * (1 - mu_0))).cdf(t) # <2>
+norm_pvalue_correct = 1 - norm(loc=n * mu_0, scale=np.sqrt(n * mu_0 * (1 - mu_0))).cdf(t - 0.5) # <3>
+
+print(f"p-значення біноміального розподілу = {binom_pvalue:.4f}")
+print(f"p-значення нормального розподілу = {norm_pvalue:.4f}")
+print(f"p-значення нормального розподілу з поправкою на неперервність = {norm_pvalue_correct:.4f}")
+```
+
+1. $p$-значення біноміального розподілу.
+2. $p$-значення нормального розподілу.
+3. $p$-значення нормального розподілу з поправкою на неперервність.
+
+Порівняння $p$-значення біноміального та нормального розподілів з поправкою на неперервність при $n=30$ та $t=19$.
+:::
+
+Ми бачимо, що $p$-значення біноміального та нормального розподілів з поправкою на неперервність тепер збігаються.
+
+Додамо поправку на неперервність до нашої функції `z_test_pvalue` (@lst-z-test-2).
+
+::: {#lst-z-test-2}
+```{python}
+def z_test_pvalue(sample_mean, sample_size, population_mean, population_variance, alternative='two-sided', continuity_correction=False):
+    if continuity_correction: # <1>
+        sample_mean = (sample_mean * sample_size - 1/2) / sample_size # <1>
+    z = (sample_mean - population_mean) / (np.sqrt(population_variance) / np.sqrt(sample_size))
+    if alternative == 'two-sided':
+        p_value = 2 * min(norm.cdf(z), 1 - norm.cdf(z))
+    elif alternative == 'greater':
+        p_value = 1 - norm.cdf(z)
+    elif alternative == 'less':
+        p_value = norm.cdf(z)
+    else:
+        raise ValueError("Оберіть одну з альтернатив: ['two-sided', 'greater', 'less']")
+    return p_value
+
+n = 30
+t = 19
+mu0 = 0.5
+variance = mu0 * (1 - mu0)
+
+p_value = z_test_pvalue(t / n, n, mu0, variance, alternative='greater', continuity_correction=True) # <13>
+print(f"p-значення за Z-критерієм Фішера з поправкою на неперервність = {p_value:.4f}") # <14>
+```
+1. Перевірка наявності поправки на неперервність.
+
+Функція $Z$-критерію Фішера з поправкою на неперервність.
+:::
+
+Чудово, тепер ми можемо використовувати $Z$-критерій Фішера з поправкою на неперервність для перевірки гіпотез про математичне сподівання випадкової величини *з відомою дисперсією*. Але що робити, якщо дисперсія невідома? Для цього існує $t$-критерій Стьюдента, який ми розглянемо далі.

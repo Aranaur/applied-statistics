@@ -15,6 +15,7 @@ profile:
 
 book:
   title: "Прикладний статистичний аналіз"
+  subtitle: "Посібник для студентів"
   reader-mode: true
 
   page-footer:
@@ -27,11 +28,15 @@ book:
     - name: Ігор Мірошниченко
       orcid: 0000-0002-1307-7889
       email: ihor.miroshnychenko@knu.ua
-      affiliation: "Київський національний університет імені Тараса Шевченка"
+      affiliation: 
+        - name: "Київський національний університет імені Тараса Шевченка"
+          department: "Кафедра технологій управління"
     - name: Юлія Хлевна
       orcid: 0000-0002-1874-1961
       email: yuliia.khlevna@knu.ua
-      affiliation: "Київський національний університет імені Тараса Шевченка"
+      affiliation:
+        - name: "Київський національний університет імені Тараса Шевченка"
+          department: "Кафедра технологій управління"
   date: today
   date-format: iso
 
