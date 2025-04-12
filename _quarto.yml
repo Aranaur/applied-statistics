@@ -65,9 +65,9 @@ format:
   docx:
     reference-doc: word-template.docx
   pdf:
-   indent: true
-   first-line-indent:
-     size: 1.25cm
+  #  indent: true
+  #  first-line-indent:
+  #    size: 1.25cm
    sansfont: Calibri
    mainfont: Georgia
    monofont: Consolas

@@ -273,6 +273,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#t-тест" id="toc-t-тест" class="nav-link" data-scroll-target="#t-тест"><span class="header-section-number">4.6.1</span> <span class="math inline">\(t'\)</span>-тест</a></li>
   </ul></li>
+  <li><a href="#довірчий-інтервал" id="toc-довірчий-інтервал" class="nav-link" data-scroll-target="#довірчий-інтервал"><span class="header-section-number">4.7</span> Довірчий інтервал</a></li>
+  <li><a href="#вибір-критерію" id="toc-вибір-критерію" class="nav-link" data-scroll-target="#вибір-критерію"><span class="header-section-number">4.8</span> Вибір критерію</a></li>
+  <li><a href="#мінімальний-ефект" id="toc-мінімальний-ефект" class="nav-link" data-scroll-target="#мінімальний-ефект"><span class="header-section-number">4.9</span> Мінімальний ефект</a></li>
+  <li><a href="#двовибірковий-t-тест" id="toc-двовибірковий-t-тест" class="nav-link" data-scroll-target="#двовибірковий-t-тест"><span class="header-section-number">4.10</span> Двовибірковий <span class="math inline">\(t\)</span>-тест</a></li>
   </ul>
 </nav>
     </div>
@@ -321,7 +325,7 @@ window.Quarto = {
 <li><span class="math inline">\(X_1, X_2, ..., X_7\)</span> — значення середньої тривалості нарад у новому форматі;</li>
 <li>Будемо вважати, що <span class="math inline">\(X\)</span> з нормального розподілу, тобто <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
 </ul>
-<div id="87d7d70d" class="cell" data-execution_count="2">
+<div id="aefaf927" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Середнє значення: </span><span class="sc">{</span>np<span class="sc">.</span>mean(meeting_time)<span class="sc">:.2f}</span><span class="ss"> хвилин"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -357,7 +361,7 @@ H_0: \mu \leq \mu_0\ \; \text{проти} \; \ H_1: \mu &gt; \mu_0
 <p>Вона називається <strong>вибірковою дисперсією</strong>. Вибіркова дисперсія є <em>незміщеною</em> та <em>консистентною</em> оцінкою дисперсії генеральної сукупності.</p>
 <p>Вибіркова дисперсія є <strong>незміщеною</strong>, оскільки ми ділимо на <span class="math inline">\(n - 1\)</span>, а не на <span class="math inline">\(n\)</span>. Це робиться для того, щоб уникнути систематичної помилки в оцінці дисперсії. <strong>Консистентність</strong> пояснюється тим, що з ростом вибірки <span class="math inline">\(n\)</span> ми все ближче підходимо до істинної дисперсії генеральної сукупності.</p>
 <p>Для розрахунку вибіркової дисперсії в Python можна скористатися функцією <code>np.var</code> з параметром <code>ddof=1</code>, що означає, що ми ділимо на <span class="math inline">\(n - 1\)</span>.</p>
-<div id="2b9342c6" class="cell" data-execution_count="3">
+<div id="90c13761" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>meeting_time_var <span class="op">=</span> np.var(meeting_time, ddof<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Вибіркова дисперсія: </span><span class="sc">{</span>meeting_time_var<span class="sc">:.2f}</span><span class="ss"> хвилин"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -386,7 +390,7 @@ H_0: \mu \leq \mu_0\ \; \text{проти} \; \ H_1: \mu &gt; \mu_0
 <li><code>sample_size</code> — розмір вибірки;</li>
 <li><code>sample_distr</code> — розподіл, з якого ми генеруємо вибірку.</li>
 </ul>
-<div id="42c4dbb7" class="cell" data-execution_count="4">
+<div id="f39fbcf6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_statistics(number_of_experiments, statistic_function, sample_size, sample_distr):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    statistic_sample <span class="op">=</span> []</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(number_of_experiments):</span>
@@ -647,7 +651,7 @@ p\text{-значення} = 2\cdot \min \left[{\tau_{n-1}(z), 1 - \tau_{n-1}(z)}
 <li><code>nan_policy</code> — як обробляти NaN. Може приймати значення <code>propagate</code>, <code>raise</code>, <code>omit</code>. За замовчуванням <code>propagate</code>;</li>
 <li><code>alternative</code> — альтернативна гіпотеза. Може приймати значення <code>two-sided</code>, <code>less</code>, <code>greater</code>. За замовчуванням <code>two-sided</code>.</li>
 </ul>
-<div id="5cfc2469" class="cell" data-execution_count="9">
+<div id="ba6100e1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ttest_result <span class="op">=</span> ttest_1samp(meeting_time, <span class="dv">70</span>, alternative<span class="op">=</span><span class="st">'less'</span>)</span>
@@ -706,7 +710,7 @@ CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqr
 <li><code>scale</code> — стандартна девіація, за замовчуванням <code>1</code>.</li>
 </ul>
 <p>Для побудови лівостороннього довірчого інтервалу візьмемо <code>confidence</code> на рівні 90%, оскільки ми хочемо перевірити, чи тривалість нарад у новому форматі <em>менша</em> 70 хвилин.</p>
-<div id="04af87b5" class="cell" data-execution_count="10">
+<div id="9d56dead" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>confidence <span class="op">=</span> <span class="fl">0.90</span></span>
@@ -742,10 +746,10 @@ CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqr
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>p_positive <span class="op">=</span> <span class="fl">0.6</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>n_pos <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> p_positive)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>profits <span class="op">=</span> np.random.lognormal(mean<span class="op">=</span><span class="dv">2</span>, sigma<span class="op">=</span><span class="fl">0.8</span>, size<span class="op">=</span>n_pos)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>profits <span class="op">=</span> np.random.lognormal(mean<span class="op">=</span><span class="dv">2</span>, sigma<span class="op">=</span><span class="fl">0.8</span>, size<span class="op">=</span>n_pos) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>n_neg <span class="op">=</span> n <span class="op">-</span> n_pos</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>losses <span class="op">=</span> <span class="op">-</span>np.random.chisquare(df<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>n_neg)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>losses <span class="op">=</span> <span class="op">-</span>np.random.chisquare(df<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>n_neg) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>profits <span class="op">=</span> np.concatenate([profits, losses])</span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>np.random.shuffle(profits)</span>
@@ -760,7 +764,7 @@ CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqr
 <div id="fig-profit" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-profit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="t-test_files/figure-html/fig-profit-output-1.png" width="676" height="324" class="figure-img">
+<img src="t-test_files/figure-html/fig-profit-output-1.png" width="682" height="324" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-profit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;4.5: Візуалізація штучних до задачі.
@@ -770,10 +774,10 @@ CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqr
 </div>
 </div>
 <p>Порахуємо середній прибуток.</p>
-<div id="7de71b87" class="cell" data-execution_count="12">
+<div id="3394bd93" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Середній прибуток: </span><span class="sc">{</span>profits<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Середній прибуток: 5.47</code></pre>
+<pre><code>Середній прибуток: 547.45</code></pre>
 </div>
 </div>
 <p>На відміну від попереднього завдання тут 2 відмінності:</p>
@@ -841,6 +845,351 @@ p\text{-значення} = 1 - \Phi(z),
 <p><span id="eq-t-p-value3"><span class="math display">\[
 p\text{-значення} = 2\cdot \min \left[{\Phi(z), 1 - \Phi(z)} \right],
 \tag{4.16}\]</span></span> де <span class="math inline">\(z\)</span> — реалізація статистики <span class="math inline">\(t(X)\)</span>, <span class="math inline">\(\Phi(z)\)</span> — функція розподілу <span class="math inline">\(\mathcal{N}(0, 1)\)</span>.</p>
+<p>Перевіримо наш критерій на великій вибірці. Для цього згеренуємо вибірку з експоненційного розподілу <span class="math inline">\(\mathcal{E}(300)\)</span>, де <span class="math inline">\(X \sim \mathcal{E}(\lambda)\)</span>, <span class="math inline">\(\lambda = 1/\mu\)</span>. Вибірка буде згенерована з параметром <span class="math inline">\(\lambda = 1/300\)</span>. Тобто, середнє значення вибірки буде <span class="math inline">\(300\)</span>.</p>
+<div id="cell-fig-profit-test" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sample_size<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>sample_distr <span class="op">=</span> expon(loc<span class="op">=</span><span class="dv">5</span>, scale<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>T_X <span class="op">=</span> <span class="kw">lambda</span> sample: np.sqrt(sample_size) <span class="op">*</span> (np.mean(sample) <span class="op">-</span> sample_distr.mean()) <span class="op">/</span> np.std(sample, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>T_sample <span class="op">=</span> sample_statistics(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>T_X,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>l_bound, r_bound <span class="op">=</span> np.quantile(T_sample, [<span class="fl">0.001</span>, <span class="fl">0.999</span>])</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(l_bound, r_bound, <span class="dv">1000</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>sns.distplot(T_sample, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm(<span class="dv">0</span>, <span class="dv">1</span>).pdf(x), label<span class="op">=</span><span class="st">'Експоненціальний розподіл'</span>, color<span class="op">=</span>red_pink)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="ss">f'</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>plt.xlim((l_bound, r_bound))</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-profit-test" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-profit-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-profit-test-output-1.png" width="672" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-profit-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.6: Розподіл <span class="math inline">\(t'(X)\)</span> для великої вибірки.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Ми бачимо, що емпіричний розподіл <span class="math inline">\(t'(X)\)</span> та теоретичний <span class="math inline">\(\mathcal{N}(0, 1)\)</span> збігаються. Це означає, що ми можемо використовувати <span class="math inline">\(t'\)</span>-тест для перевірки гіпотези. Якщо ж перевірити на великих вибірках з нормального розподілу, то <span class="math inline">\(t\)</span>-тест та <span class="math inline">\(t'\)</span>-тест будуть давати доволі схожі результати.</p>
+<div id="cell-fig-t-test-dist2" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sample_size<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">30000</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sample_distr <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">5</span>, scale<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>T_X <span class="op">=</span> <span class="kw">lambda</span> sample: np.sqrt(sample_size) <span class="op">*</span> (np.mean(sample) <span class="op">-</span> sample_distr.mean()) <span class="op">/</span> np.std(sample, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>T_sample <span class="op">=</span> sample_statistics(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    number_of_experiments<span class="op">=</span>M, statistic_function<span class="op">=</span>T_X,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    sample_size<span class="op">=</span>sample_size, sample_distr<span class="op">=</span>sample_distr)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>l_bound, r_bound <span class="op">=</span> np.quantile(T_sample, [<span class="fl">0.001</span>, <span class="fl">0.999</span>])</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(l_bound, r_bound, <span class="dv">1000</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>sns.distplot(T_sample, label<span class="op">=</span><span class="st">'Емпіричний розподіл'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm(<span class="dv">0</span>, <span class="dv">1</span>).pdf(x), label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>, color<span class="op">=</span>red_pink)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="ss">f'</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.xlim((l_bound, r_bound))</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-t-test-dist2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-t-test-dist2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-t-test-dist2-output-1.png" width="672" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t-test-dist2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.7: Розподіл <span class="math inline">\(t(X)\)</span> для великої вибірки.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Виходить, що статистика <span class="math inline">\(t'(X)\)</span> при великій вибірці з нормального розподілу також буде з нормального розподілу.</p>
+</section>
+</section>
+<section id="довірчий-інтервал" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="довірчий-інтервал"><span class="header-section-number">4.7</span> Довірчий інтервал</h2>
+<p>Довірчий інтревал виводиться аналогічно до <span class="math inline">\(t\)</span>-тесту.</p>
+<p><span id="eq-t-interval4"><span class="math display">\[
+\begin{aligned}
+    &amp;t'(X) = \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}} \sim \mathcal{N}(0, 1) \Rightarrow \\
+    &amp;P\left(-z_{1 - \frac{\alpha}{2}} &lt; \sqrt{n}\dfrac{\overline X - \mu}{\sqrt{S^2}} &lt; z_{1 - \frac{\alpha}{2}} \right) = 1 - \alpha \Leftrightarrow \\
+    &amp;P\left(\overline X - \dfrac{z_{1 - \frac{\alpha}{2}} S^2}{\sqrt{n}}  &lt; \mu &lt; \overline X + \dfrac{z_{1 - \frac{\alpha}{2}} S^2}{\sqrt{n}} \right) = 1 - \alpha
+\end{aligned}
+\tag{4.17}\]</span></span></p>
+<p>Переглнемо на практиці, як це виглядає у Python.</p>
+<div id="6539bc44" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">300</span>).rvs(<span class="dv">2000</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ci <span class="op">=</span> norm.interval(confidence<span class="op">=</span><span class="fl">0.95</span>, loc<span class="op">=</span>np.mean(sample), scale<span class="op">=</span>sem(sample))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CI = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(ci, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CI = [293.89 319.75]</code></pre>
+</div>
+</div>
+<p>Тепер ми можемо повернутися до нашої задачі з прибутком.</p>
+<div id="75ebb747" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ci_profit <span class="op">=</span> norm.interval(confidence<span class="op">=</span><span class="fl">0.95</span>, loc<span class="op">=</span>np.mean(profits), scale<span class="op">=</span>sem(profits))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CI = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(ci_profit, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CI = [520.19 574.72]</code></pre>
+</div>
+</div>
+<p>Це означає, що ми можемо стверджувати, що прибуток від нових користувачів більший за 0 грн.</p>
+</section>
+<section id="вибір-критерію" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="вибір-критерію"><span class="header-section-number">4.8</span> Вибір критерію</h2>
+<p>Для початку визначимося, коли який критерій краще використовувати?</p>
+<ol type="1">
+<li>Якщо вибірка розміру 60, то вже <span class="math inline">\(t_{59} \approx \mathcal{N}(0, 1)\)</span>.
+<ul>
+<li>Подивимося на розподіли Стьюдента і нормального:</li>
+</ul></li>
+</ol>
+<div id="cell-fig-t-test-dist3" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="dv">59</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>t_dist <span class="op">=</span> t(df<span class="op">=</span>df)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>z_dist <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x, z_dist.pdf(x), label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>, color<span class="op">=</span>red_pink)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, t_dist.pdf(x), label<span class="op">=</span><span class="st">'$t_</span><span class="sc">{59}</span><span class="st">$'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-t-test-dist3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-t-test-dist3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-t-test-dist3-output-1.png" width="652" height="304" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t-test-dist3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.8: Розподіл <span class="math inline">\(t(X)\)</span> та <span class="math inline">\(N(0, 1)\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Ми бачимо, що ці два розподіли візуально повністю збігаються, тому неважливо, як порахувати: статистика <span class="math inline">\(t\sim \mathcal{N}(0, 1)\)</span> або <span class="math inline">\(t\sim t_n\)</span>.</li>
+<li>Але це не означає, що з <span class="math inline">\(N=60\)</span> <span class="math inline">\(t\)</span>-тест або <span class="math inline">\(t'\)</span>-тест працюють коректно! Якщо вибірка не з нормального розподілу, вони обидва можуть усе ще помилятися.</li>
+</ul>
+<ol start="2" type="1">
+<li>Якщо вибірка менше 60, то безпечніше використовувати <span class="math inline">\(t\)</span>-тест, ніж <span class="math inline">\(t'\)</span>-тест.
+<ul>
+<li><strong>У <span class="math inline">\(t\)</span>-тест FPR завжди буде меншим, ніж у <span class="math inline">\(t'\)</span>-тест</strong>.
+<ul>
+<li>На FPR впливає відсоток випадків <code>pvalue &lt; alpha</code>. У <span class="math inline">\(t\)</span>-тест <span class="math inline">\(p\)</span>-значення <span class="math inline">\(\geq\)</span> <span class="math inline">\(t'\)</span>-тест <span class="math inline">\(p\)</span>-значення.</li>
+<li><code>pvalue = t_distr.cdf(x)</code> або <code>pvalue = norm_dist.cdf(x)</code>. Тож чим важчий хвіст у розподілу, тим більше <span class="math inline">\(p\)</span>-значення.</li>
+</ul></li>
+</ul></li>
+</ol>
+<p>Подивимось на прикладі.</p>
+<div id="cell-fig-t-test-dist4" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_array <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> df <span class="kw">in</span> df_array:</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    t_dist <span class="op">=</span> t(df<span class="op">=</span>df)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, t_dist.cdf(x), label<span class="op">=</span><span class="ss">f't(df=</span><span class="sc">{</span>df<span class="sc">}</span><span class="ss">)'</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>z_dist <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, z_dist.cdf(x), c<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'$\mathcal</span><span class="sc">{N}</span><span class="st">(0, 1)$'</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X'</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-t-test-dist4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-t-test-dist4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-t-test-dist4-output-1.png" width="646" height="324" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t-test-dist4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.9: Куртки розподілів <span class="math inline">\(t\)</span> та <span class="math inline">\(N(0, 1)\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Як видно на графіку, що менший ступінь свободи, то вищою є лінія на графіку (за x &lt; 0), а отже <span class="math inline">\(P(X &lt; x)\)</span> буде більшим, ніж у нормальному розподілі. Тобто, <span class="math inline">\(t\)</span>-тест буде давати менше <span class="math inline">\(p\)</span>-значення, ніж <span class="math inline">\(t'\)</span>-тест. А отже, <span class="math inline">\(t\)</span>-тест буде відкидати нульову гіпотезу частіше, ніж <span class="math inline">\(t'\)</span>-тест.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Примітка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Розподіл Стьюдента з нескінченністю ступенів свободи — це нормальний розподіл: <span class="math inline">\(t_{\infty} = \mathcal{N}(0, 1)\)</span>. Тому <code>norm(0, 1).cdf(x) = t_distr(df=infinity).cdf(x) &lt; t_distr(df=N).cdf(x)</code>.</p>
+</div>
+</div>
+<p>Тому, якщо вибірка невелика, безпечніше використовувати <span class="math inline">\(t\)</span>-тест. Але все ще не факт, що ваш критерій буде валідний!</p>
+<p>Ми бачимо, що ми скрізь можемо використовувати <span class="math inline">\(t\)</span>-тест (а <span class="math inline">\(t'\)</span>-тест не завжди), і в разі маленьких вибірок він безпечніший. <strong>Тому <span class="math inline">\(t\)</span>-тест і став набагато популярнішим, ніж <span class="math inline">\(t'\)</span>-тест</strong>. Але <span class="math inline">\(t'\)</span>-тест на практиці може бути теж корисний:</p>
+<ul>
+<li>Не треба думати під час реалізації про ступені свободи.</li>
+<li>Написати такий критерій на SQL буде набагато простіше: ви можете використовувати табличні значення в коді, щоб зрозуміти, чи відкинувся критерій.</li>
+<li>Робити різні теоретичні обчислення простіше.</li>
+<li>У ньому складніше помилитися під час реалізації.</li>
+</ul>
+</section>
+<section id="мінімальний-ефект" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="мінімальний-ефект"><span class="header-section-number">4.9</span> Мінімальний ефект</h2>
+<p>Повернемося до завдання зі стартапом. Уявімо, що ми хочемо запустити наш стартап на новому ринку, наприклад у іншій країні. <strong>Питання: чи можемо ми зменшити розмір вибірки?</strong></p>
+<p>Що взагалі нам заважає взяти занадто маленьку вибірку? Наприклад, якщо ми перевіряємо наш стартап на 1-2 користувачів, то ми нічого не можемо сказати про наш істинний ефект, він може бути як більшим за 0, так і меншим. Буде занадто широкий довірчий інтервал (через велику дисперсію у вибірці), і нам потрібен величезний ефект, щоб його виявити.</p>
+<p>Ще, можливо, ми не можемо використовувати критерій на такій маленькій вибірці. А якщо вибірка складалася б із нескінченної кількості користувачів, то ми могли б абсолютно точно сказати справжній прибуток від користувача, навіть якщо він дорівнює 1 копійці. При цьому обидва випадки нас не влаштовують. У першому — ми не зможемо запустити стартап через занадто великий шум, а в другому — нам потрібна вічність, щоб перевірити нашу гіпотезу.</p>
+<p>І тут нам допоможе MDE (minimum detectable effect). Це таке істинне значення ефекту, що наш шанс його виявити дорівнює <span class="math inline">\(1-\beta\)</span> при використанні нашого критерію.</p>
+<p>Ми можемо подивитись, який ефект ми зможемо зафіксувати під меншої кількості користувачів, і від цього вирішити, чи підходить нам така вибірка, чи ні. Наприклад:</p>
+<ul>
+<li>Ми бачимо, що MDE 100 гривень. Тобто з ймовірністю <span class="math inline">\(1-\beta\)</span> (на практиці 80%) ми його виявимо, <strong>якщо такий ефект буде</strong>. І з імовірністю 80% стартап запуститься на новому ринку. Чудово, це нас влаштовує, ми перевіряємо гіпотезу на меншій вибірці.</li>
+<li>Ми бачимо, що MDE 10000 гривень. Це, навпаки, занадто багато: у нас 99% послуг коштують менше 1000 гривень. Ми не наберемо такого прибутку, стартап невиграшний, потрібно брати вибірку більшого розміру.</li>
+</ul>
+<p>Тому слід чітко визначити <strong>від чого залежить MDE</strong>. Це може бути:</p>
+<ul>
+<li><em>Помилка першого роду</em>, або <span class="math inline">\(\alpha\)</span>. Наприклад, за <span class="math inline">\(\alpha = 1\)</span> ми знайдемо ефект і за розміру вибірки, що дорівнює одиниці (ми просто завжди відкидатимемо <span class="math inline">\(H_0\)</span>). А за <span class="math inline">\(\alpha = 0\)</span> ми ніколи не зафіксуємо ефект.</li>
+<li><em>Потужність</em>, або <span class="math inline">\(1 - \beta\)</span>. Випливає із самого визначення.</li>
+<li>Від <em>шуму в даних</em>, або від <em>дисперсії</em>. Що більш шумні дані, як ми знаємо, то ширший довірчий інтервал. А отже, складніше точно передбачити межі для істинного ефекту, тому й MDE буде більшим.</li>
+<li>Від <em>розміру вибірки</em>. Нас цікавить не просто дисперсія в даних, а дисперсія середнього значення: вона за тією самою логікою має бути якомога меншою. А що таке дисперсія середнього? Це <span class="math inline">\(\dfrac{\sigma^2}{N}\)</span>, тому MDE також залежить від розміру вибірки.</li>
+</ul>
+<p>Тепер давайте виведемо формулу виходячи з того, що ми знаємо всі ці чотири параметри. Для початку визначимося з гіпотезою, що перевіряється:</p>
+<p><span id="eq-t-test-h0"><span class="math display">\[
+H_0: \mu_0 = 0\ проти. \ H_1: \mu_0 &gt; 0
+\tag{4.18}\]</span></span></p>
+<p>Позначимо оцінку дисперсії середнього значення:</p>
+<p><span id="eq-t-test-s2"><span class="math display">\[
+S^2_{\mu} := \frac{S^2}{N}
+\tag{4.19}\]</span></span></p>
+<p>А також стандартне відхилення середнього значення:</p>
+<p><span id="eq-t-test-s-mu"><span class="math display">\[
+S_{\mu} = \sqrt{\frac{S^2}{N}}
+\tag{4.20}\]</span></span></p>
+<p>Тепер ми знаємо, що</p>
+<p><span id="eq-t-test-x"><span class="math display">\[
+\overline X \sim \mathcal{N}(\mu, S^2_{\mu})
+\tag{4.21}\]</span></span></p>
+<p>Нам треба знайти <span class="math inline">\(\text{MDE}=m\)</span>, таке, що:</p>
+<ul>
+<li>якщо <span class="math inline">\(\overline X \sim \mathcal{N}(m, S^2_{\mu})\)</span>, то в <span class="math inline">\(1-\beta\)</span> відсотку випадків для нього відкинеться критерій. Перевіряємо потужність (ціанова площа на графіку).</li>
+<li>якщо <span class="math inline">\(\overline X \sim \mathcal{N}(0, S^2_{\mu})\)</span>, то критерій відкинеться для нього в <span class="math inline">\(\alpha\)</span> відсотків випадків. Перевіряємо FPR (рожева площа на графіку).</li>
+</ul>
+<div id="cell-fig-mde" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div id="fig-mde" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="t-test_files/figure-html/fig-mde-output-1.png" width="678" height="327" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.10: Графік MDE.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Нехай</p>
+<p><span id="eq-t-test-b"><span class="math display">\[
+B(X): P_{H_0}(\overline X &gt; B(X)) = \alpha,
+\tag{4.22}\]</span></span> де <span class="math inline">\(B(X)\)</span> — межа відхилення нульової гіпотези.</p>
+<p>Тоді</p>
+<p><span id="eq-t-test-p"><span class="math display">\[
+P_{H_1}(\overline X &gt; B(X)) = 1-\beta
+\tag{4.23}\]</span></span></p>
+<p>Або</p>
+<p><span id="eq-t-test-p-m"><span class="math display">\[
+P_{H_1}(\overline X - m &gt; B(X) - m) = 1-\beta
+\tag{4.24}\]</span></span></p>
+<p>Позначимо <span class="math inline">\(\xi := \overline X - m\)</span>. Тоді</p>
+<p><span id="eq-t-test-p-xi"><span class="math display">\[
+P_{H_0}(\xi &gt; B(X) - m) = 1-\beta,
+\tag{4.25}\]</span></span> де <span class="math inline">\(B(X) - m\)</span> — межа відхилення нульової гіпотези з урахуванням істинного ефекту.</p>
+<p>Треба розв’язати ці 2 рівняння й ми отримаємо вираз <span class="math inline">\(m\)</span> через усі чотири параметри.</p>
+<p>За <span class="math inline">\(H_0\)</span> наш критерій має такий вигляд:</p>
+<p><span id="eq-t-test-b-xi"><span class="math display">\[
+\left\{T(X) \geq z_{1 - \alpha} \right\} \Leftrightarrow  \left\{\sqrt{N}\dfrac{\overline X}{\sqrt{S^2}} \geq z_{1 - \alpha} \right\} \Leftrightarrow B(X) = z_{1 - \alpha}\sqrt{\frac{S^2}{N}} = z_{1 - \alpha}S_{\mu}
+\tag{4.26}\]</span></span></p>
+<p>Тоді</p>
+<p><span id="eq-t-test-p-xi2"><span class="math display">\[
+P_{H_0}(\xi &gt; z_{1 - \alpha}S_{\mu} - m) = 1-\beta
+\tag{4.27}\]</span></span></p>
+<p>Але працювати з розподілом <span class="math inline">\(\mathcal{N}(0, S^2_{\mu})\)</span> не дуже зручно, набагато простіше з <span class="math inline">\(\mathcal{N}(0, 1)\)</span>. Для цього переходу достатньо перейти від <span class="math inline">\(\xi \rightarrow \dfrac{\xi}{S_{\mu}}\)</span> за властивостями нормального розподілу.</p>
+<p>Позначимо <span class="math inline">\(\eta := \dfrac{\xi}{S_{\mu}}\)</span>. Тоді</p>
+<p><span id="eq-t-test-p-xi3"><span class="math display">\[
+\begin{aligned}
+    &amp;P_{H_0}(\xi &gt; z_{1 - \alpha}S_{\mu} - m) =\\
+    &amp;P_{H_0}(\dfrac{\xi}{S_{\mu}} &gt; \dfrac{z_{1 - \alpha}S_{\mu} - m}{S_{\mu}}) =\\
+    &amp; P_{\mathcal{N}(0, 1)}(\eta &gt; z_{1 - \alpha} - \dfrac{m}{S_{\mu}}) = 1-\beta
+\end{aligned}
+\tag{4.28}\]</span></span></p>
+<p>За умови <span class="math inline">\(\Phi(C) = P(\eta &lt; C)\)</span>, тоді</p>
+<p><span id="eq-t-test-p-xi4"><span class="math display">\[
+\begin{aligned}
+&amp;1 - \Phi \left(z_{1 - \alpha} - \dfrac{m}{S_{\mu}} \right) = 1-\beta \Leftrightarrow\\ &amp;z_{1 - \alpha} - \dfrac{m}{S_{\mu}} = z_{\beta},
+\end{aligned}
+\tag{4.29}\]</span></span> де <span class="math inline">\(z_{\beta} = \Phi^{-1}(\beta)\)</span> — квантиль <span class="math inline">\(\beta\)</span> нормального розподілу.</p>
+<p>Тепер згадаємо, що <span class="math inline">\(\eta \sim \mathcal{N}(0, 1)\)</span>, тоді</p>
+<p><span id="eq-t-test-m"><span class="math display">\[
+m = (z_{1 - \alpha} - z_{\beta}) \cdot S_{\mu} = (z_{1 - \alpha} + z_{1 - \beta}) \cdot \sqrt{\frac{S^2}{N}}
+\tag{4.30}\]</span></span></p>
+<p>Отже, ми отримали формулу для MDE:</p>
+<p><span id="eq-t-test-mde"><span class="math display">\[
+\text{MDE} = (z_{1 - \alpha} + z_{1 - \beta}) \cdot \sqrt{\frac{S^2}{N}}
+\tag{4.31}\]</span></span> де <span class="math inline">\(z_{1 - \alpha}\)</span> — квантиль <span class="math inline">\(\alpha\)</span> нормального розподілу, <span class="math inline">\(z_{1 - \beta}\)</span> — квантиль <span class="math inline">\(\beta\)</span> нормального розподілу, <span class="math inline">\(S^2\)</span> — оцінка дисперсії, <span class="math inline">\(N\)</span> — розмір вибірки.</p>
+<p>Повернемося до стартапу. Припустимо, що <span class="math inline">\(N = 1000\)</span>, <span class="math inline">\(\alpha=5\)</span>%, <span class="math inline">\(1-\beta=80\)</span>%, а як дізнатися <span class="math inline">\(S^2\)</span>?</p>
+<p>На практиці є 3 способи:</p>
+<ul>
+<li>Оцінити на історичних даних. У цьому випадку це не підходить, тому що раніше стартапу на новому ринку не було.</li>
+<li>Оцінити за схожими даними. Наприклад, у нашому випадку, оцінити дисперисію на початковому ринку.</li>
+<li>Якось теоретично оцінити. Найгірший спосіб, який працює, якщо перші два не допомагають.</li>
+</ul>
+<p>Подивимося тепер MDE у нашому завданні.</p>
+<div id="2cba1c13" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> np.var(profits)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> <span class="fl">0.8</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>MDE <span class="op">=</span> (norm().ppf(<span class="dv">1</span><span class="op">-</span>alpha) <span class="op">+</span> norm().ppf(<span class="dv">1</span> <span class="op">-</span> beta)) <span class="op">*</span> np.sqrt(S2<span class="op">/</span>N)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MDE при N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(MDE, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MDE при N = 1000: 77.33</code></pre>
+</div>
+</div>
+<p>А отже, ми можемо розраховувати на точність лише в 77.33 грн. Але дня нас це може бути занадто великий MDE: хочеться, щоб він був <span class="math inline">\(\leq\)</span> 50 грн, ми припускаємо, що це ймовірніший істинний ефект, виходячи з поперелднього досвіду.</p>
+<p>Давайте тепер розв’яжемо зворотну задачу: Ми знаємо <span class="math inline">\(MDE=50\)</span> грн., <span class="math inline">\(\alpha=5\)</span>%, <span class="math inline">\(1-\beta=80\)</span>%, <span class="math inline">\(S^2\)</span>, чому дорівнює <span class="math inline">\(N\)</span>? Виведемо його з формули MDE:</p>
+<p><span id="eq-t-test-n"><span class="math display">\[
+N = \left(\dfrac{z_{1 - \alpha} + z_{1 - \beta}}{\text{MDE}}\right)^2 S^2
+\tag{4.32}\]</span></span></p>
+<div id="235b3b6f" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> np.var(profits)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> <span class="fl">0.8</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>mde <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> ((norm().ppf(<span class="dv">1</span><span class="op">-</span>alpha) <span class="op">+</span> norm().ppf(<span class="dv">1</span> <span class="op">-</span> beta)) <span class="op">/</span> mde)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> S2</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">int</span>(N) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Мінімальний розмір вибірки: </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Мінімальний розмір вибірки: 2392</code></pre>
+</div>
+</div>
+<p>Тепер ми знаємо, що нам потрібно 2392 користувачів, щоб перевірити нашу гіпотезу з MDE 50 грн.</p>
+</section>
+<section id="двовибірковий-t-тест" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="двовибірковий-t-тест"><span class="header-section-number">4.10</span> Двовибірковий <span class="math inline">\(t\)</span>-тест</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -851,7 +1200,6 @@ Basu, D. 1955. <em>On Statistics Independent of a Complete Sufficient Statistic<
 Cochran, William G. 1934. <em>The Distribution of Quadratic Forms in a Normal System, with Applications to the Analysis of Covariance</em>. <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>. Vol. 30. 3. Cambridge University Press. <a href="https://doi.org/10.1017/S0305004100016595">https://doi.org/10.1017/S0305004100016595</a>.
 </div>
 </div>
-</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
