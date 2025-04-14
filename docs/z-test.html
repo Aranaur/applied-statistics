@@ -318,7 +318,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.1: Візуалізація нормального розподілу з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="fe230e2c" class="cell" data-execution_count="2">
+<div id="8f1de3f4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -371,7 +371,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 Лістинг&nbsp;3.2: Нормальний розподіл у Python.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="c532062b" class="cell" data-execution_count="4">
+<div id="c2e75205" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>std_norm <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>rnorm <span class="op">=</span> std_norm.rvs(size<span class="op">=</span><span class="dv">50</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
@@ -478,7 +478,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.3: Візуалізація нормального розподілу суми двох нормально розподілених випадкових величин.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="732af9a6" class="cell" data-execution_count="6">
+<div id="ba0d993c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>mean_one, mean_two <span class="op">=</span> <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>var_one, var_two <span class="op">=</span> <span class="dv">4</span>, <span class="dv">2</span></span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -558,7 +558,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.4: Візуалізація нормального розподілу множення нормально розподіленої випадкової величини на константу.
 </figcaption>
 <div aria-describedby="lst-normal-distribution-properties-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="d7cf0a5f" class="cell" data-execution_count="7">
+<div id="5022875f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>mean_one <span class="op">=</span> <span class="dv">0</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>var_one <span class="op">=</span> <span class="dv">1</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
@@ -670,7 +670,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.5: Візуалізація ЦГТ при великій вибірці з біноміального розподілу.
 </figcaption>
 <div aria-describedby="lst-visualization-central-limit-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="0c49ce0f" class="cell" data-execution_count="8">
+<div id="c8fb7913" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_CLT(sample_generator, expected_value, variance):</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="dv">5000</span></span>
@@ -761,7 +761,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.6: Візуалізація ЦГТ при малій вибірці з біноміального розподілу.
 </figcaption>
 <div aria-describedby="lst-visualization-central-limit-theorem-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="1bcb38ae" class="cell" data-execution_count="9">
+<div id="b69e2159" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.05</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">10</span></span>
@@ -789,7 +789,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 Лістинг&nbsp;3.7: Візуалізація ЦГТ при великій вибірці з експоненціального розподілу.
 </figcaption>
 <div aria-describedby="lst-visualization-central-limit-theorem-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="85495f3a" class="cell" data-execution_count="10">
+<div id="7a756e62" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">5</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">400</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>visualize_CLT(<span class="kw">lambda</span>: np.random.exponential(scale<span class="op">=</span><span class="dv">1</span><span class="op">/</span>p, size<span class="op">=</span>size),</span>
@@ -880,7 +880,7 @@ H_0: \mu =\mu_0 = 0.5\ \text{проти} \ H_1: \mu &gt; 0.5
 Лістинг&nbsp;3.8: Порівняння точного біноміального тесту та нормальної апроксимації при малій кількості спостережень.
 </figcaption>
 <div aria-describedby="lst-norm-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="1604d52f" class="cell" data-execution_count="11">
+<div id="99fe9446" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_pvalue_by_normal_approx(t, n, mu_0):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> n <span class="op">*</span> mu_0</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.sqrt(n <span class="op">*</span> mu_0 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> mu_0))</span>
@@ -949,7 +949,7 @@ p-значення за точним біноміальним тестом = 0.1
 Лістинг&nbsp;3.9: Порівняння точного біноміального тесту та нормальної апроксимації при великій кількості спостережень.
 </figcaption>
 <div aria-describedby="lst-norm-approx-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="5f581f98" class="cell" data-execution_count="12">
+<div id="79043965" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3000</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">1544</span></span>
@@ -1011,7 +1011,7 @@ P_{H_0}(Z(X) \geq z) = 1 - P_{H_0}(Z(X) &lt; z) = 1 - \Phi(z) = \alpha
 Лістинг&nbsp;3.10: Реалізація <span class="math inline">\(Z\)</span>-критерію Фішера в Python.
 </figcaption>
 <div aria-describedby="lst-z-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="0d4b6f43" class="cell" data-execution_count="13">
+<div id="07ea3423" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_test_pvalue(sample_mean, sample_size, population_mean, population_variance, alternative<span class="op">=</span><span class="st">'two-sided'</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> (sample_mean <span class="op">-</span> population_mean) <span class="op">/</span> (np.sqrt(population_variance) <span class="op">/</span> np.sqrt(sample_size))</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> alternative <span class="op">==</span> <span class="st">'two-sided'</span>:</span>
@@ -1074,7 +1074,7 @@ P_{H_0}(Z(X) \geq z) = 1 - P_{H_0}(Z(X) &lt; z) = 1 - \Phi(z) = \alpha
 Лістинг&nbsp;3.11: Порівняння <span class="math inline">\(p\)</span>-значення за <span class="math inline">\(Z\)</span>-критерієм Фішера, нормальною апроксимацією та точним біноміальним тестом.
 </figcaption>
 <div aria-describedby="lst-z-test-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="5e8f64fd" class="cell" data-execution_count="14">
+<div id="f7fdb71c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
@@ -1133,7 +1133,7 @@ p-значення за точним біноміальним тестом = 0.1
 Лістинг&nbsp;3.12: Порівняння <span class="math inline">\(p\)</span>-значення біноміального і нормального розподілів.
 </figcaption>
 <div aria-describedby="lst-continuity-correction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="b89dc5f0" class="cell" data-execution_count="15">
+<div id="d2e79bc4" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmp_pvalue_binom_and_norm(n, mu0, t, add_to_x<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-hidden="true" tabindex="-1"></a>    x_axis <span class="op">=</span> np.linspace(<span class="dv">0</span>, n, <span class="dv">1000</span>)</span>
 <span id="annotated-cell-15-3"><a href="#annotated-cell-15-3" aria-hidden="true" tabindex="-1"></a>    dots_to_show <span class="op">=</span> np.arange(<span class="dv">0</span>, n <span class="op">+</span> <span class="dv">1</span>, <span class="dv">1</span>)</span>
@@ -1226,7 +1226,7 @@ p-значення за точним біноміальним тестом = 0.1
 Лістинг&nbsp;3.13: Порівняння <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів при малому <span class="math inline">\(n=20\)</span> та <span class="math inline">\(t=10\)</span>.
 </figcaption>
 <div aria-describedby="lst-continuity-correction-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="b3d4fca1" class="cell" data-execution_count="16">
+<div id="dfcacdd1" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="annotated-cell-16-2"><a href="#annotated-cell-16-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">10</span></span>
 <span id="annotated-cell-16-3"><a href="#annotated-cell-16-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1270,7 +1270,7 @@ p-значення нормального розподілу = 0.5000
 Лістинг&nbsp;3.14: Порівняння <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів при малому <span class="math inline">\(n=20\)</span> та <span class="math inline">\(t=16\)</span>.
 </figcaption>
 <div aria-describedby="lst-continuity-correction-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="0a81154a" class="cell" data-execution_count="17">
+<div id="88aba64d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">16</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1298,7 +1298,7 @@ p-значення нормального розподілу = 0.0036
 Лістинг&nbsp;3.15: Порівняння <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів при великому <span class="math inline">\(n=200\)</span> та <span class="math inline">\(t=100\)</span>.
 </figcaption>
 <div aria-describedby="lst-continuity-correction-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="46d6c1a1" class="cell" data-execution_count="18">
+<div id="901c7c2c" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">200</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1334,7 +1334,7 @@ p\text{-значення} = 1 - \Phi(t - 0.5)
 Лістинг&nbsp;3.16: Порівняння <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів з поправкою на неперервність.
 </figcaption>
 <div aria-describedby="lst-continuity-correction-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="639717be" class="cell" data-execution_count="19">
+<div id="18f80663" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cmp_pvalue_binom_and_norm(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="dv">15</span>, add_to_x<span class="op">=-</span><span class="fl">0.5</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1355,7 +1355,7 @@ p\text{-значення} = 1 - \Phi(t - 0.5)
 Лістинг&nbsp;3.17: Порівняння <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів з поправкою на неперервність при <span class="math inline">\(n=30\)</span> та <span class="math inline">\(t=19\)</span>.
 </figcaption>
 <div aria-describedby="lst-continuity-correction-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="3576ed7b" class="cell" data-execution_count="20">
+<div id="341b09e1" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-23-1"><a href="#annotated-cell-23-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="annotated-cell-23-2"><a href="#annotated-cell-23-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
 <span id="annotated-cell-23-3"><a href="#annotated-cell-23-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1400,7 +1400,7 @@ p-значення нормального розподілу з поправко
 Лістинг&nbsp;3.18: Функція <span class="math inline">\(Z\)</span>-критерію Фішера з поправкою на неперервність.
 </figcaption>
 <div aria-describedby="lst-z-test-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="8ce501ed" class="cell" data-execution_count="21">
+<div id="79991162" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="annotated-cell-25"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-25-1"><a href="#annotated-cell-25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_test_pvalue(sample_mean, sample_size, population_mean, population_variance, alternative<span class="op">=</span><span class="st">'two-sided'</span>, continuity_correction<span class="op">=</span><span class="va">False</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-25-2" class="code-annotation-target"><a href="#annotated-cell-25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> continuity_correction:</span>
 <span id="annotated-cell-25-3"><a href="#annotated-cell-25-3" aria-hidden="true" tabindex="-1"></a>        sample_mean <span class="op">=</span> (sample_mean <span class="op">*</span> sample_size <span class="op">-</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">/</span> sample_size</span>

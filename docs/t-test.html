@@ -276,7 +276,11 @@ window.Quarto = {
   <li><a href="#довірчий-інтервал" id="toc-довірчий-інтервал" class="nav-link" data-scroll-target="#довірчий-інтервал"><span class="header-section-number">4.7</span> Довірчий інтервал</a></li>
   <li><a href="#вибір-критерію" id="toc-вибір-критерію" class="nav-link" data-scroll-target="#вибір-критерію"><span class="header-section-number">4.8</span> Вибір критерію</a></li>
   <li><a href="#мінімальний-ефект" id="toc-мінімальний-ефект" class="nav-link" data-scroll-target="#мінімальний-ефект"><span class="header-section-number">4.9</span> Мінімальний ефект</a></li>
-  <li><a href="#двовибірковий-t-тест" id="toc-двовибірковий-t-тест" class="nav-link" data-scroll-target="#двовибірковий-t-тест"><span class="header-section-number">4.10</span> Двовибірковий <span class="math inline">\(t\)</span>-тест</a></li>
+  <li><a href="#двовибірковий-t-тест" id="toc-двовибірковий-t-тест" class="nav-link" data-scroll-target="#двовибірковий-t-тест"><span class="header-section-number">4.10</span> Двовибірковий <span class="math inline">\(t\)</span>-тест</a>
+  <ul class="collapse">
+  <li><a href="#двовибірковий-t-тест-у-python" id="toc-двовибірковий-t-тест-у-python" class="nav-link" data-scroll-target="#двовибірковий-t-тест-у-python"><span class="header-section-number">4.10.1</span> Двовибірковий <span class="math inline">\(t\)</span>-тест у Python</a></li>
+  </ul></li>
+  <li><a href="#контрольні-питання" id="toc-контрольні-питання" class="nav-link" data-scroll-target="#контрольні-питання"><span class="header-section-number">4.11</span> Контрольні питання</a></li>
   </ul>
 </nav>
     </div>
@@ -325,7 +329,7 @@ window.Quarto = {
 <li><span class="math inline">\(X_1, X_2, ..., X_7\)</span> — значення середньої тривалості нарад у новому форматі;</li>
 <li>Будемо вважати, що <span class="math inline">\(X\)</span> з нормального розподілу, тобто <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
 </ul>
-<div id="aefaf927" class="cell" data-execution_count="2">
+<div id="a6a980cc" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Середнє значення: </span><span class="sc">{</span>np<span class="sc">.</span>mean(meeting_time)<span class="sc">:.2f}</span><span class="ss"> хвилин"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -361,7 +365,7 @@ H_0: \mu \leq \mu_0\ \; \text{проти} \; \ H_1: \mu &gt; \mu_0
 <p>Вона називається <strong>вибірковою дисперсією</strong>. Вибіркова дисперсія є <em>незміщеною</em> та <em>консистентною</em> оцінкою дисперсії генеральної сукупності.</p>
 <p>Вибіркова дисперсія є <strong>незміщеною</strong>, оскільки ми ділимо на <span class="math inline">\(n - 1\)</span>, а не на <span class="math inline">\(n\)</span>. Це робиться для того, щоб уникнути систематичної помилки в оцінці дисперсії. <strong>Консистентність</strong> пояснюється тим, що з ростом вибірки <span class="math inline">\(n\)</span> ми все ближче підходимо до істинної дисперсії генеральної сукупності.</p>
 <p>Для розрахунку вибіркової дисперсії в Python можна скористатися функцією <code>np.var</code> з параметром <code>ddof=1</code>, що означає, що ми ділимо на <span class="math inline">\(n - 1\)</span>.</p>
-<div id="90c13761" class="cell" data-execution_count="3">
+<div id="849c3679" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>meeting_time_var <span class="op">=</span> np.var(meeting_time, ddof<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Вибіркова дисперсія: </span><span class="sc">{</span>meeting_time_var<span class="sc">:.2f}</span><span class="ss"> хвилин"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -390,7 +394,7 @@ H_0: \mu \leq \mu_0\ \; \text{проти} \; \ H_1: \mu &gt; \mu_0
 <li><code>sample_size</code> — розмір вибірки;</li>
 <li><code>sample_distr</code> — розподіл, з якого ми генеруємо вибірку.</li>
 </ul>
-<div id="f39fbcf6" class="cell" data-execution_count="4">
+<div id="07c14400" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_statistics(number_of_experiments, statistic_function, sample_size, sample_distr):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    statistic_sample <span class="op">=</span> []</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(number_of_experiments):</span>
@@ -651,7 +655,7 @@ p\text{-значення} = 2\cdot \min \left[{\tau_{n-1}(z), 1 - \tau_{n-1}(z)}
 <li><code>nan_policy</code> — як обробляти NaN. Може приймати значення <code>propagate</code>, <code>raise</code>, <code>omit</code>. За замовчуванням <code>propagate</code>;</li>
 <li><code>alternative</code> — альтернативна гіпотеза. Може приймати значення <code>two-sided</code>, <code>less</code>, <code>greater</code>. За замовчуванням <code>two-sided</code>.</li>
 </ul>
-<div id="ba6100e1" class="cell" data-execution_count="9">
+<div id="b6ec31ca" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ttest_result <span class="op">=</span> ttest_1samp(meeting_time, <span class="dv">70</span>, alternative<span class="op">=</span><span class="st">'less'</span>)</span>
@@ -710,7 +714,7 @@ CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqr
 <li><code>scale</code> — стандартна девіація, за замовчуванням <code>1</code>.</li>
 </ul>
 <p>Для побудови лівостороннього довірчого інтервалу візьмемо <code>confidence</code> на рівні 90%, оскільки ми хочемо перевірити, чи тривалість нарад у новому форматі <em>менша</em> 70 хвилин.</p>
-<div id="9d56dead" class="cell" data-execution_count="10">
+<div id="2edc2689" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>meeting_time <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">70</span>, <span class="dv">45</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">80</span>])</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>confidence <span class="op">=</span> <span class="fl">0.90</span></span>
@@ -774,7 +778,7 @@ CI_{\mu} = \left(\overline X \pm \dfrac{t_{n - 1, 1 - \alpha/2} \sqrt{S^2}}{\sqr
 </div>
 </div>
 <p>Порахуємо середній прибуток.</p>
-<div id="3394bd93" class="cell" data-execution_count="12">
+<div id="d1fc9599" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Середній прибуток: </span><span class="sc">{</span>profits<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Середній прибуток: 547.45</code></pre>
@@ -930,7 +934,7 @@ p\text{-значення} = 2\cdot \min \left[{\Phi(z), 1 - \Phi(z)} \right],
 \end{aligned}
 \tag{4.17}\]</span></span></p>
 <p>Переглнемо на практиці, як це виглядає у Python.</p>
-<div id="6539bc44" class="cell" data-execution_count="15">
+<div id="1a691b12" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">300</span>).rvs(<span class="dv">2000</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ci <span class="op">=</span> norm.interval(confidence<span class="op">=</span><span class="fl">0.95</span>, loc<span class="op">=</span>np.mean(sample), scale<span class="op">=</span>sem(sample))</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CI = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(ci, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -939,7 +943,7 @@ p\text{-значення} = 2\cdot \min \left[{\Phi(z), 1 - \Phi(z)} \right],
 </div>
 </div>
 <p>Тепер ми можемо повернутися до нашої задачі з прибутком.</p>
-<div id="75ebb747" class="cell" data-execution_count="16">
+<div id="009b0c10" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ci_profit <span class="op">=</span> norm.interval(confidence<span class="op">=</span><span class="fl">0.95</span>, loc<span class="op">=</span>np.mean(profits), scale<span class="op">=</span>sem(profits))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CI = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(ci_profit, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1156,7 +1160,7 @@ m = (z_{1 - \alpha} - z_{\beta}) \cdot S_{\mu} = (z_{1 - \alpha} + z_{1 - \beta}
 <li>Якось теоретично оцінити. Найгірший спосіб, який працює, якщо перші два не допомагають.</li>
 </ul>
 <p>Подивимося тепер MDE у нашому завданні.</p>
-<div id="2cba1c13" class="cell" data-execution_count="20">
+<div id="5dd95b94" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> np.var(profits)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
@@ -1173,7 +1177,7 @@ m = (z_{1 - \alpha} - z_{\beta}) \cdot S_{\mu} = (z_{1 - \alpha} + z_{1 - \beta}
 <p><span id="eq-t-test-n"><span class="math display">\[
 N = \left(\dfrac{z_{1 - \alpha} + z_{1 - \beta}}{\text{MDE}}\right)^2 S^2
 \tag{4.32}\]</span></span></p>
-<div id="235b3b6f" class="cell" data-execution_count="21">
+<div id="f1f61a46" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> np.var(profits)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> <span class="fl">0.8</span></span>
@@ -1190,6 +1194,90 @@ N = \left(\dfrac{z_{1 - \alpha} + z_{1 - \beta}}{\text{MDE}}\right)^2 S^2
 </section>
 <section id="двовибірковий-t-тест" class="level2" data-number="4.10">
 <h2 data-number="4.10" class="anchored" data-anchor-id="двовибірковий-t-тест"><span class="header-section-number">4.10</span> Двовибірковий <span class="math inline">\(t\)</span>-тест</h2>
+<div id="exm-t-test2" class="theorem example">
+<p><span class="theorem-title"><strong>Приклад 4.3</strong></span> &nbsp;</p>
+<blockquote class="blockquote">
+<p>На нашому онлайн-сервісі з розміщення оголошень є платні послуги просування. Ми плануємо запровадити знижки на ці послуги, щоб залучити більше користувачів і збільшити дохід. Для перевірки ефективності було вирішено провести A/B тест: одній половині нових користувачів ми не надавали знижки, а другій половині — надавали знижки на просування. Потрібно визначити, чи призвело це до зростання доходу.</p>
+</blockquote>
+</div>
+<p>Для вирішення цього завдання ми не можемо використовувати одновибірковий <span class="math inline">\(t\)</span>-тест. Цього разу в нас дві вибірки <span class="math inline">\(A\)</span> — контроль, та <span class="math inline">\(B\)</span> — тест.</p>
+<p>Наша гіпотеза звучить так:</p>
+<p><span class="math display">\[
+H_0: E A = E B \; проти \; H_1: E A &lt; E B
+\]</span></p>
+<p>Далі в нас може бути кілька варіантів:</p>
+<ol type="1">
+<li><strong>Обидві вибірки нормальні</strong>.</li>
+</ol>
+<p>Тоді у випадку рівних дисперсій <span class="math inline">\(\sigma^2_A = \sigma^2_B\)</span>, спільна дисперсія <span class="math inline">\(S^2_{pooled}\)</span> обчислюється за формулою:</p>
+<p><span id="eq-t-test-full"><span class="math display">\[
+S^2_{pooled} = \dfrac{(N - 1)S^2_A + (M - 1)S^2_B}{N + M - 2},
+\tag{4.33}\]</span></span> де <span class="math inline">\(N\)</span>, <span class="math inline">\(M\)</span> — розмір контролю і тесту відповідно.</p>
+<p>А критерій має такий вигляд:</p>
+<p><span id="eq-t-test-full2"><span class="math display">\[
+t(A, B) = \dfrac{\overline A - \overline B}{S^2_{pooled}\sqrt{1/N + 1/M}} \overset{H_0}{\sim} t_{n + m - 2}
+\tag{4.34}\]</span></span> де <span class="math inline">\(n + m - 2\)</span> — ступені свободи.</p>
+<p>У випадку, якщо дисперсії не рівні <span class="math inline">\(\sigma^2_A \neq \sigma^2_B\)</span><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, то:</p>
+<p><span id="eq-t-test-full3"><span class="math display">\[
+t(A, B) = \dfrac{\overline A - \overline B}{\sqrt{S^2_{A}/N + S^2_{B}/M}} \overset{H_0}{\sim} t_{v}
+\tag{4.35}\]</span></span> де <span class="math inline">\(v\)</span> — ступені свободи, які обчислюються за формулою:</p>
+<p><span id="eq-t-test-full4"><span class="math display">\[
+v = \frac{\left(\frac{S^2_{A}}{N} + \frac{S^2_{B}}{M} \right)^2}{\left(\frac{(S^2_{A})^2}{N^2(N - 1)} + \frac{(S^2_{B})^2}{M^2(M-1)} \right)}
+\tag{4.36}\]</span></span></p>
+<ol start="2" type="1">
+<li><strong>Хоча б одна вибірка не нормальна</strong>.</li>
+</ol>
+<p>Тоді ми можемо використовувати нормальну апроксимація при великій вибірці:</p>
+<p><span id="eq-t-test-full5"><span class="math display">\[
+t(A, B) = \dfrac{\overline A - \overline B}{\sqrt{S^2_{A}/N + S^2_{B}/M}} \overset{H_0}{\sim} \mathcal{N}(0, 1)
+\tag{4.37}\]</span></span> де <span class="math inline">\(S^2_{A}\)</span>, <span class="math inline">\(S^2_{B}\)</span> — вибіркові дисперсії.</p>
+<section id="двовибірковий-t-тест-у-python" class="level3" data-number="4.10.1">
+<h3 data-number="4.10.1" class="anchored" data-anchor-id="двовибірковий-t-тест-у-python"><span class="header-section-number">4.10.1</span> Двовибірковий <span class="math inline">\(t\)</span>-тест у Python</h3>
+<p>Для реалізації двовибіркового <span class="math inline">\(t\)</span>-тесту в Python ми можемо використовувати <code>ttest_ind</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> з бібліотеки <code>scipy.stats</code>.</p>
+<p>Подивимось на приклад з двома вибірками, перша вибірка — з експоненційного розподілу, а друга — з нормального розподілу.</p>
+<div id="68c73ec1" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">1100</span>).rvs(<span class="dv">1000</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">980</span>, scale<span class="op">=</span><span class="dv">30</span>).rvs(<span class="dv">1000</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>t_results <span class="op">=</span> ttest_ind(X, Y, equal_var<span class="op">=</span><span class="va">False</span>, alternative<span class="op">=</span><span class="st">'greater'</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>ci_t_results <span class="op">=</span> t_results.confidence_interval(confidence_level<span class="op">=</span><span class="fl">0.95</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-статистика = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(t_results.statistic, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-значення = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(t_results.pvalue, <span class="dv">5</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Довірчий інтервал = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(ci_t_results, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>t-статистика = 3.62
+p-значення = 0.00015
+Довірчий інтервал = [68.38   inf]</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Попередження
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>При використанні <span class="math inline">\(t\)</span>-тесту, як одновибіркового, так і двовибіркового, важливо пам’ятати, що:</p>
+<ul>
+<li>Елементи вибірок мають бути незалежні.
+<ul>
+<li>Наприклад, ваша вибірка не може містити кілька замовлень одного користувача. Вони мають бути агреговані, інакше критерії будуть невалідні!</li>
+</ul></li>
+<li>У двовибірковому критерії <strong>вибірки тесту і контролю повинні бути незалежні!</strong>.
+<ul>
+<li>Інакше критерії так само будуть невалідними.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="контрольні-питання" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="контрольні-питання"><span class="header-section-number">4.11</span> Контрольні питання</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -1208,6 +1296,8 @@ Cochran, William G. 1934. <em>The Distribution of Quadratic Forms in a Normal Sy
 <li id="fn2"><p>Доведення <span class="citation" data-cites="Cochran1934">Cochran (<a href="references.html#ref-Cochran1934" role="doc-biblioref">1934</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Розподіл Стьюдента — це розподіл, який виникає при нормальному розподілі з невідомою дисперсією. Якщо <span class="math inline">\(X_1, X_2, \ldots, X_n \sim \mathcal{N}(\mu, \sigma^2)\)</span>, то <span class="math inline">\(t = \dfrac{\overline{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}\)</span>, де <span class="math inline">\(\overline{X}\)</span> — вибіркове середнє, <span class="math inline">\(S\)</span> — вибіркова стандартна девіація.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Доведення <span class="citation" data-cites="Basu1955">Basu (<a href="references.html#ref-Basu1955" role="doc-biblioref">1955</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Такий підхід називається <span class="math inline">\(t\)</span>-тестом Уелча.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Документація: <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.htm" class="uri">https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.htm</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
