@@ -1,4 +1,4 @@
-# Статистична потужність, ефект та довірчі інтервали 
+# Статистична потужність, ефект та довірчі інтервали {#sec-power-effect-ci}
 
 ```{python}
 #| include: false
@@ -7,9 +7,9 @@ with open("_common.py") as f:
     exec(f.read())
 ```
 
-## Статистична потужність
+## Статистична потужність {#sec-power}
 
-### Хибно негативні помилки
+### Хибно негативні помилки {#sec-false-negative}
 
 Раніше під час побудови критеріїв ми звертали увагу тільки на $\alpha$, рівень значущості критерію. Але цей параметр контролює лише хибнопозитивну помилку (False Positive), а саме ймовірність, що критерій прийме $H_1$ за умови вірності $H_0$.
 
@@ -19,7 +19,7 @@ with open("_common.py") as f:
 
 Наведемо приклад, коли помилки False Negative відбуваються не завжди, але критерії є все одно нечутливими.
 
-### Критерій пори року
+### Критерій пори року {#sec-season}
 
 Поставимо гіпотезу про те, що зараз на вулиці літо. Для перевірки можна було б, звісно, подивитися в календар, але ми зробимо інакше.
 
@@ -36,13 +36,13 @@ $$
 Порахуємо FPR та FNR для цього критерію. Ми знаємо, що влітку сніг іде дуже рідко (ймовірність помилки нижча за $0.1\%$), тож це точно критерій рівня значущості $0.001$, чого зазвичай достатньо для критеріїв.
 
 $$
-FPR(S) = P(\text{йде сніг}\ |\ \text{сьогодні літо}) < 0.001
+\text{FPR}(S) = P(\text{йде сніг}\ |\ \text{сьогодні літо}) < 0.001
 $$
 
 Але що з FNR? Розглянемо конкретний випадок: зараз вересень. Оскільки у вересні майже завжди немає снігу, можна сказати, що FNR більша за $90\%$, отже, цей критерій насправді мало дієвий.
 
 $$
-FNR(S) = P(\text{не йде сніг}\ |\ \text{зараз вересень}) > 0.9
+\text{FPR}(S) = P(\text{не йде сніг}\ |\ \text{зараз вересень}) > 0.9
 $$
 
 Сформулюємо інший критерій рівня значущості $\alpha$, причому в цьому разі рівень значущості можна вибрати довільним.
@@ -57,13 +57,13 @@ $$
 Виходить, цей критерій випадковий, і він не використовує взагалі жодної інформації про погоду. Однак вимогам до рівня значущості він задовольняє.
 
 $$
-FPR = P(\text{випав орел}\ |\ \text{сьогодні літо}) = P(\text{випав орел}) = \alpha
+\text{FPR} = P(\text{випав орел}\ |\ \text{сьогодні літо}) = P(\text{випав орел}) = \alpha
 $$
 
 Обчислимо FNR.
 
 $$
-FNR = P(\text{не випав орел}\ |\ \text{сьогодні не літо}) = P(\text{не випав орел}) = 1 - \alpha
+\text{FNR} = P(\text{не випав орел}\ |\ \text{сьогодні не літо}) = P(\text{не випав орел}) = 1 - \alpha
 $$
 
 За $\alpha = 0.001$, як у першому випадку, отримуємо ймовірність FNR $0.999 > 0.9$, тобто за однакового рівня значущості з першим критерієм, другий критерій частіше припускається хибно негативної помилки.
@@ -80,7 +80,7 @@ $$ {#eq-power}
 
 $$
 \text{Power}_S(\mu) = 1 - FNR(\mu)
-$$
+$$ {#eq-power-mu}
 
 **Перший критерій**
 
@@ -140,29 +140,35 @@ $$
 #| label: fig-binom-power
 #| fig-cap: Потужність критерію для $\mu = 0.6$
 
-binom_h0 = binom(n=30, p=0.5)
-binom_alternative = binom(n=30, p=0.6)
+binom_h0 = binom(n=30, p=0.5) # <1>
+binom_alternative = binom(n=30, p=0.6) # <2>
 
-x_grid = np.arange(1, 31)
-crit_reg = x_grid >= 20
+x_grid = np.arange(1, 31) # <3>
+crit_reg = x_grid >= 20 # <4>
 
-probs_h0 = binom_h0.pmf(x_grid)
-plt.bar(x_grid, probs_h0, color=turquoise, label='PMF, $Binom(0.5, 30)$')
+probs_h0 = binom_h0.pmf(x_grid) # <5>
+plt.bar(x_grid, probs_h0, color=turquoise, label='PMF, $Binom(0.5, 30)$') # <6>
 
-probs_alternative = binom_alternative.pmf(x_grid)
-plt.bar(x_grid, probs_alternative, color=slate, label='PMF, $Binom(0.6, 30)$')
-plt.bar(x_grid[crit_reg], probs_alternative[crit_reg], color=red_pink, label='Критична область')
+probs_alternative = binom_alternative.pmf(x_grid) # <7>
+plt.bar(x_grid, probs_alternative, color=slate, label='PMF, $Binom(0.6, 30)$') # <8>
+plt.bar(x_grid[crit_reg], probs_alternative[crit_reg], color=red_pink, label='Критична область') # <9>
 
-plt.legend(fontsize=8)
+plt.legend()
 plt.show()
 ```
+1. Розподіл нульової гіпотези
+2. Розподіл альтернативної гіпотези
+3. Вибираємо значення для осі $x$
+4. Критична область
+5. Обчислюємо ймовірності для нульової гіпотези
+6. Будуємо гістограму для нульової гіпотези
+7. Обчислюємо ймовірності для альтернативної гіпотези
+8. Будуємо гістограму для альтернативної гіпотези
+9. Будуємо гістограму для критичної області
 
 Як і раніше, нас цікавить імовірність отримати $20$ або більше успіхів. Але якщо раніше ми дивилися на неї для розподілу з $\mu=0.5$ й хотіли, щоб вона була меншою за $5\%$, то тепер ми дивимося за $\mu = 0.6$ та прагнемо зробити цю величину якомога більшою. Порівняно з обчисленням FPR формула не зміниться, змінюється тільки $\mu$
 
 ```{python}
-#| lst-label: lst-binom-power
-#| lst-cap: Обчислення потужності критерію
-
 critical_value = 20
 power = 1 - binom(n=30, p=0.6).cdf(critical_value - 1)
 fpr   = 1 - binom(n=30, p=0.5).cdf(critical_value - 1)
@@ -176,35 +182,33 @@ print(f"Потужність: {power:.1%}")
 Що ж можна зробити, щоб зробити потужність вищою? Щоб розібратися, реалізуємо функцію потужності в загальному вигляді.
 
 ```{python}
-#| lst-label: lst-binom-power-general
-#| lst-cap: Обчислення потужності критерію для загального випадку
+def get_stat_power(N, mu_h0, mu_alternative, alpha): # <1>
 
-def get_stat_power(N, mu_h0, mu_alternative, alpha):
-    '''Обчислює статистичну потужність критерію для біноміального розподілу
-    
-    Параметри:
-        N - кількість бернуллієвських експериментів (розмір вибірки)
-        mu_h0 - імовірність успіху в нульовій гіпотезі
-        mu_alternative - передбачувана ймовірність успіху в експерименті
-        alpha - рівень значущості критерію
-    '''
-    binom_h0 = binom(n=N, p=mu_h0)
-    binom_alternative = binom(n=N, p=mu_alternative)
-    critical_value = binom_h0.ppf(1 - alpha) + 1
-    return 1 - binom_alternative.cdf(critical_value - 1) 
+    binom_h0 = binom(n=N, p=mu_h0) # <2>
+    binom_alternative = binom(n=N, p=mu_alternative) # <3>
+    critical_value = binom_h0.ppf(1 - alpha) + 1 # <4>
+    return 1 - binom_alternative.cdf(critical_value - 1) # <5>
 
-get_stat_power(30, 0.5, 0.6, alpha=0.05)
+result = get_stat_power(30, 0.5, 0.6, alpha=0.05)
+print(f"Потужність: {result:.1%}")
 ```
+1. Функція потужності:
+    + `N` --- розмір вибірки
+    + `mu_h0` --- параметр нульової гіпотези
+    + `mu_alternative` --- параметр альтернативної гіпотези
+    + `alpha` --- рівень значущості
+2. Розподіл нульової гіпотези
+3. Розподіл альтернативної гіпотези
+4. Критичне значення
+5. Повертаємо потужність
 
 Коли в житті ми спостерігаємо якесь явище і бачимо його лише кілька разів, ми не впевнені в тому, що воно не випадкове. Якщо ж бачимо його досить часто, то вже складаємо закономірності. Так і в статистиці. Коли ми подивилися на 30 потенційних підписок, ми помічаємо, що частка доставок більше половини. Але ми все ще не впевнені. Щоб отримати більше впевненості, потрібно провести більше спостережень, тобто знайти більше пробних клієнтів.
 
 Подивимося, що буде, якщо ми проведемо експеримент на 300 клієнтах.
 
 ```{python}
-#| lst-label: lst-binom-power-general-300
-#| lst-cap: Обчислення потужності критерію для 300 клієнтів
-
-get_stat_power(300, 0.5, 0.6, alpha=0.05)
+result = get_stat_power(300, 0.5, 0.6, alpha=0.05)
+print(f"Потужність при N=300: {result:.1%}")
 ```
 
 Бачимо, що потужність уже дуже близька до $100\%$. Але провести 300 пробних занять набагато затратніше, ніж 30. І за ресурсами, і за часом. Тому зазвичай балансують між потужністю і тривалістю/витратами експерименту.
@@ -215,21 +219,26 @@ get_stat_power(300, 0.5, 0.6, alpha=0.05)
 #| label: fig-binom-power-n
 #| fig-cap: Залежність потужності від розміру вибірки для $\mu = 0.6$
 
-n_grid = np.arange(10, 600, 10)
-power = get_stat_power(n_grid, 0.5, 0.6, alpha=0.05)
+n_grid = np.arange(10, 600, 10) # <1>
+power = get_stat_power(n_grid, 0.5, 0.6, alpha=0.05) # <2>
+
+plt.plot(n_grid, power, color=turquoise) # <3>
+plt.axhline(0.8, ls='--', color=red_pink, label='Потужність = 80%') # <4>
+
+min_n = n_grid[power >= 0.8].min() # <5>
+plt.axvline(min_n, ls='--', color=slate, label=f'N = {min_n}') # <6>
 
 plt.xlabel('Кількість пробних занять')
 plt.ylabel('Потжність')
-
-plt.plot(n_grid, power, color=turquoise)
-plt.axhline(0.8, ls='--', color=red_pink, label='Потужність = 80%')
-
-min_n = n_grid[power >= 0.8].min()
-plt.axvline(min_n, ls='--', color=slate, label=f'N = {min_n}')
-
 plt.legend()
 plt.show()
 ```
+1. Вибираємо значення для осі $x$
+2. Обчислюємо потужність для різних розмірів вибірки
+3. Будуємо графік
+4. Додаємо горизонтальну лінію для потужності $80\%$
+5. Знаходимо мінімальну кількість пробних занять, щоб потужність була більшою за $80\%$
+6. Додаємо вертикальну лінію для мінімальної кількості пробних занять
 
 Бачимо, що для потужності в $80\%$ достатньо набрати 160 пробних занять.
 
@@ -239,21 +248,26 @@ plt.show()
 #| label: fig-binom-power-n-51
 #| fig-cap: Залежність потужності від розміру вибірки для $\mu = 0.51$
 
-n_grid = np.arange(10, 30000, 59)
-power = get_stat_power(n_grid, 0.5, 0.51, alpha=0.05)
+n_grid = np.arange(10, 30000, 59) # <1>
+power = get_stat_power(n_grid, 0.5, 0.51, alpha=0.05) # <2>
 
-plt.xlabel('Кількість пробних занять', fontsize=8)
-plt.ylabel('Потжність', fontsize=8)
+plt.plot(n_grid, power, color=turquoise) # <3>
+plt.axhline(0.8, ls='--', color=red_pink, label='Потужність = 80%') # <4>
 
-plt.plot(n_grid, power, color=turquoise)
-plt.axhline(0.8, ls='--', color=red_pink, label='Потужність = 80%')
+min_n = n_grid[power >= 0.8].min() # <5>
+plt.axvline(min_n, ls='--', color=slate, label=f'N = {min_n}') # <6>
 
-min_n = n_grid[power >= 0.8].min()
-plt.axvline(min_n, ls='--', color=slate, label=f'N = {min_n}')
-
+plt.xlabel('Кількість пробних занять')
+plt.ylabel('Потжність')
 plt.legend()
 plt.show()
 ```
+1. Вибираємо значення для осі $x$
+2. Обчислюємо потужність для різних розмірів вибірки
+3. Будуємо графік
+4. Додаємо горизонтальну лінію для потужності $80\%$
+5. Знаходимо мінімальну кількість пробних занять, щоб потужність була більшою за $80\%$
+6. Додаємо вертикальну лінію для мінімальної кількості пробних занять
 
 Бачимо, що потрібно понад 15 тисяч клієнтів, щоб детектувати такий ефект! Дуже складно знайти стільки пробних клієнтів. Але потрібно замислитися над питанням, а чи варто це робити? У нашому випадку, якщо ймовірність успіху $51\%$, то прибуток із замовлень буде невеликий, і вкладення інвесторів, звісно, окупатимуться, але дуже довго. Тому збільшення на $1%$ для нашого завдання не значуще *практично*, а отже, не потрібно намагатися набирати 15 тисяч людей, а можна зупинитися і на 160.
 
@@ -268,21 +282,26 @@ plt.show()
 #| label: fig-binom-power-mu
 #| fig-cap: Залежність потужності від параметра $\mu$
 
-mu_grid = np.linspace(0.5, 0.9, 100)
-power = get_stat_power(30, 0.5, mu_grid, alpha=0.05)
+mu_grid = np.linspace(0.5, 0.9, 100) # <1>
+power = get_stat_power(30, 0.5, mu_grid, alpha=0.05) # <2>
+
+plt.plot(mu_grid, power, color=turquoise) # <3>
+plt.axhline(0.8, ls='--', color=red_pink, label='Потужність = 80%') # <4>
+
+min_mu = mu_grid[power >= 0.8].min() # <5>
+plt.axvline(min_mu, ls='--', color=slate, label=f'$\mu = {min_mu:.2f}$') # <6>
 
 plt.xlabel('Ймовірність успіху')
 plt.ylabel('Потужність')
-
-plt.plot(mu_grid, power, color=turquoise)
-plt.axhline(0.8, ls='--', color=red_pink, label='Потужність = 80%')
-
-min_mu = mu_grid[power >= 0.8].min()
-plt.axvline(min_mu, ls='--', color=slate, label=f'$\mu = {min_mu:.2f}$')
-
 plt.legend()
 plt.show()
 ```
+1. Вибираємо значення для осі $x$
+2. Обчислюємо потужність для різних параметрів $\mu$
+3. Будуємо графік
+4. Додаємо горизонтальну лінію для потужності $80\%$
+5. Знаходимо мінімальну ймовірність успіху, щоб потужність була більшою за $80\%$
+6. Додаємо вертикальну лінію для мінімальної ймовірності успіху
 
 У нашому експерименті ми добре детектуємо ефект, тільки якщо ймовірність успіху в генеральній сукупності хоча б $72\%$.
 
@@ -297,17 +316,25 @@ plt.show()
 Найчастіше беруть $1 - \beta = 80\%$. Напишемо функцію, яка обчислюватиме MDE підбором.
 
 ```{python}
-#| lst-label: lst-binom-mde
-#| lst-cap: Обчислення MDE
+def binom_test_mde_one_sided(N, mu0, alpha=0.05, min_power=0.8): # <1>
 
-def binom_test_mde_one_sided(N, mu0, alpha=0.05, min_power=0.8):
-    delta_grid = np.linspace(0, 1 - mu0, 500) 
-    power = get_stat_power(N, mu0, mu0 + delta_grid, alpha=alpha)
-    fit_delta = delta_grid[power >= min_power]
-    return fit_delta[0]
+    delta_grid = np.linspace(0, 1 - mu0, 500) # <2>
+    power = get_stat_power(N, mu0, mu0 + delta_grid, alpha=alpha) # <3>
+    fit_delta = delta_grid[power >= min_power] # <4>
+    return fit_delta[0] # <5>
 
-binom_test_mde_one_sided(30, 0.5)
+result = binom_test_mde_one_sided(30, 0.5)
+print(f"MDE: {result:.1%}")
 ```
+1. Функція `binom_test_mde_one_sided`, яка обчислює MDE:
+    + `N` --- розмір вибірки
+    + `mu0` --- параметр нульової гіпотези
+    + `alpha` --- рівень значущості
+    + `min_power` --- мінімальна потужність
+2. Створюємо сітку для $\delta$
+3. Обчислюємо потужність для різних значень $\delta$
+4. Знаходимо значення $\delta$, для яких потужність більша за $80\%$
+5. Повертаємо перше значення $\delta$, для якого потужність більша за $80\%$
 
 Результат збігається з обчисленнями за графіком @fig-binom-power-mu. Тобто ми можемо детектувати ефект у $22$ процентних пункти.
 
@@ -326,33 +353,34 @@ binom_test_mde_one_sided(30, 0.5)
 З визначення випливає, що різні критерії можуть породжувати різні довірчі інтервали. У цій частині розглянемо, які інтервали породжуються двостороннім критерієм. Для цього з кроком $0.001$ переберемо значення $\mu \in [0, 1]$ і перевіримо гіпотези.
 
 ```{python}
-#| lst-label: lst-binom-ci
-#| lst-cap: Довірчі інтервали для біноміального розподілу
-
 def two_sided_criterion_nonsym(n, mu, alpha): # <1>
-    binom_h0 = binom(n=n, p=mu)
-    c2 = binom_h0.ppf(1 - alpha/2) + 1
-    c1 = binom_h0.ppf(alpha/2) - 1
-    return c1, c2
+
+    binom_h0 = binom(n=n, p=mu) # <2>
+    c2 = binom_h0.ppf(1 - alpha/2) + 1 # <3>
+    c1 = binom_h0.ppf(alpha/2) - 1 # <4>
+    return c1, c2 # <5>
 
 
-success_cnt = 19 # <2>
-mu_grid = np.arange(0, 1, 0.001) # <3>
-mu_no_rejection = [] # <4>
+success_cnt = 19 # <6>
+mu_grid = np.arange(0, 1, 0.001) # <7>
+mu_no_rejection = [] # <8>
 
-for mu_h0 in mu_grid: # <5>
+for mu_h0 in mu_grid: # <9>
     c1, c2 = two_sided_criterion_nonsym(30, mu_h0, alpha=0.05)
     if success_cnt > c1 and success_cnt < c2:
         mu_no_rejection.append(mu_h0)
 
 print(f'95% довірчий інтервал: [{min(mu_no_rejection)} - {max(mu_no_rejection)}]')
 ```
-
 1. Функція, що обчислює критичні значення для двостороннього критерію.
-2. Кількість успішних підписок.
-3. Сітка значень $\mu$.
-4. Список значень $\mu$, для яких гіпотеза не відкидається.
-5. Перебір значень $\mu$.
+2. Розподіл нульової гіпотези
+3. Права межа критичної області
+4. Ліва межа критичної області
+5. Повертаємо межі критичної області
+6. Кількість успіхів
+7. Сітка для $\mu$
+8. Список для значень $\mu$, для яких ${H}_0$ не відкидається
+9. Перебираємо значення $\mu$ та обчислюємо критичні значення
 
 Отримавши такий інтервал, ми відразу можемо зробити висновок, що гіпотеза ${H}_0: \mu = 0.5$ не відкидається, оскільки $0.5$ лежить у довірчому інтервалі. Але при цьому відразу зрозуміло, що $\mu \neq 0.4$ на рівні значущості $\alpha$.
 
@@ -363,29 +391,41 @@ print(f'95% довірчий інтервал: [{min(mu_no_rejection)} - {max(mu
 ```{python}
 #| label: fig-binom-ci
 #| fig-cap: Довірчі інтервали для біноміального розподілу
-#| lst-label: lst-binom-ci-plot
-#| lst-cap: Довірчі інтервали для біноміального розподілу
 
-mus_h0 = [0.2, 0.438, 0.439, 0.8, 0.81, 0.9]
+mus_h0 = [0.2, 0.438, 0.439, 0.8, 0.81, 0.9] # <1>
 
-fig, axes = plt.subplots(3, 2, figsize=(8, 10))
+fig, axes = plt.subplots(3, 2, figsize=(8, 10)) # <2>
 
-for mu_h0, ax in zip(mus_h0, axes.flatten()):
-    binom_h0 = binom(n=30, p=mu_h0)
-    probs = binom_h0.pmf(x_grid)
+for mu_h0, ax in zip(mus_h0, axes.flatten()): # <3>
+    binom_h0 = binom(n=30, p=mu_h0) # <4>
+    probs = binom_h0.pmf(x_grid) # <5>
 
-    ax.bar(x_grid, probs, color=turquoise, label=f'PMF, $Binom({mu_h0}, 30)$')
-    c1, c2 = two_sided_criterion_nonsym(30, mu_h0, alpha=0.05)
-    crit_reg = (x_grid <= c1) | (x_grid >= c2)
-    ax.bar(x_grid[crit_reg], probs[crit_reg], color=red_pink, label='Критична область')
+    ax.bar(x_grid, probs, color=turquoise, label=f'PMF, $Binom({mu_h0}, 30)$') # <6>
+    c1, c2 = two_sided_criterion_nonsym(30, mu_h0, alpha=0.05) # <7>
+    crit_reg = (x_grid <= c1) | (x_grid >= c2) # <8>
+    ax.bar(x_grid[crit_reg], probs[crit_reg], # <9>
+           color=red_pink, label='Критична область') # <9>
+    is_rejection = success_cnt <= c1 or success_cnt >= c2 # <10>
+    ax.axvline(success_cnt, ls='--', # <11>
+        label=f'Q = {success_cnt} ' + ('відхилено' if is_rejection else 'не відхилено'), # <11>
+        color='gray', alpha=0.4) # <11>
 
-    is_rejection = success_cnt <= c1 or success_cnt >= c2
-    ax.axvline(success_cnt, ls='--', label=f'Q = {success_cnt} ' + ('відхилено' if is_rejection else 'не видхилено'), color='gray', alpha=0.4)
-
-    rejection_prob = probs[crit_reg].sum()
-    ax.set_title(f'$\mu = {mu_h0}$', fontsize=8)
+    rejection_prob = probs[crit_reg].sum() # <12>
+    ax.set_title(f'$\mu = {mu_h0}$', fontsize=10) # <12>
     ax.legend()
 ```
+1. Сітка для $\mu$
+2. Створюємо сітку для графіків
+3. Перебираємо значення $\mu$ та осі
+4. Розподіл нульової гіпотези
+5. Обчислюємо ймовірності
+6. Будуємо гістограму
+7. Обчислюємо критичні значення
+8. Критична область
+9. Підсвічуємо критичну область
+10. Чи потрапляє $19$ у критичну область
+11. Вертикальна лінія для $19$ успіхів
+12. Ймовірність потрапляння в критичну область
 
 Видно, що зі зростанням $\mu_0$ гістограма зсувається вправо. І спочатку $19$ потрапляє в праву критичну область. Потім, починаючи з точки $0.439$, значення $19$ вже опиняється поза критичною областю, і тільки з $\mu_0 = 0.81$ починає потрапляти в ліву критичну область.
 
@@ -398,25 +438,31 @@ for mu_h0, ax in zip(mus_h0, axes.flatten()):
 Спробуємо скористатися одностороннім критерієм для побудови довірчого інтервалу.
 
 ```{python}
-#| lst-label: lst-binom-ci-one-sided
-#| lst-cap: Односторонні довірчі інтервали для біноміального розподілу
+def make_binom_criterion(n, mu=0.5, alpha=0.05): # <1>
 
-def make_binom_criterion(n, mu=0.5, alpha=0.05):
-    binom_h0 = binom(n=n, p=mu)
-    q = binom_h0.ppf(1 - alpha)
-    return q + 1
+    binom_h0 = binom(n=n, p=mu) # <2>
+    q = binom_h0.ppf(1 - alpha) # <3>
+    return q + 1 # <4>
 
-success_cnt = 19
-mu_grid = np.arange(0, 1.001, 0.001)
-mu_no_rejection = []
+success_cnt = 19 # <5>
+mu_grid = np.arange(0, 1.001, 0.001) # <6>
+mu_no_rejection = [] # <7>
 
-for mu_h0 in mu_grid:
-    crit_val = make_binom_criterion(n=30, mu=mu_h0, alpha=0.05)
-    if success_cnt < crit_val:
-        mu_no_rejection.append(mu_h0)
+for mu_h0 in mu_grid: # <8>
+    crit_val = make_binom_criterion(n=30, mu=mu_h0, alpha=0.05) # <8>
+    if success_cnt < crit_val: # <8>
+        mu_no_rejection.append(mu_h0) # <8>
 
 print(f'95% довірчий інтервал: [{min(mu_no_rejection)} - {max(mu_no_rejection)}]')
 ```
+1. Функція, що обчислює критичне значення для одностороннього критерію.
+2. Розподіл нульової гіпотези
+3. Критичне значення
+4. Повертаємо критичне значення
+5. Кількість успіхів
+6. Сітка для $\mu$
+7. Список для значень $\mu$, для яких ${H}_0$ не відкидається
+8. Перебираємо значення $\mu$ та обчислюємо критичне значення
 
 Коли ми використовували двосторонній інтервал, ми отримали ліву межу $0.439 < 0.467$. Виходить, що односторонній інтервал з точки зору лівої межі дає нам більше інформації. При цьому з точки зору правої межі ми втрачаємо інформацію зовсім. Вона дорівнює 1 просто тому, що ймовірність не може бути більшою.
 
@@ -425,9 +471,6 @@ print(f'95% довірчий інтервал: [{min(mu_no_rejection)} - {max(mu
 Припустимо, ми отримали не $19$ успіхів, а $22$. Побудуємо 2 види інтервалів.
 
 ```{python}
-#| lst-label: lst-binom-ci-22
-#| lst-cap: Двосторонній довірчий інтервал для $22$ успіхів
-
 success_cnt = 22
 mu_grid = np.arange(0, 1, 0.001)
 mu_no_rejection = []
@@ -437,13 +480,10 @@ for mu_h0 in mu_grid:
     if success_cnt > c1 and success_cnt < c2:
         mu_no_rejection.append(mu_h0)
 
-print(f'Двосторонній 95% довірчий інтервал: [{min(mu_no_rejection):.3f} - {max(mu_no_rejection):.3f}]')
+print(f'Двосторонній 95% ДІ: [{min(mu_no_rejection):.3f} - {max(mu_no_rejection):.3f}]')
 ```
 
 ```{python}
-#| lst-label: lst-binom-ci-22-one-sided
-#| lst-cap: Односторонній довірчий інтервал для $22$ успіхів
-
 success_cnt = 22
 mu_grid = np.arange(0, 1.001, 0.001)
 mu_no_rejection = []
@@ -453,7 +493,7 @@ for mu_h0 in mu_grid:
     if success_cnt < crit_val:
         mu_no_rejection.append(mu_h0)
 
-print(f'Односторонній 95% довірчий інтервал: [{min(mu_no_rejection):.3f} - {max(mu_no_rejection):.3f}]')
+print(f'Односторонній 95% ДІ: [{min(mu_no_rejection):.3f} - {max(mu_no_rejection):.3f}]')
 ```
 
 За обома довірчими інтервалами ми робимо висновок, що конверсія значимо відрізняється від $50\%$. Але односторонній інтервал дає кращу нижню оцінку на ймовірність успіху. Ми можемо зрозуміти, що наша конверсія більша за $57\%$. А інформація з двостороннього інтервалу про те, що ймовірність менша за $88\%$ не додає нам користі.
@@ -463,27 +503,39 @@ print(f'Односторонній 95% довірчий інтервал: [{min(
 ```{python}
 #| label: fig-binom-ci-22
 #| fig-cap: Односторонній довірчий інтервал для $22$ успіхів
-#| lst-label: lst-binom-ci-22-plot
-#| lst-cap: Односторонній довірчий інтервал для $22$ успіхів
 
 fig, axes = plt.subplots(3, 2, figsize=(8, 10))
 
-for mu_h0, ax in zip(mus_h0, axes.flatten()):
-    binom_h0 = binom(n=30, p=mu_h0)
-    probs = binom_h0.pmf(x_grid)
+for mu_h0, ax in zip(mus_h0, axes.flatten()): # <1>
+    binom_h0 = binom(n=30, p=mu_h0) # <2>
+    probs = binom_h0.pmf(x_grid) # <3>
 
-    ax.bar(x_grid, probs, color=turquoise, label=f'PMF, $Binom({mu_h0}, 30)$')
-    c = make_binom_criterion(30, mu_h0, alpha=0.05)
-    crit_reg = (x_grid >= c)
-    ax.bar(x_grid[crit_reg], probs[crit_reg], color=red_pink, label='Критична область')
+    ax.bar(x_grid, probs, color=turquoise, label=f'PMF, $Binom({mu_h0}, 30)$') # <4>
+    c = make_binom_criterion(30, mu_h0, alpha=0.05) # <5>
+    crit_reg = (x_grid >= c) # <6>
+    ax.bar(x_grid[crit_reg], probs[crit_reg], # <7>
+           color=red_pink, label='Критична область') # <7>
 
-    is_rejection = success_cnt >= c
-    ax.axvline(success_cnt, ls='--', label=f'Q = {success_cnt} ' + ('відхилено' if is_rejection else 'не відхилено'), color='gray', alpha=0.4)
+    is_rejection = success_cnt >= c # <8>
+    ax.axvline(success_cnt, ls='--', # <9>
+    label=f'Q = {success_cnt} ' + ('відхилено' if is_rejection else 'не відхилено'), # <9>
+    color='gray', alpha=0.4) # <9>
 
-    rejection_prob = probs[crit_reg].sum()
-    ax.set_title(f'$\mu = {mu_h0}$', fontsize=8)
+    rejection_prob = probs[crit_reg].sum() # <10>
+    ax.set_title(f'$\mu = {mu_h0}$', fontsize=8) # <11>
     ax.legend()
 ```
+1. Сітка для $\mu$
+2. Розподіл нульової гіпотези
+3. Обчислюємо ймовірності
+4. Будуємо гістограму
+5. Обчислюємо критичні значення
+6. Критична область
+7. Підсвічуємо критичну область
+8. Чи потрапляє $22$ у критичну область
+9. Вертикальна лінія для $22$ успіхів
+10. Ймовірність потрапляння в критичну область
+11. Заголовок для графіка
 
 Порівняно з @fig-binom-ci ми бачимо, що права критична область стала більшою через те, що там тепер знаходиться не $2.5\%$, а $5\%$ від усіх значень. При цьому лівої критичної області просто не існує, тому за великих $\mu$ не відбувається потрапляння $19$ до неї, а значить ми не відкидаємо гіпотезу.
 
@@ -492,9 +544,6 @@ for mu_h0, ax in zip(mus_h0, axes.flatten()):
 Перевіримо, що вийде за $\alpha = 0.1$.
 
 ```{python}
-#| lst-label: lst-binom-ci-22-2alpha
-#| lst-cap: Двосторонній довірчий інтервал для $22$ успіхів з $\alpha = 0.1$
-
 success_cnt = 19
 mu_grid = np.arange(0, 1, 0.001)
 mu_no_rejection = []
@@ -509,7 +558,7 @@ print(f'95% довірчий інтервал: [{min(mu_no_rejection):.3f} - {ma
 
 Бачимо, що отримали таку саму ліву межу, як і в односторонньому інтервалі.
 
-## Властивості довірчих інтервалів
+## Властивості довірчих інтервалів {#sec-ci-prop}
 
 Згадаймо визначення довірчого інтервалу.
 
@@ -519,7 +568,7 @@ print(f'95% довірчий інтервал: [{min(mu_no_rejection):.3f} - {ma
 
 Позначимо межі інтервалу за $\mathcal{L}(Q), \mathcal{R}(Q)$ --- статистики критерію, які відповідають лівій та правій межі інтервалу.
 
-### Ймовірність попадання в інтервал
+### Ймовірність попадання в інтервал {#sec-ci-prop-1}
 
 Яким би не було істинне значення $\mu = \mu_0$, ймовірність того, що воно перебуває між $\mathcal{L}(Q)$ та $\mathcal{R}(Q)$, не нижча, ніж $1 - \alpha$. Значення $1 - \alpha$ називається **рівнем довіри** довірчого інтервалу.
 
@@ -535,51 +584,70 @@ $$ {#eq-ci-1}
 * Обчислюємо статистику $q$.
 * Рахуємо довірчий інтервал для $\alpha = 0.05$.
 
-Перевіряємо, що частка випадків, коли параметр $\mu_0$ опинився всередині інтервалу, хоча б $95\%$
-
-::: {#lst-binom-ci-1}
+Перевіряємо, що частка випадків, коли параметр $\mu_0$ опинився всередині інтервалу, хоча б $95\%$.
 
 ```{python}
-import time
+import time # <1>
 
-start_time = time.time()
+start_time = time.time() # <2>
 
-def my_binomial_confint(n, alpha, q):
-    mu_grid = np.arange(0, 1.1, 0.1) # np.arange(0, 1.001, 0.001)
-    mu_no_rejection = []
+def my_binomial_confint(n, alpha, q): # <3>
+    mu_grid = np.arange(0, 1.1, 0.1) # np.arange(0, 1.001, 0.001) # <4>
+    mu_no_rejection = [] # <5>
 
-    for mu_h0 in mu_grid:
-        c1, c2 = two_sided_criterion_nonsym(30, mu_h0, alpha=0.05)
-        if q > c1 and q < c2:
-            mu_no_rejection.append(mu_h0)
+    for mu_h0 in mu_grid: # <6>
+        c1, c2 = two_sided_criterion_nonsym(30, mu_h0, alpha=0.05) # <7>
+        if q > c1 and q < c2: # <8>
+            mu_no_rejection.append(mu_h0) # <9>
 
-    return min(mu_no_rejection), max(mu_no_rejection)
+    return min(mu_no_rejection), max(mu_no_rejection) # <10>
+```
+1. Імпортуємо бібліотеку для вимірювання часу
+2. Запускаємо таймер
+3. Функція, що обчислює довірчий інтервал
+4. Сітка для $\mu$
+5. Список для значень $\mu$, для яких ${H}_0$ не відкидається
+6. Перебираємо значення $\mu$ та осі
+7. Обчислюємо критичні значення
+8. Чи потрапляє $q$ у критичну область
+9. Додаємо значення $\mu$, для яких ${H}_0$ не відкидається
+10. Повертаємо межі довірчого інтервалу
 
-N_EXPERIMENTS = 1000
-SAMPLE_SIZE = 30
-latent_mu = 0.5
-binom_true = binom(n=SAMPLE_SIZE, p=latent_mu)
+Тепер запустимо експеримент. Для цього зафіксуємо $\mu_0 = 0.5$ й проведемо $1000$ експериментів. У кожному з них будемо генерувати $30$ успіхів, а потім перевіряти, чи потрапила $\mu_0$ у довірчий інтервал.
 
-confint_fail_cases = 0
+```{python}
+N_EXPERIMENTS = 1000 # <1>
+SAMPLE_SIZE = 30 # <2>
+latent_mu = 0.5 # <3>
+binom_true = binom(n=SAMPLE_SIZE, p=latent_mu) # <4>
 
-for i in range(N_EXPERIMENTS):
-    q = binom_true.rvs()
-    L, R = my_binomial_confint(n=SAMPLE_SIZE, alpha=0.05, q=q)
-    if L < latent_mu < R:
-        pass
-    else:
-        confint_fail_cases += 1
+confint_fail_cases = 0 # <5>
 
-success_cases = round(100 * (N_EXPERIMENTS - confint_fail_cases) / N_EXPERIMENTS, 2)
+for i in range(N_EXPERIMENTS): # <6>
+    q = binom_true.rvs() # <7>
+    L, R = my_binomial_confint(n=SAMPLE_SIZE, alpha=0.05, q=q) # <8>
+    if L < latent_mu < R: # <9>
+        pass # <9>
+    else: # <9>
+        confint_fail_cases += 1 # <9>
 
-print(f"Відсоток успішних випадків: {success_cases}%")
+success_cases = 100 * (N_EXPERIMENTS - confint_fail_cases) / N_EXPERIMENTS # <10>
+end_time = time.time() # <11>
 
-end_time = time.time()
+print(f"Відсоток успішних випадків: {success_cases:.2f}%")
 print(f"Час виконання: {end_time - start_time:.4f} секунди")
 ```
-
-Перевірка властивості довірчого інтервалу.
-:::
+1. Кількість експериментів
+2. Розмір вибірки
+3. Істинне значення ймовірності успіху
+4. Розподіл нульової гіпотези
+5. Лічильник невдалих випадків
+6. Перебираємо експерименти
+7. Генеруємо вибірку
+8. Обчислюємо довірчий інтервал
+9. Перевіряємо, чи потрапила $\mu_0$ у довірчий інтервал
+10. Обчислюємо частку успішних випадків
+11. Вимірюємо час виконання
 
 Зазначимо, що цей код працював понад 5 хвилин. Це через те, що під час кожного експерименту потрібно побудувати довірчий інтервал, а значить перевірити 1000 можливих параметрів $\mu_0$.
 
@@ -594,17 +662,16 @@ print(f"Час виконання: {end_time - start_time:.4f} секунди")
 ```{python}
 #| label: fig-binom-ci-1
 #| fig-cap: Розподіл статистики при істинній ймовірності успіху
-#| lst-label: lst-binom-ci-1-plot
-#| lst-cap: Розподіл статистики при істинній ймовірності успіху
 
-mu0 = 0.5
-binom_mu0 = binom(n=30, p=mu0)
-probs = binom_mu0.pmf(x_grid)
+mu0 = 0.5 # <1>
+binom_mu0 = binom(n=30, p=mu0) # <2>
+probs = binom_mu0.pmf(x_grid) # <3>
 
-plt.bar(x_grid, probs, color=turquoise, label=f'PMF, $Binom({mu0}, 30)$')
-c1, c2 = two_sided_criterion_nonsym(30, mu0, alpha=0.05)
-crit_reg = (x_grid >= c2) | (x_grid <= c1)
-plt.bar(x_grid[crit_reg], probs[crit_reg], color=red_pink, label='Критична область')
+plt.bar(x_grid, probs, color=turquoise, label=f'PMF, $Binom({mu0}, 30)$') # <4>
+c1, c2 = two_sided_criterion_nonsym(30, mu0, alpha=0.05) # <5>
+crit_reg = (x_grid >= c2) | (x_grid <= c1) # <6>
+plt.bar(x_grid[crit_reg], probs[crit_reg], # <7>
+        color=red_pink, label='Критична область') # <7>
 plt.legend()
 plt.show()
 ```
@@ -621,16 +688,13 @@ $$ {#eq-ci-2}
 
 де $L(\xi)$ і $R(\xi)$ --- статистики, що залежать від вибірки. Знову звертаємо увагу, що випадковість тут прихована не в параметрі $\mu_0$, а в статистиках від вибірки.
 
-### Довірчий інтервал Вілсона
+### Довірчий інтервал Вілсона {#sec-ci-prop-2}
 
 Розглянутий зараз алгоритм побудови довірчого інтервалу працює занадто довго. У Python є функції, які дозволяють швидше розрахувати інтервал. Наприклад, можна скористатися методом Вілсона і функцією `proportion_confint`.
 
 Повторимо експерименти з новим типом довірчого інтервалу, тут можемо дозволити більше реалізацій вибірки, оскільки інтервал рахується недовго.
 
 ```{python}
-#| lst-label: lst-binom-ci-2
-#| lst-cap: Довірчий інтервал Вілсона
-
 from statsmodels.stats.proportion import proportion_confint
 
 start_time = time.time()
@@ -655,9 +719,10 @@ for i in range(N_EXPERIMENTS):
     else:
         confint_fail_cases += 1
 
-success_cases = round(100 * (N_EXPERIMENTS - confint_fail_cases) / N_EXPERIMENTS, 2)
-print(f"Відсоток успішних випадків: {success_cases}%")
+success_cases = 100 * (N_EXPERIMENTS - confint_fail_cases) / N_EXPERIMENTS
 end_time = time.time()
+
+print(f"Відсоток успішних випадків: {success_cases:.2f}%")
 print(f"Час виконання: {end_time - start_time:.4f} секунди")
 ```
 
@@ -666,42 +731,88 @@ print(f"Час виконання: {end_time - start_time:.4f} секунди")
 Залежність частки успішних влучень $\mu$ у довірчий інтервал від розміру вибірки зобразимо на @fig-binom-ci-2.
 
 ```{python}
+n_grid = np.arange(1, 1000, 25).tolist() # <1>
+interval_success_rate = [] # <2>
+
+for n in n_grid: # <3>
+    confint_fail_cases = 0 # <4>
+    for i in range(N_EXPERIMENTS): # <5>
+        binom_true = binom(n=n, p=latent_mu) # <6>
+        q = binom_true.rvs() # <7>
+        L, R = proportion_confint( # <8>
+            count=q, # <8>
+            nobs=n, # <8>
+            alpha=0.05, # <8>
+            method='wilson' # <8>
+        ) # <8>
+        if L < latent_mu < R: # <9>
+            pass # <9>
+        else:  # <9>
+            confint_fail_cases += 1  # <9>
+    interval_success_rate.append(1 - confint_fail_cases / N_EXPERIMENTS) # <10>
+```
+1. Сітка для розміру вибірки
+2. Список для частки успішних влучень
+3. Перебираємо розміри вибірки
+4. Лічильник невдалих випадків
+5. Перебираємо експерименти
+6. Генеруємо вибірку
+7. Генеруємо $q$ з розподілу
+8. Обчислюємо довірчий інтервал
+9. Перевіряємо, чи потрапила $\mu_0$ у довірчий інтервал
+10. Обчислюємо частку успішних випадків
+
+Тепер побудуємо графік.
+
+```{python}
 #| label: fig-binom-ci-2
 #| fig-cap: Залежність частки успішних влучень $\mu$ у довірчий інтервал від розміру вибірки
-#| lst-label: lst-binom-ci-2-plot
-#| lst-cap: Залежність частки успішних влучень $\mu$ у довірчий інтервал від розміру вибірки
 
-n_grid = np.arange(1, 1000, 25).tolist()
-interval_success_rate = []
-
-for n in n_grid:
-    confint_fail_cases = 0
-    for i in range(N_EXPERIMENTS):
-        binom_true = binom(n=n, p=latent_mu)
-        q = binom_true.rvs()  
-        L, R = proportion_confint(
-            count=q,
-            nobs=n,
-            alpha=0.05,
-            method='wilson'
-        )
-        if L < latent_mu < R:
-            pass
-        else:
-            confint_fail_cases += 1
-    interval_success_rate.append(1 - confint_fail_cases / N_EXPERIMENTS)
+plt.plot(n_grid, interval_success_rate, # <1>
+         label='Частка успішних влучень', color=turquoise) # <1>
+plt.axhline(0.95, ls='--', # <2>
+            label='Желаемая успешность', color=red_pink) # <2>
 
 plt.xlabel('Розмір вибірки $n$')
 plt.ylabel('Частка успішних влучень')
-
-plt.plot(n_grid, interval_success_rate, label='Частка успішних влучень', color=turquoise)
-plt.axhline(0.95, ls='--', label='Желаемая успешность', color=red_pink)
-
 plt.legend()
 plt.show()
 ```
+1. Графік частки успішних влучень
+2. Лінія бажаної частки успішних влучень
 
 Видно, що на будь-якому розмірі вибірки під час використання інтервалу Вілсона можна отримати менше $95\%$ влучень, але що більший розмір вибірки, то менше графік відхиляється від $95\%$.
 
+## Питання для самоперевірки {#sec-questions-2}
 
+**Загальні поняття та Помилки**
 
+1.  Які два основні типи помилок можна зробити при перевірці статистичних гіпотез? Назвіть їх (FPR та FNR) та поясніть, що кожна з них означає.
+2.  Як рівень значущості ($\alpha$) пов'язаний з одним із типів помилок?
+3.  Поясніть на прикладі "критерію пори року", чому критерій з низьким рівнем значущості ($\alpha$) не обов'язково є хорошим чи корисним.
+
+**Статистична Потужність**
+
+4.  Що таке статистична потужність критерію? Як вона пов'язана з хибно негативною помилкою (FNR)?
+5.  Чому в статистиці часто фокусуються на максимізації потужності (або мінімізації FNR) при фіксованому рівні значущості $\alpha$?
+6.  Від яких основних факторів залежить потужність статистичного критерію? Як кожен з них (розмір вибірки, величина ефекту, рівень значущості) впливає на потужність?
+7.  Як змінюється потужність критерію для біноміального розподілу при збільшенні розміру вибірки (N)? Наведіть приклад з тексту.
+8.  Як змінюється потужність критерію для біноміального розподілу при збільшенні різниці між параметром нульової гіпотези ($\mu_0$) та параметром альтернативної гіпотези ($\mu_{alternative}$)? Наведіть приклад з тексту.
+9.  Яке значення потужності часто вважається прийнятним мінімальним рівнем у практичних дослідженнях?
+
+**Мінімальна Величина Ефекту (MDE)**
+
+10. Що таке Мінімальна величина ефекту, яку можна задетектувати (MDE)?
+11. Як MDE пов'язаний з потужністю, розміром вибірки та рівнем значущості?
+12. Чому важливо розраховувати MDE перед початком експерименту?
+13. Поясніть різницю між *статистичною* значущістю та *практичною* значущістю ефекту. Чому ця різниця важлива?
+
+**Довірчі Інтервали (ДІ)**
+
+14. Дайте визначення довірчого інтервалу рівня $1 - \alpha$. Як він пов'язаний з перевіркою гіпотез?
+15. Опишіть основний принцип побудови довірчого інтервалу, який використовувався в тексті для біноміального розподілу (через перебір значень $\mu_0$).
+16. Чим відрізняються двосторонні та односторонні довірчі інтервали? В якій ситуації може бути доцільніше використовувати односторонній ДІ?
+17. Як межа одностороннього довірчого інтервалу пов'язана з межами двостороннього довірчого інтервалу, побудованого з подвоєним рівнем значущості (наприклад, $\alpha=0.1$ для 95% одностороннього інтервалу)?
+18. Поясніть ключову властивість довірчого інтервалу: $P(\mathcal{L}(Q) < \mu_0 < \mathcal{R}(Q)) \geqslant 1 - \alpha$. Що є випадковим у цій нерівності (параметр $\mu_0$ чи межі інтервалу $\mathcal{L}, \mathcal{R}$)?
+19. Чому при використанні точних методів побудови ДІ для дискретних розподілів (як біноміальний) фактична ймовірність покриття істинного параметра може бути *більшою* за $1 - \alpha$?
+20. Які переваги та недоліки використання наближених методів побудови ДІ, таких як метод Вілсона? Коли їх використання виправдане?

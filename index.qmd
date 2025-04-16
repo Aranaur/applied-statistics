@@ -30,10 +30,13 @@
 
 Досліджуйте далі. Цей посібник --- стартова платформа. Якщо вам цікаво --- глибше копати тільки вітається.
 
+{{< pagebreak >}}
+
 ## Попередні налаштування Python {#sec-setup}
 
 Для роботи з цим посібником вам знадобиться Python. В процесі написання ми використовували наступні глобальні бібліотеки та змінні:
 
+\footnotesize
 ```python
 import numpy as np # <1>
 import seaborn as sns # <1>
@@ -57,8 +60,8 @@ from scipy.stats import ( # <1>
     sem, # <1>
     bernoulli, # <1>
     uniform, # <1>
-    gamma# <1>
-)
+    gamma # <1>
+) # <1>
 
 np.random.seed(73) # <2>
 
@@ -69,19 +72,19 @@ palette = sns.color_palette("Set2")  # <3>
 sns.set_palette(palette)  # <3>
 sns.set_context("talk")  # <3>
 
-plt.rcParams['figure.figsize'] = (8, 3.5) # <4>
-plt.rcParams['font.size'] = 12 # <4>
-plt.rcParams['axes.labelsize'] = 12 # <4>
-plt.rcParams['axes.titlesize'] = 12 # <4>
-plt.rcParams['xtick.labelsize'] = 8 # <4>
-plt.rcParams['ytick.labelsize'] = 8 # <4>
-plt.rcParams['legend.fontsize'] = 8 # <4>
-plt.rcParams['figure.titlesize'] = 12 # <4>
-plt.rcParams['grid.color'] = (0.5, 0.5, 0.5, 0.1) # <4>
-plt.rcParams['axes.spines.top'] = False # <4>
-plt.rcParams['axes.spines.right'] = False # <4>
-plt.rcParams['axes.spines.left'] = False # <4>
-plt.rcParams['axes.spines.bottom'] = False # <4>
+plt.rcParams['figure.figsize']      = (8, 3.5) # <4>
+plt.rcParams['font.size']           = 12 # <4>
+plt.rcParams['axes.labelsize']      = 12 # <4>
+plt.rcParams['axes.titlesize']      = 12 # <4>
+plt.rcParams['xtick.labelsize']     = 8 # <4>
+plt.rcParams['ytick.labelsize']     = 8 # <4>
+plt.rcParams['legend.fontsize']     = 8 # <4>
+plt.rcParams['figure.titlesize']    = 12 # <4>
+plt.rcParams['grid.color']          = (0.5, 0.5, 0.5, 0.1) # <4>
+plt.rcParams['axes.spines.top']     = False # <4>
+plt.rcParams['axes.spines.right']   = False # <4>
+plt.rcParams['axes.spines.left']    = False # <4>
+plt.rcParams['axes.spines.bottom']  = False # <4>
 
 red_pink   = "#e64173" # <5>
 turquoise  = "#20B2AA" # <5>
@@ -94,9 +97,10 @@ yellow     = "#D8BD44" # <5>
 purple     = "#6A5ACD" # <5>
 slate      = "#314f4f" # <5>
 ```
-
 1. Ці бібліотеки використовуються для статистичних обчислень, візуалізації та роботи з даними.
 2. Встановлюємо випадкове зерно для відтворюваності результатів.
 3. Налаштовуємо стиль графіків для кращої візуалізації.
 4. Налаштовуємо параметри графіків для кращої візуалізації.
 5. Визначаємо кольори для графіків.
+
+\normalsize

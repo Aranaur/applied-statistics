@@ -52,7 +52,7 @@ book:
     # - chi-sq.qmd
     # - mann-whitney.qmd
     # - bootstrap.qmd
-    - summary.qmd
+    # - summary.qmd
     - references.qmd
 
 bibliography: references.bib
