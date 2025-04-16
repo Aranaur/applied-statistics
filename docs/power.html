@@ -402,7 +402,7 @@ S = \{Q \geqslant 20\}
 </div>
 </div>
 <p>Як і раніше, нас цікавить імовірність отримати <span class="math inline">\(20\)</span> або більше успіхів. Але якщо раніше ми дивилися на неї для розподілу з <span class="math inline">\(\mu=0.5\)</span> й хотіли, щоб вона була меншою за <span class="math inline">\(5\%\)</span>, то тепер ми дивимося за <span class="math inline">\(\mu = 0.6\)</span> та прагнемо зробити цю величину якомога більшою. Порівняно з обчисленням FPR формула не зміниться, змінюється тільки <span class="math inline">\(\mu\)</span></p>
-<div id="8d565674" class="cell" data-execution_count="3">
+<div id="c30981c2" class="cell" data-execution_count="3">
 <div id="lst-binom-power" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -425,7 +425,7 @@ S = \{Q \geqslant 20\}
 </div>
 <p>Видно, що потужність близько <span class="math inline">\(30\%\)</span>. Це досить маленьке значення, адже якщо наш продукт прибутковий, то ми побачимо це за допомогою нашого тесту тільки з імовірністю в <span class="math inline">\(30\)</span> відсотків. Ми легко можемо пропустити ефект.</p>
 <p>Що ж можна зробити, щоб зробити потужність вищою? Щоб розібратися, реалізуємо функцію потужності в загальному вигляді.</p>
-<div id="a7791221" class="cell" data-execution_count="4">
+<div id="c4b40af5" class="cell" data-execution_count="4">
 <div id="lst-binom-power-general" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-power-general-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -456,7 +456,7 @@ S = \{Q \geqslant 20\}
 </div>
 <p>Коли в житті ми спостерігаємо якесь явище і бачимо його лише кілька разів, ми не впевнені в тому, що воно не випадкове. Якщо ж бачимо його досить часто, то вже складаємо закономірності. Так і в статистиці. Коли ми подивилися на 30 потенційних підписок, ми помічаємо, що частка доставок більше половини. Але ми все ще не впевнені. Щоб отримати більше впевненості, потрібно провести більше спостережень, тобто знайти більше пробних клієнтів.</p>
 <p>Подивимося, що буде, якщо ми проведемо експеримент на 300 клієнтах.</p>
-<div id="66ce5ec2" class="cell" data-execution_count="5">
+<div id="e7251494" class="cell" data-execution_count="5">
 <div id="lst-binom-power-general-300" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-power-general-300-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -574,7 +574,7 @@ S = \{Q \geqslant 20\}
 <p>Тому перед запуском експериментів аналітики повідомляють <strong>мінімальну величину ефекту, яку можна задетектувати</strong> (Minimal Detectable Effect, MDE). У нашому випадку <span class="math inline">\(MDE = +22\)</span> процентних пункти.</p>
 <p>Більш формально, MDE для гіпотези <span class="math inline">\(H_0: \mu = \mu_0\)</span> — це мінімальний ефект <span class="math inline">\(\delta\)</span>, за якого критерій рівня значущості <span class="math inline">\(\alpha\)</span> для перевірки цієї гіпотези за істинного параметра <span class="math inline">\(\mu = \mu_0 + \delta\)</span> та розміру вибірки <span class="math inline">\(N\)</span> відкидатиме <span class="math inline">\({H}_0\)</span> з потужністю більшою, ніж <span class="math inline">\(1 - \beta\)</span>.</p>
 <p>Найчастіше беруть <span class="math inline">\(1 - \beta = 80\%\)</span>. Напишемо функцію, яка обчислюватиме MDE підбором.</p>
-<div id="2c032ce8" class="cell" data-execution_count="9">
+<div id="98369043" class="cell" data-execution_count="9">
 <div id="lst-binom-mde" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-mde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -605,7 +605,7 @@ S = \{Q \geqslant 20\}
 <p>Якщо гіпотеза <span class="math inline">\({H}_0\)</span> не відкидається, це означає, що значення <span class="math inline">\(\mu = 0.5\)</span> припустиме для нашої вибірки. Отримані значення можна пояснити значенням <span class="math inline">\(\mu = 0.5\)</span>. Але якщо у нас є механізм перевірки для будь-якого <span class="math inline">\(\mu\)</span>, ми можемо для всіх значень дізнатися, які з них допустимі, і отримати множину можливих значень <span class="math inline">\(\mu\)</span>. Така множина називається <em>довірчим інтервалом</em>.</p>
 <p><strong>Довірчий інтервал</strong> рівня <span class="math inline">\(1 - \alpha\)</span> — множина значень параметра <span class="math inline">\(\mu_0\)</span>, для яких гіпотеза <span class="math inline">\(\mu = \mu_0\)</span> не відкидається критерієм рівня значущості <span class="math inline">\(\alpha\)</span>.</p>
 <p>З визначення випливає, що різні критерії можуть породжувати різні довірчі інтервали. У цій частині розглянемо, які інтервали породжуються двостороннім критерієм. Для цього з кроком <span class="math inline">\(0.001\)</span> переберемо значення <span class="math inline">\(\mu \in [0, 1]\)</span> і перевіримо гіпотези.</p>
-<div id="b12504f2" class="cell" data-execution_count="10">
+<div id="37b78577" class="cell" data-execution_count="10">
 <div id="lst-binom-ci" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -695,7 +695,7 @@ S = \{Q \geqslant 20\}
 <h2 data-number="2.5" class="anchored" data-anchor-id="односторонні-довірчі-інтервали"><span class="header-section-number">2.5</span> Односторонні довірчі інтервали</h2>
 <p>Насправді, двосторонній критерій потрібен вкрай рідко. Контролювати хибно похитивну помилку нам потрібно тільки для відхилень у бік, корисний для бізнесу. У випадку завдання з освітнім сервісом це отримання <em>більшої</em> конверсії в успіх.</p>
 <p>Спробуємо скористатися одностороннім критерієм для побудови довірчого інтервалу.</p>
-<div id="5cd29a99" class="cell" data-execution_count="12">
+<div id="5e9229fa" class="cell" data-execution_count="12">
 <div id="lst-binom-ci-one-sided" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-ci-one-sided-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -727,7 +727,7 @@ S = \{Q \geqslant 20\}
 <p>Коли ми використовували двосторонній інтервал, ми отримали ліву межу <span class="math inline">\(0.439 &lt; 0.467\)</span>. Виходить, що односторонній інтервал з точки зору лівої межі дає нам більше інформації. При цьому з точки зору правої межі ми втрачаємо інформацію зовсім. Вона дорівнює 1 просто тому, що ймовірність не може бути більшою.</p>
 <p>Насправді зазвичай на праву межу не дивляться під час аналізу, коли ми шукаємо позитивний ефект.</p>
 <p>Припустимо, ми отримали не <span class="math inline">\(19\)</span> успіхів, а <span class="math inline">\(22\)</span>. Побудуємо 2 види інтервалів.</p>
-<div id="3e6d8da4" class="cell" data-execution_count="13">
+<div id="9d1264db" class="cell" data-execution_count="13">
 <div id="lst-binom-ci-22" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-ci-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -751,7 +751,7 @@ S = \{Q \geqslant 20\}
 <pre><code>Двосторонній 95% довірчий інтервал: [0.542 - 0.877]</code></pre>
 </div>
 </div>
-<div id="5b7bde6c" class="cell" data-execution_count="14">
+<div id="5baf3c38" class="cell" data-execution_count="14">
 <div id="lst-binom-ci-22-one-sided" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-ci-22-one-sided-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -820,7 +820,7 @@ S = \{Q \geqslant 20\}
 <p>Порівняно з <a href="#fig-binom-ci" class="quarto-xref">Рисунок&nbsp;<span>2.5</span></a> ми бачимо, що права критична область стала більшою через те, що там тепер знаходиться не <span class="math inline">\(2.5\%\)</span>, а <span class="math inline">\(5\%\)</span> від усіх значень. При цьому лівої критичної області просто не існує, тому за великих <span class="math inline">\(\mu\)</span> не відбувається потрапляння <span class="math inline">\(19\)</span> до неї, а значить ми не відкидаємо гіпотезу.</p>
 <p>Зауважимо, що якби ми будували двосторонній інтервал, але з удвічі більшою <span class="math inline">\(\alpha\)</span>, потрапляння в праву критичну область траплялися б за тих самих <span class="math inline">\(\mu\)</span>, що й в односторонньому критерії. Тому часто для пошуку односторонньої межі будують двосторонній довірчий інтервал із більшою <span class="math inline">\(\alpha\)</span>, ігноруючи при цьому праву межу. Це зручно, оскільки можна користуватися тільки однією функцією для критерію.</p>
 <p>Перевіримо, що вийде за <span class="math inline">\(\alpha = 0.1\)</span>.</p>
-<div id="cdd6fc86" class="cell" data-execution_count="16">
+<div id="76cdfc18" class="cell" data-execution_count="16">
 <div id="lst-binom-ci-22-2alpha" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-ci-22-2alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -872,7 +872,7 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 Лістинг&nbsp;2.12: Перевірка властивості довірчого інтервалу.
 </figcaption>
 <div aria-describedby="lst-binom-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="2b59b1e7" class="cell" data-execution_count="17">
+<div id="f35cf6bb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -911,7 +911,7 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 <span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Час виконання: </span><span class="sc">{</span>end_time <span class="op">-</span> start_time<span class="sc">:.4f}</span><span class="ss"> секунди"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Відсоток успішних випадків: 61.4%
-Час виконання: 3.8248 секунди</code></pre>
+Час виконання: 3.5918 секунди</code></pre>
 </div>
 </div>
 </div>
@@ -969,7 +969,7 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 <h3 data-number="2.6.2" class="anchored" data-anchor-id="довірчий-інтервал-вілсона"><span class="header-section-number">2.6.2</span> Довірчий інтервал Вілсона</h3>
 <p>Розглянутий зараз алгоритм побудови довірчого інтервалу працює занадто довго. У Python є функції, які дозволяють швидше розрахувати інтервал. Наприклад, можна скористатися методом Вілсона і функцією <code>proportion_confint</code>.</p>
 <p>Повторимо експерименти з новим типом довірчого інтервалу, тут можемо дозволити більше реалізацій вибірки, оскільки інтервал рахується недовго.</p>
-<div id="00c0e9ba" class="cell" data-execution_count="19">
+<div id="ee057736" class="cell" data-execution_count="19">
 <div id="lst-binom-ci-2" class="python cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-binom-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1009,7 +1009,7 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Відсоток успішних випадків: 96.6%
-Час виконання: 0.0780 секунди</code></pre>
+Час виконання: 0.0715 секунди</code></pre>
 </div>
 </div>
 <p>Зауважимо, що наше <span class="math inline">\(\mu\)</span> може знаходитись в довірчому інтервалі менше, ніж у <span class="math inline">\(95\%\)</span> випадків. Це відбувається через те, що швидкі методи працюють наближено, оцінюючи розподіл статистики при збільшенні розміру вибірки. Чим розмір вибірки більший, тим ближчим буде інтервал до <span class="math inline">\(95\%\)</span>-ного.</p>

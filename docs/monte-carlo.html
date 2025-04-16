@@ -262,6 +262,12 @@ window.Quarto = {
   <ul>
   <li><a href="#sec-check-criterion" id="toc-sec-check-criterion" class="nav-link active" data-scroll-target="#sec-check-criterion"><span class="header-section-number">5.1</span> Перевірка критерію</a></li>
   <li><a href="#sec-size" id="toc-sec-size" class="nav-link" data-scroll-target="#sec-size"><span class="header-section-number">5.2</span> Визначення розміру вибірки</a></li>
+  <li><a href="#sec-simulate" id="toc-sec-simulate" class="nav-link" data-scroll-target="#sec-simulate"><span class="header-section-number">5.3</span> Моделювання експерименту</a></li>
+  <li><a href="#sec-additional" id="toc-sec-additional" class="nav-link" data-scroll-target="#sec-additional"><span class="header-section-number">5.4</span> Додаткові питання</a>
+  <ul class="collapse">
+  <li><a href="#sec-t-test-non-normal" id="toc-sec-t-test-non-normal" class="nav-link" data-scroll-target="#sec-t-test-non-normal"><span class="header-section-number">5.4.1</span> <span class="math inline">\(t\)</span>-тест та мала вибірка не з нормального розподілу</a></li>
+  <li><a href="#sec-choose-criterion" id="toc-sec-choose-criterion" class="nav-link" data-scroll-target="#sec-choose-criterion"><span class="header-section-number">5.4.2</span> Як обрати критерій</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -335,7 +341,7 @@ window.Quarto = {
 </ul></li>
 </ol>
 <p>Розглянемо процедуру на прикладі: перевіримо, чи можна використовувати <span class="math inline">\(t\)</span>-тест для вибірок із нормального розподілу?</p>
-<div id="28f7ae65" class="cell" data-execution_count="2">
+<div id="25cddea7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>bad_cnt <span class="op">=</span> <span class="dv">0</span></span>
@@ -361,7 +367,7 @@ window.Quarto = {
 <li>Порахувати частку помилок й <em>побудувати довірчий інтервал для нього</em>. Якщо <span class="math inline">\(\alpha\)</span> лежить у ньому, значить усе добре, а інакше розбираємося, що пішло не так.</li>
 </ol>
 <p>Довірчий інтервал можна побудувати різними способами (<a href="power.html#sec-ci" class="quarto-xref">див.&nbsp;<span>2.4</span></a>). Але можна зробити простіше: у Python є функція, яка будує довірчий інтервал Вілсона<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: він не такий точний, як ми виводили раніше, зате він швидший й працює швидше. Давайте спробуємо його реалізувати:</p>
-<div id="7e789876" class="cell" data-execution_count="3">
+<div id="05080d83" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ci <span class="op">=</span> proportion_confint(count <span class="op">=</span> bad_cnt, nobs <span class="op">=</span> N, alpha<span class="op">=</span><span class="fl">0.05</span>, method<span class="op">=</span><span class="st">'wilson'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"FPR: </span><span class="sc">{</span>bad_cnt<span class="op">/</span>N<span class="sc">:.3f}</span><span class="ch">\n</span><span class="ss">Довірчий інтервал: (</span><span class="sc">{</span>ci[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss">, </span><span class="sc">{</span>ci[<span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">)"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -401,7 +407,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Напишемо функцію <code>check_criterion()</code>, яка буде перевіряти критерій на коректність. Вона приймає на вхід розподіли для тесту й контролю, розмір вибірки, кількість експериментів, а також вміє виводити довірчий інтервал.</p>
-<div id="bbe2bd6f" class="cell" data-execution_count="5">
+<div id="e0ff0bc0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_criterion(test_dist, control_dist, sample_size, N_exps<span class="op">=</span><span class="dv">10000</span>, to_print<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">35</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    bad_cnt<span class="op">=</span><span class="dv">0</span></span>
@@ -421,7 +427,7 @@ window.Quarto = {
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ci</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Тепер перевіримо, чи працює <span class="math inline">\(t\)</span>-тест для вибірок з різних експоненціальних розподілів. Одразу спробуємо перевірити відомий міф про достатність вибірки 30<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Чи дійсно <span class="math inline">\(t\)</span>-тест працює, якщо вибірка більша за 30?</p>
-<div id="abde74b3" class="cell" data-execution_count="6">
+<div id="1c930d6f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist, control_dist, sample_size<span class="op">=</span><span class="dv">40</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>FPR: 0.061
@@ -433,25 +439,109 @@ window.Quarto = {
 <section id="sec-size" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="sec-size"><span class="header-section-number">5.2</span> Визначення розміру вибірки</h2>
 <p>Визначити розмір вибірки, з якого <span class="math inline">\(t\)</span>-тест почне працювати, можна за допомогою методу Монте-Карло. Для цього ми будемо перевіряти <span class="math inline">\(t\)</span>-тест на вибірках різного розміру, поки не знайдемо такий розмір, при якому <span class="math inline">\(t\)</span>-тест почне працювати. Для цього ми будемо перевіряти <span class="math inline">\(t\)</span>-тест на вибірках від 20 до 100 з кроком 10.</p>
-<div id="6f1a0dc7" class="cell" data-execution_count="7">
+<div id="4a17a857" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.arange(<span class="dv">20</span>, <span class="dv">110</span>, <span class="dv">10</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> N <span class="kw">in</span> scale:</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    left, right <span class="op">=</span> check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span>N, N_exps<span class="op">=</span><span class="dv">10000</span>, to_print<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&lt;</span> alpha <span class="op">&lt;</span> right:</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Розмір вибірки </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss"> достатній для $t$-тесту"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Розмір вибірки </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss"> достатній для t-тесту"</span>)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Розмір вибірки 60 достатній для $t$-тесту</code></pre>
+<pre><code>Розмір вибірки 60 достатній для t-тесту</code></pre>
 </div>
 </div>
 <p>Як бачимо, <span class="math inline">\(t\)</span>-тест починає працювати з вибірки розміром 60.</p>
-<div id="5e746447" class="cell" data-execution_count="8">
+<div id="76160b73" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span><span class="dv">60</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>FPR: 0.053
 Довірчий інтервал: (0.048, 0.057)</code></pre>
 </div>
 </div>
+<p>Але це доволі умовна межа, бо якщо у цьому випадку ми візьмемо вибірку розміром 61, то <span class="math inline">\(t\)</span>-тест не спрацює.</p>
+<div id="653552d5" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span><span class="dv">61</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FPR: 0.057
+Довірчий інтервал: (0.052, 0.061)</code></pre>
+</div>
+</div>
+<p>Це може бути пов’язано з тим, що ми взяли недостатню велику кількість експериментів, або з дисперсією, або з обома факторами. Тому, якщо потрібна більша точність — необхідно проводити більше експериментів.</p>
+</section>
+<section id="sec-simulate" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-simulate"><span class="header-section-number">5.3</span> Моделювання експерименту</h2>
+<p>Розберемо два сценарії моделювання експерименту:</p>
+<ol type="1">
+<li>Генерація тестової та контрольної групи через імітаційне моделювання. За допомогою різних розподілів можна спробувати наблизити реальний розподіл на даних. Наприклад:
+<ul>
+<li>Для генерації виручки використовувати експоненціальний розподіл. Чим більша виручка від користувача — тим менше таких людей.</li>
+<li>Для генерації конверсійних вибірок (наприклад, клікне/не клінкет) використовувати бернулліївську вибірку.</li>
+<li>Іноді можна брати суміш розподілів: нехай 90% користувачів нашого сайту приносять нульову виручку. Тоді можна перемножити бернуллівський розподіл на експоненціальний для моделювання виручки від користувача.</li>
+<li>Також для перевірки критерію рівності середніх не обов’язково мають збігатися розподіли в тесті та в контролі. Вони можуть бути різними, але математичне сподівання має збігатися.</li>
+</ul></li>
+<li>Використати історичні дані компанії. У багатьох компаній є логування подій. Тоді ми зможемо прямо на реальних даних оцінити правильність критерію! І не потрапити в пастку того, що на штучних вибірках критерій валідний, а на реальних даних ні. Наприклад, у нас є дані про транзакції користувачів за кілька років. Це вже один готовий набір даних: ви ділите всіх користувачів на тестову та контрольну групи й отримуєте один “експеримент” для перевірки вашого критерію.</li>
+</ol>
+<p>Залишилося зрозуміти, як з одного великого набору даних зробити <span class="math inline">\(N\)</span> маленьких. Покажемо на прикладі сервісу з оголошень: наші користувачі розміщують оголошення, кожне оголошення відноситься тільки до однієї категорії товарів і розміщено тільки в одному регіоні. Звідси виникає нехитрий алгоритм:</p>
+<ul>
+<li>Розіб’ємо всі оголошення користувачів на чотири (або <span class="math inline">\(N\)</span> у загальному випадку) категорії: автомобілі, спецтехніка, послуги та нерухомість. Тепер наш набір даних можна розбити на ці підкатегорії: наприклад, в одному наборі даних дивитися виручку користувача тільки в цій підкатегорії.</li>
+<li>Поділимо набір даних за місяцями: витрат користувача за листопад, за грудень тощо.</li>
+<li>Ще всі метрики можна поділити за адміністративно-територіальними одиницями: місто, громада, район, область тощо.</li>
+<li>Об’єднаємо всі три правила в одне. Наприклад: набір даних витрат користувача в сервісі оголошень за жовтень у Києві.</li>
+<li>Тепер у нас є велика кількість наборів даних і в кожному з них є користувачі. Поділимо користувачів випадково на тест і контроль й отримаємо фінальні набір даних для валідації придуманих статистичних критеріїв.</li>
+</ul>
+<p>Якщо порівнювати два підходи, то головні переваги штучних даних у тому, що їх скільки завгодно, вони генеруються швидко, й ви повністю контролюєте розподіл. Можна створити нескінченно багато наборів даних й дуже точно оцінити помилку першого роду вашого критерію. На початкових етапах дослідження нового критерію штучні дані значно кращі за реальні. Головний мінус — ви отримали коректність вашого критерію тільки на штучних даних! На реальних же даних критерій може працювати некоректно.</p>
+<p>У наборів даних, отриманих на справжніх даних, усе навпаки: зібрати їх велику кількість складно, та й не завжди нормально побудований процес їх збору. Але адекватна оцінка коректності критерію для перевірки гіпотез у вашій компанії можлива тільки в такий спосіб. Завжди можна реалізувати такий критерій, який буде правильно працювати на штучних даних. Але, зіткнувшись у реальності з більш шумними даними, він може почати помилятися частіше, ніж у 5% випадків. Тому важливо переконатися, що саме на справжніх даних метод працюватиме правильно.</p>
+</section>
+<section id="sec-additional" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-additional"><span class="header-section-number">5.4</span> Додаткові питання</h2>
+<section id="sec-t-test-non-normal" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="sec-t-test-non-normal"><span class="header-section-number">5.4.1</span> <span class="math inline">\(t\)</span>-тест та мала вибірка не з нормального розподілу</h3>
+<p>У попередньому розділі ми розглянули <span class="math inline">\(t\)</span>-тест для вибірок з нормального розподілу. Розглянемо екстремальний випадок, коли вибірка мала, а розподіл не нормальний. Ми знову використаємо метод Монте-Карло, щоб перевірити, чи працює <span class="math inline">\(t\)</span>-тест у цьому випадку.</p>
+<div id="7812adfc" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>test_dist    <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>control_dist <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FPR: 0.040
+Довірчий інтервал: (0.036, 0.044)</code></pre>
+</div>
+</div>
+<p>Тут FPR статистично значущо менше 5%, а отже, використовувати <span class="math inline">\(t\)</span>-тест <strong>можна</strong>. Тільки треба бути готовим, що він буде не дуже потужним.</p>
+</section>
+<section id="sec-choose-criterion" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="sec-choose-criterion"><span class="header-section-number">5.4.2</span> Як обрати критерій</h3>
+<p>Нехай у вас є два критерії, й обидва валідні на наших даних. Як зрозуміти на практиці, який із них кращий?</p>
+<p>Правильна відповідь — треба порівняти потужність 2 критеріїв! Але як її дізнатися?</p>
+<p>Пропонується повторити ту саму процедуру, що ми робили вище, тільки замість генерації експерименту, коли вірна <span class="math inline">\(H_0\)</span>, генерувати експеримент, коли вірна альтернатива. У разі порівняння середніх — треба додати ефект до тесту. І замість FPR рахувати TPR — частка правильно відхилених нульових гіпотез. Чим більше — тим краще.</p>
+<p>Перевіримо на прикладі <span class="math inline">\(t\)</span>-тесту, як це працює.</p>
+<div id="97d2b606" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rej_cnt <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>alpha<span class="op">=</span><span class="fl">0.05</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>sample_dist <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">2</span>, scale<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mu<span class="op">=</span>sample_dist.expect()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    test    <span class="op">=</span> sample_dist.rvs(<span class="dv">15</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    control <span class="op">=</span> sample_dist.rvs(<span class="dv">15</span>) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    pvalue <span class="op">=</span> ttest_ind(test, control, equal_var<span class="op">=</span><span class="va">False</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>).pvalue</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    rej_cnt <span class="op">+=</span> (pvalue <span class="op">&lt;</span> alpha)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"TPR: </span><span class="sc">{</span>rej_cnt<span class="op">/</span>N<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TPR: 0.194</code></pre>
+</div>
+</div>
+<p>Бачимо, що потужність критерію в цьому випадку дорівнює 0.19. Якщо є другий критерій — треба запустити таку перевірку для 2го критерію й оцінити, який критерій кращий чи гірший, не забувши про статичну значущість.</p>
+<p>Ще є питання: ви оцінили 2 критерії лише при додаванні одного ефекту, наприклад у випадку вище, коли <span class="math inline">\(\mu_T = \mu_C * 2\)</span>. А якби була інша зміна, збереглися б результати, що цей критерій кращий? Не факт, тому треба підбирати такий ефект, який найчастіше зустрінеться на практиці. Ваше завдання ще правильно зімітувати ефект, схожий на справжній.</p>
+<p>Логіка тут точно така сама, як і чому краще генерувати експерименти на історичних даних, а не на справжніх.</p>
+<p>Тобто, ваше завдання для оцінки потужності критерію полягає в:</p>
+<ol type="1">
+<li>Створенні 1000 експериментів, на історичних даних, або на симульованих</li>
+<li>Підборі ефекту, який буде найкраще імітувати істинний ефект, що перевіряється, в гіпотезі.</li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -462,6 +552,7 @@ Hogg, Robert V., Elliott A. Tanis, and Dale L. Zimmerman. 2015. <em>Probability 
 Wilson, Edwin Bidwell. 1927. <em>Probable Inference, the Law of Succession, and Statistical Inference</em>. <em>Journal of the American Statistical Association</em>. Vol. 22. 158.
 </div>
 </div>
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
