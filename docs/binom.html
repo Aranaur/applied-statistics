@@ -303,7 +303,9 @@ window.Quarto = {
 <li>Використаємо метод <code>integers()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> до класу <code>Generator</code>, яка генерує випадкові цілі числа в заданому діапазоні.</li>
 <li>Підкинемо монетку 30 разів та порахуємо кількість успішних випадків.</li>
 </ul>
-<div id="abc66fa7" class="cell" data-execution_count="3">
+<p><br>
+</p>
+<div id="eee2e84b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">18</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -339,6 +341,8 @@ window.Quarto = {
 <pre><code>Кількість успішних випадків: 70.0%</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що в експерименті частка успішних випадків навіть перевищила 63%, тоді як у симуляції була закладена ймовірність 50%.</p>
 <p>Тому, на жаль, ми не можемо з абсолютною точністю визначити, яким є справжнє значення <span class="math inline">\(\mu\)</span> у генеральній сукупності та чи перевищує воно 50%, незалежно від того, скільки спостережень ми проводимо. Однак, застосовуючи методи прикладної статистики, ми зможемо використати інструменти, які допоможуть ухвалити правильне рішення, зокрема й у цьому випадку.</p>
 </section>
@@ -392,6 +396,8 @@ S_n = \sum_{i=1}^{n} \xi_i \sim \text{Binomial}(n, \mu)
 \]</span></p>
 <p>де <span class="math inline">\(\xi_i\)</span> — випадкова величина, яка показує успіх у <span class="math inline">\(i\)</span>-му спостереженні, <span class="math inline">\(S_n\)</span> — кількість успішних випадків у <span class="math inline">\(n\)</span> спостереженнях, <span class="math inline">\(n\)</span> — кількість спостережень, <span class="math inline">\(\mu\)</span> — ймовірність успіху.</p>
 <p>Давайте подивимось, як це виглядає графічно. Для цього побудуємо графік функції щільності ймовірностей для біноміального розподілу з параметрами <span class="math inline">\(n = 30\)</span> та <span class="math inline">\(\mu = 0.5\)</span>.</p>
+<p><br>
+</p>
 <div id="cell-fig-binom-pmf" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -469,9 +475,9 @@ S(\xi) = \begin{cases}
 S = \{\sum \xi_i \geqslant 21\}
 \]</span></p>
 <p>Позначимо <span class="math inline">\(Q = \sum \xi_i\)</span>, <span class="math inline">\(C = 21\)</span>, тоді критерій набуває вигляду:</p>
-<p><span class="math display">\[
+<p><span id="eq-crit"><span class="math display">\[
 S = \{Q(\xi) \geqslant C\}
-\]</span> {#sec-crit}</p>
+\tag{1.1}\]</span></span></p>
 <p>Так влаштована більшість класичних критеріїв у прикладній статистиці, тому величинам у ньому дано спеціальні назви. <span class="math inline">\(Q\)</span> називається <strong>статистикою критерію</strong>, <span class="math inline">\(C\)</span> — <strong>критичним значенням</strong>.</p>
 <p><span class="math inline">\(Q\)</span> може бути будь-якою функцією від вибірки, яку ви вважаєте логічною для перевірки гіпотези. У нашому випадку це кількість успіхів, або сума всіх <span class="math inline">\(\xi_i\)</span>. Але ви можете вибрати й інші: максимальне значення, суму перших 5 значень або навіть просто перший елемент.</p>
 </section>
@@ -514,18 +520,21 @@ FPR &amp;= P(S(\xi) = 1\ |\ H_0) \\
 <section id="обчислення-fpr" class="level3" data-number="1.2.4">
 <h3 data-number="1.2.4" class="anchored" data-anchor-id="обчислення-fpr"><span class="header-section-number">1.2.4</span> Обчислення FPR</h3>
 <p>Давайте порахуємо суму ймовірностей для кількостей успіхів від 21 до 30 включно. Покажемо графічно, як це виглядає на <a href="#fig-binom-pmf-fpr" class="quarto-xref">Рисунку&nbsp;<span>1.2</span></a>.</p>
+<p><br>
+</p>
 <div id="cell-fig-binom-pmf-fpr" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, n <span class="op">+</span> <span class="dv">1</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> binom.pmf(x, n, <span class="fl">0.5</span>)</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>plt.bar(x, y, color<span class="op">=</span>turquoise)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>plt.bar(x[x <span class="op">&gt;=</span> crit_subs], y[x <span class="op">&gt;=</span> crit_subs], color<span class="op">=</span>red_pink)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(crit_subs <span class="op">-</span> <span class="dv">2</span>, crit_subs <span class="op">+</span> <span class="dv">4</span>):</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>    plt.text(i <span class="op">+</span> <span class="fl">0.5</span>, y[i] <span class="op">+</span> <span class="fl">0.001</span>, <span class="ss">f"</span><span class="sc">{</span><span class="bu">round</span>(y[i] <span class="op">*</span> <span class="dv">100</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">%"</span>,</span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, size<span class="op">=</span><span class="dv">8</span>, rotation <span class="op">=</span> <span class="dv">30</span>)</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Кількість успішних випадків"</span>)</span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ймовірність"</span>)</span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>plt.bar(x, y, color<span class="op">=</span>turquoise)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>plt.bar(x[x <span class="op">&gt;=</span> crit_subs], y[x <span class="op">&gt;=</span> crit_subs], color<span class="op">=</span>red_pink)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(crit_subs <span class="op">-</span> <span class="dv">2</span>, crit_subs <span class="op">+</span> <span class="dv">4</span>):</span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>    plt.text(i <span class="op">+</span> <span class="fl">0.5</span>, y[i] <span class="op">+</span> <span class="fl">0.001</span>, <span class="ss">f"</span><span class="sc">{</span><span class="bu">round</span>(y[i] <span class="op">*</span> <span class="dv">100</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">%"</span>,</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, size<span class="op">=</span><span class="dv">8</span>, rotation <span class="op">=</span> <span class="dv">30</span>)</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Кількість успішних випадків"</span>)</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ймовірність"</span>)</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
@@ -538,15 +547,15 @@ FPR &amp;= P(S(\xi) = 1\ |\ H_0) \\
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="3">Створюємо гістограму з ймовірностями.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="3">Створюємо гістограму з ймовірностями.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="4">Виділяємо ймовірності для кількості успішних випадків, яка є більшою або рівною 21.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="4">Виділяємо ймовірності для кількості успішних випадків, яка є більшою або рівною 21.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="6,7,8" data-code-annotation="5">Додаємо текст до гістограми.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="7,8,9" data-code-annotation="5">Додаємо текст до гістограми.</span>
 </dd>
 </dl>
 </div>
@@ -554,7 +563,7 @@ FPR &amp;= P(S(\xi) = 1\ |\ H_0) \\
 <div id="fig-binom-pmf-fpr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binom-pmf-fpr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="binom_files/figure-html/fig-binom-pmf-fpr-output-1.png" width="675" height="324" class="figure-img">
+<img src="binom_files/figure-html/fig-binom-pmf-fpr-output-1.png" width="675" height="287" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-pmf-fpr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;1.2: Ймовірність хибно відхилити <span class="math inline">\(H_0\)</span> за умови її вірності
@@ -587,7 +596,9 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>Ми з’ясували, що статистика <span class="math inline">\(Q\)</span> має біноміальний розподіл.</p>
 <p>Біноміальний розподіл <span class="math inline">\(Binom(n, \mu)\)</span> — розподіл кількості успіхів у послідовності з <span class="math inline">\(n\)</span> незалежних випадкових експериментів, ймовірність успіху в кожному з яких дорівнює <span class="math inline">\(\mu\)</span>.</p>
 <p>Щоб працювати з розподілом, можна створити об’єкт-розподіл за допомогою бібліотеки <code>scipy.stats</code>.</p>
-<div id="6a80ec6f" class="cell" data-execution_count="6">
+<p><br>
+</p>
+<div id="f8c96b35" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> binom</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -616,26 +627,33 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="функція-ймовірностей"><span class="header-section-number">1.3.2</span> Функція ймовірностей</h3>
 <p>Функція ймовірності дискретного розподілу <span class="math inline">\(p_\xi(x)\)</span> — ймовірність, з якою <span class="math inline">\(\xi\)</span> приймає значення <span class="math inline">\(x\)</span>.</p>
 <p>У Python це функція <code>pmf</code> (probability mass function).</p>
-<div id="d8530d83" class="cell" data-execution_count="7">
+<p><br>
+</p>
+<div id="97bdfa1d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_dist.pmf(<span class="dv">20</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність отримати 20 успішних випадків: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ймовірність отримати 20 успішних випадків: 0.0280</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Зобразимо розподіл статистики <span class="math inline">\(Q\)</span> за справедливості <span class="math inline">\(H_0\)</span> на графіку. Для цього можна передати відразу масив точок, для яких треба розрахувати ймовірність.</p>
+<p><br>
+</p>
 <div id="cell-fig-binom-pmf-python" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, n <span class="op">+</span> <span class="dv">1</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> binom_dist.pmf(x)</span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">21</span></span>
 <span id="annotated-cell-6-5"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-6" class="code-annotation-target"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>plt.bar(x, y, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">"Ймовірність успіхів"</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-6-7" class="code-annotation-target"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>plt.bar(x[x <span class="op">&gt;=</span> crit_subs], y[x <span class="op">&gt;=</span> crit_subs],</span>
-<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">"Критичне значення"</span>)</span>
-<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Кількість успішних випадків"</span>)</span>
-<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ймовірність"</span>)</span>
-<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">2.5</span>))</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-7" class="code-annotation-target"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>plt.bar(x, y, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">"Ймовірність успіхів"</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-6-8" class="code-annotation-target"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a>plt.bar(x[x <span class="op">&gt;=</span> crit_subs], y[x <span class="op">&gt;=</span> crit_subs],</span>
+<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">"Критичне значення"</span>)</span>
+<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Кількість успішних випадків"</span>)</span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Ймовірність"</span>)</span>
+<span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
@@ -652,11 +670,11 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="6" data-code-annotation="4">Ймовірність успіхів.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="7" data-code-annotation="4">Ймовірність успіхів.</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="7,8" data-code-annotation="5">Критичне значення.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="8,9" data-code-annotation="5">Критичне значення.</span>
 </dd>
 </dl>
 </div>
@@ -664,7 +682,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <div id="fig-binom-pmf-python" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binom-pmf-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="binom_files/figure-html/fig-binom-pmf-python-output-1.png" width="675" height="324" class="figure-img">
+<img src="binom_files/figure-html/fig-binom-pmf-python-output-1.png" width="675" height="250" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-pmf-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;1.3: Функція щільності ймовірностей біноміального розподілу
@@ -674,16 +692,22 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 </div>
 </div>
 <p>Насправді вже зараз ми можемо порахувати ймовірність потрапляння в критичну область. Потрібно просто підсумувати ймовірності для кількостей успіхів від 21 до 30.</p>
-<div id="0125d473" class="cell" data-execution_count="9">
+<p><br>
+</p>
+<div id="8f696724" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.<span class="bu">sum</span>(y[crit_subs:])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ймовірність потрапляння в критичну область: 0.0214</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Отже, ми дійсно побудували критерій рівня значущості <span class="math inline">\(\alpha = 0.05\)</span>. Ба більше, це критерій рівня значущості 0.021.</p>
 <p>А що якби ми взяли <span class="math inline">\(C = 19\)</span>?</p>
-<div id="44a412a8" class="cell" data-execution_count="10">
+<p><br>
+</p>
+<div id="c7d0f566" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.<span class="bu">sum</span>(y[crit_subs:])</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -691,9 +715,13 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <pre><code>Ймовірність потрапляння в критичну область: 0.1002</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Тоді ймовірність помилки вже навіть більше <span class="math inline">\(10\%\)</span>, що зовсім нам не підходить.</p>
 <p>А якщо <span class="math inline">\(C = 20\)</span>?</p>
-<div id="e4eda779" class="cell" data-execution_count="11">
+<p><br>
+</p>
+<div id="915a160e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.<span class="bu">sum</span>(y[crit_subs:])</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -701,6 +729,8 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <pre><code>Ймовірність потрапляння в критичну область: 0.0494</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Видно, що немає такого <span class="math inline">\(C\)</span>, щоб FPR був рівно <span class="math inline">\(5\%\)</span>.</p>
 </section>
 <section id="кумулятивна-функція-розподілу" class="level3" data-number="1.3.3">
@@ -708,34 +738,42 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>Кумулятивна функція розподілу задається формулою:</p>
 <p><span id="eq-cdf"><span class="math display">\[
 F_\xi(x) = P(\xi \leqslant x)
-\tag{1.1}\]</span></span></p>
+\tag{1.2}\]</span></span></p>
 <p>У Python це метод <code>cdf()</code> (Cumulative Distribution Function).</p>
-<div id="354a2616" class="cell" data-execution_count="12">
+<p><br>
+</p>
+<div id="b02f404c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_dist.cdf(<span class="dv">19</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність отримати 19 або менше успішних випадків: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ймовірність отримати 19 або менше успішних випадків: 0.9506</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>А оскільки <span class="math inline">\(P(\xi \leqslant 19) + P(\xi \geqslant 20) = 1\)</span>, можемо обчислити рівень значущості нашого критерію.</p>
-<div id="b7fc46d6" class="cell" data-execution_count="13">
+<p><br>
+</p>
+<div id="3a18af01" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom_dist.cdf(<span class="dv">19</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ймовірність потрапляння в критичну область: 0.0494</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 </section>
 <section id="квантиль" class="level3" data-number="1.3.4">
 <h3 data-number="1.3.4" class="anchored" data-anchor-id="квантиль"><span class="header-section-number">1.3.4</span> Квантиль</h3>
 <p>Щоб вибрати критичну область для критерію, ми хотіли б знайти точку, площа стовпців праворуч від якої була б <span class="math inline">\(5\%\)</span>. Тобто площа стовпців зліва — <span class="math inline">\(95\%\)</span>. Така точка називається <em>квантилью</em>.</p>
 <p><span id="eq-quantile"><span class="math display">\[
 u_p(\xi) = \{x\ | F_\xi(x) = p\}
-\tag{1.2}\]</span></span></p>
+\tag{1.3}\]</span></span></p>
 <p>Але при <span class="math inline">\(p = 0.95\)</span> й нашому біноміальному розподілі, такої точки немає. Ми з’ясували, що є точка, праворуч від якої площа <span class="math inline">\(0.494\)</span>, а в наступної вже <span class="math inline">\(0.1\)</span>. Щоб визначити квантиль у цьому випадку, модифікуємо визначення. Квантиль <span class="math inline">\(u_p(\xi)\)</span> — величина, яку <span class="math inline">\(\xi\)</span> не перевищує з імовірністю хоча б <span class="math inline">\(p\)</span>. Тобто <span class="math inline">\(F_\xi(u_p) \geqslant p\)</span>.</p>
 <p><span id="eq-quantile-mod"><span class="math display">\[
 u_p(\xi) = min\ \{x\ |\ F_\xi(x) \geqslant p \}
-\tag{1.3}\]</span></span></p>
+\tag{1.4}\]</span></span></p>
 <div id="exm-quantile" class="theorem example">
 <p><span class="theorem-title"><strong>Приклад 1.1</strong></span> Для величини <span class="math inline">\(\xi \sim Bin(30, 0.5)\)</span> порахуємо 0.95-квантиль. Вирішимо задачу просто підбором.</p>
 <p><span class="math display">\[
@@ -751,13 +789,17 @@ P(\xi \leqslant 20) \approx 0.97
 <p>Якби розподіл був неперервним, можна було б сказати, що квантиль — це таке <span class="math inline">\(x\)</span>, на якому функція розподілу дорівнює <span class="math inline">\(p\)</span>. Але для дискретного розподілу такого може не бути.</p>
 </div>
 <p>У Python квантиль можна порахувати через методу <code>ppf()</code> (Percent Point Function).</p>
-<div id="581485b6" class="cell" data-execution_count="14">
+<p><br>
+</p>
+<div id="08005da0" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_dist.ppf(<span class="fl">0.95</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"0.95-квантиль: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.95-квантиль: 19.0</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Як тепер підібрати <span class="math inline">\(C\)</span> для будь-яких <span class="math inline">\(n, \mu\)</span> й для будь-якого рівня значущості <span class="math inline">\(\alpha\)</span>?</p>
 <ol type="1">
 <li>Потрібно знайти <span class="math inline">\(C\)</span>, таке що <span class="math inline">\(P(Q \geqslant C) \leqslant \alpha\)</span></li>
@@ -766,7 +808,9 @@ P(\xi \leqslant 20) \approx 0.97
 <li>Отже, з визначення квантилі, <span class="math inline">\(C - 1 = u_{1 - \alpha}\)</span></li>
 <li>Значить <span class="math inline">\(C = u_{1 - \alpha} + 1\)</span></li>
 </ol>
-<div id="29664e94" class="cell" data-execution_count="15">
+<p><br>
+</p>
+<div id="06bb867d" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_crit_subs(n, mu, alpha):</span>
 <span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичне значення для біноміального розподілу.</span></span>
@@ -801,6 +845,8 @@ P(\xi \leqslant 20) \approx 0.97
 <pre><code>Критичне значення для n = 30, mu = 0.5, alpha = 0.05: 20.0</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Критичне значення <span class="math inline">\(20\)</span>, отже підсумковий критерій має такий вигляд:</p>
 <p><span class="math display">\[
 S = \{Q \geqslant 20\}
@@ -818,7 +864,7 @@ S = \{Q \geqslant 20\}
 <p>Визначимо поняття екстремальності формально:</p>
 <p><span id="eq-extremal"><span class="math display">\[
 S = \{Q(\xi) \geqslant C\}:\ t\ \text{екстремальніше}\ q \Leftrightarrow t &gt; q
-\tag{1.4}\]</span></span></p>
+\tag{1.5}\]</span></span></p>
 <p>Найчастіше критерії інших видів можна привести до цього, тоді для них теж визначено поняття екстремальності.</p>
 </section>
 <section id="p-значення-1" class="level3" data-number="1.4.2">
@@ -826,13 +872,13 @@ S = \{Q(\xi) \geqslant C\}:\ t\ \text{екстремальніше}\ q \Leftrigh
 <p><strong>p-value</strong> — це ймовірність отримати таке або більш екстремальне значення статистики <span class="math inline">\(q\)</span> за умови вірності <span class="math inline">\(H_0\)</span>.</p>
 <p><span id="eq-p-value"><span class="math display">\[
 P_{H_0}(Q \geqslant q)
-\tag{1.5}\]</span></span></p>
+\tag{1.6}\]</span></span></p>
 <div id="cell-fig-binom-pmf-p-value" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div id="fig-binom-pmf-p-value" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binom-pmf-p-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="binom_files/figure-html/fig-binom-pmf-p-value-output-1.png" width="675" height="324" class="figure-img">
+<img src="binom_files/figure-html/fig-binom-pmf-p-value-output-1.png" width="675" height="215" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-pmf-p-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;1.4: <span class="math inline">\(p\)</span>-значення для критерію <span class="math inline">\(Q = 15\)</span>
@@ -844,14 +890,14 @@ P_{H_0}(Q \geqslant q)
 <p>Тепер виведемо формулу через функції Python:</p>
 <p><span id="eq-p-value-python"><span class="math display">\[
 P_{H_0}(Q \geqslant q) = 1 - P_{H_0}(Q &lt; q) = 1 - F(q)
-\tag{1.6}\]</span></span></p>
+\tag{1.7}\]</span></span></p>
 <p>Зобразимо на графіку область більш екстремальних значень й p-value для різних значень статистики.</p>
 <div id="cell-fig-binom-pmf-p-values" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div id="fig-binom-pmf-p-values" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binom-pmf-p-values-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="binom_files/figure-html/fig-binom-pmf-p-values-output-1.png" width="729" height="559" class="figure-img">
+<img src="binom_files/figure-html/fig-binom-pmf-p-values-output-1.png" width="753" height="367" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-pmf-p-values-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;1.5: <span class="math inline">\(p\)</span>-значення для критерію <span class="math inline">\(Q = 10, 19, 20, 25\)</span>
@@ -863,7 +909,7 @@ P_{H_0}(Q \geqslant q) = 1 - P_{H_0}(Q &lt; q) = 1 - F(q)
 <p>Можна побачити, що в критичній області <span class="math inline">\(p\)</span>-значення <span class="math inline">\(\leqslant \alpha\)</span>, а поза нею <span class="math inline">\(p\)</span>-значення <span class="math inline">\(&gt; \alpha\)</span>. Саме таке правило й використовується для прийняття рішення.</p>
 <p><span id="eq-p-value-rule"><span class="math display">\[
 H_0 \text{ відкидається } \Leftrightarrow p\text{-значення} \leqslant \alpha
-\tag{1.7}\]</span></span></p>
+\tag{1.8}\]</span></span></p>
 <p>Причому за <span class="math inline">\(p\)</span>-значення одразу видно, що якби в нашу критичну область включили значення <span class="math inline">\(19\)</span>, наш критерій допускав би FPR у <span class="math inline">\(10\%\)</span> випадків, що вже неприпустимо. Тому й гіпотезу ми не відкидаємо.</p>
 <p>Зауважимо, що для обчислення <span class="math inline">\(p\)</span>-значення не знадобилося знання <span class="math inline">\(\alpha\)</span>, а потрібна була тільки статистика й форма критерію.</p>
 </section>
@@ -882,10 +928,12 @@ H_1: \mu \neq 0.5
 <p>Оскільки відхилення в різні боки однаково важливі, а розподіл симетричний, шукати критерій можна в такому вигляді:</p>
 <p><span id="eq-two-sided-crit"><span class="math display">\[
 S = \{Q \geqslant C\} \cup \{Q \leqslant n - C\}
-\tag{1.8}\]</span></span></p>
+\tag{1.9}\]</span></span></p>
 <section id="як-вибрати-критичну-область" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="як-вибрати-критичну-область"><span class="header-section-number">1.5.1</span> Як вибрати критичну область</h3>
 <p>Подивимося, який вигляд матиме критична область у такому разі.</p>
+<p><br>
+</p>
 <div id="cell-fig-binom-pmf-two-sided" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div id="fig-binom-pmf-two-sided" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -904,7 +952,9 @@ S = \{Q \geqslant C\} \cup \{Q \leqslant n - C\}
 <p>Якщо ж виставити <span class="math inline">\(C = 6\)</span>, то така область уже підходить, площа стовпців <span class="math inline">\(\approx 0.043 &lt; 0.05\)</span>.</p>
 <p>Щоб вибрати порогову константу за формулою, можна помітити, що критична область симетрична, а значить праворуч площа не повинна бути більшою, ніж <span class="math inline">\(\frac{\alpha}{2}\)</span>. А таку задачу ми вже вміємо розв’язувати.</p>
 <p>Реалізуємо функцію на Python.</p>
-<div id="8fb91521" class="cell" data-execution_count="19">
+<p><br>
+</p>
+<div id="1bb1ac92" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_crit_subs_two_sided(n, mu, alpha):</span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-14-3"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичне значення для двостороннього біноміального розподілу.</span></span>
@@ -922,7 +972,7 @@ S = \{Q \geqslant C\} \cup \{Q \leqslant n - C\}
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">Функція для знаходження критичного значення:</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">Функція для знаходження критичного значення.</span>
 </dd>
 <dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
 <dd>
@@ -948,9 +998,11 @@ S = \{|Q(\xi) - 15| \geqslant C\}
 <p>Позначимо відхилення суми від 15 як <span class="math inline">\(\Delta(\xi) = |Q(\xi) - 15|\)</span>, тоді ми маємо критерій</p>
 <p><span id="eq-two-sided-crit-2"><span class="math display">\[
 S = \{\Delta(\xi) \geqslant C\}
-\tag{1.9}\]</span></span></p>
+\tag{1.10}\]</span></span></p>
 <p>Тобто більш екстремальними вважатимуться ті значення суми, що знаходяться далі від 15. Щоб обчислити <span class="math inline">\(p\)</span>-значення, доведеться порахувати суму площ із двох сторін окремо.</p>
-<div id="36fe20cd" class="cell" data-execution_count="20">
+<p><br>
+</p>
+<div id="611f688d" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided_sym(n, q):</span>
 <span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-15-3"><a href="#annotated-cell-15-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Обчислює p-значення для двостороннього біноміального розподілу.</span></span>
@@ -970,7 +1022,7 @@ S = \{\Delta(\xi) \geqslant C\}
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-15" data-code-lines="1" data-code-annotation="1">Функція для обчислення <span class="math inline">\(p\)</span>-значення:</span>
+<span data-code-cell="annotated-cell-15" data-code-lines="1" data-code-annotation="1">Функція для обчислення <span class="math inline">\(p\)</span>-значення.</span>
 </dd>
 <dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
 <dd>
@@ -998,8 +1050,12 @@ S = \{\Delta(\xi) \geqslant C\}
 <pre><code>p-значення для q = 21: 0.0428</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Насправді через симетричність розподілу ліва й права площа виходять однаковими, тому можна порахувати площу з одного боку й помножити на 2.</p>
-<div id="64f83423" class="cell" data-execution_count="21">
+<p><br>
+</p>
+<div id="d908930a" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided_sym_simple(n, q):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Обчислює p-значення для двостороннього біноміального розподілу.</span></span>
@@ -1018,12 +1074,16 @@ S = \{\Delta(\xi) \geqslant C\}
 <pre><code>p-значення для q = 21: 0.0428</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Тепер навіть у разі <span class="math inline">\(20\)</span> орлів <span class="math inline">\(p\)</span>-значення <span class="math inline">\(&gt; 0.05\)</span>, тому відкидати будемо значення, починаючи з <span class="math inline">\(21\)</span> й менші або такі, що дорівнюють <span class="math inline">\(9\)</span>.</p>
 </section>
 <section id="випадок-із-несиметричним-розподілом" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="випадок-із-несиметричним-розподілом"><span class="header-section-number">1.5.3</span> Випадок із несиметричним розподілом</h3>
 <p>Коли розподіл за справедливості <span class="math inline">\(H_0\)</span> несиметричний, відхилення від очікуваного значення в різні боки можуть бути по-різному критичними. Як приклад розглянемо також біноміальний розподіл, але з імовірністю успіху <span class="math inline">\(0.8\)</span>.</p>
 <p>Тоді можна ліву і праву критичні області побудувати окремо, виділивши на них по <span class="math inline">\(\frac{\alpha}{2}\)</span> площі. Праву область ми вже вміємо шукати, знайдемо ліву.</p>
+<p><br>
+</p>
 <div id="cell-fig-binom-pmf-two-sided-nonsym" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>binom_h0_nonsym <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.8</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-17-2" class="code-annotation-target"><a href="#annotated-cell-17-2" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> binom_h0_nonsym.pmf(np.arange(<span class="dv">31</span>))</span>
@@ -1064,9 +1124,11 @@ S = \{\Delta(\xi) \geqslant C\}
 <p>Шукаємо <span class="math inline">\(C\)</span>, таке що</p>
 <p><span id="eq-crit-nonsym"><span class="math display">\[
 P(Q(\xi) \leqslant C) \leqslant \frac{\alpha}{2}
-\tag{1.10}\]</span></span></p>
+\tag{1.11}\]</span></span></p>
 <p>Спочатку знайдемо перше число, де ймовірність <span class="math inline">\(\geqslant \frac{\alpha}{2}\)</span>. А це за визначенням <span class="math inline">\(\frac{\alpha}{2}\)</span>-квантиль. Достатньо взяти попереднє число, і воно буде задовольняти нашій умові.</p>
-<div id="f902c7d6" class="cell" data-execution_count="23">
+<p><br>
+</p>
+<div id="067fcd0e" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> two_sided_criterion_nonsym(n, mu, alpha):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичні значення для двостороннього біноміального розподілу.</span></span>
@@ -1086,6 +1148,8 @@ P(Q(\xi) \leqslant C) \leqslant \frac{\alpha}{2}
 <pre><code>Критичні значення для n = 30, mu = 0.8, alpha = 0.05: (18.0, 29.0)</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Отже, наш критерій для перевірки гіпотези</p>
 <p><span class="math display">\[
 H_0: \mu = 0.8
@@ -1099,6 +1163,8 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 \]</span></p>
 <p>Тут межа <span class="math inline">\(29\)</span> уже має логічний вигляд, бо треба спростувати 80% орлів/успіхів, а для цього потрібна велика їхня кількість.</p>
 <p>Зобразимо критичну область на графіку.</p>
+<p><br>
+</p>
 <div id="cell-fig-binom-pmf-two-sided-nonsym-crit" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-19-1" class="code-annotation-target"><a href="#annotated-cell-19-1" aria-hidden="true" tabindex="-1"></a>C1, C2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, <span class="fl">0.8</span>, <span class="fl">0.05</span>)</span>
 <span id="annotated-cell-19-2"><a href="#annotated-cell-19-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1157,10 +1223,12 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <p>Цей критерій — об’єднання двох критеріїв рівня значущості <span class="math inline">\(\frac{\alpha}{2}\)</span>, для кожного з яких можна порахувати <span class="math inline">\(p\)</span>-значення. Позначимо їх як <span class="math inline">\(p_1, p_2\)</span>. Перший критерій відкидається при <span class="math inline">\(p_1 \leqslant \frac{\alpha}{2}\)</span>, другий при <span class="math inline">\(p_2 \leqslant \frac{\alpha}{2}\)</span>. А наш об’єднаний, коли виконано одну з цих умов, тобто</p>
 <p><span id="eq-p-value-two-sided-nonsym"><span class="math display">\[
 2p_1 \leqslant \alpha \vee 2p_2 \leqslant \alpha \Leftrightarrow 2 \cdot \min(p_1, p_2) \leqslant \alpha
-\tag{1.11}\]</span></span></p>
+\tag{1.12}\]</span></span></p>
 <p>Отже, можна рахувати <span class="math inline">\(p\)</span>-значення як <span class="math inline">\(2 \min(p_1, p_2)\)</span> й порівнювати з <span class="math inline">\(\alpha\)</span>.</p>
 <p>Проведемо аналогію із симетричним випадком: якщо сума опинилася в лівій частині, то потрібно порахувати <span class="math inline">\(p\)</span>-значення лівого критерію і помножити на 2. Якщо сума опинилася в правій частині, то потрібно порахувати <span class="math inline">\(p\)</span>-значення правого критерію і помножити на 2.</p>
-<div id="8ec4380a" class="cell" data-execution_count="25">
+<p><br>
+</p>
+<div id="bf1c8633" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided(n, q, mu<span class="op">=</span><span class="fl">0.5</span>):</span>
 <span id="annotated-cell-20-2"><a href="#annotated-cell-20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-20-3"><a href="#annotated-cell-20-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Обчислює p-значення для двостороннього біноміального розподілу.</span></span>
@@ -1204,22 +1272,30 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <pre><code>p-значення для q = 28: 0.0884</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Видно, що <span class="math inline">\(p\)</span>-значення <span class="math inline">\(&gt; 0.05\)</span>, отже, на рівні значущості <span class="math inline">\(0.05\)</span> навіть <span class="math inline">\(28\)</span> успіхів недостатньо, щоб відкинути ймовірність успіху в <span class="math inline">\(80\%\)</span>.</p>
 <p>Зауважимо, що ця ж функція працює і для симетричного випадку, повертаючи той самий результат.</p>
-<div id="47f18a2c" class="cell" data-execution_count="26">
+<p><br>
+</p>
+<div id="28d18de2" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pvalue_two_sided(n<span class="op">=</span><span class="dv">30</span>, q<span class="op">=</span><span class="dv">20</span>, mu<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-значення для q = 20: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>p-значення для q = 20: 0.0987</code></pre>
 </div>
 </div>
-<div id="d4c47be3" class="cell" data-execution_count="27">
+<p><br>
+</p>
+<div id="9aa6080a" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pvalue_two_sided_sym(n<span class="op">=</span><span class="dv">30</span>, q<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-значення для q = 20: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>p-значення для q = 20: 0.0987</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 </section>
 </section>
 <section id="sec-scipy" class="level2" data-number="1.6">
@@ -1236,7 +1312,9 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <li><code>less</code>: лівостороння</li>
 </ul></li>
 </ul>
-<div id="3072b52d" class="cell" data-execution_count="28">
+<p><br>
+</p>
+<div id="45e6d161" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> binomtest</span>
 <span id="annotated-cell-23-2"><a href="#annotated-cell-23-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binomtest(<span class="dv">19</span>, <span class="dv">30</span>, <span class="fl">0.5</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
@@ -1251,7 +1329,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-23" data-code-lines="3" data-code-annotation="2">Викликаємо функцію з параметрами:</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="3" data-code-annotation="2">Викликаємо функцію з параметрами.</span>
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
 <dd>

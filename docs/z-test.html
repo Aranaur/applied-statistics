@@ -307,6 +307,8 @@ window.Quarto = {
 f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2},
 \tag{3.1}\]</span></span> де <span class="math inline">\(x\)</span> — випадкова величина, <span class="math inline">\(\mu\)</span> — математичне сподівання, <span class="math inline">\(\sigma^2\)</span> — дисперсія.</p>
 <p>На графіку нижче показано, як виглядає нормальний розподіл з різними параметрами <span class="math inline">\(\mu\)</span> та <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><br>
+</p>
 <div id="cell-fig-normal-distribution" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">2</span>, <span class="dv">2</span>)]</span>
@@ -370,7 +372,9 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 </ul>
 <p>CDF та PPF — це функції, які пов’язані між собою. CDF визначає ймовірність того, що випадкова величина <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(x\)</span>, а PPF визначає значення <span class="math inline">\(x\)</span>, для якого ймовірність <span class="math inline">\(X\)</span> менша або дорівнює <span class="math inline">\(q\)</span>.</p>
 <p>Ініціалізуємо клас <code>norm</code> з параметрами <span class="math inline">\(\mu = 0\)</span> та <span class="math inline">\(\sigma = 1\)</span> (стандартний нормальний розподіл). Далі, згенеруємо випадкову вибірку з 50 спостережень, а також обчислимо PDF, CDF та PPF для <span class="math inline">\(x = 1.5\)</span>.</p>
-<div id="0dd5446e" class="cell" data-execution_count="3">
+<p><br>
+</p>
+<div id="52dcda1d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>std_norm <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>rnorm <span class="op">=</span> std_norm.rvs(size<span class="op">=</span><span class="dv">50</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
@@ -422,7 +426,11 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <p><span class="math inline">\(z_{0.933} = \Phi^{-1}(0.933) = 1.499\)</span></p>
 </div>
 </div>
+<p><br>
+</p>
 <p>Візуалізація методів класу <code>norm</code> показана на <a href="#fig-normal-distribution-2" class="quarto-xref">рисунку&nbsp;<span>3.2</span></a>.</p>
+<p><br>
+</p>
 <div id="cell-fig-normal-distribution-2" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div id="fig-normal-distribution-2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -460,6 +468,8 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <section id="sec-normal-distribution-properties-python" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-normal-distribution-properties-python"><span class="header-section-number">3.3.1</span> Перевірка властивостей в Python</h3>
 <p>За допомогою мови Python ми можемо перевірити ці властивості. Почнемо з <a href="#eq-normal-sum" class="quarto-xref">Рівняння&nbsp;<span>3.2</span></a>. Для цього ми згенеруємо дві нормально розподілені випадкові величини <span class="math inline">\(\xi_1\)</span> та <span class="math inline">\(\xi_2\)</span> з параметрами <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\sigma_1^2 = 1\)</span> та <span class="math inline">\(\mu_2 = 1\)</span>, <span class="math inline">\(\sigma_2^2 = 4\)</span>. Потім, ми обчислимо їхню суму та перевіримо, чи має вона нормальний розподіл з параметрами <span class="math inline">\(\mu_1 + \mu_2\)</span> та <span class="math inline">\(\sigma_1^2 + \sigma_2^2\)</span>.</p>
+<p><br>
+</p>
 <div id="cell-fig-normal-distribution-properties" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>mean_one, mean_two <span class="op">=</span> <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>var_one, var_two <span class="op">=</span> <span class="dv">4</span>, <span class="dv">2</span></span>
@@ -538,6 +548,8 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </div>
 <p>Видно, що розподіли приблизно збіглися! А значить ми переконалися, що формула правильна.</p>
 <p>Другу властивість <a href="#eq-normal-multiply" class="quarto-xref">Рівняння&nbsp;<span>3.3</span></a> можна перевірити аналогічно. Для цього ми згенеруємо нормально розподілену випадкову величину <span class="math inline">\(\xi_1\)</span> з параметрами <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\sigma_1^2 = 1\)</span> та помножимо її на константу <span class="math inline">\(a = 2\)</span>. Потім, ми перевіримо, чи має вона нормальний розподіл з параметрами <span class="math inline">\(a\mu_1\)</span> та <span class="math inline">\(a^2\sigma_1^2\)</span>.</p>
+<p><br>
+</p>
 <div id="cell-fig-normal-distribution-properties-2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>mean_one <span class="op">=</span> <span class="dv">0</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>var_one <span class="op">=</span> <span class="dv">1</span></span>
@@ -648,7 +660,9 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 <li>Вона і має бути з нормального розподілу.</li>
 </ul></li>
 </ul>
-<div id="f0a95438" class="cell" data-execution_count="7">
+<p><br>
+</p>
+<div id="f8ef2401" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_CLT(sample_generator, expected_value, variance):</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Візуалізація ЦГТ</span></span>
@@ -713,7 +727,11 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </dl>
 </div>
 </div>
+<p><br>
+</p>
 <p>Тепер, давайте подивимося на біноміальний розподіл. Для цього ми згенеруємо вибірку з <span class="math inline">\(N\)</span> елементів з біноміального розподілу з параметрами <span class="math inline">\(n = 20\)</span> та <span class="math inline">\(p = 0.01\)</span>. Потім, ми обчислимо середнє за <span class="math inline">\(M\)</span> елементами.</p>
+<p><br>
+</p>
 <div id="cell-fig-visualization-central-limit-theorem-1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.01</span></span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
@@ -754,6 +772,8 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </div>
 <p>Емпірична щільність достатньо близько збігається з теоретичним розподілом.</p>
 <p>А що якщо зменшити вибірку, за якою рахується середнє? Для цього ми зменшимо <span class="math inline">\(n\)</span> до 20, а <span class="math inline">\(p\)</span> до 0.05. Тепер, ми згенеруємо вибірку з <span class="math inline">\(N\)</span> елементів з біноміального розподілу з параметрами <span class="math inline">\(n = 20\)</span> та <span class="math inline">\(p = 0.05\)</span>. Потім, ми обчислимо середнє за <span class="math inline">\(M\)</span> елементами.</p>
+<p><br>
+</p>
 <div id="cell-fig-visualization-central-limit-theorem-2" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.05</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
@@ -779,6 +799,8 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </div>
 <p>Стало значно гірше: з’явилися прогалини в розподілі, та й сама емпірична функція розподілу зміщена. Тож наш експеримент підтвердив важливість розміру вибірки для коректної роботи ЦГТ. Це означає, що якщо ми хочемо використовувати ЦГТ, то вибірка має бути досить великою. В іншому випадку, результати можуть бути ненадійними.</p>
 <p>Тепер подивимось на експоненціальний розподіл. Для цього ми згенеруємо вибірку з <span class="math inline">\(N\)</span> елементів з експоненціального розподілу з параметром <span class="math inline">\(\lambda = 5\)</span>. Потім, ми обчислимо середнє за <span class="math inline">\(M\)</span> елементами.</p>
+<p><br>
+</p>
 <div id="cell-fig-visualization-central-limit-theorem-3" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">5</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> <span class="dv">400</span></span>
@@ -868,7 +890,9 @@ H_0: \mu =\mu_0 = 0.5\ \text{проти} \ H_1: \mu &gt; 0.5
 <li>у разі біноміального розподілу: <span class="math inline">\(P(T(X^n) \geq t) = 1 - P(T(X^n) \leq t - 1)\)</span>.</li>
 </ul>
 <p>Подивимось, як це виглядає в Python. Для цього створимо функцію <code>get_pvalue_by_normal_approx</code>, яка буде приймати на вхід параметри <span class="math inline">\(n\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(t\)</span> та повертати <span class="math inline">\(p\)</span>-значення. Порівняємо результати за точним біноміальним тестом та нашим наближенням.</p>
-<div id="52615478" class="cell" data-execution_count="11">
+<p><br>
+</p>
+<div id="e757f16e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_pvalue_by_normal_approx(t, n, mu_0):</span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція для обчислення p-значення за нормальною апроксимацією</span></span>
@@ -935,8 +959,12 @@ H_0: \mu =\mu_0 = 0.5\ \text{проти} \ H_1: \mu &gt; 0.5
 p-значення за точним біноміальним тестом = 0.1002</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що значення не дуже-то й збіглися. Але, як ми пам’ятаємо, нормальна апроксимація працює тільки з деякого великого <span class="math inline">\(n\)</span>. Тому давайте спробуємо повторити експеримент із більшаимо кількість спостережень.</p>
-<div id="f9175558" class="cell" data-execution_count="12">
+<p><br>
+</p>
+<div id="8d9cbc34" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3000</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">1544</span></span>
@@ -951,6 +979,8 @@ p-значення за точним біноміальним тестом = 0.1
 p-значення за точним біноміальним тестом = 0.0561</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що відмінність тепер тільки в 3 знаку після коми, а не в другому, як раніше. Що більше ми братимемо вибірку, то меншою буде помилка про що говорить ЦГТ.</p>
 </section>
 <section id="z-критерій-фішера" class="level3" data-number="3.5.2">
@@ -990,7 +1020,9 @@ P_{H_0}(Z(X) \geq z) = 1 - P_{H_0}(Z(X) &lt; z) = 1 - \Phi(z) = \alpha
 <section id="z-критерій-фішера-в-python" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="z-критерій-фішера-в-python"><span class="header-section-number">3.6</span> <span class="math inline">\(Z\)</span>-критерій Фішера в Python</h2>
 <p>Напишемо функцію <code>z_test_pvalue</code>, яка буде приймати на вхід параметри <code>sample_mean</code> (середнє арифметичне вибірки), <code>sample_size</code> (кількість спостережень), <code>population_mean</code> (гіпотетичне значення параметра <span class="math inline">\(\mu\)</span>), <code>population_variance</code> (дисперсія генеральної сукупності) та <code>alternative</code> (альтернативна гіпотеза). Функція буде повертати <span class="math inline">\(p\)</span>-значення для двостороннього або одностороннього <span class="math inline">\(Z\)</span>-критерію Фішера.</p>
-<div id="1aaa3d11" class="cell" data-execution_count="13">
+<p><br>
+</p>
+<div id="1cfb8cf0" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_test_pvalue(</span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>    sample_mean,</span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>    sample_size,</span>
@@ -1061,8 +1093,12 @@ P_{H_0}(Z(X) \geq z) = 1 - P_{H_0}(Z(X) &lt; z) = 1 - \Phi(z) = \alpha
 </dl>
 </div>
 </div>
+<p><br>
+</p>
 <p>Тепер ми можемо перевірити гіпотезу про те, що <span class="math inline">\(\mu\)</span> не дорівнює <span class="math inline">\(\mu_0\)</span>, за допомогою <span class="math inline">\(Z\)</span>-критерію Фішера. Для цього ми можемо використати функцію <code>z_test_pvalue</code> та порівняємо з результатами, які ми отримали раніше за допомогою біноміального тесту та нормальної апроксимації.</p>
-<div id="e7bc1ca6" class="cell" data-execution_count="14">
+<p><br>
+</p>
+<div id="49f87b3d" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="annotated-cell-12-3"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
@@ -1091,6 +1127,8 @@ p-значення за нормальною апроксимацією = 0.0721
 p-значення за точним біноміальним тестом = 0.1002</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що <span class="math inline">\(p\)</span>-значення за <span class="math inline">\(Z\)</span>-критерієм Фішера та нормальною апроксимацією збігаються, а точний біноміальний тест дає трохи інше значення. Залишається питання: чи можна уточнити результати <span class="math inline">\(Z\)</span>-тесту при малих вибірках? Відповідь: так, можна. Для цього існує поправка на неперервність, яка дозволяє покращити точність апроксимації і її ми розглянемо далі.</p>
 </section>
 <section id="sec-continuity-correction" class="level2" data-number="3.7">
@@ -1112,7 +1150,9 @@ p-значення за точним біноміальним тестом = 0.1
 <li>Розрахунок в Python: <code>1 - binom.cdf(t - 1, n, mu_0)</code>.</li>
 </ul></li>
 </ul>
-<div id="b92fb72f" class="cell" data-execution_count="15">
+<p><br>
+</p>
+<div id="9ef8cc46" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmp_pvalue_binom_and_norm(n, mu0, t, add_to_x<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція для порівняння p-значення біноміального та нормального розподілів</span></span>
@@ -1192,7 +1232,11 @@ p-значення за точним біноміальним тестом = 0.1
 </dl>
 </div>
 </div>
+<p><br>
+</p>
 <p>Тепер ми можемо порівняти <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів. Для цього викличемо функцію <code>cmp_pvalue_binom_and_norm</code> з параметрами <span class="math inline">\(n\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(t\)</span>.</p>
+<p><br>
+</p>
 <div id="cell-cmp-pvalue-binomial" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1210,7 +1254,9 @@ p-значення за точним біноміальним тестом = 0.1
 </div>
 <p>Якщо порівняти різницю між <span class="math inline">\(p\)</span>-значеннями біноміального та нормального розподілів, то ми отримаємо, що <span class="math inline">\(p\)</span>-значення біноміального розподілу завжди більше за <span class="math inline">\(p\)</span>-значення нормального розподілу. При цьому із збільшенням вибірки ця різниця зменшується. Давайте подивимось на ці різниці для різних значень <span class="math inline">\(t\)</span>.</p>
 <p>Для початку візьмемо <span class="math inline">\(n = 20\)</span> та <span class="math inline">\(t = 10\)</span>.</p>
-<div id="3cb18835" class="cell" data-execution_count="17">
+<p><br>
+</p>
+<div id="55bc940e" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">10</span></span>
 <span id="annotated-cell-15-3"><a href="#annotated-cell-15-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1244,8 +1290,12 @@ p-значення нормального розподілу = 0.5000
 Різниця між p-значеннями = 0.0881</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Тепер візьмемо <span class="math inline">\(n = 20\)</span> та <span class="math inline">\(t = 16\)</span>.</p>
-<div id="c6c8ee8c" class="cell" data-execution_count="18">
+<p><br>
+</p>
+<div id="6f3e8f75" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">16</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1263,8 +1313,10 @@ p-значення нормального розподілу = 0.0036
 Різниця між p-значеннями = 0.0023</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>І накінці візьмемо <span class="math inline">\(n = 200\)</span> та <span class="math inline">\(t = 100\)</span>.</p>
-<div id="8fe78126" class="cell" data-execution_count="19">
+<div id="54d09a77" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">200</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1282,6 +1334,8 @@ p-значення нормального розподілу = 0.5000
 Різниця між p-значеннями = 0.0282</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що з ростом вибірки різниця між <span class="math inline">\(p\)</span>-значеннями біноміального та нормального розподілів зменшується. Але як зробити так, щоб два <span class="math inline">\(p\)</span>-значення збіглися? Для цього слід звернути увагу на точки перетину двох ліній: біноміального та нормального розподілів. Зауважимо, що вони перетинаються приблизно на середині відрізка: між <span class="math inline">\(t-1\)</span> та <span class="math inline">\(t\)</span>. Тому спробуємо “змістити” графік нормального розподілу на <span class="math inline">\(0.5\)</span> праворуч.</p>
 <p><span id="eq-continuity-correction"><span class="math display">\[
 F_{\text{new}}(x) = F_{\text{old}}(x - 0.5)
@@ -1291,7 +1345,9 @@ F_{\text{new}}(x) = F_{\text{old}}(x - 0.5)
 p\text{-значення} = 1 - \Phi(t - 0.5)
 \tag{3.14}\]</span></span> де <span class="math inline">\(\Phi(t - 0.5)\)</span> — функція розподілу стандартного нормального розподілу.</p>
 <p>Подивимось на графік з поправкою на неперервність.</p>
-<div id="51f9b5ec" class="cell" data-execution_count="20">
+<p><br>
+</p>
+<div id="5d78de1a" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cmp_pvalue_binom_and_norm(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="dv">15</span>, add_to_x<span class="op">=-</span><span class="fl">0.5</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1301,9 +1357,13 @@ p\text{-значення} = 1 - \Phi(t - 0.5)
 </div>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів тепер збігаються.</p>
 <p>Порівняємо <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів з поправкою на неперервність.</p>
-<div id="85eb9c9e" class="cell" data-execution_count="21">
+<p><br>
+</p>
+<div id="54cc8fca" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-19-1"><a href="#annotated-cell-19-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="annotated-cell-19-2"><a href="#annotated-cell-19-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
 <span id="annotated-cell-19-3"><a href="#annotated-cell-19-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1341,9 +1401,13 @@ p (нормальне наближення) = 0.0721
 p (з поправкою на неперервність) = 0.1006</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Ми бачимо, що <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів з поправкою на неперервність тепер збігаються.</p>
 <p>Додамо поправку на неперервність до нашої функції <code>z_test_pvalue</code>.</p>
-<div id="ca2e9cb9" class="cell" data-execution_count="22">
+<p><br>
+</p>
+<div id="f98ee1fb" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_test_pvalue(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    sample_mean, </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    sample_size, </span>
@@ -1383,8 +1447,12 @@ p (з поправкою на неперервність) = 0.1006</code></pre>
 <ol type="1">
 <li>Перевірка наявності поправки на неперервність.</li>
 </ol>
+<p><br>
+</p>
 <p>Тепер ми можемо використовувати функцію <code>z_test_pvalue</code> з параметром <code>continuity_correction=True</code>, щоб отримати <span class="math inline">\(p\)</span>-значення з поправкою на неперервність.</p>
-<div id="adafc1e4" class="cell" data-execution_count="23">
+<p><br>
+</p>
+<div id="9abbddbb" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mu0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1404,6 +1472,8 @@ p (з поправкою на неперервність) = 0.1006</code></pre>
 <pre><code>p-значення (Z-критерій з поправкою) = 0.1006</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Чудово, тепер ми можемо використовувати <span class="math inline">\(Z\)</span>-критерій Фішера з поправкою на неперервність для перевірки гіпотез про математичне сподівання випадкової величини <em>з відомою дисперсією</em>. Але що робити, якщо дисперсія невідома? Для цього існує <span class="math inline">\(t\)</span>-критерій Стьюдента, який ми розглянемо далі.</p>
 </section>
 <section id="sec-questions-3" class="level2" data-number="3.8">
