@@ -378,11 +378,13 @@ S = \{Q \geqslant 20\}
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-1-8" class="code-annotation-target"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs_h0, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="st">'PMF, $Binom(0.5, 30)$'</span>)</span>
 <span id="annotated-cell-1-9"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-1-10" class="code-annotation-target"><a href="#annotated-cell-1-10" aria-hidden="true" tabindex="-1"></a>probs_alternative <span class="op">=</span> binom_alternative.pmf(x_grid)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-1-11" class="code-annotation-target"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs_alternative, color<span class="op">=</span>slate, label<span class="op">=</span><span class="st">'PMF, $Binom(0.6, 30)$'</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-1-12" class="code-annotation-target"><a href="#annotated-cell-1-12" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid[crit_reg], probs_alternative[crit_reg], color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Критична область'</span>)</span>
-<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-1-11" class="code-annotation-target"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs_alternative, color<span class="op">=</span>slate,</span>
+<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">'PMF, $Binom(0.6, 30)$'</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-1-13" class="code-annotation-target"><a href="#annotated-cell-1-13" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid[crit_reg], probs_alternative[crit_reg], color<span class="op">=</span>red_pink,</span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">'Критична область'</span>)</span>
+<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-16"><a href="#annotated-cell-1-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-1-17"><a href="#annotated-cell-1-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
@@ -415,11 +417,11 @@ S = \{Q \geqslant 20\}
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="11" data-code-annotation="8">Будуємо гістограму для альтернативної гіпотези</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="11,12" data-code-annotation="8">Будуємо гістограму для альтернативної гіпотези</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="12" data-code-annotation="9">Будуємо гістограму для критичної області</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="13,14" data-code-annotation="9">Будуємо гістограму для критичної області</span>
 </dd>
 </dl>
 </div>
@@ -437,7 +439,7 @@ S = \{Q \geqslant 20\}
 </div>
 </div>
 <p>Як і раніше, нас цікавить імовірність отримати <span class="math inline">\(20\)</span> або більше успіхів. Але якщо раніше ми дивилися на неї для розподілу з <span class="math inline">\(\mu=0.5\)</span> й хотіли, щоб вона була меншою за <span class="math inline">\(5\%\)</span>, то тепер ми дивимося за <span class="math inline">\(\mu = 0.6\)</span> та прагнемо зробити цю величину якомога більшою. Порівняно з обчисленням FPR формула не зміниться, змінюється тільки <span class="math inline">\(\mu\)</span></p>
-<div id="768bc8ec" class="cell" data-execution_count="3">
+<div id="1f971078" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>critical_value <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>power <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.6</span>).cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fpr   <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.5</span>).cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
@@ -451,16 +453,23 @@ S = \{Q \geqslant 20\}
 </div>
 <p>Видно, що потужність близько <span class="math inline">\(30\%\)</span>. Це досить маленьке значення, адже якщо наш продукт прибутковий, то ми побачимо це за допомогою нашого тесту тільки з імовірністю в <span class="math inline">\(30\)</span> відсотків. Ми легко можемо пропустити ефект.</p>
 <p>Що ж можна зробити, щоб зробити потужність вищою? Щоб розібратися, реалізуємо функцію потужності в загальному вигляді.</p>
-<div id="8206ce7e" class="cell" data-execution_count="4">
+<div id="210e633d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_stat_power(N, mu_h0, mu_alternative, alpha):</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>N, p<span class="op">=</span>mu_h0)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>    binom_alternative <span class="op">=</span> binom(n<span class="op">=</span>N, p<span class="op">=</span>mu_alternative)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>    critical_value <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha) <span class="op">+</span> <span class="dv">1</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> binom_alternative.cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> get_stat_power(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Потужність: </span><span class="sc">{</span>result<span class="sc">:.1%}</span><span class="ss">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція потужності для біноміального розподілу</span></span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    N: розмір вибірки</span></span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    mu_h0: ймовірність успіху в нульовій гіпотезі</span></span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    mu_alternative: ймовірність успіху в альтернативній гіпотезі</span></span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha: рівень значущості</span></span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>N, p<span class="op">=</span>mu_h0)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>    binom_alternative <span class="op">=</span> binom(n<span class="op">=</span>N, p<span class="op">=</span>mu_alternative)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-12" class="code-annotation-target"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>    critical_value <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha) <span class="op">+</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-13" class="code-annotation-target"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> binom_alternative.cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> get_stat_power(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Потужність: </span><span class="sc">{</span>result<span class="sc">:.1%}</span><span class="ss">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
@@ -469,19 +478,19 @@ S = \{Q \geqslant 20\}
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">Розподіл нульової гіпотези</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="2">Розподіл нульової гіпотези</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="3">Розподіл альтернативної гіпотези</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="3">Розподіл альтернативної гіпотези</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="4">Критичне значення</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="4">Критичне значення</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="5">Повертаємо потужність</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="13" data-code-annotation="5">Повертаємо потужність</span>
 </dd>
 </dl>
 </div>
@@ -491,7 +500,7 @@ S = \{Q \geqslant 20\}
 </div>
 <p>Коли в житті ми спостерігаємо якесь явище і бачимо його лише кілька разів, ми не впевнені в тому, що воно не випадкове. Якщо ж бачимо його досить часто, то вже складаємо закономірності. Так і в статистиці. Коли ми подивилися на 30 потенційних підписок, ми помічаємо, що частка доставок більше половини. Але ми все ще не впевнені. Щоб отримати більше впевненості, потрібно провести більше спостережень, тобто знайти більше пробних клієнтів.</p>
 <p>Подивимося, що буде, якщо ми проведемо експеримент на 300 клієнтах.</p>
-<div id="3750411a" class="cell" data-execution_count="5">
+<div id="63cd26b4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> get_stat_power(<span class="dv">300</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Потужність при N=300: </span><span class="sc">{</span>result<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -682,37 +691,44 @@ S = \{Q \geqslant 20\}
 <p>Тому перед запуском експериментів аналітики повідомляють <strong>мінімальну величину ефекту, яку можна задетектувати</strong> (Minimal Detectable Effect, MDE). У нашому випадку <span class="math inline">\(MDE = +22\)</span> процентних пункти.</p>
 <p>Більш формально, MDE для гіпотези <span class="math inline">\(H_0: \mu = \mu_0\)</span> — це мінімальний ефект <span class="math inline">\(\delta\)</span>, за якого критерій рівня значущості <span class="math inline">\(\alpha\)</span> для перевірки цієї гіпотези за істинного параметра <span class="math inline">\(\mu = \mu_0 + \delta\)</span> та розміру вибірки <span class="math inline">\(N\)</span> відкидатиме <span class="math inline">\({H}_0\)</span> з потужністю більшою, ніж <span class="math inline">\(1 - \beta\)</span>.</p>
 <p>Найчастіше беруть <span class="math inline">\(1 - \beta = 80\%\)</span>. Напишемо функцію, яка обчислюватиме MDE підбором.</p>
-<div id="9d6db45a" class="cell" data-execution_count="9">
+<div id="90390eed" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binom_test_mde_one_sided(N, mu0, alpha<span class="op">=</span><span class="fl">0.05</span>, min_power<span class="op">=</span><span class="fl">0.8</span>):</span>
-<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    delta_grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span> mu0, <span class="dv">500</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>    power <span class="op">=</span> get_stat_power(N, mu0, mu0 <span class="op">+</span> delta_grid, alpha<span class="op">=</span>alpha)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-8-5" class="code-annotation-target"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a>    fit_delta <span class="op">=</span> delta_grid[power <span class="op">&gt;=</span> min_power]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-8-6" class="code-annotation-target"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fit_delta[<span class="dv">0</span>]</span>
-<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_test_mde_one_sided(<span class="dv">30</span>, <span class="fl">0.5</span>)</span>
-<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MDE: </span><span class="sc">{</span>result<span class="sc">:.1%}</span><span class="ss">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Розрахунок MDE для біноміального тесту</span></span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a><span class="co">    N: розмір вибірки</span></span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a><span class="co">    mu0: параметр нульової гіпотези</span></span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha: рівень значущості</span></span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    min_power: мінімальна потужність</span></span>
+<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-10" class="code-annotation-target"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>    delta_grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span> mu0, <span class="dv">500</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-8-11" class="code-annotation-target"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>    power <span class="op">=</span> get_stat_power(N, mu0, mu0 <span class="op">+</span> delta_grid, alpha<span class="op">=</span>alpha)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-8-12" class="code-annotation-target"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a>    fit_delta <span class="op">=</span> delta_grid[power <span class="op">&gt;=</span> min_power]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-8-13" class="code-annotation-target"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fit_delta[<span class="dv">0</span>]</span>
+<span id="annotated-cell-8-14"><a href="#annotated-cell-8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-8-15"><a href="#annotated-cell-8-15" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_test_mde_one_sided(<span class="dv">30</span>, <span class="fl">0.5</span>)</span>
+<span id="annotated-cell-8-16"><a href="#annotated-cell-8-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MDE: </span><span class="sc">{</span>result<span class="sc">:.1%}</span><span class="ss">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="1" data-code-annotation="1">Функція <code>binom_test_mde_one_sided</code>, яка обчислює MDE:</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="1" data-code-annotation="1">Функція, яка обчислює MDE.</span>
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="2">Створюємо сітку для <span class="math inline">\(\delta\)</span></span>
+<span data-code-cell="annotated-cell-8" data-code-lines="10" data-code-annotation="2">Створюємо сітку для <span class="math inline">\(\delta\)</span></span>
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="3">Обчислюємо потужність для різних значень <span class="math inline">\(\delta\)</span></span>
+<span data-code-cell="annotated-cell-8" data-code-lines="11" data-code-annotation="3">Обчислюємо потужність для різних значень <span class="math inline">\(\delta\)</span></span>
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="5" data-code-annotation="4">Знаходимо значення <span class="math inline">\(\delta\)</span>, для яких потужність більша за <span class="math inline">\(80\%\)</span></span>
+<span data-code-cell="annotated-cell-8" data-code-lines="12" data-code-annotation="4">Знаходимо значення <span class="math inline">\(\delta\)</span>, для яких потужність більша за <span class="math inline">\(80\%\)</span></span>
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="6" data-code-annotation="5">Повертаємо перше значення <span class="math inline">\(\delta\)</span>, для якого потужність більша за <span class="math inline">\(80\%\)</span></span>
+<span data-code-cell="annotated-cell-8" data-code-lines="13" data-code-annotation="5">Повертаємо перше значення <span class="math inline">\(\delta\)</span>, для якого потужність більша за <span class="math inline">\(80\%\)</span></span>
 </dd>
 </dl>
 </div>
@@ -730,25 +746,31 @@ S = \{Q \geqslant 20\}
 <p>Якщо гіпотеза <span class="math inline">\({H}_0\)</span> не відкидається, це означає, що значення <span class="math inline">\(\mu = 0.5\)</span> припустиме для нашої вибірки. Отримані значення можна пояснити значенням <span class="math inline">\(\mu = 0.5\)</span>. Але якщо у нас є механізм перевірки для будь-якого <span class="math inline">\(\mu\)</span>, ми можемо для всіх значень дізнатися, які з них допустимі, і отримати множину можливих значень <span class="math inline">\(\mu\)</span>. Така множина називається <em>довірчим інтервалом</em>.</p>
 <p><strong>Довірчий інтервал</strong> рівня <span class="math inline">\(1 - \alpha\)</span> — множина значень параметра <span class="math inline">\(\mu_0\)</span>, для яких гіпотеза <span class="math inline">\(\mu = \mu_0\)</span> не відкидається критерієм рівня значущості <span class="math inline">\(\alpha\)</span>.</p>
 <p>З визначення випливає, що різні критерії можуть породжувати різні довірчі інтервали. У цій частині розглянемо, які інтервали породжуються двостороннім критерієм. Для цього з кроком <span class="math inline">\(0.001\)</span> переберемо значення <span class="math inline">\(\mu \in [0, 1]\)</span> і перевіримо гіпотези.</p>
-<div id="d29f6622" class="cell" data-execution_count="10">
+<div id="4b71d2bc" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> two_sided_criterion_nonsym(n, mu, alpha):</span>
-<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span>mu)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-9-4" class="code-annotation-target"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>    c2 <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">1</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>    c1 <span class="op">=</span> binom_h0.ppf(alpha<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-9-6" class="code-annotation-target"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c1, c2</span>
-<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">19</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-9-10" class="code-annotation-target"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-9-11" class="code-annotation-target"><a href="#annotated-cell-9-11" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
-<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-9-13" class="code-annotation-target"><a href="#annotated-cell-9-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu_h0 <span class="kw">in</span> mu_grid:</span>
-<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14" aria-hidden="true" tabindex="-1"></a>    c1, c2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, mu_h0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="annotated-cell-9-15"><a href="#annotated-cell-9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> success_cnt <span class="op">&gt;</span> c1 <span class="kw">and</span> success_cnt <span class="op">&lt;</span> c2:</span>
-<span id="annotated-cell-9-16"><a href="#annotated-cell-9-16" aria-hidden="true" tabindex="-1"></a>        mu_no_rejection.append(mu_h0)</span>
-<span id="annotated-cell-9-17"><a href="#annotated-cell-9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-9-18"><a href="#annotated-cell-9-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'95% довірчий інтервал: [</span><span class="sc">{</span><span class="bu">min</span>(mu_no_rejection)<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">max</span>(mu_no_rejection)<span class="sc">}</span><span class="ss">]'</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція, що обчислює критичні значення для двостороннього критерію</span></span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    n: розмір вибірки</span></span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a><span class="co">    mu: параметр нульової гіпотези</span></span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha: рівень значущості</span></span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span>mu)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-9-10" class="code-annotation-target"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a>    c2 <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-9-11" class="code-annotation-target"><a href="#annotated-cell-9-11" aria-hidden="true" tabindex="-1"></a>    c1 <span class="op">=</span> binom_h0.ppf(alpha<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-9-12" class="code-annotation-target"><a href="#annotated-cell-9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c1, c2</span>
+<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-9-15" class="code-annotation-target"><a href="#annotated-cell-9-15" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">19</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-9-16" class="code-annotation-target"><a href="#annotated-cell-9-16" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-9-17" class="code-annotation-target"><a href="#annotated-cell-9-17" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
+<span id="annotated-cell-9-18"><a href="#annotated-cell-9-18" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-9-19" class="code-annotation-target"><a href="#annotated-cell-9-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu_h0 <span class="kw">in</span> mu_grid:</span>
+<span id="annotated-cell-9-20"><a href="#annotated-cell-9-20" aria-hidden="true" tabindex="-1"></a>    c1, c2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, mu_h0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="annotated-cell-9-21"><a href="#annotated-cell-9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> success_cnt <span class="op">&gt;</span> c1 <span class="kw">and</span> success_cnt <span class="op">&lt;</span> c2:</span>
+<span id="annotated-cell-9-22"><a href="#annotated-cell-9-22" aria-hidden="true" tabindex="-1"></a>        mu_no_rejection.append(mu_h0)</span>
+<span id="annotated-cell-9-23"><a href="#annotated-cell-9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-24"><a href="#annotated-cell-9-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'95% довірчий інтервал: [</span><span class="sc">{</span><span class="bu">min</span>(mu_no_rejection)<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">max</span>(mu_no_rejection)<span class="sc">}</span><span class="ss">]'</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
@@ -757,35 +779,35 @@ S = \{Q \geqslant 20\}
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="2">Розподіл нульової гіпотези</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="2">Розподіл нульової гіпотези</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="4" data-code-annotation="3">Права межа критичної області</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="10" data-code-annotation="3">Права межа критичної області</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="4">Ліва межа критичної області</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="11" data-code-annotation="4">Ліва межа критичної області</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="6" data-code-annotation="5">Повертаємо межі критичної області</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="12" data-code-annotation="5">Повертаємо межі критичної області</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="6">Кількість успіхів</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="15" data-code-annotation="6">Кількість успіхів</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="10" data-code-annotation="7">Сітка для <span class="math inline">\(\mu\)</span></span>
+<span data-code-cell="annotated-cell-9" data-code-lines="16" data-code-annotation="7">Сітка для <span class="math inline">\(\mu\)</span></span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="11" data-code-annotation="8">Список для значень <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="17" data-code-annotation="8">Список для значень <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="13" data-code-annotation="9">Перебираємо значення <span class="math inline">\(\mu\)</span> та обчислюємо критичні значення</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="19" data-code-annotation="9">Перебираємо значення <span class="math inline">\(\mu\)</span> та обчислюємо критичні значення</span>
 </dd>
 </dl>
 </div>
@@ -799,7 +821,7 @@ S = \{Q \geqslant 20\}
 <div id="cell-fig-binom-ci" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a>mus_h0 <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">0.438</span>, <span class="fl">0.439</span>, <span class="fl">0.8</span>, <span class="fl">0.81</span>, <span class="fl">0.9</span>]</span>
 <span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">10</span>))</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="annotated-cell-10-4"><a href="#annotated-cell-10-4" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-10-5" class="code-annotation-target"><a href="#annotated-cell-10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu_h0, ax <span class="kw">in</span> <span class="bu">zip</span>(mus_h0, axes.flatten()):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-10-6" class="code-annotation-target"><a href="#annotated-cell-10-6" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span>mu_h0)</span>
@@ -816,7 +838,7 @@ S = \{Q \geqslant 20\}
 <span id="annotated-cell-10-17"><a href="#annotated-cell-10-17" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'gray'</span>, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
 <span id="annotated-cell-10-18"><a href="#annotated-cell-10-18" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="12" onclick="event.preventDefault();">12</a><span id="annotated-cell-10-19" class="code-annotation-target"><a href="#annotated-cell-10-19" aria-hidden="true" tabindex="-1"></a>    rejection_prob <span class="op">=</span> probs[crit_reg].<span class="bu">sum</span>()</span>
-<span id="annotated-cell-10-20"><a href="#annotated-cell-10-20" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'$\mu = </span><span class="sc">{</span>mu_h0<span class="sc">}</span><span class="ss">$'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="annotated-cell-10-20"><a href="#annotated-cell-10-20" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'$\mu = </span><span class="sc">{</span>mu_h0<span class="sc">}</span><span class="ss">$'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
 <span id="annotated-cell-10-21"><a href="#annotated-cell-10-21" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
@@ -874,7 +896,7 @@ S = \{Q \geqslant 20\}
 <div id="fig-binom-ci" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binom-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="power_files/figure-html/fig-binom-ci-output-1.png" width="658" height="804" class="figure-img">
+<img src="power_files/figure-html/fig-binom-ci-output-1.png" width="658" height="654" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;2.5: Довірчі інтервали для біноміального розподілу
@@ -890,23 +912,29 @@ S = \{Q \geqslant 20\}
 <h2 data-number="2.5" class="anchored" data-anchor-id="односторонні-довірчі-інтервали"><span class="header-section-number">2.5</span> Односторонні довірчі інтервали</h2>
 <p>Насправді, двосторонній критерій потрібен вкрай рідко. Контролювати хибно похитивну помилку нам потрібно тільки для відхилень у бік, корисний для бізнесу. У випадку завдання з освітнім сервісом це отримання <em>більшої</em> конверсії в успіх.</p>
 <p>Спробуємо скористатися одностороннім критерієм для побудови довірчого інтервалу.</p>
-<div id="f210abf6" class="cell" data-execution_count="12">
+<div id="cafaa505" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_binom_criterion(n, mu<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.05</span>):</span>
-<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span>mu)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-11-5" class="code-annotation-target"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> q <span class="op">+</span> <span class="dv">1</span></span>
-<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-11-7" class="code-annotation-target"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">19</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-11-8" class="code-annotation-target"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.001</span>, <span class="fl">0.001</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-11-9" class="code-annotation-target"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
-<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-11-11" class="code-annotation-target"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu_h0 <span class="kw">in</span> mu_grid:</span>
-<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a>    crit_val <span class="op">=</span> make_binom_criterion(n<span class="op">=</span><span class="dv">30</span>, mu<span class="op">=</span>mu_h0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> success_cnt <span class="op">&lt;</span> crit_val:</span>
-<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14" aria-hidden="true" tabindex="-1"></a>        mu_no_rejection.append(mu_h0)</span>
-<span id="annotated-cell-11-15"><a href="#annotated-cell-11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-11-16"><a href="#annotated-cell-11-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'95% довірчий інтервал: [</span><span class="sc">{</span><span class="bu">min</span>(mu_no_rejection)<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">max</span>(mu_no_rejection)<span class="sc">}</span><span class="ss">]'</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція, що обчислює критичне значення для одностороннього критерію</span></span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a><span class="co">    n: розмір вибірки</span></span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a><span class="co">    mu: параметр нульової гіпотези</span></span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha: рівень значущості</span></span>
+<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-11-9" class="code-annotation-target"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span>n, p<span class="op">=</span>mu)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-11-10" class="code-annotation-target"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> binom_h0.ppf(<span class="dv">1</span> <span class="op">-</span> alpha)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-11-11" class="code-annotation-target"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> q <span class="op">+</span> <span class="dv">1</span></span>
+<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-11-13" class="code-annotation-target"><a href="#annotated-cell-11-13" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">19</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-11-14" class="code-annotation-target"><a href="#annotated-cell-11-14" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.001</span>, <span class="fl">0.001</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-11-15" class="code-annotation-target"><a href="#annotated-cell-11-15" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
+<span id="annotated-cell-11-16"><a href="#annotated-cell-11-16" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-11-17" class="code-annotation-target"><a href="#annotated-cell-11-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu_h0 <span class="kw">in</span> mu_grid:</span>
+<span id="annotated-cell-11-18"><a href="#annotated-cell-11-18" aria-hidden="true" tabindex="-1"></a>    crit_val <span class="op">=</span> make_binom_criterion(n<span class="op">=</span><span class="dv">30</span>, mu<span class="op">=</span>mu_h0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="annotated-cell-11-19"><a href="#annotated-cell-11-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> success_cnt <span class="op">&lt;</span> crit_val:</span>
+<span id="annotated-cell-11-20"><a href="#annotated-cell-11-20" aria-hidden="true" tabindex="-1"></a>        mu_no_rejection.append(mu_h0)</span>
+<span id="annotated-cell-11-21"><a href="#annotated-cell-11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-22"><a href="#annotated-cell-11-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'95% довірчий інтервал: [</span><span class="sc">{</span><span class="bu">min</span>(mu_no_rejection)<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">max</span>(mu_no_rejection)<span class="sc">}</span><span class="ss">]'</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
@@ -915,31 +943,31 @@ S = \{Q \geqslant 20\}
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="2">Розподіл нульової гіпотези</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="9" data-code-annotation="2">Розподіл нульової гіпотези</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="3">Критичне значення</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="10" data-code-annotation="3">Критичне значення</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="5" data-code-annotation="4">Повертаємо критичне значення</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="11" data-code-annotation="4">Повертаємо критичне значення</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="7" data-code-annotation="5">Кількість успіхів</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="13" data-code-annotation="5">Кількість успіхів</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="8" data-code-annotation="6">Сітка для <span class="math inline">\(\mu\)</span></span>
+<span data-code-cell="annotated-cell-11" data-code-lines="14" data-code-annotation="6">Сітка для <span class="math inline">\(\mu\)</span></span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="9" data-code-annotation="7">Список для значень <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="15" data-code-annotation="7">Список для значень <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="11,12,13,14" data-code-annotation="8">Перебираємо значення <span class="math inline">\(\mu\)</span> та обчислюємо критичне значення</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="17,18,19,20" data-code-annotation="8">Перебираємо значення <span class="math inline">\(\mu\)</span> та обчислюємо критичне значення</span>
 </dd>
 </dl>
 </div>
@@ -950,7 +978,7 @@ S = \{Q \geqslant 20\}
 <p>Коли ми використовували двосторонній інтервал, ми отримали ліву межу <span class="math inline">\(0.439 &lt; 0.467\)</span>. Виходить, що односторонній інтервал з точки зору лівої межі дає нам більше інформації. При цьому з точки зору правої межі ми втрачаємо інформацію зовсім. Вона дорівнює 1 просто тому, що ймовірність не може бути більшою.</p>
 <p>Насправді зазвичай на праву межу не дивляться під час аналізу, коли ми шукаємо позитивний ефект.</p>
 <p>Припустимо, ми отримали не <span class="math inline">\(19\)</span> успіхів, а <span class="math inline">\(22\)</span>. Побудуємо 2 види інтервалів.</p>
-<div id="94947f4e" class="cell" data-execution_count="13">
+<div id="719eabd3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">22</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
@@ -965,7 +993,7 @@ S = \{Q \geqslant 20\}
 <pre><code>Двосторонній 95% ДІ: [0.542 - 0.877]</code></pre>
 </div>
 </div>
-<div id="dec0812f" class="cell" data-execution_count="14">
+<div id="149fb46a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">22</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.001</span>, <span class="fl">0.001</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
@@ -983,7 +1011,7 @@ S = \{Q \geqslant 20\}
 <p>За обома довірчими інтервалами ми робимо висновок, що конверсія значимо відрізняється від <span class="math inline">\(50\%\)</span>. Але односторонній інтервал дає кращу нижню оцінку на ймовірність успіху. Ми можемо зрозуміти, що наша конверсія більша за <span class="math inline">\(57\%\)</span>. А інформація з двостороннього інтервалу про те, що ймовірність менша за <span class="math inline">\(88\%\)</span> не додає нам користі.</p>
 <p>Навіщо ж ми тоді взагалі використовуємо двосторонній інтервал? Щоб це зрозуміти, подивимося, як виглядають візуально межі для одностороннього інтервалу.</p>
 <div id="cell-fig-binom-ci-22" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">10</span>))</span>
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu_h0, ax <span class="kw">in</span> <span class="bu">zip</span>(mus_h0, axes.flatten()):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-14-4" class="code-annotation-target"><a href="#annotated-cell-14-4" aria-hidden="true" tabindex="-1"></a>    binom_h0 <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span>mu_h0)</span>
@@ -1055,7 +1083,7 @@ S = \{Q \geqslant 20\}
 <div id="fig-binom-ci-22" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binom-ci-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="power_files/figure-html/fig-binom-ci-22-output-1.png" width="658" height="802" class="figure-img">
+<img src="power_files/figure-html/fig-binom-ci-22-output-1.png" width="658" height="654" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-ci-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;2.6: Односторонній довірчий інтервал для <span class="math inline">\(22\)</span> успіхів
@@ -1067,7 +1095,7 @@ S = \{Q \geqslant 20\}
 <p>Порівняно з <a href="#fig-binom-ci" class="quarto-xref">Рисунок&nbsp;<span>2.5</span></a> ми бачимо, що права критична область стала більшою через те, що там тепер знаходиться не <span class="math inline">\(2.5\%\)</span>, а <span class="math inline">\(5\%\)</span> від усіх значень. При цьому лівої критичної області просто не існує, тому за великих <span class="math inline">\(\mu\)</span> не відбувається потрапляння <span class="math inline">\(19\)</span> до неї, а значить ми не відкидаємо гіпотезу.</p>
 <p>Зауважимо, що якби ми будували двосторонній інтервал, але з удвічі більшою <span class="math inline">\(\alpha\)</span>, потрапляння в праву критичну область траплялися б за тих самих <span class="math inline">\(\mu\)</span>, що й в односторонньому критерії. Тому часто для пошуку односторонньої межі будують двосторонній довірчий інтервал із більшою <span class="math inline">\(\alpha\)</span>, ігноруючи при цьому праву межу. Це зручно, оскільки можна користуватися тільки однією функцією для критерію.</p>
 <p>Перевіримо, що вийде за <span class="math inline">\(\alpha = 0.1\)</span>.</p>
-<div id="77e4b531" class="cell" data-execution_count="16">
+<div id="3516a82b" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
@@ -1077,9 +1105,9 @@ S = \{Q \geqslant 20\}
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> success_cnt <span class="op">&gt;</span> c1 <span class="kw">and</span> success_cnt <span class="op">&lt;</span> c2:</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        mu_no_rejection.append(mu_h0)</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'95% довірчий інтервал: [</span><span class="sc">{</span><span class="bu">min</span>(mu_no_rejection)<span class="sc">:.3f}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">max</span>(mu_no_rejection)<span class="sc">:.3f}</span><span class="ss">]'</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'95% ДІ: [</span><span class="sc">{</span><span class="bu">min</span>(mu_no_rejection)<span class="sc">:.3f}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">max</span>(mu_no_rejection)<span class="sc">:.3f}</span><span class="ss">]'</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% довірчий інтервал: [0.467 - 0.778]</code></pre>
+<pre><code>95% ДІ: [0.467 - 0.778]</code></pre>
 </div>
 </div>
 <p>Бачимо, що отримали таку саму ліву межу, як і в односторонньому інтервалі.</p>
@@ -1104,21 +1132,28 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 <li>Рахуємо довірчий інтервал для <span class="math inline">\(\alpha = 0.05\)</span>.</li>
 </ul>
 <p>Перевіряємо, що частка випадків, коли параметр <span class="math inline">\(\mu_0\)</span> опинився всередині інтервалу, хоча б <span class="math inline">\(95\%\)</span>.</p>
-<div id="7bca95ef" class="cell" data-execution_count="17">
+<div id="3a5f6798" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="annotated-cell-16-2"><a href="#annotated-cell-16-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-16-3" class="code-annotation-target"><a href="#annotated-cell-16-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
 <span id="annotated-cell-16-4"><a href="#annotated-cell-16-4" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-16-5" class="code-annotation-target"><a href="#annotated-cell-16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_binomial_confint(n, alpha, q):</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-16-6" class="code-annotation-target"><a href="#annotated-cell-16-6" aria-hidden="true" tabindex="-1"></a>    mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>) <span class="co"># np.arange(0, 1.001, 0.001)</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-16-7" class="code-annotation-target"><a href="#annotated-cell-16-7" aria-hidden="true" tabindex="-1"></a>    mu_no_rejection <span class="op">=</span> []</span>
+<span id="annotated-cell-16-6"><a href="#annotated-cell-16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція, що обчислює довірчий інтервал для біноміального розподілу</span></span>
 <span id="annotated-cell-16-8"><a href="#annotated-cell-16-8" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-16-9" class="code-annotation-target"><a href="#annotated-cell-16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> mu_h0 <span class="kw">in</span> mu_grid:</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-16-10" class="code-annotation-target"><a href="#annotated-cell-16-10" aria-hidden="true" tabindex="-1"></a>        c1, c2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, mu_h0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-16-11" class="code-annotation-target"><a href="#annotated-cell-16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> q <span class="op">&gt;</span> c1 <span class="kw">and</span> q <span class="op">&lt;</span> c2:</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-16-12" class="code-annotation-target"><a href="#annotated-cell-16-12" aria-hidden="true" tabindex="-1"></a>            mu_no_rejection.append(mu_h0)</span>
-<span id="annotated-cell-16-13"><a href="#annotated-cell-16-13" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-16-14" class="code-annotation-target"><a href="#annotated-cell-16-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">min</span>(mu_no_rejection), <span class="bu">max</span>(mu_no_rejection)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-16-9"><a href="#annotated-cell-16-9" aria-hidden="true" tabindex="-1"></a><span class="co">    n: розмір вибірки</span></span>
+<span id="annotated-cell-16-10"><a href="#annotated-cell-16-10" aria-hidden="true" tabindex="-1"></a><span class="co">    alpha: рівень значущості</span></span>
+<span id="annotated-cell-16-11"><a href="#annotated-cell-16-11" aria-hidden="true" tabindex="-1"></a><span class="co">    q: кількість успіхів</span></span>
+<span id="annotated-cell-16-12"><a href="#annotated-cell-16-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-16-13" class="code-annotation-target"><a href="#annotated-cell-16-13" aria-hidden="true" tabindex="-1"></a>    mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>) <span class="co"># np.arange(0, 1.001, 0.001)</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-16-14" class="code-annotation-target"><a href="#annotated-cell-16-14" aria-hidden="true" tabindex="-1"></a>    mu_no_rejection <span class="op">=</span> []</span>
+<span id="annotated-cell-16-15"><a href="#annotated-cell-16-15" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-16-16" class="code-annotation-target"><a href="#annotated-cell-16-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> mu_h0 <span class="kw">in</span> mu_grid:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-16-17" class="code-annotation-target"><a href="#annotated-cell-16-17" aria-hidden="true" tabindex="-1"></a>        c1, c2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, mu_h0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-16-18" class="code-annotation-target"><a href="#annotated-cell-16-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> q <span class="op">&gt;</span> c1 <span class="kw">and</span> q <span class="op">&lt;</span> c2:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-16-19" class="code-annotation-target"><a href="#annotated-cell-16-19" aria-hidden="true" tabindex="-1"></a>            mu_no_rejection.append(mu_h0)</span>
+<span id="annotated-cell-16-20"><a href="#annotated-cell-16-20" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="10" onclick="event.preventDefault();">10</a><span id="annotated-cell-16-21" class="code-annotation-target"><a href="#annotated-cell-16-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">min</span>(mu_no_rejection), <span class="bu">max</span>(mu_no_rejection)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
@@ -1135,37 +1170,37 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="6" data-code-annotation="4">Сітка для <span class="math inline">\(\mu\)</span></span>
+<span data-code-cell="annotated-cell-16" data-code-lines="13" data-code-annotation="4">Сітка для <span class="math inline">\(\mu\)</span></span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="7" data-code-annotation="5">Список для значень <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="14" data-code-annotation="5">Список для значень <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="9" data-code-annotation="6">Перебираємо значення <span class="math inline">\(\mu\)</span> та осі</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="16" data-code-annotation="6">Перебираємо значення <span class="math inline">\(\mu\)</span> та осі</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="10" data-code-annotation="7">Обчислюємо критичні значення</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="17" data-code-annotation="7">Обчислюємо критичні значення</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="11" data-code-annotation="8">Чи потрапляє <span class="math inline">\(q\)</span> у критичну область</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="18" data-code-annotation="8">Чи потрапляє <span class="math inline">\(q\)</span> у критичну область</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="12" data-code-annotation="9">Додаємо значення <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="19" data-code-annotation="9">Додаємо значення <span class="math inline">\(\mu\)</span>, для яких <span class="math inline">\({H}_0\)</span> не відкидається</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="10">10</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="14" data-code-annotation="10">Повертаємо межі довірчого інтервалу</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="21" data-code-annotation="10">Повертаємо межі довірчого інтервалу</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>Тепер запустимо експеримент. Для цього зафіксуємо <span class="math inline">\(\mu_0 = 0.5\)</span> й проведемо <span class="math inline">\(1000\)</span> експериментів. У кожному з них будемо генерувати <span class="math inline">\(30\)</span> успіхів, а потім перевіряти, чи потрапила <span class="math inline">\(\mu_0\)</span> у довірчий інтервал.</p>
-<div id="33705297" class="cell" data-execution_count="18">
+<div id="0318b407" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>N_EXPERIMENTS <span class="op">=</span> <span class="dv">1000</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-17-2" class="code-annotation-target"><a href="#annotated-cell-17-2" aria-hidden="true" tabindex="-1"></a>SAMPLE_SIZE <span class="op">=</span> <span class="dv">30</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-17-3" class="code-annotation-target"><a href="#annotated-cell-17-3" aria-hidden="true" tabindex="-1"></a>latent_mu <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1236,7 +1271,7 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Відсоток успішних випадків: 61.40%
-Час виконання: 3.5348 секунди</code></pre>
+Час виконання: 4.1015 секунди</code></pre>
 </div>
 </div>
 <p>Зазначимо, що цей код працював понад 5 хвилин. Це через те, що під час кожного експерименту потрібно побудувати довірчий інтервал, а значить перевірити 1000 можливих параметрів <span class="math inline">\(\mu_0\)</span>.</p>
@@ -1246,17 +1281,49 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 <p>Під час формулювання властивості ми припускаємо, що є деяка <span class="math inline">\(\mu_0\)</span> — ймовірність успіху в генеральній сукупності. Коли ми проводимо штучний експеримент, ми фіксуємо її й можемо вважати істинною <span class="math inline">\(\mu\)</span>.</p>
 <p>Щоразу ми генеруємо <span class="math inline">\(Q \sim Binom(\mu_0, 30)\)</span> й перевіряємо, чи потрапила <span class="math inline">\(\mu_0\)</span> у довірчий інтервал. Намалюємо розподіл статистики <span class="math inline">\(Q\)</span>, який уже нам знайомий. Намалюємо й область ймовірності <span class="math inline">\(\leqslant \alpha\)</span>, як ми робили це раніше.</p>
 <div id="cell-fig-binom-ci-1" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1" aria-hidden="true" tabindex="-1"></a>mu0 <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="annotated-cell-18-2"><a href="#annotated-cell-18-2" aria-hidden="true" tabindex="-1"></a>binom_mu0 <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span>mu0)</span>
-<span id="annotated-cell-18-3"><a href="#annotated-cell-18-3" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> binom_mu0.pmf(x_grid)</span>
+<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-18-1" class="code-annotation-target"><a href="#annotated-cell-18-1" aria-hidden="true" tabindex="-1"></a>mu0 <span class="op">=</span> <span class="fl">0.5</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-18-2" class="code-annotation-target"><a href="#annotated-cell-18-2" aria-hidden="true" tabindex="-1"></a>binom_mu0 <span class="op">=</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span>mu0)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-18-3" class="code-annotation-target"><a href="#annotated-cell-18-3" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> binom_mu0.pmf(x_grid)</span>
 <span id="annotated-cell-18-4"><a href="#annotated-cell-18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-18-5"><a href="#annotated-cell-18-5" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="ss">f'PMF, $Binom(</span><span class="sc">{</span>mu0<span class="sc">}</span><span class="ss">, 30)$'</span>)</span>
-<span id="annotated-cell-18-6"><a href="#annotated-cell-18-6" aria-hidden="true" tabindex="-1"></a>c1, c2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, mu0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="annotated-cell-18-7"><a href="#annotated-cell-18-7" aria-hidden="true" tabindex="-1"></a>crit_reg <span class="op">=</span> (x_grid <span class="op">&gt;=</span> c2) <span class="op">|</span> (x_grid <span class="op">&lt;=</span> c1)</span>
-<span id="annotated-cell-18-8"><a href="#annotated-cell-18-8" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid[crit_reg], probs[crit_reg],</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-18-5" class="code-annotation-target"><a href="#annotated-cell-18-5" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid, probs, color<span class="op">=</span>turquoise, label<span class="op">=</span><span class="ss">f'PMF, $Binom(</span><span class="sc">{</span>mu0<span class="sc">}</span><span class="ss">, 30)$'</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-18-6" class="code-annotation-target"><a href="#annotated-cell-18-6" aria-hidden="true" tabindex="-1"></a>c1, c2 <span class="op">=</span> two_sided_criterion_nonsym(<span class="dv">30</span>, mu0, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-18-7" class="code-annotation-target"><a href="#annotated-cell-18-7" aria-hidden="true" tabindex="-1"></a>crit_reg <span class="op">=</span> (x_grid <span class="op">&gt;=</span> c2) <span class="op">|</span> (x_grid <span class="op">&lt;=</span> c1)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-18-8" class="code-annotation-target"><a href="#annotated-cell-18-8" aria-hidden="true" tabindex="-1"></a>plt.bar(x_grid[crit_reg], probs[crit_reg],</span>
 <span id="annotated-cell-18-9"><a href="#annotated-cell-18-9" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>red_pink, label<span class="op">=</span><span class="st">'Критична область'</span>)</span>
 <span id="annotated-cell-18-10"><a href="#annotated-cell-18-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="annotated-cell-18-11"><a href="#annotated-cell-18-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-18-11"><a href="#annotated-cell-18-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="1" data-code-annotation="1">Істинне значення ймовірності успіху</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="2" data-code-annotation="2">Розподіл нульової гіпотези</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="3" data-code-annotation="3">Обчислюємо ймовірності</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="5" data-code-annotation="4">Будуємо гістограму</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="6" data-code-annotation="5">Обчислюємо критичні значення</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="7" data-code-annotation="6">Критична область</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="8,9" data-code-annotation="7">Підсвічуємо критичну область</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-display">
 <div id="fig-binom-ci-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1283,7 +1350,7 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 <h3 data-number="2.6.2" class="anchored" data-anchor-id="sec-ci-prop-2"><span class="header-section-number">2.6.2</span> Довірчий інтервал Вілсона</h3>
 <p>Розглянутий зараз алгоритм побудови довірчого інтервалу працює занадто довго. У Python є функції, які дозволяють швидше розрахувати інтервал. Наприклад, можна скористатися методом Вілсона і функцією <code>proportion_confint</code>.</p>
 <p>Повторимо експерименти з новим типом довірчого інтервалу, тут можемо дозволити більше реалізацій вибірки, оскільки інтервал рахується недовго.</p>
-<div id="f98030f6" class="cell" data-execution_count="20">
+<div id="7d5c4e02" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.proportion <span class="im">import</span> proportion_confint</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -1315,12 +1382,12 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Час виконання: </span><span class="sc">{</span>end_time <span class="op">-</span> start_time<span class="sc">:.4f}</span><span class="ss"> секунди"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Відсоток успішних випадків: 96.60%
-Час виконання: 0.0715 секунди</code></pre>
+Час виконання: 0.0807 секунди</code></pre>
 </div>
 </div>
 <p>Зауважимо, що наше <span class="math inline">\(\mu\)</span> може знаходитись в довірчому інтервалі менше, ніж у <span class="math inline">\(95\%\)</span> випадків. Це відбувається через те, що швидкі методи працюють наближено, оцінюючи розподіл статистики при збільшенні розміру вибірки. Чим розмір вибірки більший, тим ближчим буде інтервал до <span class="math inline">\(95\%\)</span>-ного.</p>
 <p>Залежність частки успішних влучень <span class="math inline">\(\mu\)</span> у довірчий інтервал від розміру вибірки зобразимо на <a href="#fig-binom-ci-2" class="quarto-xref">Рисунок&nbsp;<span>2.8</span></a>.</p>
-<div id="322fedbc" class="cell" data-execution_count="21">
+<div id="3d4d9af0" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1" aria-hidden="true" tabindex="-1"></a>n_grid <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">25</span>).tolist()</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-20-2" class="code-annotation-target"><a href="#annotated-cell-20-2" aria-hidden="true" tabindex="-1"></a>interval_success_rate <span class="op">=</span> []</span>
 <span id="annotated-cell-20-3"><a href="#annotated-cell-20-3" aria-hidden="true" tabindex="-1"></a></span>

@@ -26,10 +26,14 @@ with open("_common.py") as f:
 - $X_1, X_2, ..., X_7$ --- значення середньої тривалості нарад у новому форматі;
 - Будемо вважати, що $X$ з нормального розподілу, тобто $X \sim N(\mu, \sigma^2)$.
 
+\
+
 ```{python}
 meeting_time = np.array([50, 55, 70, 45, 40, 70, 80])
 print(f"Середнє значення: {np.mean(meeting_time):.2f} хвилин")
 ```
+
+\
 
 Наша гіпотеза звучить так:
 
@@ -66,10 +70,14 @@ $$ {#eq-sample-variance}
 
 Для розрахунку вибіркової дисперсії в Python можна скористатися функцією `np.var` з параметром `ddof=1`, що означає, що ми ділимо на $n - 1$.
 
+\
+
 ```{python}
 meeting_time_var = np.var(meeting_time, ddof=1)
 print(f"Вибіркова дисперсія: {meeting_time_var:.2f} хвилин")
 ```
+
+\
 
 Давайте введемо новий критерій $t'$-тест, у якому ми підставимо:
 
@@ -93,8 +101,23 @@ print(f"Вибіркова дисперсія: {meeting_time_var:.2f} хвили
 - `sample_size` --- розмір вибірки;
 - `sample_distr` --- розподіл, з якого ми генеруємо вибірку.
 
+\
+
 ```{python}
-def sample_statistics(number_of_experiments, statistic_function, sample_size, sample_distr):
+def sample_statistics(
+    number_of_experiments,
+    statistic_function, 
+    sample_size, 
+    sample_distr
+):
+    """
+    Генерує вибірку з розподілу та обчислює статистику для кожної вибірки.
+    
+    number_of_experiments: кількість експериментів
+    statistic_function: функція, яка обчислює статистику
+    sample_size: розмір вибірки
+    sample_distr: розподіл, з якого генеруємо вибірку
+    """
     statistic_sample = []
     for _ in range(number_of_experiments):
         sample = sample_distr.rvs(sample_size)
@@ -103,33 +126,44 @@ def sample_statistics(number_of_experiments, statistic_function, sample_size, sa
     return statistic_sample
 ```
 
+\
+
 Тепер перевіримо, чи дійсно $t(X)$ розподілена нормально. Для цього скористаємося функцією `sample_statistics` та побудуємо гістограму для $t(X)$. Генерувати вибірку будемо з нормального розподілу $\mathcal{N}(5, 3^2)$.
+
+\
 
 ```{python}
 #| label: fig-t-test
 #| fig-cap: Симуляція розподілу $t(X)$ та $Z(X)$
 
-sample_size = 7
-M = 100000
-sample_distr = norm(loc=5, scale=3)
+sample_size = 7 # <1>
+M = 100000 # <1>
+sample_distr = norm(loc=5, scale=3) # <1>
 
-T_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / np.sqrt(np.var(sample, ddof=1))
-Z_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / sample_distr.std()
+T_X = lambda x: ( # <2>
+    np.sqrt(sample_size) * (np.mean(x) - sample_distr.mean()) / # <2>
+    np.sqrt(np.var(x, ddof=1)) # <2>
+) # <2>
 
-samples = {
-    "T(X)": sample_statistics(
-    number_of_experiments=M, statistic_function=T_X,
-    sample_size=sample_size, sample_distr=sample_distr),
+Z_X = lambda x: ( # <2>
+    np.sqrt(sample_size) * (np.mean(x) - sample_distr.mean()) / # <2>
+    sample_distr.std() # <2>
+) # <2>
 
-    "Z(X)": sample_statistics(
-    number_of_experiments=M, statistic_function=Z_X,
-    sample_size=sample_size, sample_distr=sample_distr)
-}
+samples = { # <3>
+    "T(X)": sample_statistics( # <3>
+    number_of_experiments=M, statistic_function=T_X, # <3>
+    sample_size=sample_size, sample_distr=sample_distr), # <3>
 
-for i, name in enumerate(["T(X)", "Z(X)"]):
-    plt.subplot(1, 2, i + 1)
-    current_sample = samples[name]
-    l_bound, r_bound = np.quantile(current_sample, [0.001, 0.999])
+    "Z(X)": sample_statistics( # <3>
+    number_of_experiments=M, statistic_function=Z_X, # <3>
+    sample_size=sample_size, sample_distr=sample_distr) # <3>
+} # <3>
+
+for i, name in enumerate(["T(X)", "Z(X)"]): # <4>
+    plt.subplot(1, 2, i + 1) # <4>
+    current_sample = samples[name] # <4>
+    l_bound, r_bound = np.quantile(current_sample, [0.001, 0.999]) # <4>
 
     x = np.linspace(l_bound, r_bound, 1000)
     sns.distplot(current_sample, label='Емпіричний розподіл', color=turquoise)
@@ -142,6 +176,12 @@ for i, name in enumerate(["T(X)", "Z(X)"]):
 
 plt.show()
 ```
+1. Формування параметрів.
+2. Статистика $t(X)$ та $Z(X)$.
+3. Генерація вибірки та обчислення статистики.
+4. Візуалізація результатів.
+
+\
 
 Ми бачимо, що:
 
@@ -167,16 +207,17 @@ plt.show()
 
 Давайте подивимося на розподіл $\sqrt{S^2}$ на все тому ж нормальному розподілі.
 
+\
 
 ```{python}
 #| label: fig-sample-variance
 #| fig-cap: Розподіл $\sqrt{S^2}$
 
-S2 = lambda sample: np.std(sample, ddof=1)
-S2_sample = sample_statistics(
-    number_of_experiments=M, statistic_function=S2,
-    sample_size=sample_size, sample_distr=sample_distr
-)
+S2 = lambda sample: np.std(sample, ddof=1) # <1>
+S2_sample = sample_statistics( # <2>
+    number_of_experiments=M, statistic_function=S2, # <2>
+    sample_size=sample_size, sample_distr=sample_distr # <2>
+) # <2>
 
 sns.distplot(S2_sample, label='Емпіричний розподіл', color=turquoise)
 plt.legend()
@@ -185,6 +226,10 @@ plt.ylabel('Щільність')
 plt.grid(linewidth=0.2)
 plt.show()
 ```
+1. Статистика $S^2$.
+2. Генерація вибірки та обчислення статистики.
+
+\
 
 Розподіл $\sqrt{S^2}$ несиметричний й незрозуміло як розподілений. Тому, коли ми якусь величину з нормального розподілу ділимо на несиметричний незрозумілий розподіл, ми й отримуємо, що наша статистика $t$ не з нормального розподілу.
 
@@ -275,37 +320,53 @@ $$ {#eq-t-p-value2}
 
 Подивимось на розподіл $\chi^2$ та розподіл $\eta$.
 
+\
+
 ```{python}
 #| label: fig-chi2
 #| fig-cap: Розподіл емпіричного $\eta$ та теоретичного $\chi^2$.
-sample_size = 7
-sample_distr = norm(loc=5, scale=3)
-sample = sample_distr.rvs(sample_size)
-M = 10000
+sample_size = 7 # <1>
+sample_distr = norm(loc=5, scale=3) # <1>
+sample = sample_distr.rvs(sample_size) # <1>
+M = 10000 # <1>
 
-eta_statistic = lambda sample: np.var(sample, ddof=1) * (sample_size - 1) / sample_distr.var()
-eta_sample = sample_statistics(
-    number_of_experiments=M, statistic_function=eta_statistic,
-    sample_size=sample_size, sample_distr=sample_distr
-)
+eta_stat = lambda x: ( # <2>
+    np.var(x, ddof=1) * (sample_size - 1) / sample_distr.var() # <2>
+) # <2>
 
-chi2_dist = chi2(df=sample_size-1)
+eta_sample = sample_statistics( # <3>
+    number_of_experiments=M, # <3>
+    statistic_function=eta_stat, # <3>
+    sample_size=sample_size, # <3>
+    sample_distr=sample_distr # <3>
+) # <3>
 
-l_bound, r_bound = np.quantile(eta_sample, [0.001, 0.999])
-x = np.linspace(l_bound, r_bound, 1000)
+chi2_dist = chi2(df=sample_size - 1) # <4>
+l, r = np.quantile(eta_sample, [0.001, 0.999]) # <5>
 
+x = np.linspace(l, r, 1000)
 sns.distplot(eta_sample, label='Емпіричний розподіл', color=turquoise)
 plt.plot(x, chi2_dist.pdf(x), label='$\chi^2$', color=red_pink)
+
 plt.legend()
 plt.xlabel('$\eta$')
 plt.ylabel('Щільність')
 plt.grid(linewidth=0.2)
 plt.show()
 ```
+1. Формування параметрів.
+2. Статистика $\eta$.
+3. Генерація вибірки та обчислення статистики.
+4. Розподіл $\chi^2$.
+5. Візуалізація результатів.
+
+\
 
 Ми бачимо, що емпіричний розподіл $\eta$ та теоретичний $\chi^2$ збігаються. Це означає, що ми можемо використовувати $t$-тест для перевірки гіпотези.
 
 Тепер перевіримо, чи дійсно $t(X)$ описується розподілом Стьюдента. Для цього скористаємося функцією `sample_statistics` та побудуємо гістограму для $t(X)$. Генерувати вибірку будемо з нормального розподілу $\mathcal{N}(5, 3^2)$.
+
+\
 
 ```{python}
 #| label: fig-t-test-dist
@@ -314,30 +375,37 @@ plt.show()
 sample_size = 7
 sample_distr = norm(loc=5, scale=3)
 sample = sample_distr.rvs(sample_size)
-M = 10000
+M = 10_000
 
-T_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / np.std(sample, ddof=1)
-T_sample = sample_statistics(
-    number_of_experiments=M, statistic_function=T_X,
-    sample_size=sample_size, sample_distr=sample_distr
+T_X = lambda x: (
+    np.sqrt(sample_size) * (np.mean(x) - sample_distr.mean()) /
+    np.std(x, ddof=1)
 )
 
+T_sample = sample_statistics(
+    number_of_experiments=M,
+    statistic_function=T_X,
+    sample_size=sample_size,
+    sample_distr=sample_distr
+)
 
-T_dist = t(df=sample_size-1)
-
-l_bound, r_bound = np.quantile(T_sample, [0.001, 0.999])
-x = np.linspace(l_bound, r_bound, 1000)
+T_dist = t(df=sample_size - 1)
+l, r = np.quantile(T_sample, [0.001, 0.999])
+x = np.linspace(l, r, 1000)
 
 sns.distplot(T_sample, color=turquoise, label='Емпіричний розподіл')
 plt.plot(x, T_dist.pdf(x), c=red_pink, label='$t_{n-1}$')
-plt.plot(x, norm(0, 1).pdf(x), c=slate, linestyle='--', label='$\mathcal{N}(0, 1)$')
+plt.plot(x, norm(0, 1).pdf(x), c=slate, ls='--', label='$\mathcal{N}(0, 1)$')
+
 plt.legend()
 plt.xlabel('$t(X)$')
 plt.ylabel('Щільність')
-plt.xlim((l_bound, r_bound))
+plt.xlim(l, r)
 plt.grid(linewidth=0.2)
 plt.show()
 ```
+
+\
 
 Розподіл Стьюдента практично ідеально описує дані, тоді як нормальний розподіл більш "центрований".
 
@@ -349,6 +417,8 @@ plt.show()
 - `nan_policy` --- як обробляти NaN. Може приймати значення `propagate`, `raise`, `omit`. За замовчуванням `propagate`;
 - `alternative` --- альтернативна гіпотеза. Може приймати значення `two-sided`, `less`, `greater`. За замовчуванням `two-sided`.
 
+\
+
 ```{python}
 meeting_time = np.array([50, 55, 70, 45, 40, 70, 80])
 
@@ -356,6 +426,8 @@ ttest_result = ttest_1samp(meeting_time, 70, alternative='less')
 print(f"Статистика: {ttest_result.statistic:.2f}")
 print(f"p-значення: {ttest_result.pvalue:.2f}")
 ```
+
+\
 
 Оскільки $p$-значення менше 0.05, то ми відхиляємо нульову гіпотезу. Це означає, що середня тривалість нарад у новому форматі триває менше 70 хвилин.
 Відповідно до $t$-тесту, ми можемо стверджувати, що новий формат нарад дійсно скорочує їх тривалість.
@@ -413,17 +485,27 @@ $$ {#eq-t-interval3}
 - `scale` --- стандартна девіація, за замовчуванням `1`.
 
 Для побудови лівостороннього довірчого інтервалу візьмемо `confidence` на рівні 90%, оскільки ми хочемо перевірити, чи тривалість нарад у новому форматі *менша* 70 хвилин.
+
+\
+
 ```{python}
 meeting_time = np.array([50, 55, 70, 45, 40, 70, 80])
 
-confidence = 0.90
-df = len(meeting_time) - 1
-loc = np.mean(meeting_time)
-scale = np.std(meeting_time, ddof=1) / np.sqrt(len(meeting_time))
+confidence = 0.90 # <1>
+df = len(meeting_time) - 1 # <2>
+loc = np.mean(meeting_time) # <3>
+scale = np.std(meeting_time, ddof=1) / np.sqrt(len(meeting_time)) # <4>
 
-interval = t.interval(confidence, df, loc, scale)
+interval = t.interval(confidence, df, loc, scale) # <5>
 print(f"Довірчий інтервал: {np.round(interval, 2)}")
 ```
+1. Рівень значущості.
+2. Кількість ступенів свободи.
+3. Середнє значення.
+4. Стандартна девіація.
+5. Виклик функції `scipy.stats.t.interval`.
+
+\
 
 ## $t$-тест та вимога нормальності
 
@@ -438,6 +520,8 @@ print(f"Довірчий інтервал: {np.round(interval, 2)}")
 :::
 
 Згенеруємо штучні дані для цієї задачі. Для цього змішаємо логнормальний розподіл для позитивних значень (прибуток) та від'ємний $\chi^2$ для від'ємних значень (збиток).
+
+\
 
 ```{python}
 #| label: fig-profit
@@ -462,11 +546,17 @@ plt.grid(True)
 plt.show()
 ```
 
+\
+
 Порахуємо середній прибуток.
+
+\
 
 ```{python}
 print(f"Середній прибуток: {profits.mean():.2f}")
 ```
+
+\
 
 На відміну від попереднього завдання тут 2 відмінності:
 
@@ -541,60 +631,85 @@ $$ {#eq-t-p-value3}
 Перевіримо наш критерій на великій вибірці. Для цього згеренуємо вибірку з експоненційного розподілу $\mathcal{E}(300)$, де $X \sim \mathcal{E}(\lambda)$, $\lambda = 1/\mu$.
 Вибірка буде згенерована з параметром $\lambda = 1/300$. Тобто, середнє значення вибірки буде $300$.
 
+\
+
 ```{python}
 #| label: fig-profit-test
 #| fig-cap: Розподіл $t'(X)$ для великої вибірки.
 
-sample_size=2000
-M = 10000
+sample_size = 2000
+M = 10_000
 sample_distr = expon(loc=5, scale=300)
 
-T_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / np.std(sample, ddof=1)
+T_X = lambda x: (
+    np.sqrt(sample_size) * (np.mean(x) - sample_distr.mean()) /
+    np.std(x, ddof=1)
+)
 
 T_sample = sample_statistics(
-    number_of_experiments=M, statistic_function=T_X,
-    sample_size=sample_size, sample_distr=sample_distr)
+    number_of_experiments=M,
+    statistic_function=T_X,
+    sample_size=sample_size,
+    sample_distr=sample_distr
+)
 
-l_bound, r_bound = np.quantile(T_sample, [0.001, 0.999])
+l, r = np.quantile(T_sample, [0.001, 0.999])
+x = np.linspace(l, r, 1000)
 
-x = np.linspace(l_bound, r_bound, 1000)
 sns.distplot(T_sample, label='Емпіричний розподіл', color=turquoise)
-plt.plot(x, norm(0, 1).pdf(x), label='Експоненціальний розподіл', color=red_pink)
+plt.plot(x, norm(0, 1).pdf(x),
+         label='$\mathcal{N}(0, 1)$', color=red_pink)
+
 plt.legend()
-plt.xlabel(f'{name}')
-plt.xlim((l_bound, r_bound))
+plt.xlabel('$T(X)$')
 plt.ylabel('Щільність')
+plt.xlim(l, r)
 plt.grid(linewidth=0.2)
 plt.show()
 ```
 
+\
+
 Ми бачимо, що емпіричний розподіл $t'(X)$ та теоретичний $\mathcal{N}(0, 1)$ збігаються. Це означає, що ми можемо використовувати $t'$-тест для перевірки гіпотези. Якщо ж перевірити на великих вибірках з нормального розподілу, то $t$-тест та $t'$-тест будуть давати доволі схожі результати.
+
+\
 
 ```{python}
 #| label: fig-t-test-dist2
 #| fig-cap: Розподіл $t(X)$ для великої вибірки.
 
-sample_size=2000
-M = 30000
+sample_size = 2000
+M = 30_000
 sample_distr = norm(loc=5, scale=300)
 
-T_X = lambda sample: np.sqrt(sample_size) * (np.mean(sample) - sample_distr.mean()) / np.std(sample, ddof=1)
+T_X = lambda x: (
+    np.sqrt(sample_size) * (np.mean(x) - sample_distr.mean()) /
+    np.std(x, ddof=1)
+)
+
 T_sample = sample_statistics(
-    number_of_experiments=M, statistic_function=T_X,
-    sample_size=sample_size, sample_distr=sample_distr)
+    number_of_experiments=M,
+    statistic_function=T_X,
+    sample_size=sample_size,
+    sample_distr=sample_distr
+)
 
-l_bound, r_bound = np.quantile(T_sample, [0.001, 0.999])
+l, r = np.quantile(T_sample, [0.001, 0.999])
+x = np.linspace(l, r, 1000)
 
-x = np.linspace(l_bound, r_bound, 1000)
 sns.distplot(T_sample, label='Емпіричний розподіл', color=turquoise)
-plt.plot(x, norm(0, 1).pdf(x), label='$\mathcal{N}(0, 1)$', color=red_pink)
+plt.plot(x, norm(0, 1).pdf(x),
+         label='$\mathcal{N}(0, 1)$', color=red_pink)
+
 plt.legend()
-plt.xlabel(f'{name}')
-plt.xlim((l_bound, r_bound))
+plt.xlabel('$T(X)$')
 plt.ylabel('Щільність')
+plt.xlim(l, r)
 plt.grid(linewidth=0.2)
 plt.show()
 ```
+
+\
 
 Виходить, що статистика $t'(X)$ при великій вибірці з нормального розподілу також буде з нормального розподілу.
 
@@ -612,18 +727,26 @@ $$ {#eq-t-interval4}
 
 Переглнемо на практиці, як це виглядає у Python.
 
+\
+
 ```{python}
 sample = expon(scale=300).rvs(2000)
 ci = norm.interval(confidence=0.95, loc=np.mean(sample), scale=sem(sample))
 print(f"CI = {np.round(ci, 2)}")
 ```
 
+\
+
 Тепер ми можемо повернутися до нашої задачі з прибутком.
+
+\
 
 ```{python}
 ci_profit = norm.interval(confidence=0.95, loc=np.mean(profits), scale=sem(profits))
 print(f"CI = {np.round(ci_profit, 2)}")
 ```
+
+\
 
 Це означає, що ми можемо стверджувати, що прибуток від нових користувачів більший за 0 грн.
 
@@ -633,6 +756,8 @@ print(f"CI = {np.round(ci_profit, 2)}")
 
 1. Якщо вибірка розміру 60, то вже $t_{59} \approx \mathcal{N}(0, 1)$.
     - Подивимося на розподіли Стьюдента і нормального:
+
+\
 
 ```{python}
 #| label: fig-t-test-dist3
@@ -651,6 +776,8 @@ plt.grid(linewidth=0.2)
 plt.show()
 ```
 
+\
+
 - Ми бачимо, що ці два розподіли візуально повністю збігаються, тому неважливо, як порахувати: статистика $t\sim \mathcal{N}(0, 1)$ або $t\sim t_n$.
 - Але це не означає, що з $N=60$ $t$-тест або $t'$-тест працюють коректно! Якщо вибірка не з нормального розподілу, вони обидва можуть усе ще помилятися.
 
@@ -661,6 +788,7 @@ plt.show()
 
 Подивимось на прикладі.
 
+\
 
 ```{python}
 #| label: fig-t-test-dist4
@@ -680,6 +808,8 @@ plt.xlabel('X')
 plt.grid(linewidth=0.2)
 plt.show()
 ```
+
+\
 
 Як видно на графіку, що менший ступінь свободи, то вищою є лінія на графіку (за x < 0), а отже $P(X < x)$ буде більшим, ніж у нормальному розподілі. Тобто, $t$-тест буде давати менше $p$-значення, ніж $t'$-тест. А отже, $t$-тест буде відкидати нульову гіпотезу частіше, ніж $t'$-тест.
 
@@ -859,6 +989,8 @@ $$ {#eq-t-test-mde}
 
 Подивимося тепер MDE у нашому завданні.
 
+\
+
 ```{python}
 N = 1000
 S2 = np.var(profits)
@@ -869,6 +1001,8 @@ MDE = (norm().ppf(1-alpha) + norm().ppf(1 - beta)) * np.sqrt(S2/N)
 print(f"MDE при N = {N}: {np.round(MDE, 2)}")
 ```
 
+\
+
 А отже, ми можемо розраховувати на точність лише в `{python} np.round(MDE, 2)` грн. Але дня нас це може бути занадто великий MDE: хочеться, щоб він був $\leq$ 50 грн, ми припускаємо, що це ймовірніший істинний ефект, виходячи з поперелднього досвіду.
 
 Давайте тепер розв'яжемо зворотну задачу: Ми знаємо $MDE=50$ грн., $\alpha=5$%, $1-\beta=80$%, $S^2$, чому дорівнює $N$? Виведемо його з формули MDE:
@@ -876,6 +1010,8 @@ print(f"MDE при N = {N}: {np.round(MDE, 2)}")
 $$
 N = \left(\dfrac{z_{1 - \alpha} + z_{1 - \beta}}{\text{MDE}}\right)^2 S^2
 $$ {#eq-t-test-n}
+
+\
 
 ```{python}
 S2 = np.var(profits)
@@ -887,6 +1023,8 @@ N = ((norm().ppf(1-alpha) + norm().ppf(1 - beta)) / mde)**2 * S2
 N = int(N) + 1
 print(f"Мінімальний розмір вибірки: {N}")
 ```
+
+\
 
 Тепер ми знаємо, що нам потрібно `{python} N` користувачів, щоб перевірити нашу гіпотезу з MDE 50 грн.
 
@@ -952,6 +1090,8 @@ $$ {#eq-t-test-full5}
 
 Подивимось на приклад з двома вибірками, перша вибірка --- з експоненційного розподілу, а друга --- з нормального розподілу.
 
+\
+
 ```{python}
 X = expon(scale=1100).rvs(1000)
 Y = norm(loc=980, scale=30).rvs(1000)
@@ -964,6 +1104,8 @@ print(f"p-значення = {np.round(t_results.pvalue, 5)}")
 print(f"Довірчий інтервал = {np.round(ci_t_results, 2)}")
 ```
 
+\
+
 ::: {.callout-warning}
 При використанні $t$-тесту, як одновибіркового, так і двовибіркового, важливо пам'ятати, що:
 
@@ -973,7 +1115,54 @@ print(f"Довірчий інтервал = {np.round(ci_t_results, 2)}")
     - Інакше критерії так само будуть невалідними.
 :::
 
-## Контрольні питання
+## Питання для самоперевірки {#sec-questions-4}
 
+**Загальні питання та Мотивація**
 
-    
+1.  У якій ситуації ми не можемо використовувати $Z$-критерій для перевірки гіпотези про середнє значення, навіть якщо припускаємо нормальність даних?
+2.  Яка основна проблема виникає при спробі замінити невідому дисперсію генеральної сукупності ($\sigma^2$) на її оцінку у формулі $Z$-статистики?
+3.  Чому вибіркова дисперсія $S^2$ розраховується з дільником $n-1$, а не $n$? Які властивості цієї оцінки важливі?
+4.  Чи є вибіркова дисперсія ($S^2$) константою чи випадковою величиною? Чому це важливо для розподілу статистики $t(X)$?
+
+**$t$-статистика та $t$-розподіл**
+
+5.  Напишіть формулу для $t$-статистики Стьюдента для однієї вибірки.
+6.  Який розподіл має $t$-статистика за нульовою гіпотезою ($H_0: \mu = \mu_0$) за умови, що вихідна вибірка взята з нормального розподілу? Вкажіть параметри цього розподілу.
+7.  Які два типи випадкових величин (та їх розподіли) використовуються для теоретичного визначення змінної, що має $t$-розподіл Стьюдента? Яка умова щодо їх взаємозв'язку?
+8.  Як візуально відрізняється $t$-розподіл від стандартного нормального розподілу ($\mathcal{N}(0, 1)$), особливо при малих значеннях ступенів свободи? Як він змінюється зі збільшенням ступенів свободи?
+
+**Застосування $t$-тесту**
+
+9.  Сформулюйте типові нульову ($H_0$) та альтернативну ($H_1$) гіпотези для одностороннього (правостороннього) $t$-тесту.
+10. Як виглядає критична область для одностороннього (лівостороннього) $t$-тесту з рівнем значущості $\alpha$?
+11. Як розраховується $p$-значення для двостороннього $t$-тесту, якщо відоме значення $t$-статистики ($z$) та функція розподілу $t_{n-1}$ ($\tau_{n-1}(z)$)?
+12. Яку функцію в `scipy.stats` використовують для проведення одновибіркового $t$-тесту? Які основні параметри вона приймає?
+
+**Довірчі інтервали**
+
+13. Наведіть формулу для розрахунку $(1-\alpha)$ довірчого інтервалу для середнього значення $\mu$, використовуючи $t$-розподіл.
+14. Як пов'язане поняття довірчого інтервалу з перевіркою гіпотез? (Поясніть перший метод виведення ДІ, згаданий у тексті).
+15. Яку функцію в `scipy.stats` можна використати для побудови довірчого інтервалу на основі $t$-розподілу?
+
+**Припущення $t$-тесту та великі вибірки**
+
+16. Яке ключове припущення щодо розподілу вихідних даних лежить в основі точного $t$-розподілу статистики $t(X)$?
+17. Що відбувається з розподілом $t$-статистики, коли розмір вибірки ($n$) стає великим, навіть якщо вихідні дані не розподілені нормально? Яка теорема це пояснює?
+18. Який розподіл використовується для апроксимації розподілу $t$-статистики при великих вибірках ($t'$-тест)?
+19. За яких умов результати "класичного" $t$-тесту (з $t_{n-1}$) та "апроксимованого" $t'$-тесту (з $\mathcal{N}(0, 1)$) будуть дуже схожими?
+20. Чому $t$-тест часто вважають "безпечнішим" або більш консервативним, ніж $t'$-тест, особливо при невеликих або помірних розмірах вибірки?
+
+**Мінімально виявлений ефект (MDE)**
+
+21. Що таке мінімально виявлений ефект (MDE)? У яких ситуаціях корисно його розраховувати?
+22. Назвіть чотири основні фактори, від яких залежить MDE.
+23. Напишіть формулу для розрахунку MDE для одностороннього тесту при заданих $\alpha$, $\beta$, $N$ та $S^2$.
+24. Як можна використати формулу MDE для визначення необхідного розміру вибірки ($N$)?
+
+**Двовибірковий $t$-тест**
+
+25. Для вирішення якого типу завдань призначений двовибірковий $t$-тест? Сформулюйте типову нульову гіпотезу.
+26. Назвіть два варіанти двовибіркового $t$-тесту залежно від припущення про дисперсії двох вибірок. Який варіант називають тестом Уелча?
+27. Яку статистику та розподіл використовують для двовибіркового тесту при великих вибірках, якщо не припускати нормальність?
+28. Які ключові припущення щодо незалежності повинні виконуватись при використанні двовибіркового $t$-тесту? (Вкажіть два типи незалежності).
+29. Яка функція в `scipy.stats` використовується для проведення двовибіркового $t$-тесту?
