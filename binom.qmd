@@ -765,16 +765,16 @@ print(f"p-значення для q = 21: {result:.4f}")
 #| label: fig-binom-pmf-two-sided-nonsym
 #| fig-cap: Біноміальний розподіл з імовірністю успіху $0.8$
 
+fig, ax = plt.subplots(figsize=(8, 2.5))
 binom_h0_nonsym = binom(n=30, p=0.8) # <1>
 probs = binom_h0_nonsym.pmf(np.arange(31)) # <2>
 
-plt.bar(np.arange(31), probs, color=turquoise, label="Binom(30, 0.8)") # <3>
+plt.bar(np.arange(31), probs, color=turquoise, label="Binom(30, 0.8)")
 plt.legend()
 plt.show()
 ```
 1. Створюємо об'єкт біноміального розподілу з ймовірністю успіху $0.8$.
 2. Обчислюємо ймовірності для всіх можливих значень.
-3. Будуємо графік.
 
 Для того, щоб побудувати двосторонній критерій, потрібно знайти ліворуч і праворуч області, площа яких становить не більше, ніж $\frac{\alpha}{2}$. Для правого боку ми вже розв'язували таку задачу, розв'яжемо для лівого.
 

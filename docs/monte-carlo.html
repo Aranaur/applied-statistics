@@ -338,7 +338,7 @@ window.Quarto = {
 <p>Розглянемо процедуру на прикладі: перевіримо, чи можна використовувати <span class="math inline">\(t\)</span>-тест для вибірок із нормального розподілу?</p>
 <p><br>
 </p>
-<div id="0f4aeccf" class="cell" data-execution_count="2">
+<div id="1f592c78" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>bad_cnt <span class="op">=</span> <span class="dv">0</span></span>
@@ -360,7 +360,7 @@ window.Quarto = {
 </div>
 <p><br>
 </p>
-<p>Зверніть увагу, що <span class="math inline">\(FPR=\)</span> 0.05, хоча він мав дорівнювати 5%. Чи правда, що критерій некоректний? Ні, ми просто не врахували шум: ми навряд чи зможемо отримати на кінцевому числі експериментів точну рівність <span class="math inline">\(\text{FPR} = \alpha\)</span>.</p>
+<p>Зверніть увагу, що <span class="math inline">\(FPR=\)</span> 0.052, хоча він мав дорівнювати 5%. Чи правда, що критерій некоректний? Ні, ми просто не врахували шум: ми навряд чи зможемо отримати на кінцевому числі експериментів точну рівність <span class="math inline">\(\text{FPR} = \alpha\)</span>.</p>
 <p>Тому пункт 4 процедури перевірки критерію можна уточнити:</p>
 <ol start="4" type="1">
 <li>Порахувати частку помилок й <em>побудувати довірчий інтервал для нього</em>. Якщо <span class="math inline">\(\alpha\)</span> лежить у ньому, значить усе добре, а інакше розбираємося, що пішло не так.</li>
@@ -368,7 +368,7 @@ window.Quarto = {
 <p>Довірчий інтервал можна побудувати різними способами (<a href="power.html#sec-ci" class="quarto-xref">див.&nbsp;<span>2.4</span></a>). Але можна зробити простіше: у Python є функція, яка будує довірчий інтервал Вілсона<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: він не такий точний, як ми виводили раніше, зате він швидший й працює швидше. Давайте спробуємо його реалізувати:</p>
 <p><br>
 </p>
-<div id="a88dcc8f" class="cell" data-execution_count="3">
+<div id="952c9e84" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ci <span class="op">=</span> proportion_confint(count <span class="op">=</span> bad_cnt, nobs <span class="op">=</span> N, alpha<span class="op">=</span><span class="fl">0.05</span>, method<span class="op">=</span><span class="st">'wilson'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"FPR: </span><span class="sc">{</span>bad_cnt<span class="op">/</span>N<span class="sc">:.3f}</span><span class="ch">\n</span><span class="ss">Довірчий інтервал: (</span><span class="sc">{</span>ci[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss">, </span><span class="sc">{</span>ci[<span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">)"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -391,18 +391,19 @@ window.Quarto = {
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1000</span>)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, test_dist.pdf(x), label<span class="op">=</span><span class="st">'Тест'</span>, color<span class="op">=</span>turquoise)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, control_dist.pdf(x), label<span class="op">=</span><span class="st">'Контроль'</span>, color<span class="op">=</span>slate)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, test_dist.pdf(x), label<span class="op">=</span><span class="st">'Тест'</span>, color<span class="op">=</span>turquoise)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.plot(x, control_dist.pdf(x), label<span class="op">=</span><span class="st">'Контроль'</span>, color<span class="op">=</span>slate)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Щільність'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.grid(linewidth<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="fig-t-test-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t-test-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="monte-carlo_files/figure-html/fig-t-test-2-output-1.png" width="678" height="324" class="figure-img">
+<img src="monte-carlo_files/figure-html/fig-t-test-2-output-1.png" width="672" height="213" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t-test-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;5.1: Приклад, коли <span class="math inline">\(H_0\)</span> правильна, але розподіли різні
@@ -414,31 +415,48 @@ window.Quarto = {
 <p>Напишемо функцію <code>check_criterion()</code>, яка буде перевіряти критерій на коректність. Вона приймає на вхід розподіли для тесту й контролю, розмір вибірки, кількість експериментів, а також вміє виводити довірчий інтервал.</p>
 <p><br>
 </p>
-<div id="61f5a38a" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_criterion(test_dist, control_dist, sample_size, N_exps<span class="op">=</span><span class="dv">10000</span>, to_print<span class="op">=</span><span class="va">True</span>):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">35</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    bad_cnt<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.05</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N_exps):</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        test    <span class="op">=</span> test_dist.rvs(sample_size)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        control <span class="op">=</span> control_dist.rvs(sample_size)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        pvalue <span class="op">=</span> ttest_ind(test, control, equal_var<span class="op">=</span><span class="va">False</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>).pvalue</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        bad_cnt <span class="op">+=</span> (pvalue <span class="op">&lt;</span> alpha)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ci <span class="op">=</span> proportion_confint(count <span class="op">=</span> bad_cnt, nobs <span class="op">=</span> N_exps, alpha<span class="op">=</span><span class="fl">0.05</span>, method<span class="op">=</span><span class="st">'wilson'</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> to_print:</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"FPR: </span><span class="sc">{</span>bad_cnt<span class="op">/</span>N_exps<span class="sc">:.3f}</span><span class="ch">\n</span><span class="ss">Довірчий інтервал: (</span><span class="sc">{</span>ci[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss">, </span><span class="sc">{</span>ci[<span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">)"</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ci</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7a96bc9f" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_criterion(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    test_dist,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    control_dist, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    sample_size, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    N_exps<span class="op">=</span><span class="dv">10000</span>, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    to_print<span class="op">=</span><span class="va">True</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція перевіряє критерій на коректність.</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    test_dist: розподіл для тесту</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">    control_dist: розподіл для контролю</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    sample_size: розмір вибірки</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    N_exps: кількість експериментів</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    to_print: чи виводити довірчий інтервал</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">35</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    bad_cnt<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.05</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N_exps):</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        test    <span class="op">=</span> test_dist.rvs(sample_size)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        control <span class="op">=</span> control_dist.rvs(sample_size)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        pvalue <span class="op">=</span> ttest_ind(test, control, equal_var<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                           alternative<span class="op">=</span><span class="st">'two-sided'</span>).pvalue</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        bad_cnt <span class="op">+=</span> (pvalue <span class="op">&lt;</span> alpha)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    ci <span class="op">=</span> proportion_confint(count <span class="op">=</span> bad_cnt, nobs <span class="op">=</span> N_exps,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>                            alpha<span class="op">=</span><span class="fl">0.05</span>, method<span class="op">=</span><span class="st">'wilson'</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> to_print:</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"FPR: </span><span class="sc">{</span>bad_cnt<span class="op">/</span>N_exps<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Довірчий інтервал: (</span><span class="sc">{</span>ci[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss">, </span><span class="sc">{</span>ci[<span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">)"</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ci</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p>Тепер перевіримо, чи працює <span class="math inline">\(t\)</span>-тест для вибірок з різних експоненціальних розподілів. Одразу спробуємо перевірити відомий міф про достатність вибірки 30<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Чи дійсно <span class="math inline">\(t\)</span>-тест працює, якщо вибірка більша за 30?</p>
 <p><br>
 </p>
-<div id="17d90ba3" class="cell" data-execution_count="6">
+<div id="bbc2376e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist, control_dist, sample_size<span class="op">=</span><span class="dv">40</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>FPR: 0.061
@@ -454,13 +472,17 @@ window.Quarto = {
 <p>Визначити розмір вибірки, з якого <span class="math inline">\(t\)</span>-тест почне працювати, можна за допомогою методу Монте-Карло. Для цього ми будемо перевіряти <span class="math inline">\(t\)</span>-тест на вибірках різного розміру, поки не знайдемо такий розмір, при якому <span class="math inline">\(t\)</span>-тест почне працювати. Для цього ми будемо перевіряти <span class="math inline">\(t\)</span>-тест на вибірках від 20 до 100 з кроком 10.</p>
 <p><br>
 </p>
-<div id="bee92103" class="cell" data-execution_count="7">
+<div id="2ce0d5c0" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.arange(<span class="dv">20</span>, <span class="dv">110</span>, <span class="dv">10</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> N <span class="kw">in</span> scale:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    left, right <span class="op">=</span> check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span>N, N_exps<span class="op">=</span><span class="dv">10000</span>, to_print<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&lt;</span> alpha <span class="op">&lt;</span> right:</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Розмір вибірки </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss"> достатній для t-тесту"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    left, right <span class="op">=</span> check_criterion(test_dist<span class="op">=</span>test_dist,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                  control_dist<span class="op">=</span>control_dist,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                                  sample_size<span class="op">=</span>N, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                  N_exps<span class="op">=</span><span class="dv">10000</span>, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                                  to_print<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&lt;</span> alpha <span class="op">&lt;</span> right:</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Розмір вибірки </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss"> достатній для t-тесту"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Розмір вибірки 60 достатній для t-тесту</code></pre>
 </div>
@@ -470,7 +492,7 @@ window.Quarto = {
 <p>Як бачимо, <span class="math inline">\(t\)</span>-тест починає працювати з вибірки розміром 60.</p>
 <p><br>
 </p>
-<div id="c02c6658" class="cell" data-execution_count="8">
+<div id="491c2361" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span><span class="dv">60</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>FPR: 0.053
@@ -482,7 +504,7 @@ window.Quarto = {
 <p>Але це доволі умовна межа, бо якщо у цьому випадку ми візьмемо вибірку розміром 61, то <span class="math inline">\(t\)</span>-тест не спрацює.</p>
 <p><br>
 </p>
-<div id="f0f6b9ab" class="cell" data-execution_count="9">
+<div id="a8d40639" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>check_criterion(test_dist<span class="op">=</span>test_dist, control_dist<span class="op">=</span>control_dist, sample_size<span class="op">=</span><span class="dv">61</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>FPR: 0.057
@@ -524,7 +546,7 @@ window.Quarto = {
 <p>У попередньому розділі ми розглянули <span class="math inline">\(t\)</span>-тест для вибірок з нормального розподілу. Розглянемо екстремальний випадок, коли вибірка мала, а розподіл не нормальний. Ми знову використаємо метод Монте-Карло, щоб перевірити, чи працює <span class="math inline">\(t\)</span>-тест у цьому випадку.</p>
 <p><br>
 </p>
-<div id="55b2709f" class="cell" data-execution_count="10">
+<div id="a76db6b7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>test_dist    <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>control_dist <span class="op">=</span> expon(scale<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -546,7 +568,7 @@ window.Quarto = {
 <p>Перевіримо на прикладі <span class="math inline">\(t\)</span>-тесту, як це працює.</p>
 <p><br>
 </p>
-<div id="a8687555" class="cell" data-execution_count="11">
+<div id="a1d6b5e5" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rej_cnt <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10000</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>alpha<span class="op">=</span><span class="fl">0.05</span></span>
@@ -557,10 +579,11 @@ window.Quarto = {
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    test    <span class="op">=</span> sample_dist.rvs(<span class="dv">15</span>)</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    control <span class="op">=</span> sample_dist.rvs(<span class="dv">15</span>) <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    pvalue <span class="op">=</span> ttest_ind(test, control, equal_var<span class="op">=</span><span class="va">False</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>).pvalue</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    rej_cnt <span class="op">+=</span> (pvalue <span class="op">&lt;</span> alpha)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"TPR: </span><span class="sc">{</span>rej_cnt<span class="op">/</span>N<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    pvalue <span class="op">=</span> ttest_ind(test, control,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                       equal_var<span class="op">=</span><span class="va">False</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>).pvalue</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    rej_cnt <span class="op">+=</span> (pvalue <span class="op">&lt;</span> alpha)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"TPR: </span><span class="sc">{</span>rej_cnt<span class="op">/</span>N<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>TPR: 0.194</code></pre>
 </div>

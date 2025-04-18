@@ -713,6 +713,7 @@ n = 30
 mu_0 = 0.5
 t = 15
 
+fig, ax = plt.subplots(figsize=(8, 2.5))
 cmp_pvalue_binom_and_norm(n, mu_0, t)
 ```
 
@@ -799,8 +800,6 @@ $$ {#eq-continuity-correction-p-value}
 ```{python}
 cmp_pvalue_binom_and_norm(30, 0.5, 15, add_to_x=-0.5)
 ```
-
-\
 
 Ми бачимо, що $p$-значення біноміального та нормального розподілів тепер збігаються.
 

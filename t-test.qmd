@@ -755,6 +755,7 @@ z_dist = norm(loc=0, scale=1)
 
 x = np.linspace(-3, 3, 100)
 
+fig, ax = plt.subplots(figsize=(8, 2.5))
 plt.plot(x, z_dist.pdf(x), label='$\mathcal{N}(0, 1)$', color=red_pink)
 plt.plot(x, t_dist.pdf(x), label='$t_{59}$', color=turquoise)
 plt.legend()

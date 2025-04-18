@@ -74,7 +74,7 @@ print(f"FPR: {bad_cnt/N:.3f}")
 
 \
 
-Зверніть увагу, що $FPR=$ `{python} np.round(bad_cnt/N, 2)`, хоча він мав дорівнювати 5%. Чи правда, що критерій некоректний? Ні, ми просто не врахували шум: ми навряд чи зможемо отримати на кінцевому числі експериментів точну рівність $\text{FPR} = \alpha$.
+Зверніть увагу, що $FPR=$ `{python} np.round(bad_cnt/N, 3)`, хоча він мав дорівнювати 5%. Чи правда, що критерій некоректний? Ні, ми просто не врахували шум: ми навряд чи зможемо отримати на кінцевому числі експериментів точну рівність $\text{FPR} = \alpha$.
 
 Тому пункт 4 процедури перевірки критерію можна уточнити:
 
@@ -112,6 +112,7 @@ control_dist = expon(loc=5, scale = 5)
 
 x = np.linspace(0, 100, 1000)
 
+fig, ax = plt.subplots(figsize=(8, 2))
 plt.plot(x, test_dist.pdf(x), label='Тест', color=turquoise)
 plt.plot(x, control_dist.pdf(x), label='Контроль', color=slate)
 plt.xlabel('x')
@@ -126,7 +127,21 @@ plt.show()
 \
 
 ```{python}
-def check_criterion(test_dist, control_dist, sample_size, N_exps=10000, to_print=True):
+def check_criterion(
+    test_dist,
+    control_dist, 
+    sample_size, 
+    N_exps=10000, 
+    to_print=True
+):
+    """
+    Функція перевіряє критерій на коректність.
+    test_dist: розподіл для тесту
+    control_dist: розподіл для контролю
+    sample_size: розмір вибірки
+    N_exps: кількість експериментів
+    to_print: чи виводити довірчий інтервал
+    """
     np.random.seed(35)
     bad_cnt=0
     alpha=0.05
@@ -134,13 +149,16 @@ def check_criterion(test_dist, control_dist, sample_size, N_exps=10000, to_print
     for i in range(N_exps):
         test    = test_dist.rvs(sample_size)
         control = control_dist.rvs(sample_size)
-        pvalue = ttest_ind(test, control, equal_var=False, alternative='two-sided').pvalue
+        pvalue = ttest_ind(test, control, equal_var=False,
+                           alternative='two-sided').pvalue
         bad_cnt += (pvalue < alpha)
 
-    ci = proportion_confint(count = bad_cnt, nobs = N_exps, alpha=0.05, method='wilson')
+    ci = proportion_confint(count = bad_cnt, nobs = N_exps,
+                            alpha=0.05, method='wilson')
 
     if to_print:
-        print(f"FPR: {bad_cnt/N_exps:.3f}\nДовірчий інтервал: ({ci[0]:.3f}, {ci[1]:.3f})")
+        print(f"FPR: {bad_cnt/N_exps:.3f}")
+        print(f"Довірчий інтервал: ({ci[0]:.3f}, {ci[1]:.3f})")
     else:
         return ci
 ```
@@ -170,7 +188,11 @@ check_criterion(test_dist, control_dist, sample_size=40)
 ```{python}
 scale = np.arange(20, 110, 10)
 for N in scale:
-    left, right = check_criterion(test_dist=test_dist, control_dist=control_dist, sample_size=N, N_exps=10000, to_print=False)
+    left, right = check_criterion(test_dist=test_dist,
+                                  control_dist=control_dist,
+                                  sample_size=N, 
+                                  N_exps=10000, 
+                                  to_print=False)
     if left < alpha < right:
         print(f"Розмір вибірки {N} достатній для t-тесту")
         break
@@ -265,7 +287,8 @@ mu=sample_dist.expect()
 for i in range(N):
     test    = sample_dist.rvs(15)
     control = sample_dist.rvs(15) * 2
-    pvalue = ttest_ind(test, control, equal_var=False, alternative='two-sided').pvalue
+    pvalue = ttest_ind(test, control,
+                       equal_var=False, alternative='two-sided').pvalue
     rej_cnt += (pvalue < alpha)
 
 print(f"TPR: {rej_cnt/N:.3f}")

@@ -566,7 +566,7 @@ print(f'Односторонній 95% ДІ: [{min(mu_no_rejection):.3f} - {max(
 #| label: fig-binom-ci-22
 #| fig-cap: Односторонній довірчий інтервал для $22$ успіхів
 
-fig, axes = plt.subplots(3, 2, figsize=(8, 8))
+fig, axes = plt.subplots(3, 2, figsize=(8, 7))
 
 for mu_h0, ax in zip(mus_h0, axes.flatten()): # <1>
     binom_h0 = binom(n=30, p=mu_h0) # <2>
@@ -584,7 +584,7 @@ for mu_h0, ax in zip(mus_h0, axes.flatten()): # <1>
     color='gray', alpha=0.4) # <9>
 
     rejection_prob = probs[crit_reg].sum() # <10>
-    ax.set_title(f'$\mu = {mu_h0}$', fontsize=8) # <11>
+    ax.set_title(f'$\mu = {mu_h0}$', fontsize=8)
     ax.legend()
 ```
 1. Сітка для $\mu$
@@ -597,7 +597,6 @@ for mu_h0, ax in zip(mus_h0, axes.flatten()): # <1>
 8. Чи потрапляє $22$ у критичну область
 9. Вертикальна лінія для $22$ успіхів
 10. Ймовірність потрапляння в критичну область
-11. Заголовок для графіка
 
 Порівняно з @fig-binom-ci ми бачимо, що права критична область стала більшою через те, що там тепер знаходиться не $2.5\%$, а $5\%$ від усіх значень. При цьому лівої критичної області просто не існує, тому за великих $\mu$ не відбувається потрапляння $19$ до неї, а значить ми не відкидаємо гіпотезу.
 
@@ -866,6 +865,7 @@ for n in n_grid: # <3>
 #| label: fig-binom-ci-2
 #| fig-cap: Залежність частки успішних влучень $\mu$ у довірчий інтервал від розміру вибірки
 
+fig, ax = plt.subplots(figsize=(8, 2.5))
 plt.plot(n_grid, interval_success_rate, # <1>
          label='Частка успішних влучень', color=turquoise) # <1>
 plt.axhline(0.95, ls='--', # <2>
