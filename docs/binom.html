@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -221,7 +241,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Список літератури</span></a>
+ <span class="menu-text">Рекомендована література</span></a>
   </div>
 </li>
     </ul>
@@ -305,7 +325,7 @@ window.Quarto = {
 </ul>
 <p><br>
 </p>
-<div id="899e0687" class="cell" data-execution_count="3">
+<div id="23353255" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">18</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -598,7 +618,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>Щоб працювати з розподілом, можна створити об’єкт-розподіл за допомогою бібліотеки <code>scipy.stats</code>.</p>
 <p><br>
 </p>
-<div id="1959699d" class="cell" data-execution_count="6">
+<div id="c208ed15" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> binom</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
@@ -629,7 +649,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>У Python це функція <code>pmf</code> (probability mass function).</p>
 <p><br>
 </p>
-<div id="67e97a1a" class="cell" data-execution_count="7">
+<div id="b245698a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_dist.pmf(<span class="dv">20</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність отримати 20 успішних випадків: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -694,7 +714,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>Насправді вже зараз ми можемо порахувати ймовірність потрапляння в критичну область. Потрібно просто підсумувати ймовірності для кількостей успіхів від 21 до 30.</p>
 <p><br>
 </p>
-<div id="bbfc7e83" class="cell" data-execution_count="9">
+<div id="cdccb6cc" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.<span class="bu">sum</span>(y[crit_subs:])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -707,7 +727,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>А що якби ми взяли <span class="math inline">\(C = 19\)</span>?</p>
 <p><br>
 </p>
-<div id="e3f67209" class="cell" data-execution_count="10">
+<div id="316d99fb" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.<span class="bu">sum</span>(y[crit_subs:])</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -721,7 +741,7 @@ FPR_{19} = \sum_{i = 20}^{30} P(Q = i) \approx 0.1002
 <p>А якщо <span class="math inline">\(C = 20\)</span>?</p>
 <p><br>
 </p>
-<div id="a494f7ea" class="cell" data-execution_count="11">
+<div id="4c4b7e63" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>crit_subs <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.<span class="bu">sum</span>(y[crit_subs:])</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -742,7 +762,7 @@ F_\xi(x) = P(\xi \leqslant x)
 <p>У Python це метод <code>cdf()</code> (Cumulative Distribution Function).</p>
 <p><br>
 </p>
-<div id="e33b079e" class="cell" data-execution_count="12">
+<div id="c9a82ad3" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_dist.cdf(<span class="dv">19</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність отримати 19 або менше успішних випадків: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -754,7 +774,7 @@ F_\xi(x) = P(\xi \leqslant x)
 <p>А оскільки <span class="math inline">\(P(\xi \leqslant 19) + P(\xi \geqslant 20) = 1\)</span>, можемо обчислити рівень значущості нашого критерію.</p>
 <p><br>
 </p>
-<div id="c4425220" class="cell" data-execution_count="13">
+<div id="f5791a07" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom_dist.cdf(<span class="dv">19</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ймовірність потрапляння в критичну область: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -791,7 +811,7 @@ P(\xi \leqslant 20) \approx 0.97
 <p>У Python квантиль можна порахувати через методу <code>ppf()</code> (Percent Point Function).</p>
 <p><br>
 </p>
-<div id="d56c99fb" class="cell" data-execution_count="14">
+<div id="18374f19" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binom_dist.ppf(<span class="fl">0.95</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"0.95-квантиль: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -810,7 +830,7 @@ P(\xi \leqslant 20) \approx 0.97
 </ol>
 <p><br>
 </p>
-<div id="6bfe8377" class="cell" data-execution_count="15">
+<div id="226889a7" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_crit_subs(n, mu, alpha):</span>
 <span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичне значення для біноміального розподілу.</span></span>
@@ -960,7 +980,7 @@ P_{H_0}(Q \geqslant C) = P_{H_0}(Q \leqslant n - C) = \frac{\alpha}{2}
 <p>Реалізуємо функцію на Python.</p>
 <p><br>
 </p>
-<div id="8b02a0b4" class="cell" data-execution_count="19">
+<div id="b92b2786" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_crit_subs_two_sided(n, mu, alpha):</span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-14-3"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичне значення для двостороннього біноміального розподілу.</span></span>
@@ -1008,7 +1028,7 @@ S = \{\Delta(\xi) \geqslant C\}
 <p>Тобто більш екстремальними вважатимуться ті значення суми, що знаходяться далі від 15. Щоб обчислити <span class="math inline">\(p\)</span>-значення, доведеться порахувати суму площ із двох сторін окремо.</p>
 <p><br>
 </p>
-<div id="ba118c0e" class="cell" data-execution_count="20">
+<div id="a7279ee4" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided_sym(n, q):</span>
 <span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-15-3"><a href="#annotated-cell-15-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Обчислює p-значення для двостороннього біноміального розподілу.</span></span>
@@ -1061,7 +1081,7 @@ S = \{\Delta(\xi) \geqslant C\}
 <p>Насправді через симетричність розподілу ліва й права площа виходять однаковими, тому можна порахувати площу з одного боку й помножити на 2.</p>
 <p><br>
 </p>
-<div id="6fb7bc3b" class="cell" data-execution_count="21">
+<div id="03cd30f8" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided_sym_simple(n, q):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Обчислює p-значення для двостороннього біноміального розподілу.</span></span>
@@ -1131,7 +1151,7 @@ P(Q(\xi) \leqslant C) \leqslant \frac{\alpha}{2}
 <p>Спочатку знайдемо перше число, де ймовірність <span class="math inline">\(\geqslant \frac{\alpha}{2}\)</span>. А це за визначенням <span class="math inline">\(\frac{\alpha}{2}\)</span>-квантиль. Достатньо взяти попереднє число, і воно буде задовольняти нашій умові.</p>
 <p><br>
 </p>
-<div id="bf827c26" class="cell" data-execution_count="23">
+<div id="6df920d7" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> two_sided_criterion_nonsym(n, mu, alpha):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Знаходить критичні значення для двостороннього біноміального розподілу.</span></span>
@@ -1231,7 +1251,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <p>Проведемо аналогію із симетричним випадком: якщо сума опинилася в лівій частині, то потрібно порахувати <span class="math inline">\(p\)</span>-значення лівого критерію і помножити на 2. Якщо сума опинилася в правій частині, то потрібно порахувати <span class="math inline">\(p\)</span>-значення правого критерію і помножити на 2.</p>
 <p><br>
 </p>
-<div id="9d42c9fe" class="cell" data-execution_count="25">
+<div id="8a17d6cc" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pvalue_two_sided(n, q, mu<span class="op">=</span><span class="fl">0.5</span>):</span>
 <span id="annotated-cell-20-2"><a href="#annotated-cell-20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-20-3"><a href="#annotated-cell-20-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Обчислює p-значення для двостороннього біноміального розподілу.</span></span>
@@ -1281,7 +1301,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 <p>Зауважимо, що ця ж функція працює і для симетричного випадку, повертаючи той самий результат.</p>
 <p><br>
 </p>
-<div id="f6ceb18d" class="cell" data-execution_count="26">
+<div id="2853041b" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pvalue_two_sided(n<span class="op">=</span><span class="dv">30</span>, q<span class="op">=</span><span class="dv">20</span>, mu<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-значення для q = 20: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1290,7 +1310,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 </div>
 <p><br>
 </p>
-<div id="090ea26d" class="cell" data-execution_count="27">
+<div id="ca64d9e3" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pvalue_two_sided_sym(n<span class="op">=</span><span class="dv">30</span>, q<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-значення для q = 20: </span><span class="sc">{</span>result<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1317,7 +1337,7 @@ S = \{Q(\xi) \leqslant 18\} \cup \{Q(\xi) \geqslant 29\}
 </ul>
 <p><br>
 </p>
-<div id="4b9c9947" class="cell" data-execution_count="28">
+<div id="f3f17fcb" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> binomtest</span>
 <span id="annotated-cell-23-2"><a href="#annotated-cell-23-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> binomtest(<span class="dv">19</span>, <span class="dv">30</span>, <span class="fl">0.5</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
@@ -1402,6 +1422,119 @@ p-значення: 0.2005</code></pre>
 </ol>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Agresti2013" class="csl-entry" role="listitem">
+Agresti, Alan. 2012. <em>Categorical Data Analysis</em>. 3rd ed. Wiley.
+</div>
+<div id="ref-Agresti2018" class="csl-entry" role="listitem">
+———. 2018. <em>An Introduction to Categorical Data Analysis</em>. 3rd ed. Wiley.
+</div>
+<div id="ref-Basu1955" class="csl-entry" role="listitem">
+Basu, D. 1955. <em>On Statistics Independent of a Complete Sufficient Statistic</em>. <em>Sankhya</em>. Vol. 15.
+</div>
+<div id="ref-Bruce2020" class="csl-entry" role="listitem">
+Bruce, Peter, Andrew Bruce, and Peter Gedeck. 2020. <em>Practical Statistics for Data Scientists</em>. 2nd ed. O’Reilly Media.
+</div>
+<div id="ref-Casella2002" class="csl-entry" role="listitem">
+Casella, George, and Roger L. Berger. 2002. <em>Statistical Inference</em>. 2nd ed. Duxbury Press.
+</div>
+<div id="ref-Cochran1934" class="csl-entry" role="listitem">
+Cochran, William G. 1934. <em>The Distribution of Quadratic Forms in a Normal System, with Applications to the Analysis of Covariance</em>. <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>. Vol. 30. 3. Cambridge University Press. <a href="https://doi.org/10.1017/S0305004100016595">https://doi.org/10.1017/S0305004100016595</a>.
+</div>
+<div id="ref-Cohen1988" class="csl-entry" role="listitem">
+Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2nd ed. Lawrence Erlbaum Associates.
+</div>
+<div id="ref-Downey2014" class="csl-entry" role="listitem">
+Downey, Allen B. 2014. <em>Think Stats: Exploratory Data Analysis in Python</em>. 2nd ed. O’Reilly Media. <a href="https://greenteapress.com/wp/think-stats-2e/">https://greenteapress.com/wp/think-stats-2e/</a>.
+</div>
+<div id="ref-Efron1994" class="csl-entry" role="listitem">
+Efron, Bradley, and Robert J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-Fisher1922" class="csl-entry" role="listitem">
+Fisher, R. A. 1922. <span>“On the Mathematical Foundations of Theoretical Statistics.”</span> <em>Philosophical Transactions of the Royal Society of London. Series A</em> 222 (594-604): 309–68. <a href="https://doi.org/10.1098/rsta.1922.0009">https://doi.org/10.1098/rsta.1922.0009</a>.
+</div>
+<div id="ref-Freedman2007" class="csl-entry" role="listitem">
+Freedman, David, Robert Pisani, and Roger Purves. 2007. <em>Statistics</em>. 4th ed. W. W. Norton &amp; Company.
+</div>
+<div id="ref-Gnedenko2021" class="csl-entry" role="listitem">
+Gnedenko, Boris V., and Alexander N. Kolmogorov. 2021. <em>Limit Distributions for Sums of Independent Random Variables</em>. Martino Fine Books.
+</div>
+<div id="ref-Grus2019" class="csl-entry" role="listitem">
+Grus, Joel. 2019. <em>Data Science from Scratch: First Principles with Python</em>. 2nd ed. O’Reilly Media.
+</div>
+<div id="ref-Haslwanter2016" class="csl-entry" role="listitem">
+Haslwanter, Thomas. 2016. <em>An Introduction to Statistics with Python: With Applications in the Life Sciences</em>. Springer.
+</div>
+<div id="ref-Hogg2019" class="csl-entry" role="listitem">
+Hogg, Robert V., Joseph W. McKean, and Allen T. Craig. 2018. <em>Introduction to Mathematical Statistics</em>. 8th ed. Pearson.
+</div>
+<div id="ref-Hogg2015" class="csl-entry" role="listitem">
+Hogg, Robert V., Elliott A. Tanis, and Dale L. Zimmerman. 2015. <em>Probability and Statistical Inference</em>. 9th ed. Pearson.
+</div>
+<div id="ref-Lehmann2005" class="csl-entry" role="listitem">
+Lehmann, Erich L., and Joseph P. Romano. 2005. <em>Testing Statistical Hypotheses</em>. 3rd ed. Springer.
+</div>
+<div id="ref-lemons2002" class="csl-entry" role="listitem">
+Lemons, Don S. 2002. <em>An Introduction to Stochastic Processes in Physics</em>. The Johns Hopkins University Press.
+</div>
+<div id="ref-McKinney2022" class="csl-entry" role="listitem">
+McKinney, Wes. 2022. <em>Python for Data Analysis</em>. 3rd ed. O’Reilly Media.
+</div>
+<div id="ref-Montgomery2017" class="csl-entry" role="listitem">
+Montgomery, Douglas C. 2017. <em>Design and Analysis of Experiments</em>. 9th ed. Wiley.
+</div>
+<div id="ref-Mood1974" class="csl-entry" role="listitem">
+Mood, Alexander M., Franklin A. Graybill, and Duane C. Boes. 1974. <em>Introduction to the Theory of Statistics</em>. 3rd ed. McGraw-Hill.
+</div>
+<div id="ref-Newcombe2012" class="csl-entry" role="listitem">
+Newcombe, Robert G. 2012. <em>Confidence Intervals for Proportions and Related Measures of Effect Size</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-Neyman1933" class="csl-entry" role="listitem">
+Neyman, J., and E. S. Pearson. 1933. <span>“On the Problem of the Most Efficient Tests of Statistical Hypotheses.”</span> <em>Philosophical Transactions of the Royal Society of London. Series A</em> 231 (694-706): 289–337. <a href="https://doi.org/10.1098/rsta.1933.0009">https://doi.org/10.1098/rsta.1933.0009</a>.
+</div>
+<div id="ref-Numpy" class="csl-entry" role="listitem">
+NumPy community. 2023. <em><span>NumPy</span> V1.25 Manual</em>. <a href="https://numpy.org/doc/stable/">https://numpy.org/doc/stable/</a>.
+</div>
+<div id="ref-Robert2004" class="csl-entry" role="listitem">
+Robert, Christian P., and George Casella. 2004. <em>Monte Carlo Statistical Methods</em>. 2nd ed. Springer.
+</div>
+<div id="ref-ScipyStats" class="csl-entry" role="listitem">
+SciPy community. 2023. <em><span>SciPy</span> V1.11.2 Manual: Statistical Functions (‘Scipy.stats‘)</em>. <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">https://docs.scipy.org/doc/scipy/reference/stats.html</a>.
+</div>
+<div id="ref-Snedecor1989" class="csl-entry" role="listitem">
+Snedecor, George W., and William G. Cochran. 1989. <em>Statistical Methods</em>. 8th ed. Iowa State University Press.
+</div>
+<div id="ref-Statsmodels" class="csl-entry" role="listitem">
+Statsmodels development team. 2023. <em><span>Statsmodels</span>: Statistics in Python</em>. <a href="https://www.statsmodels.org/stable/index.html">https://www.statsmodels.org/stable/index.html</a>.
+</div>
+<div id="ref-Student1908" class="csl-entry" role="listitem">
+Student. 1908. <span>“The Probable Error of a Mean.”</span> <em>Biometrika</em> 6 (1): 1–25. <a href="https://doi.org/10.1093/biomet/6.1.1">https://doi.org/10.1093/biomet/6.1.1</a>.
+</div>
+<div id="ref-Pandas" class="csl-entry" role="listitem">
+The pandas development team. 2023. <em><span class="nocase">pandas</span> 2.1.1 Documentation</em>. <a href="https://pandas.pydata.org/pandas-docs/stable/">https://pandas.pydata.org/pandas-docs/stable/</a>.
+</div>
+<div id="ref-VanderPlas2016" class="csl-entry" role="listitem">
+VanderPlas, Jake. 2017. <em>Python Data Science Handbook: Essential Tools for Working with Data</em>. O’Reilly Media. <a href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a>.
+</div>
+<div id="ref-Wasserman2004" class="csl-entry" role="listitem">
+Wasserman, Larry. 2004. <em>All of Statistics: A Concise Course in Statistical Inference</em>. New York: Springer.
+</div>
+<div id="ref-Welch1947" class="csl-entry" role="listitem">
+Welch, B. L. 1947. <span>“The Generalization of <span>‘Student’s’</span> Problem When Several Different Population Variances Are Involved.”</span> <em>Biometrika</em> 34 (1-2): 28–35. <a href="https://doi.org/10.1093/biomet/34.1-2.28">https://doi.org/10.1093/biomet/34.1-2.28</a>.
+</div>
+<div id="ref-Wilson1927" class="csl-entry" role="listitem">
+Wilson, Edwin B. 1927. <span>“Probable Inference, the Law of Succession, and Statistical Inference.”</span> <em>Journal of the American Statistical Association</em> 22 (158): 209–12. <a href="https://doi.org/10.1080/01621459.1927.10502953">https://doi.org/10.1080/01621459.1927.10502953</a>.
+</div>
+<div id="ref-Zar2010" class="csl-entry" role="listitem">
+Zar, Jerrold H. 2010. <em>Biostatistical Analysis</em>. 5th ed. Pearson Prentice Hall.
+</div>
+<div id="ref-Zhluktenko2006" class="csl-entry" role="listitem">
+Жлуктенко, В. І., and С. І. Наконечний. 2001. <em>Теорія Ймовірностей і Математична Статистика: Навч.-Метод. Посібник. У 2 ч. Ч. II. Математична Статистика</em>. Київ: КНЕУ.
+</div>
+<div id="ref-Turchyn2006" class="csl-entry" role="listitem">
+Турчин, В. М. 2014. <em>Теорія Ймовірностей і Математична Статистика. Основні Поняття, Приклади, Задачі</em>. Дніпропетровськ: ІМА-прес.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

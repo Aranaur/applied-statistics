@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -221,7 +241,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Список літератури</span></a>
+ <span class="menu-text">Рекомендована література</span></a>
   </div>
 </li>
     </ul>
@@ -443,7 +463,7 @@ S = \{Q \geqslant 20\}
 <p>Як і раніше, нас цікавить імовірність отримати <span class="math inline">\(20\)</span> або більше успіхів. Але якщо раніше ми дивилися на неї для розподілу з <span class="math inline">\(\mu=0.5\)</span> й хотіли, щоб вона була меншою за <span class="math inline">\(5\%\)</span>, то тепер ми дивимося за <span class="math inline">\(\mu = 0.6\)</span> та прагнемо зробити цю величину якомога більшою. Порівняно з обчисленням FPR формула не зміниться, змінюється тільки <span class="math inline">\(\mu\)</span></p>
 <p><br>
 </p>
-<div id="f614a38c" class="cell" data-execution_count="3">
+<div id="a345278e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>critical_value <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>power <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.6</span>).cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fpr   <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> binom(n<span class="op">=</span><span class="dv">30</span>, p<span class="op">=</span><span class="fl">0.5</span>).cdf(critical_value <span class="op">-</span> <span class="dv">1</span>)</span>
@@ -461,7 +481,7 @@ S = \{Q \geqslant 20\}
 <p>Що ж можна зробити, щоб зробити потужність вищою? Щоб розібратися, реалізуємо функцію потужності в загальному вигляді.</p>
 <p><br>
 </p>
-<div id="6547315e" class="cell" data-execution_count="4">
+<div id="499161fa" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_stat_power(N, mu_h0, mu_alternative, alpha):</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція потужності для біноміального розподілу</span></span>
@@ -512,7 +532,7 @@ S = \{Q \geqslant 20\}
 <p>Подивимося, що буде, якщо ми проведемо експеримент на 300 клієнтах.</p>
 <p><br>
 </p>
-<div id="789d16c4" class="cell" data-execution_count="5">
+<div id="e0f94f5a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> get_stat_power(<span class="dv">300</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Потужність при N=300: </span><span class="sc">{</span>result<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -713,7 +733,7 @@ S = \{Q \geqslant 20\}
 <p>Найчастіше беруть <span class="math inline">\(1 - \beta = 80\%\)</span>. Напишемо функцію, яка обчислюватиме MDE підбором.</p>
 <p><br>
 </p>
-<div id="48ea28c4" class="cell" data-execution_count="9">
+<div id="fc892108" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binom_test_mde_one_sided(N, mu0, alpha<span class="op">=</span><span class="fl">0.05</span>, min_power<span class="op">=</span><span class="fl">0.8</span>):</span>
 <span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Розрахунок MDE для біноміального тесту</span></span>
@@ -772,7 +792,7 @@ S = \{Q \geqslant 20\}
 <p>З визначення випливає, що різні критерії можуть породжувати різні довірчі інтервали. У цій частині розглянемо, які інтервали породжуються двостороннім критерієм. Для цього з кроком <span class="math inline">\(0.001\)</span> переберемо значення <span class="math inline">\(\mu \in [0, 1]\)</span> і перевіримо гіпотези.</p>
 <p><br>
 </p>
-<div id="537d88c5" class="cell" data-execution_count="10">
+<div id="ed332b00" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> two_sided_criterion_nonsym(n, mu, alpha):</span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція, що обчислює критичні значення для двостороннього критерію</span></span>
@@ -944,7 +964,7 @@ S = \{Q \geqslant 20\}
 <p>Спробуємо скористатися одностороннім критерієм для побудови довірчого інтервалу.</p>
 <p><br>
 </p>
-<div id="e1f5815f" class="cell" data-execution_count="12">
+<div id="8c63704b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_binom_criterion(n, mu<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.05</span>):</span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція, що обчислює критичне значення для одностороннього критерію</span></span>
@@ -1014,7 +1034,7 @@ S = \{Q \geqslant 20\}
 <p>Припустимо, ми отримали не <span class="math inline">\(19\)</span> успіхів, а <span class="math inline">\(22\)</span>. Побудуємо 2 види інтервалів.</p>
 <p><br>
 </p>
-<div id="69fe317e" class="cell" data-execution_count="13">
+<div id="83de4cf0" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">22</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
@@ -1031,7 +1051,7 @@ S = \{Q \geqslant 20\}
 </div>
 <p><br>
 </p>
-<div id="6d874346" class="cell" data-execution_count="14">
+<div id="d37f713a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">22</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.001</span>, <span class="fl">0.001</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
@@ -1135,7 +1155,7 @@ S = \{Q \geqslant 20\}
 <p>Перевіримо, що вийде за <span class="math inline">\(\alpha = 0.1\)</span>.</p>
 <p><br>
 </p>
-<div id="35886de2" class="cell" data-execution_count="16">
+<div id="2433923c" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>success_cnt <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mu_grid <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mu_no_rejection <span class="op">=</span> []</span>
@@ -1176,7 +1196,7 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 <p>Перевіряємо, що частка випадків, коли параметр <span class="math inline">\(\mu_0\)</span> опинився всередині інтервалу, хоча б <span class="math inline">\(95\%\)</span>.</p>
 <p><br>
 </p>
-<div id="0a27414b" class="cell" data-execution_count="17">
+<div id="490b94f3" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="annotated-cell-16-2"><a href="#annotated-cell-16-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-16-3" class="code-annotation-target"><a href="#annotated-cell-16-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -1246,7 +1266,7 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 <p>Тепер запустимо експеримент. Для цього зафіксуємо <span class="math inline">\(\mu_0 = 0.5\)</span> й проведемо <span class="math inline">\(1000\)</span> експериментів. У кожному з них будемо генерувати <span class="math inline">\(30\)</span> успіхів, а потім перевіряти, чи потрапила <span class="math inline">\(\mu_0\)</span> у довірчий інтервал.</p>
 <p><br>
 </p>
-<div id="fce8af95" class="cell" data-execution_count="18">
+<div id="fa82daed" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>N_EXPERIMENTS <span class="op">=</span> <span class="dv">1000</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-17-2" class="code-annotation-target"><a href="#annotated-cell-17-2" aria-hidden="true" tabindex="-1"></a>SAMPLE_SIZE <span class="op">=</span> <span class="dv">30</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-17-3" class="code-annotation-target"><a href="#annotated-cell-17-3" aria-hidden="true" tabindex="-1"></a>latent_mu <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1317,7 +1337,7 @@ P(\mathcal{L}(Q) &lt; \mu_0 &lt; \mathcal{R}(Q)) \geqslant 1 - \alpha
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Відсоток успішних випадків: 61.40%
-Час виконання: 6.5775 секунди</code></pre>
+Час виконання: 3.7123 секунди</code></pre>
 </div>
 </div>
 <p><br>
@@ -1402,7 +1422,7 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 <p>Повторимо експерименти з новим типом довірчого інтервалу, тут можемо дозволити більше реалізацій вибірки, оскільки інтервал рахується недовго.</p>
 <p><br>
 </p>
-<div id="9b8d2000" class="cell" data-execution_count="20">
+<div id="37961574" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.proportion <span class="im">import</span> proportion_confint</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -1434,7 +1454,7 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Час виконання: </span><span class="sc">{</span>end_time <span class="op">-</span> start_time<span class="sc">:.4f}</span><span class="ss"> секунди"</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Відсоток успішних випадків: 96.60%
-Час виконання: 0.2273 секунди</code></pre>
+Час виконання: 0.0754 секунди</code></pre>
 </div>
 </div>
 <p><br>
@@ -1443,7 +1463,7 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 <p>Залежність частки успішних влучень <span class="math inline">\(\mu\)</span> у довірчий інтервал від розміру вибірки зобразимо на <a href="#fig-binom-ci-2" class="quarto-xref">Рисунок&nbsp;<span>2.8</span></a>.</p>
 <p><br>
 </p>
-<div id="8c623ad0" class="cell" data-execution_count="21">
+<div id="88f299d2" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1" aria-hidden="true" tabindex="-1"></a>n_grid <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">25</span>).tolist()</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-20-2" class="code-annotation-target"><a href="#annotated-cell-20-2" aria-hidden="true" tabindex="-1"></a>interval_success_rate <span class="op">=</span> []</span>
 <span id="annotated-cell-20-3"><a href="#annotated-cell-20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1588,6 +1608,119 @@ P(L(\xi) &lt; \mu_0 &lt; R(\xi)) \geqslant 1 - \alpha
 </ol>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Agresti2013" class="csl-entry" role="listitem">
+Agresti, Alan. 2012. <em>Categorical Data Analysis</em>. 3rd ed. Wiley.
+</div>
+<div id="ref-Agresti2018" class="csl-entry" role="listitem">
+———. 2018. <em>An Introduction to Categorical Data Analysis</em>. 3rd ed. Wiley.
+</div>
+<div id="ref-Basu1955" class="csl-entry" role="listitem">
+Basu, D. 1955. <em>On Statistics Independent of a Complete Sufficient Statistic</em>. <em>Sankhya</em>. Vol. 15.
+</div>
+<div id="ref-Bruce2020" class="csl-entry" role="listitem">
+Bruce, Peter, Andrew Bruce, and Peter Gedeck. 2020. <em>Practical Statistics for Data Scientists</em>. 2nd ed. O’Reilly Media.
+</div>
+<div id="ref-Casella2002" class="csl-entry" role="listitem">
+Casella, George, and Roger L. Berger. 2002. <em>Statistical Inference</em>. 2nd ed. Duxbury Press.
+</div>
+<div id="ref-Cochran1934" class="csl-entry" role="listitem">
+Cochran, William G. 1934. <em>The Distribution of Quadratic Forms in a Normal System, with Applications to the Analysis of Covariance</em>. <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>. Vol. 30. 3. Cambridge University Press. <a href="https://doi.org/10.1017/S0305004100016595">https://doi.org/10.1017/S0305004100016595</a>.
+</div>
+<div id="ref-Cohen1988" class="csl-entry" role="listitem">
+Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2nd ed. Lawrence Erlbaum Associates.
+</div>
+<div id="ref-Downey2014" class="csl-entry" role="listitem">
+Downey, Allen B. 2014. <em>Think Stats: Exploratory Data Analysis in Python</em>. 2nd ed. O’Reilly Media. <a href="https://greenteapress.com/wp/think-stats-2e/">https://greenteapress.com/wp/think-stats-2e/</a>.
+</div>
+<div id="ref-Efron1994" class="csl-entry" role="listitem">
+Efron, Bradley, and Robert J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-Fisher1922" class="csl-entry" role="listitem">
+Fisher, R. A. 1922. <span>“On the Mathematical Foundations of Theoretical Statistics.”</span> <em>Philosophical Transactions of the Royal Society of London. Series A</em> 222 (594-604): 309–68. <a href="https://doi.org/10.1098/rsta.1922.0009">https://doi.org/10.1098/rsta.1922.0009</a>.
+</div>
+<div id="ref-Freedman2007" class="csl-entry" role="listitem">
+Freedman, David, Robert Pisani, and Roger Purves. 2007. <em>Statistics</em>. 4th ed. W. W. Norton &amp; Company.
+</div>
+<div id="ref-Gnedenko2021" class="csl-entry" role="listitem">
+Gnedenko, Boris V., and Alexander N. Kolmogorov. 2021. <em>Limit Distributions for Sums of Independent Random Variables</em>. Martino Fine Books.
+</div>
+<div id="ref-Grus2019" class="csl-entry" role="listitem">
+Grus, Joel. 2019. <em>Data Science from Scratch: First Principles with Python</em>. 2nd ed. O’Reilly Media.
+</div>
+<div id="ref-Haslwanter2016" class="csl-entry" role="listitem">
+Haslwanter, Thomas. 2016. <em>An Introduction to Statistics with Python: With Applications in the Life Sciences</em>. Springer.
+</div>
+<div id="ref-Hogg2019" class="csl-entry" role="listitem">
+Hogg, Robert V., Joseph W. McKean, and Allen T. Craig. 2018. <em>Introduction to Mathematical Statistics</em>. 8th ed. Pearson.
+</div>
+<div id="ref-Hogg2015" class="csl-entry" role="listitem">
+Hogg, Robert V., Elliott A. Tanis, and Dale L. Zimmerman. 2015. <em>Probability and Statistical Inference</em>. 9th ed. Pearson.
+</div>
+<div id="ref-Lehmann2005" class="csl-entry" role="listitem">
+Lehmann, Erich L., and Joseph P. Romano. 2005. <em>Testing Statistical Hypotheses</em>. 3rd ed. Springer.
+</div>
+<div id="ref-lemons2002" class="csl-entry" role="listitem">
+Lemons, Don S. 2002. <em>An Introduction to Stochastic Processes in Physics</em>. The Johns Hopkins University Press.
+</div>
+<div id="ref-McKinney2022" class="csl-entry" role="listitem">
+McKinney, Wes. 2022. <em>Python for Data Analysis</em>. 3rd ed. O’Reilly Media.
+</div>
+<div id="ref-Montgomery2017" class="csl-entry" role="listitem">
+Montgomery, Douglas C. 2017. <em>Design and Analysis of Experiments</em>. 9th ed. Wiley.
+</div>
+<div id="ref-Mood1974" class="csl-entry" role="listitem">
+Mood, Alexander M., Franklin A. Graybill, and Duane C. Boes. 1974. <em>Introduction to the Theory of Statistics</em>. 3rd ed. McGraw-Hill.
+</div>
+<div id="ref-Newcombe2012" class="csl-entry" role="listitem">
+Newcombe, Robert G. 2012. <em>Confidence Intervals for Proportions and Related Measures of Effect Size</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-Neyman1933" class="csl-entry" role="listitem">
+Neyman, J., and E. S. Pearson. 1933. <span>“On the Problem of the Most Efficient Tests of Statistical Hypotheses.”</span> <em>Philosophical Transactions of the Royal Society of London. Series A</em> 231 (694-706): 289–337. <a href="https://doi.org/10.1098/rsta.1933.0009">https://doi.org/10.1098/rsta.1933.0009</a>.
+</div>
+<div id="ref-Numpy" class="csl-entry" role="listitem">
+NumPy community. 2023. <em><span>NumPy</span> V1.25 Manual</em>. <a href="https://numpy.org/doc/stable/">https://numpy.org/doc/stable/</a>.
+</div>
+<div id="ref-Robert2004" class="csl-entry" role="listitem">
+Robert, Christian P., and George Casella. 2004. <em>Monte Carlo Statistical Methods</em>. 2nd ed. Springer.
+</div>
+<div id="ref-ScipyStats" class="csl-entry" role="listitem">
+SciPy community. 2023. <em><span>SciPy</span> V1.11.2 Manual: Statistical Functions (‘Scipy.stats‘)</em>. <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">https://docs.scipy.org/doc/scipy/reference/stats.html</a>.
+</div>
+<div id="ref-Snedecor1989" class="csl-entry" role="listitem">
+Snedecor, George W., and William G. Cochran. 1989. <em>Statistical Methods</em>. 8th ed. Iowa State University Press.
+</div>
+<div id="ref-Statsmodels" class="csl-entry" role="listitem">
+Statsmodels development team. 2023. <em><span>Statsmodels</span>: Statistics in Python</em>. <a href="https://www.statsmodels.org/stable/index.html">https://www.statsmodels.org/stable/index.html</a>.
+</div>
+<div id="ref-Student1908" class="csl-entry" role="listitem">
+Student. 1908. <span>“The Probable Error of a Mean.”</span> <em>Biometrika</em> 6 (1): 1–25. <a href="https://doi.org/10.1093/biomet/6.1.1">https://doi.org/10.1093/biomet/6.1.1</a>.
+</div>
+<div id="ref-Pandas" class="csl-entry" role="listitem">
+The pandas development team. 2023. <em><span class="nocase">pandas</span> 2.1.1 Documentation</em>. <a href="https://pandas.pydata.org/pandas-docs/stable/">https://pandas.pydata.org/pandas-docs/stable/</a>.
+</div>
+<div id="ref-VanderPlas2016" class="csl-entry" role="listitem">
+VanderPlas, Jake. 2017. <em>Python Data Science Handbook: Essential Tools for Working with Data</em>. O’Reilly Media. <a href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a>.
+</div>
+<div id="ref-Wasserman2004" class="csl-entry" role="listitem">
+Wasserman, Larry. 2004. <em>All of Statistics: A Concise Course in Statistical Inference</em>. New York: Springer.
+</div>
+<div id="ref-Welch1947" class="csl-entry" role="listitem">
+Welch, B. L. 1947. <span>“The Generalization of <span>‘Student’s’</span> Problem When Several Different Population Variances Are Involved.”</span> <em>Biometrika</em> 34 (1-2): 28–35. <a href="https://doi.org/10.1093/biomet/34.1-2.28">https://doi.org/10.1093/biomet/34.1-2.28</a>.
+</div>
+<div id="ref-Wilson1927" class="csl-entry" role="listitem">
+Wilson, Edwin B. 1927. <span>“Probable Inference, the Law of Succession, and Statistical Inference.”</span> <em>Journal of the American Statistical Association</em> 22 (158): 209–12. <a href="https://doi.org/10.1080/01621459.1927.10502953">https://doi.org/10.1080/01621459.1927.10502953</a>.
+</div>
+<div id="ref-Zar2010" class="csl-entry" role="listitem">
+Zar, Jerrold H. 2010. <em>Biostatistical Analysis</em>. 5th ed. Pearson Prentice Hall.
+</div>
+<div id="ref-Zhluktenko2006" class="csl-entry" role="listitem">
+Жлуктенко, В. І., and С. І. Наконечний. 2001. <em>Теорія Ймовірностей і Математична Статистика: Навч.-Метод. Посібник. У 2 ч. Ч. II. Математична Статистика</em>. Київ: КНЕУ.
+</div>
+<div id="ref-Turchyn2006" class="csl-entry" role="listitem">
+Турчин, В. М. 2014. <em>Теорія Ймовірностей і Математична Статистика. Основні Поняття, Приклади, Задачі</em>. Дніпропетровськ: ІМА-прес.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

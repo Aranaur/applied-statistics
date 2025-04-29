@@ -57,6 +57,8 @@ book:
 
 bibliography: references.bib
 bibliographystyle: apa
+nocite: |
+  @*
 
 format:
   html:
