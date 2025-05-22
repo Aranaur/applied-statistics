@@ -91,10 +91,12 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6c380caa1d326ca7d97976c903cdd929.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6c380caa1d326ca7d97976c903cdd929.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-253818f70130c36e0f90c2945f2a2946.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -181,6 +183,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Прикладний статистичний аналіз</a> 
         <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключити темний режим"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Переключити режим читання">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -374,7 +377,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\righ
 <p>Ініціалізуємо клас <code>norm</code> з параметрами <span class="math inline">\(\mu = 0\)</span> та <span class="math inline">\(\sigma = 1\)</span> (стандартний нормальний розподіл). Далі, згенеруємо випадкову вибірку з 50 спостережень, а також обчислимо PDF, CDF та PPF для <span class="math inline">\(x = 1.5\)</span>.</p>
 <p><br>
 </p>
-<div id="6e4b8598" class="cell" data-execution_count="3">
+<div id="4971dab0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>std_norm <span class="op">=</span> norm(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>rnorm <span class="op">=</span> std_norm.rvs(size<span class="op">=</span><span class="dv">50</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
@@ -662,7 +665,7 @@ a \xi_1 \sim \mathcal{N}(a\mu_1, a^2\sigma_1^2)
 </ul>
 <p><br>
 </p>
-<div id="c49211f7" class="cell" data-execution_count="7">
+<div id="d5191002" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_CLT(sample_generator, expected_value, variance):</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Візуалізація ЦГТ</span></span>
@@ -892,7 +895,7 @@ H_0: \mu =\mu_0 = 0.5\ \text{проти} \ H_1: \mu &gt; 0.5
 <p>Подивимось, як це виглядає в Python. Для цього створимо функцію <code>get_pvalue_by_normal_approx</code>, яка буде приймати на вхід параметри <span class="math inline">\(n\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(t\)</span> та повертати <span class="math inline">\(p\)</span>-значення. Порівняємо результати за точним біноміальним тестом та нашим наближенням.</p>
 <p><br>
 </p>
-<div id="03945fcf" class="cell" data-execution_count="11">
+<div id="937a9cd0" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_pvalue_by_normal_approx(t, n, mu_0):</span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція для обчислення p-значення за нормальною апроксимацією</span></span>
@@ -964,7 +967,7 @@ p-значення за точним біноміальним тестом = 0.1
 <p>Ми бачимо, що значення не дуже-то й збіглися. Але, як ми пам’ятаємо, нормальна апроксимація працює тільки з деякого великого <span class="math inline">\(n\)</span>. Тому давайте спробуємо повторити експеримент із більшаимо кількість спостережень.</p>
 <p><br>
 </p>
-<div id="f0b6d0b6" class="cell" data-execution_count="12">
+<div id="c23b9a59" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3000</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">1544</span></span>
@@ -1022,7 +1025,7 @@ P_{H_0}(Z(X) \geq z) = 1 - P_{H_0}(Z(X) &lt; z) = 1 - \Phi(z) = \alpha
 <p>Напишемо функцію <code>z_test_pvalue</code>, яка буде приймати на вхід параметри <code>sample_mean</code> (середнє арифметичне вибірки), <code>sample_size</code> (кількість спостережень), <code>population_mean</code> (гіпотетичне значення параметра <span class="math inline">\(\mu\)</span>), <code>population_variance</code> (дисперсія генеральної сукупності) та <code>alternative</code> (альтернативна гіпотеза). Функція буде повертати <span class="math inline">\(p\)</span>-значення для двостороннього або одностороннього <span class="math inline">\(Z\)</span>-критерію Фішера.</p>
 <p><br>
 </p>
-<div id="b4c63541" class="cell" data-execution_count="13">
+<div id="86305194" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_test_pvalue(</span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>    sample_mean,</span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>    sample_size,</span>
@@ -1098,7 +1101,7 @@ P_{H_0}(Z(X) \geq z) = 1 - P_{H_0}(Z(X) &lt; z) = 1 - \Phi(z) = \alpha
 <p>Тепер ми можемо перевірити гіпотезу про те, що <span class="math inline">\(\mu\)</span> не дорівнює <span class="math inline">\(\mu_0\)</span>, за допомогою <span class="math inline">\(Z\)</span>-критерію Фішера. Для цього ми можемо використати функцію <code>z_test_pvalue</code> та порівняємо з результатами, які ми отримали раніше за допомогою біноміального тесту та нормальної апроксимації.</p>
 <p><br>
 </p>
-<div id="a05f0431" class="cell" data-execution_count="14">
+<div id="a65ae519" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="annotated-cell-12-3"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
@@ -1152,7 +1155,7 @@ p-значення за точним біноміальним тестом = 0.1
 </ul>
 <p><br>
 </p>
-<div id="3c7571e2" class="cell" data-execution_count="15">
+<div id="7e8c07fc" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmp_pvalue_binom_and_norm(n, mu0, t, add_to_x<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Функція для порівняння p-значення біноміального та нормального розподілів</span></span>
@@ -1257,7 +1260,7 @@ p-значення за точним біноміальним тестом = 0.1
 <p>Для початку візьмемо <span class="math inline">\(n = 20\)</span> та <span class="math inline">\(t = 10\)</span>.</p>
 <p><br>
 </p>
-<div id="e2376804" class="cell" data-execution_count="17">
+<div id="f3ad446c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="annotated-cell-15-2"><a href="#annotated-cell-15-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">10</span></span>
 <span id="annotated-cell-15-3"><a href="#annotated-cell-15-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1296,7 +1299,7 @@ p-значення нормального розподілу = 0.5000
 <p>Тепер візьмемо <span class="math inline">\(n = 20\)</span> та <span class="math inline">\(t = 16\)</span>.</p>
 <p><br>
 </p>
-<div id="62d19358" class="cell" data-execution_count="18">
+<div id="00740847" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">16</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1317,7 +1320,7 @@ p-значення нормального розподілу = 0.0036
 <p><br>
 </p>
 <p>І накінці візьмемо <span class="math inline">\(n = 200\)</span> та <span class="math inline">\(t = 100\)</span>.</p>
-<div id="62fec84d" class="cell" data-execution_count="19">
+<div id="c1f88d7f" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">200</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1348,7 +1351,7 @@ p\text{-значення} = 1 - \Phi(t - 0.5)
 <p>Подивимось на графік з поправкою на неперервність.</p>
 <p><br>
 </p>
-<div id="816f0968" class="cell" data-execution_count="20">
+<div id="06e907ad" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cmp_pvalue_binom_and_norm(<span class="dv">30</span>, <span class="fl">0.5</span>, <span class="dv">15</span>, add_to_x<span class="op">=-</span><span class="fl">0.5</span>)</span></code><button title="Скопіювати в буфер обміну" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1362,7 +1365,7 @@ p\text{-значення} = 1 - \Phi(t - 0.5)
 <p>Порівняємо <span class="math inline">\(p\)</span>-значення біноміального та нормального розподілів з поправкою на неперервність.</p>
 <p><br>
 </p>
-<div id="9b961358" class="cell" data-execution_count="21">
+<div id="a06f7812" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-19-1"><a href="#annotated-cell-19-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="annotated-cell-19-2"><a href="#annotated-cell-19-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
 <span id="annotated-cell-19-3"><a href="#annotated-cell-19-3" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1406,7 +1409,7 @@ p (з поправкою на неперервність) = 0.1006</code></pre>
 <p>Додамо поправку на неперервність до нашої функції <code>z_test_pvalue</code>.</p>
 <p><br>
 </p>
-<div id="f31fa9a7" class="cell" data-execution_count="22">
+<div id="e6b15c8e" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_test_pvalue(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    sample_mean, </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    sample_size, </span>
@@ -1451,7 +1454,7 @@ p (з поправкою на неперервність) = 0.1006</code></pre>
 <p>Тепер ми можемо використовувати функцію <code>z_test_pvalue</code> з параметром <code>continuity_correction=True</code>, щоб отримати <span class="math inline">\(p\)</span>-значення з поправкою на неперервність.</p>
 <p><br>
 </p>
-<div id="62623e61" class="cell" data-execution_count="23">
+<div id="50366537" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">30</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">19</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mu0 <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1667,6 +1670,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

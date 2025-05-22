@@ -62,7 +62,9 @@ nocite: |
 
 format:
   html:
-    theme: [cosmo, ims-style.scss]
+    theme: 
+      light: [cosmo, ims-style.scss]
+      dark: [cosmo, ims-style-dark.scss]
     code-link: true
   docx:
     reference-doc: word-template.docx
