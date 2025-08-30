@@ -14,13 +14,13 @@ profile:
   default: development
 
 book:
-  title: "Прикладний статистичний аналіз"
-  subtitle: "Посібник для студентів"
+  title: "ПРИКЛАДНИЙ СТАТИСТИЧНИЙ АНАЛІЗ В PYTHON. ЧАСТИНА I"
+  subtitle: "Навчальний посібник"
   reader-mode: true
 
   page-footer:
     left: |
-      Прикладний статистичний аналіз
+      ПРИКЛАДНИЙ СТАТИСТИЧНИЙ АНАЛІЗ В PYTHON. ЧАСТИНА I
     right: |
       Ця книга створена за допомогою <a href="https://quarto.org/">Quarto</a>.
 
@@ -75,7 +75,11 @@ format:
    sansfont: Calibri
    mainfont: Georgia
    monofont: Consolas
-   include-in-header: latex/as-style.tex
+   include-in-header:
+     - file: latex/as-style.tex
+     - text: |
+        \usepackage{makeidx}
+        \makeindex
    geometry:
     - top=25mm
     - left=18mm
@@ -99,4 +103,7 @@ format:
    fig-align: center
    toc: true
    toc-depth: 3
+   include-after-body: 
+     text: |
+       \printindex
 
